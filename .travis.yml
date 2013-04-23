@@ -8,7 +8,7 @@ script:
   - bundle exec rspec -f d -c
   - RAILS_ENV=test bundle exec rake db:reset
 before_script:
-  - cp conf/database.travis.yml config/database.yml
+  - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:create
   - RAILS_ENV=test bundle exec rake db:migrate
   - mkdir tmp
