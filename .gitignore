@@ -13,6 +13,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore database.yml (an example is provided in database.example.yml)
+config/database.yml
 .DS_Store
 .rvmrc
-
