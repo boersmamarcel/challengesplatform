@@ -1,0 +1,17 @@
+language: ruby
+rvm: 
+  - 1.9.3
+env: 
+  - DB=postgres
+script:
+  - bundle exec cucumber -r features
+  - bundle exec rspec -f d -c
+  - RAILS_ENV=test bundle exec rake db:reset
+before_script:
+  - cp conf/database.travis.yml config/database.yml
+  - bundle exec rake db:create
+  - RAILS_ENV=test bundle exec rake db:migrate
+  - mkdir tmp
+  - mkdir tmp/cache
+  - phantomjs --version
+
