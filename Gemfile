@@ -20,7 +20,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group [:test, :develop]  do
+group :test, :develop  do
     gem 'rspec'
     gem 'rake'
     gem 'cucumber-rails', :require => false
