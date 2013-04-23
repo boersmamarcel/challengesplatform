@@ -1,5 +1,5 @@
 test:
-  adapter: mysql2
+  adapter: postgres
   encoding: utf8
   reconnect: false
   database: behandel_ons_test
