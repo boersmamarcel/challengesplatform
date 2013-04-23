@@ -8,12 +8,20 @@ development:
 # The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+<<<<<<< HEAD
+test: &test
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+=======
 test:
   adapter: postgresql
   host: localhost
   username: test
   database: testDB
   password: itest123! 
+>>>>>>> c795f8e173f15bb1c2c828f5d1ccb17b17c2e6bb
 
 production:
   adapter: postgresql
@@ -23,8 +31,24 @@ production:
   password: iproduce123!
 
 staging:
+<<<<<<< HEAD
+  adapter: sqlite3
+  database: db/staging.sqlite3
+  pool: 5
+  timeout: 5000 adapter: sqlite3
+
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
+
+cucumber:
+  <<: *test
+=======
   adapter: postgresql
   host: localhost
   username: staging
   database: stageDB
   password: istage123!
+>>>>>>> c795f8e173f15bb1c2c828f5d1ccb17b17c2e6bb
