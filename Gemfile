@@ -20,6 +20,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :develop do
+  gem 'capistrano'
+end
+
 group :test, :develop  do
     gem 'rspec'
     gem 'rake'
