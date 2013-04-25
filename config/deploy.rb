@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 set :application, "Challengesplatform"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -24,6 +26,19 @@ set :user, "root"  # The server's user for deploys
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
+set :rvm_ruby_string, :local               # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
+
+before 'deploy:setup', 'rvm:install_rvm'   # install RVM
+before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, OR:
+before 'deploy:setup', 'rvm:create_gemset' # only create gemset
+
+require "rvm/capistrano"
+before "deploy", "deploy:deploying"
+after "deploy", "deploy:done"
+after "deploy", "deploy:symlink_db"
+after "deploy:symlink_db", "deploy:restart"
+
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
   task :start do ; end
@@ -31,4 +46,15 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+  task :deploying, :on_error => :continue do
+    system "/usr/bin/afplay ~/Downloads/deploying.mp3"
+  end
+  task :done, :on_error => :continue do
+    system "/usr/bin/afplay ~/Downloads/deploying.mp3"
+  end
+  desc "Symlinks the database.yml"
+    task :symlink_db, :roles => :app do
+      run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+    end
+
 end
