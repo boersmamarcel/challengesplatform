@@ -20,4 +20,3 @@ config/database.yml
 .rvmrc
 .ruby-version
 .bundle\n
-Gemfile.lock
