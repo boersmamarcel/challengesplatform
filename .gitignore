@@ -18,3 +18,6 @@
 config/database.yml
 .DS_Store
 .rvmrc
+.ruby-version
+.bundle\n
+Gemfile.lock
