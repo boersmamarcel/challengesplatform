@@ -30,6 +30,7 @@ group :test, :develop  do
     gem 'cucumber-rails', :require => false
     # database_cleaner is not required, but highly recommended
     gem 'database_cleaner'
+    gem 'rspec-rails', '~> 2.0'
 end
 
 gem 'jquery-rails'
