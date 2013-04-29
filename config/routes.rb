@@ -1,4 +1,6 @@
 Challengesplatform::Application.routes.draw do
+  devise_for :users
+
   get "static/index"
 
   # The priority is based upon order of creation:
