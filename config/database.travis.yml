@@ -1,7 +1,0 @@
-test:
-  adapter: postgresql
-  encoding: utf8
-  reconnect: false
-  pool: 5
-  user: postgres 
-  database: testDB
