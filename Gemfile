@@ -25,6 +25,8 @@ group :develop do
 end
 
 group :test, :develop  do
+
+    gem 'factory_girl_rails'
     gem 'rspec'
     gem 'rake'
     gem 'cucumber-rails', :require => false
