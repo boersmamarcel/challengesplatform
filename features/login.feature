@@ -17,4 +17,8 @@ Feature: Login
 	When I visit the "login" page
 	And I fill in email with "j.p.balkenende@studente.utwente.nl" and password with "wrong"
 	Then I should see a message with "Wrong password"
-	
+
+	Scenario: Login as a student (with Google OAuth)
+	When I log in with Google
+	Then I should see the "dashboard" page
+	And see the "logout" button	
