@@ -240,10 +240,8 @@ Devise.setup do |config|
   
   #google authentication
   require "omniauth-google-oauth2"
-  if Rails.env.production?
-    config.omniauth :google_oauth2, "long string secret", "short secret", { :access_type => "offline", :approval_prompt => "" }
-  else
-    config.omniauth :google_oauth2, "long string secret", "short secret", { :access_type => "offline", :approval_prompt => "" } 
-  end
-  
+  config.omniauth :google_oauth2, "ClientID", "ClientSecret", { :access_type => "offline", :approval_prompt => "" } 
+
+  Devise.mailchimp_api_key = 'your_api_key'
+  Devise.mailing_list_name = 'List Name'
 end
