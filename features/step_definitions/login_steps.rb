@@ -1,5 +1,16 @@
 When(/^I visit the "(.*?)" page$/) do |pageName|
-	find('input#page_identifier').value.should eql pageName 
+	pending
+end
+
+def getRoute(name)
+	case name
+	when "login"
+		return "new_user_session"
+	when "home"
+		return "root"
+	else
+		print("Invalid route requested (" + name + ")")
+	end
 end
 
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
@@ -7,18 +18,18 @@ When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, pass
 end
 
 Then(/^I should see the "(.*?)" page$/) do |pageName|
-	pending # express the regexp above with the code you wish you had
+	find('input#page_identifier').value.should eql pageName 
 end
 
 Then(/^see the "(.*?)" button$/) do |buttonID|
-	pending # express the regexp above with the code you wish you had
+	find("#" + buttonID).should_not be_nil
 end
 
 Then(/^I should see a message with "(.*?)"$/) do |contents|
 	pending # express the regexp above with the code you wish you had
 end
 
-When(/^I sign up with Google$/) do
+When(/^I log in with Google$/) do
 	google = { :provider => :google_oauth2,
 		:uuid     => "1234",
 		:google_oauth2 => {
