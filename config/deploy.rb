@@ -1,12 +1,10 @@
 require 'bundler/capistrano'
-
-require "rvm/capistrano"
 require 'capistrano/ext/multistage'
 set :stages, %w(production staging)
 set :default_stage, "staging"
 set :application, "Challengesplatform"
 
-# role :web, "198.199.77.172"                          # Your HTTP server, Apache/etc
+role :web, "198.199.77.172"                          # Your HTTP server, Apache/etc
 role :app, "198.199.77.172"                          # This may be the same as your `Web` server
 # role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
 # role :db,  "your slave db-server here"
@@ -19,9 +17,9 @@ set :scm, "git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 set :use_sudo, false
-
+set :rvm_install_with_sudo, true
 after "deploy:restart", "deploy:cleanup"
-
+set :rvm_type, :system
 set :rvm_ruby_string, :local               # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
 
@@ -32,6 +30,9 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 before "deploy", "deploy:deploying"
 before "deploy:restart", "deploy:symlink_db"
 after "deploy:restart", "deploy:done"
+after "deploy", "deploy:migrate"
+
+require "rvm/capistrano"
 
 namespace :deploy do
   task :start do ; end
