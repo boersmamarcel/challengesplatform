@@ -18,6 +18,8 @@ def getRoute(name)
 		root_path
 	when "logout"
 		destroy_user_session_path
+	when "registration.form"
+		new_user_registration_path
 	else
 		print("Invalid route requested (" + name + ")")
 	end

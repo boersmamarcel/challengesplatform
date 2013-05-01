@@ -25,8 +25,8 @@ Feature: Login
 	Then I should see the "dashboard.index" page
 
 	Scenario: Visit the home page while logged in
-	When I am logged in
-	And I visit the "home" page
+	Given I am logged in
+	When I visit the "home" page
 	Then I should see the "dashboard.index" page
 
 	Scenario: Visit the login page while logged in
