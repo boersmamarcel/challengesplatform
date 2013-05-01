@@ -34,7 +34,7 @@ When(/^I log in with Google$/) do
 		:uuid     => "1234",
 		:google_oauth2 => {
 			:name => "Foo", 
-			:email => "foobar@example.com" 
+			:email => "test@student.utwente.nl"
 		}
 	}
 	set_omniauth(google)
@@ -46,7 +46,7 @@ def set_omniauth(opts = {})
 		:uuid     => "1234",
 		:google_oauth2 => {
 			:name => "Foo",
-                        :email => "foobar@example.com"
+      :email => "test@student.utwente.nl"
                 }
 	}
 

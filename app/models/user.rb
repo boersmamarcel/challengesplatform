@@ -1,3 +1,4 @@
+require 'pp'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
     	    		   :email => data["email"],
     	    		   :password => Devise.friendly_token[0,20]
     	    		  )
+    	    	  
             user.add_to_mailchimp_list("Challenges")
         end
         user
