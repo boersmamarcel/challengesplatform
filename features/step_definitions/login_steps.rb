@@ -1,23 +1,27 @@
 When(/^I visit the "(.*?)" page$/) do |pageName|
-	pending
+	visit getRoute(pageName)
 end
 
 def getRoute(name)
 	case name
 	when "login"
-		return "new_user_session"
+      new_user_session_path
 	when "home"
-		return "root"
+      root_path
 	else
 		print("Invalid route requested (" + name + ")")
 	end
 end
 
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
-	pending # express the regexp above with the code you wish you had
+    fill_in :user_email, :with => email
+    fill_in :user_password, :with => password
+    
+    click_button "Sign in"
 end
 
 Then(/^I should see the "(.*?)" page$/) do |pageName|
+  page.should_not be_nil
 	find('input#page_identifier').value.should eql pageName 
 end
 
@@ -26,7 +30,7 @@ Then(/^see the "(.*?)" button$/) do |buttonID|
 end
 
 Then(/^I should see a message with "(.*?)"$/) do |contents|
-	pending # express the regexp above with the code you wish you had
+    page.should have_content(contents)
 end
 
 When(/^I log in with Google$/) do
@@ -62,4 +66,10 @@ def set_omniauth(opts = {})
 			"email" => user_hash[:email],
 		}
 	})
+end
+
+Given(/^the following (.+) records?$/) do |factory, table|
+  table.hashes.each do |hash|
+       FactoryGirl.create(factory, hash)
+  end
 end
