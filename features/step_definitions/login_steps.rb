@@ -1,3 +1,11 @@
+Given(/^I am logged in$/) do
+	step "I log in with Google"
+end
+
+Given(/^I am not logged in$/) do
+	step "I log out"
+end
+
 When(/^I visit the "(.*?)" page$/) do |pageName|
 	visit getRoute(pageName)
 end
@@ -5,9 +13,11 @@ end
 def getRoute(name)
 	case name
 	when "login"
-      new_user_session_path
+		new_user_session_path
 	when "home"
-      root_path
+		root_path
+	when "logout"
+		destroy_user_session_path
 	else
 		print("Invalid route requested (" + name + ")")
 	end
@@ -21,8 +31,12 @@ When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, pass
 end
 
 Then(/^I should see the "(.*?)" page$/) do |pageName|
-  page.should_not be_nil
+	page.should_not be_nil
 	find('input#page_identifier').value.should eql pageName 
+end
+
+When(/^I log out$/) do
+	step "I visit the \"logout\" page"
 end
 
 Then(/^see the "(.*?)" button$/) do |buttonID|
