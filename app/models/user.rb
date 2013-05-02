@@ -27,8 +27,10 @@ class User < ActiveRecord::Base
     	    		   :email => data["email"],
     	    		   :password => Devise.friendly_token[0,20]
     	    		  )
-    	    	  
-            user.add_to_mailchimp_list("Challenges")
+
+	    if Rails.env.production?    	    	  
+                user.add_to_mailchimp_list("Challenges")
+            end
         end
         user
     end
