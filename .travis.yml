@@ -1,17 +1,18 @@
+---
 language: ruby
-rvm: 
-  - 1.9.3
-env: 
-  - DB=postgres
+rvm:
+- 1.9.3
+env:
+- DB=postgres
+- MAILCHIMPKEY: "LJyABtHExncJhgWjSw1ualA93WW4d8ge+YhK5nxMS392AAO7d9iNci7nI9j5\ndlVeSt39UnqiMz+3x0fbnbt4Y4PKYSz1LiS9Y/Ao0OyB00vCiGpAxtLcW1Eo\nn5I+1sJfZofP6CtVHKnyd/1uF5dzE27D9d8Ii7MwzzE9etSj8qc="
 script:
-  - bundle exec cucumber -r features
-  - bundle exec rspec -f d -c
-  - RAILS_ENV=test bundle exec rake db:reset
+- bundle exec cucumber -r features
+- bundle exec rspec -f d -c
+- RAILS_ENV=test bundle exec rake db:reset
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - bundle exec rake db:create
-  - RAILS_ENV=test bundle exec rake db:migrate
-  - mkdir tmp
-  - mkdir tmp/cache
-  - phantomjs --version
-
+- cp config/database.travis.yml config/database.yml
+- bundle exec rake db:create
+- RAILS_ENV=test bundle exec rake db:migrate
+- mkdir tmp
+- mkdir tmp/cache
+- phantomjs --version
