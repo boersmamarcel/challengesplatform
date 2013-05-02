@@ -27,7 +27,7 @@ Feature: Login
 	Scenario: Visit the home page while logged in
 	Given I am logged in
 	When I visit the "home" page
-	Then I should see the "dashboard.index" page
+	Then I should see a message with "Go to dashboard" 
 
 	Scenario: Visit the login page while logged in
 	When I am logged in
