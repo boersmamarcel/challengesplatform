@@ -20,7 +20,7 @@ set :use_sudo, false
 set :rvm_install_with_sudo, true
 after "deploy:restart", "deploy:cleanup"
 set :rvm_type, :system
-set :rvm_ruby_string, :local               # use the same ruby as used locally for deployment
+set :rvm_ruby_string, "ruby-2.0.0-p0@challenges"               # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
@@ -31,7 +31,6 @@ before "deploy", "deploy:deploying"
 before "deploy:restart", "deploy:symlink_db"
 after "deploy:restart", "deploy:done"
 after "deploy", "deploy:migrate"
-
 require "rvm/capistrano"
 
 namespace :deploy do
