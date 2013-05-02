@@ -21,7 +21,7 @@ Feature: Login
 	Then I should see a message with "Invalid email or password"
 
 	Scenario: Login as a student (with Google OAuth)
-	When I log in with Google
+	When I log in with Google "test@utwente.nl"
 	Then I should see the "dashboard.index" page
 
 	Scenario: Visit the home page while logged in
@@ -32,4 +32,10 @@ Feature: Login
 	Scenario: Visit the login page while logged in
 	When I am logged in
 	And I visit the "login" page
-	Then I should see the "dashboard.index" page
+    Then I should see the "dashboard.index" page
+
+
+    #temporary scenario:
+    Scenario: Login with a not utwente.nl account in Google OAuth
+        When I log in with Google "test@gmail.com"
+        Then I should see the "index" page 

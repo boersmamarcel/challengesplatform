@@ -1,5 +1,5 @@
 Given(/^I am logged in$/) do
-	step "I log in with Google"
+	step "I log in with Google \"test@student.utwente.nl\""
 end
 
 Given(/^I am not logged in$/) do
@@ -49,12 +49,12 @@ Then(/^I should see a message with "(.*?)"$/) do |contents|
     page.should have_content(contents)
 end
 
-When(/^I log in with Google$/) do
+When(/^I log in with Google "(.*?)"$/) do |email|
 	google = { :provider => :google_oauth2,
 		:uuid     => "1234",
 		:google_oauth2 => {
 			:name => "Foo", 
-			:email => "test@student.utwente.nl"
+			:email => email
 		}
 	}
 	set_omniauth(google)
