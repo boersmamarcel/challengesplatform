@@ -1,7 +1,7 @@
 ---
 language: ruby
 rvm:
-- 1.9.3
+- 2.0.0
 env:
 - DB=postgres
 - MAILCHIMPKEY: "LJyABtHExncJhgWjSw1ualA93WW4d8ge+YhK5nxMS392AAO7d9iNci7nI9j5\ndlVeSt39UnqiMz+3x0fbnbt4Y4PKYSz1LiS9Y/Ao0OyB00vCiGpAxtLcW1Eo\nn5I+1sJfZofP6CtVHKnyd/1uF5dzE27D9d8Ii7MwzzE9etSj8qc="
