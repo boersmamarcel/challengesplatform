@@ -6,7 +6,7 @@ Feature: Registration
 	Scenario: Visit the registration url
 	Given I am not logged in
 	When I visit the "registration.form" page
-	Then I should see the "login" page
+	Then I should see the "session.new" page
 	And I should get the message "We're sorry: only admins are allowed to create new users."
 
 	# Redirect to the dashboard page
