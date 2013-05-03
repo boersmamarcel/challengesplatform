@@ -1,7 +1,7 @@
 ---
 language: ruby
 rvm:
-- 2.0.0
+- 1.9.3
 env:
 - DB=postgres
 - secure: "f3lpVCNKjoSpnUBTqCMm5Qzij7AKGcedNznfM4IfFtmE2mYseHhdMRw/EueX\n/nKxdnytMHpzBntR2od4Mmkkt9T6pAtuNNtMQ4RJZZf+YtvkfPbFZrOcUvEk\nn67rbI/Q72TfjgakSCsxCgGA4/RZTrKC5JYnyInJBLxbJZ6TSbs="
