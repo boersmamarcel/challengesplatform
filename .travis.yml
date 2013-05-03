@@ -5,9 +5,9 @@ rvm:
   - 1.9.3
 env:
   global:
-    - secure: "LTShr15xa9PEn1dxAWM2uMCYxjaBEHkUuAIU1JeYxfYfLwf73xpRZXjj++9q\nxdgIWg6OtJX75n06X82APXKAAncd+zvO1ov0QBleDh4OA+I0CpX3ZmwSjWvM\nu+KOvASmftstILV0Hjddx1RLcdlETlJxrKbIvM9A1z427TcPibY="
-    - secure: "VzxMIZCw5/JzGlTNDAuAgUmY6BTkHha3yQCVNre9h4B5miSAp/NhHBwTwrw2\ng7om6GtDWyJrlBQna9zPSJsfhzds3bGRjghEXOm4tMaOTTGmPxWbyRjYhiLC\nM3IJcwH/LUJcpPwHemVFANunWv+z8HKveQWoaXjZvfBF3ACXwhE="
-    - secure: "d0G3bIS+c3Qhz+3CZhV0lkf4vVh8ue/FCuZjxjzBB0UH+VsGU7vPTHs10WsK\nivvG3dZbVi4HlaRHYORrF3MRqUl7MO0hRYYy/g/7TuRpq2ABcn8vVgQRP0b9\nW/9uSGGyfmAPR0s/2kr7VFpeWTnp29AMsZEkdIRnkI5eJguim7A="
+    - secure: "dYThxgC+wL1Teoa43IFqG2Gv9umzBZjmy3jDdH1D29O5u6ekY5k0AF4i5bDq\nOgAMFR/FIeqwVajNsn60/qn287BR4LuamTssjGP3FnUnvuDEFxDFBNz+KwBd\nF+9ryZRwNrWVDOxHt8KaoOSgXFiP522K3uBkz7JvFm63jj0Zw5g="
+    - secure: "IL5x5UL21pyP+dvSGwyHzx9Dvua8aBnpVexTSScUvCbb/m7VhrfftfQYpDee\nQcNAbcM7OFdrPokg3RhPGwMwBsMXedkFE6sLOH8tml6IGWgOmGemV8E7LmzL\nadxpMilgxdKsYgVwi6WZ+mt5LdM0prlW5NabZTmMHaosDyBGERg="
+    - secure: "RRy7IQNoTe41zs+kD2W9NQ/9gDGpKdj34kvWrmszchQJYzEDbQ6PLzHWDfFM\nVORZXNOcNPFHi0O1+H5HVrU2vquUa85ApvA6i6O+lDbH/VSekDB+BRYmh+6N\nk7nuA1l1bNQe787Lt8zOGUX8DTHHcV1kpLhJnngxAQLuoziJ934="
     - secure: "biE7FXW01hxze4qEIEs+8lUhNYdVkRViGsEJpyiRs/XIM75/TfPZ7fdiGxXr\nDAL0Sbfj+jI6PY0h7sjPVZVpuJwG69A9Rk+WJuFD2qVcInLhdcL1xMX+vtHM\nr2/X5Oa889LUGMxcj7qxB6I8S8PPIoEWlZ6sZ9mqAlmwYkd5gS4="
   matrix:
     - DB=postgres
