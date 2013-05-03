@@ -4,9 +4,16 @@ rvm:
 - 1.9.3
 env:
 - DB=postgres
-- secure: "f3lpVCNKjoSpnUBTqCMm5Qzij7AKGcedNznfM4IfFtmE2mYseHhdMRw/EueX\n/nKxdnytMHpzBntR2od4Mmkkt9T6pAtuNNtMQ4RJZZf+YtvkfPbFZrOcUvEk\nn67rbI/Q72TfjgakSCsxCgGA4/RZTrKC5JYnyInJBLxbJZ6TSbs="
-- secure: "gEMGYo2nQFUAY92Bpbbr1laeUtaEXBidQdgbO4WNu2OP0EQOFwXSWyab0jyj\nmlQvMMbZpJXkQIVk3WqyG3eUftI4sEHRPnaN+FhrC3kNA8fVTXA9TA9XN2oi\nhb+rum+KFj81mE7Fai71t99nIzucmFt+n2095XMFn4L+t/ugQPU="
-- secure: "S6BCXApvkRQosXZJEOdRYmQKwVyA4NhR0G0H0QVxcUnngbK8nnFsn+qr83Hq\nuFXfdosMsjN6zGCXlOG4K/2MpWiu8ymwqolY5z+FBcklDmn4Wy1EfgBBDgCt\n6vbDwanlVlds1JzJxSySz7wrsd6wBc5cEpHgQD8BibCNSNEE8uI="
+- global:
+  - secure: |-
+      VYyI9raDBcmopFG1/GHopcryp17KLbqPLYYkOoKLpnftp7M09IFLMkWD8KzZ
+      XSZai8buZtFnwwkKfVZU2Wsdqm7u0rogm3vBMlUZywT6Lnbk7LLHr4atWsMD
+      ZdZIXi59MyOMtMevjTkuRahR2TuzGRveINRKJbOCMvSpL1ajUgM=
+  - secure: |-
+      UuLBAtI9Zze0GNJl94vCJ6FQRCMRRzDWKW4L48cyrsr/yGKtCgM+WXj1mtDy
+      mVHB0sl4yWd3dOq0+TGy+TfUk3hQhb5CUhLdFU/Gp702bB/q6vASSxgu3aWG
+      ll6UrsuO11idesGpns1lH8cTQnRgbh4GLukfnSjAcpRPh3vi3U0=
+  - secure: "d0G3bIS+c3Qhz+3CZhV0lkf4vVh8ue/FCuZjxjzBB0UH+VsGU7vPTHs10WsK\nivvG3dZbVi4HlaRHYORrF3MRqUl7MO0hRYYy/g/7TuRpq2ABcn8vVgQRP0b9\nW/9uSGGyfmAPR0s/2kr7VFpeWTnp29AMsZEkdIRnkI5eJguim7A="
 - bundle exec cucumber -r features
 - bundle exec rspec -f d -c
 - RAILS_ENV=test bundle exec rake db:reset
