@@ -29,6 +29,7 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 before "deploy", "deploy:deploying"
 before "deploy:restart", "deploy:symlink_db"
+before "deploy:restart", "deploy:symlink_keys"
 after "deploy:restart", "deploy:done"
 after "deploy", "deploy:migrate"
 require "rvm/capistrano"
@@ -54,5 +55,9 @@ namespace :deploy do
   desc "Symlinks the database.yml"
   task :symlink_db, :roles => :app do
       run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
+  desc "Symlinks the keys"
+  task :symlink_keys, :roles => :app do
+      run "ln -nfs #{deploy_to}/shared/config/initializers/devise_local.rb #{release_path}/initializers/devise_local.rb"
   end
 end
