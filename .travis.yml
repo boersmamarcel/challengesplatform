@@ -5,6 +5,8 @@ rvm:
 env:
 - DB=postgres
 - secure: "f3lpVCNKjoSpnUBTqCMm5Qzij7AKGcedNznfM4IfFtmE2mYseHhdMRw/EueX\n/nKxdnytMHpzBntR2od4Mmkkt9T6pAtuNNtMQ4RJZZf+YtvkfPbFZrOcUvEk\nn67rbI/Q72TfjgakSCsxCgGA4/RZTrKC5JYnyInJBLxbJZ6TSbs="
+- secure: "gEMGYo2nQFUAY92Bpbbr1laeUtaEXBidQdgbO4WNu2OP0EQOFwXSWyab0jyj\nmlQvMMbZpJXkQIVk3WqyG3eUftI4sEHRPnaN+FhrC3kNA8fVTXA9TA9XN2oi\nhb+rum+KFj81mE7Fai71t99nIzucmFt+n2095XMFn4L+t/ugQPU="
+- secure: "S6BCXApvkRQosXZJEOdRYmQKwVyA4NhR0G0H0QVxcUnngbK8nnFsn+qr83Hq\nuFXfdosMsjN6zGCXlOG4K/2MpWiu8ymwqolY5z+FBcklDmn4Wy1EfgBBDgCt\n6vbDwanlVlds1JzJxSySz7wrsd6wBc5cEpHgQD8BibCNSNEE8uI="
 - bundle exec cucumber -r features
 - bundle exec rspec -f d -c
 - RAILS_ENV=test bundle exec rake db:reset
