@@ -8,7 +8,15 @@ gem 'rails', '3.2.13'
 # Use PostgreSQL
 gem 'pg'
 
+#Add gems for devise authentication and Google oauth
+gem 'devise'
+gem 'omniauth-google-oauth2'
+gem 'omniauth'
+
 gem 'haml'
+
+gem "devise_mailchimp"  # Last officially released gem
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,6 +45,9 @@ group :test, :develop  do
     gem 'database_cleaner'
     gem 'rspec-rails', '~> 2.0'
 end
+
+
+
 
 gem 'jquery-rails'
 
