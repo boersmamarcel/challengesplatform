@@ -11,7 +11,6 @@ env:
 - bundle exec cucumber -r features
 - bundle exec rspec -f d -c
 - RAILS_ENV=test 
-- bundle exec rake db:reset
 before_script:
 - cp config/database.travis.yml config/database.yml
 - bundle exec rake db:create
