@@ -3,14 +3,12 @@ language: ruby
 
 rvm:
   - 1.9.3
-
 env:
   global: 
     - secure: "LTShr15xa9PEn1dxAWM2uMCYxjaBEHkUuAIU1JeYxfYfLwf73xpRZXjj++9q\nxdgIWg6OtJX75n06X82APXKAAncd+zvO1ov0QBleDh4OA+I0CpX3ZmwSjWvM\nu+KOvASmftstILV0Hjddx1RLcdlETlJxrKbIvM9A1z427TcPibY="
     - secure: "VzxMIZCw5/JzGlTNDAuAgUmY6BTkHha3yQCVNre9h4B5miSAp/NhHBwTwrw2\ng7om6GtDWyJrlBQna9zPSJsfhzds3bGRjghEXOm4tMaOTTGmPxWbyRjYhiLC\nM3IJcwH/LUJcpPwHemVFANunWv+z8HKveQWoaXjZvfBF3ACXwhE="
     - secure: "d0G3bIS+c3Qhz+3CZhV0lkf4vVh8ue/FCuZjxjzBB0UH+VsGU7vPTHs10WsK\nivvG3dZbVi4HlaRHYORrF3MRqUl7MO0hRYYy/g/7TuRpq2ABcn8vVgQRP0b9\nW/9uSGGyfmAPR0s/2kr7VFpeWTnp29AMsZEkdIRnkI5eJguim7A="
     - DB=postgres
-
 before_script:
   - cp config/database.travis.yml config/database.yml
   - cat config/database.yml
@@ -19,6 +17,7 @@ before_script:
   - mkdir tmp
   - mkdir tmp/cache
   - phantomjs --version
-
-- bundle exec cucumber -r features
-- bundle exec rspec -f d -c
+script:
+  - bundle exec cucumber -r features
+  - bundle exec rspec -f d -c
+  - RAILS_ENV=test bundle exec rake db:reset
