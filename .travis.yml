@@ -20,6 +20,3 @@ before_script:
   - phantomjs --version
 script:
   - echo $TEST_ENV
-  - bundle exec cucumber -r features
-  - bundle exec rspec -f d -c
-  - RAILS_ENV=test bundle exec rake db:reset
