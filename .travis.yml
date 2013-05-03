@@ -5,10 +5,10 @@ rvm:
   - 1.9.3
 env:
   global: 
-    - secure: "LTShr15xa9PEn1dxAWM2uMCYxjaBEHkUuAIU1JeYxfYfLwf73xpRZXjj++9q\nxdgIWg6OtJX75n06X82APXKAAncd+zvO1ov0QBleDh4OA+I0CpX3ZmwSjWvM\nu+KOvASmftstILV0Hjddx1RLcdlETlJxrKbIvM9A1z427TcPibY="
-    - secure: "VzxMIZCw5/JzGlTNDAuAgUmY6BTkHha3yQCVNre9h4B5miSAp/NhHBwTwrw2\ng7om6GtDWyJrlBQna9zPSJsfhzds3bGRjghEXOm4tMaOTTGmPxWbyRjYhiLC\nM3IJcwH/LUJcpPwHemVFANunWv+z8HKveQWoaXjZvfBF3ACXwhE="
-    - secure: "d0G3bIS+c3Qhz+3CZhV0lkf4vVh8ue/FCuZjxjzBB0UH+VsGU7vPTHs10WsK\nivvG3dZbVi4HlaRHYORrF3MRqUl7MO0hRYYy/g/7TuRpq2ABcn8vVgQRP0b9\nW/9uSGGyfmAPR0s/2kr7VFpeWTnp29AMsZEkdIRnkI5eJguim7A="
-    - secure: "FHlFJHsdHM0gS3E3IOkfBjfoK+WD1Zsf6w39ttWnjcuO0XxpHwjCpIHC4khi\nCSou7HnfsJm2MVfieptm6nXVOmnhbKRJw6dFHl0S0P4pElwveJNYGWdlEE4c\n6PehhVM1meL3VLR3POK7imuPeeNHYlPPKrKXkj/e78tHK8EidPY="
+    secure: "LTShr15xa9PEn1dxAWM2uMCYxjaBEHkUuAIU1JeYxfYfLwf73xpRZXjj++9q\nxdgIWg6OtJX75n06X82APXKAAncd+zvO1ov0QBleDh4OA+I0CpX3ZmwSjWvM\nu+KOvASmftstILV0Hjddx1RLcdlETlJxrKbIvM9A1z427TcPibY="
+    secure: "VzxMIZCw5/JzGlTNDAuAgUmY6BTkHha3yQCVNre9h4B5miSAp/NhHBwTwrw2\ng7om6GtDWyJrlBQna9zPSJsfhzds3bGRjghEXOm4tMaOTTGmPxWbyRjYhiLC\nM3IJcwH/LUJcpPwHemVFANunWv+z8HKveQWoaXjZvfBF3ACXwhE="
+    secure: "d0G3bIS+c3Qhz+3CZhV0lkf4vVh8ue/FCuZjxjzBB0UH+VsGU7vPTHs10WsK\nivvG3dZbVi4HlaRHYORrF3MRqUl7MO0hRYYy/g/7TuRpq2ABcn8vVgQRP0b9\nW/9uSGGyfmAPR0s/2kr7VFpeWTnp29AMsZEkdIRnkI5eJguim7A="
+    secure: "gz1B3haIHoqbEdX1ae6nrr//RKYO4TevF78NXe1Tp8jl8SmebwwXj0DvtiaD\ngQJf5soJvBwOZHcvLHwEzWRFccS2OVSc+40/9WIFQlW3uj7VvQKb/8piSKQ1\npQ31wnzo2U72WvOaXp16t+hNwOEk27y0FrQlPkRXGejmpsZBYf8="
     - DB=postgres
 before_script:
   - cp config/database.travis.yml config/database.yml
