@@ -134,7 +134,7 @@ class ChallengesController < ApplicationController
     
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to challenges_path , notice: 'Challenges successfully revoked' }
+        format.html { redirect_to challenges_path , notice: 'Challenge successfully revoked' }
         format.json { head :no_content }
       else
         format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}

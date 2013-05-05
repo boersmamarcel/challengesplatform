@@ -23,21 +23,22 @@ Feature: Add challenge
         And I press "Save"
         Then I should see a message with "Challenge successfully saved"
     
-    @focus
+    
     Scenario: Revoke a pending for review challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
         When I visit the "challenges.pending" page
         And I follow "Revoke"
-        Then I should see a message with "Challenges successfully revoked"
+        Then I should see a message with "Challenge successfully revoked"
     
+    @focus
     Scenario: Revoke an approved challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
         When I visit the "challenges.approved" page
-        And I press "Revoke"
+        And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
     
     Scenario: View declined challenges
