@@ -1,2 +1,27 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'dashboard.index'}
-dashboard page
+
+%h1 Listing New Challenges
+%table
+  %tr
+    %th Title
+    %th Description
+    %th Start date
+    %th End date
+    %th State
+    %th Count
+    %th
+    %th
+    %th
+  - @upcoming_challenges.each do |challenge|
+    %tr
+      %td= challenge.title
+      %td= challenge.description
+      %td= challenge.start_date
+      %td= challenge.end_date
+      %td= challenge.state
+      %td= challenge.count
+      %td= link_to 'Show', challenge
+      %td= link_to 'Edit', edit_challenge_path(challenge)
+      %td= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Challenge', new_challenge_path
