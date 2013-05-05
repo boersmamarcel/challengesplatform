@@ -1,4 +1,12 @@
 Challengesplatform::Application.routes.draw do
+  resources :challenges do
+      get 'approved', :on => :collection
+      get 'declined', :on => :collection
+      get 'pending', :on => :collection
+      get 'proposal', :on => :collection
+  end
+
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'users/registrations' }
 
   get "static/index"
