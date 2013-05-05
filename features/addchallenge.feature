@@ -32,7 +32,7 @@ Feature: Add challenge
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
     
-    @focus
+    
     Scenario: Revoke an approved challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
@@ -41,6 +41,7 @@ Feature: Add challenge
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
     
+    @focus
     Scenario: View declined challenges
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |

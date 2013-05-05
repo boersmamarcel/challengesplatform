@@ -14,7 +14,7 @@ When (/^I follow "(.*?)"$/) do |link|
 end
 
 Then(/^I should see "(.*?)" in the list$/) do |title|
-   within("div#title").should have_content(title)
+   page.should have_content(title)
 end
 
 When(/^I edit the challenge with id "(.*?)" and a new description "(.*?)"$/) do |id, description|
