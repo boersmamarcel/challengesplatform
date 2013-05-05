@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :challenge do
-   id 1
    title "Default title"
    description "Default description"
    start_date Date.today + 2
