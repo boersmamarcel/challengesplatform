@@ -16,20 +16,20 @@ Feature: Add challenge
      | Title 1  |                           | 03-08-2013        | 09-09-2013        | One or more fields are missing            |
      | Title 1  |                           |                   |                   | One or more fields are missing            |
 
-    @focus
+    
     Scenario: Save a challenge proposal
         When I visit the "challenge.new" page
         And I fill in title with "Title 1" description with "description"  and fill in start_date with "03-08-2013" and end_date with "09-09-2013"
         And I press "Save"
         Then I should see a message with "Challenge successfully saved"
     
-    
+    @focus
     Scenario: Revoke a pending for review challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
         When I visit the "challenges.pending" page
-        And I press "Revoke"
+        And I follow "Revoke"
         Then I should see a message with "Challenges successfully revoked"
     
     Scenario: Revoke an approved challenge
@@ -38,7 +38,7 @@ Feature: Add challenge
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
         When I visit the "challenges.approved" page
         And I press "Revoke"
-        Then I should see a message with "Challenges successfully revoked"
+        Then I should see a message with "Challenge successfully revoked"
     
     Scenario: View declined challenges
         Given the following challenge records
@@ -113,6 +113,9 @@ Feature: Add challenge
     Scenario: Not logged in and visit challenges.*
       When I visit the "challenges.index" page
       Then I should be redirected to "session.new" page
+      
+    Scenario: Supervisor can not delete a challenge only revoke a challenge
+    
       
 
     

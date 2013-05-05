@@ -24,7 +24,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/proposal
     # GET /challenges/proposal
     def proposal
-        @challenges = Challenge.where(:state => "proposal")
+        @challenges = Challenge.proposal
         
         respond_to do |format|
             format.html
@@ -35,7 +35,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/approved
   # GET /challenges/approved.json
   def approved
-      @challenges = Challenge.where(:state => "approved")
+      @challenges = Challenge.approved
       
       respond_to do |format|
           format.html
@@ -46,7 +46,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
-        @challenges = Challenge.where(:state => "declined")
+        @challenges = Challenge.declined
         
         respond_to do |format|
             format.html
@@ -57,7 +57,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/pending
     # GET /challenges/pending
     def pending
-        @challenges = Challenge.where(:state => "pending")
+        @challenges = Challenge.pending
         
         respond_to do |format|
             format.html
@@ -127,4 +127,20 @@ class ChallengesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def revoke
+    @challenge = Challenge.find(params[:id])
+    @challenge.state = "declined"
+    
+    respond_to do |format|
+      if @challenge.save
+        format.html { redirect_to challenges_path , notice: 'Challenges successfully revoked' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}
+        format.html { head :no_content }
+      end
+    end
+  end
+  
 end

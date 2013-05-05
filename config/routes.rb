@@ -4,6 +4,7 @@ Challengesplatform::Application.routes.draw do
       get 'declined', :on => :collection
       get 'pending', :on => :collection
       get 'proposal', :on => :collection
+      get 'revoke', :on => :member
   end
 
 

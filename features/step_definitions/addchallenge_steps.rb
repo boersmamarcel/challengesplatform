@@ -9,6 +9,10 @@ When(/^I press "(.*?)"$/) do |button|
   click_button button
 end
 
+When (/^I follow "(.*?)"$/) do |link|
+    click_link link
+end
+
 Then(/^I should see "(.*?)" in the list$/) do |title|
    within("div#title").should have_content(title)
 end

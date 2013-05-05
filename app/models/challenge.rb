@@ -2,6 +2,7 @@ class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
   attr_accessor :submit
   
+  
   validate :submit?
   
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :submit?
@@ -12,6 +13,12 @@ class Challenge < ActiveRecord::Base
   
   validate :dates, :if => :submit?
   scope :upcoming, where('start_date > ?', Date.today)
+  scope :pending, where(:state => "pending")
+  scope :proposal, where(:state => "proposal")
+  scope :declined, where(:state => "declined")
+  scope :approved, where(:state => "approved")
+  
+  @protected
   
   def submit?
       submit
