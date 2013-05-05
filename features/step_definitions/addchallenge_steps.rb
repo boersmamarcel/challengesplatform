@@ -1,12 +1,12 @@
 When(/^I fill in title with "(.*?)" description with "(.*?)"  and fill in start_date with "(.*?)" and end_date with "(.*?)"$/) do | title, description, start_date, end_date |
-    fill_in title_field, :with => title
-    fill_in description_field, :with => description
-    fill_in start_date_field, :with => start_date
-    fill_in end_date_field, :with => end_date
+    fill_in :challenge_title, :with => title
+    fill_in :challenge_description, :with => description
+    fill_in :challenge_start_date, :with => start_date
+    fill_in :challenge_end_date, :with => end_date
 end
 
 When(/^I press "(.*?)"$/) do |button|
-  click_botton button
+  click_button button
 end
 
 Then(/^I should see "(.*?)" in the list$/) do |title|

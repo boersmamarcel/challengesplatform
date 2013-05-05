@@ -21,19 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :start_date %><br />
-    <%= f.datetime_select :start_date %>
+    <%= f.text_field :start_date %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br />
-    <%= f.datetime_select :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :count %><br />
-    <%= f.number_field :count %>
+    <%= f.text_field :end_date %>
   </div>
   <div class="actions">
     <%= f.submit %>

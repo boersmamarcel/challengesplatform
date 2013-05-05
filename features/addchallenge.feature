@@ -3,10 +3,11 @@ Feature: Add challenge
     As an admin or supervisor
     I want to be able to submit a proposal for review and see the current stats of an approved challenge
     
+    @focus
     Scenario Outline: Submit new challenge
         When I visit the "challenge.new" page
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
-        And I press "Submit"
+        And I press "Create Challenge"
         Then I should see a message with "<message>"
       
     Examples:
@@ -109,6 +110,11 @@ Feature: Add challenge
         When I visit the edit challenge "1" page
         Then I should see a message with "Can not edit an approved challenge"
         
+        
+    Scenario: Not logged in and visit challenges.*
+      When I visit the "challenges.index" page
+      Then I should be redirected to "session.new" page
+      
 
     
     
