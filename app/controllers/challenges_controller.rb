@@ -86,22 +86,12 @@ class ChallengesController < ApplicationController
   def create
     @challenge = Challenge.new(params[:challenge])
     
-    # empty = false
-    #  params[:challenge].each do |var|
-    #    if var.blank?
-    #      empty = true
-    #    end
-    #  end
-    #    
-    #  redirect_to new_challenge_path(params) and flash[:notice] = "One or more fields are missing" and return if empty
-    #    
-    #  start_date = DateTime.strptime(params[:challenge][:start_date], '%d-%m-%Y')
-    #  end_date = DateTime.strptime(params[:challenge][:end_date], '%d-%m-%Y')
-    #  
-      
+    @challenge.submit = true if params[:commit] == "Create Challenge"
+
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge is pending for review.' }
+        format.html { redirect_to @challenge, notice: 'Challenge is pending for review.' } if @challenge.submit
+        format.html { redirect_to @challenge, notice: 'Challenge successfully saved' } unless @challenge.submit
         format.json { render json: @challenge, status: :created, location: @challenge }
       else
         format.html { render action: "new" }

@@ -3,7 +3,6 @@ Feature: Add challenge
     As an admin or supervisor
     I want to be able to submit a proposal for review and see the current stats of an approved challenge
     
-    @focus
     Scenario Outline: Submit new challenge
         When I visit the "challenge.new" page
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
@@ -17,7 +16,7 @@ Feature: Add challenge
      | Title 1  |                           | 03-08-2013        | 09-09-2013        | One or more fields are missing            |
      | Title 1  |                           |                   |                   | One or more fields are missing            |
 
-    
+    @focus
     Scenario: Save a challenge proposal
         When I visit the "challenge.new" page
         And I fill in title with "Title 1" description with "description"  and fill in start_date with "03-08-2013" and end_date with "09-09-2013"

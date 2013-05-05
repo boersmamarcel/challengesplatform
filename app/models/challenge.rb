@@ -1,15 +1,21 @@
 class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
-
+  attr_accessor :submit
   
-  validates :title, :presence => { :message => "One or more fields are missing" }
-  validates :description, :presence => { :message => "One or more fields are missing" }
+  validate :submit?
   
-  validates :start_date, :presence => { :message => "One or more fields are missing" }
-  validates :end_date, :presence => { :message => "One or more fields are missing" }
+  validates :title, :presence => { :message => "One or more fields are missing" }, :if => :submit?
+  validates :description, :presence => { :message => "One or more fields are missing" }, :if => :submit?
   
-  validate :dates
+  validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
+  validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
+  
+  validate :dates, :if => :submit?
   scope :upcoming, where('start_date > ?', Date.today)
+  
+  def submit?
+      submit
+  end
 
 
    def dates
