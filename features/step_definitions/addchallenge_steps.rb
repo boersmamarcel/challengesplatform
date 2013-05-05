@@ -17,6 +17,10 @@ Then(/^I should see "(.*?)" in the list$/) do |title|
    page.should have_content(title)
 end
 
+Then(/^I should not see "(.*?)" in the list$/) do |title|
+  page.should_not have_content(title)
+end
+
 When(/^I edit the challenge with id "(.*?)" and a new description "(.*?)"$/) do |id, description|
     
     visit edit_challenge_path(id)
