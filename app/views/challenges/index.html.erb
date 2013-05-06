@@ -16,10 +16,10 @@
 
 <% @challenges.each do |challenge| %>
   <tr>
-    <td><%= challenge.title %></td>
-    <td><%= challenge.description %></td>
-    <td><%= challenge.start_date %></td>
-    <td><%= challenge.end_date %></td>
+    <td class='title'><%= challenge.title %></td>
+    <td class="description"><%= challenge.description %></td>
+    <td class='start_date'><%= challenge.start_date.strftime("%d-%m-%Y") %></td>
+    <td class='end_date'><%= challenge.end_date.strftime("%d-%m-%Y") %></td>
     <td><%= challenge.state %></td>
     <td><%= challenge.count %></td>
     <td><%= link_to 'Show', challenge %></td>

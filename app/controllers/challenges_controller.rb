@@ -16,7 +16,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.where("id = ? AND state = 'approved'", params[:id]).first
 
     redirect_to challenges_path and return if @challenge.nil?
-
+    
     respond_to do |format|
       format.html { @challenge }# show.html.erb
       format.json { render json: @challenge }

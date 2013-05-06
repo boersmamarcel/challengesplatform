@@ -8,3 +8,10 @@ Given(/^user "(.*?)" is subscribed to challenge "(.*?)"$/) do |user_email, chall
     Enrollment.create!(:user_id => user.id, :challenge_id => challenge_id)
   end
 end
+
+Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)" in the list$/) do |title, description, start_date, end_date|
+  page.should have_content(title)
+  page.should have_content(description)
+  page.should have_content(start_date)
+  page.should have_content(end_date)
+end
