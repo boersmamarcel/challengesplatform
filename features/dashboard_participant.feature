@@ -2,7 +2,7 @@ Feature: A dashboard for participant
   In order to quickly get up to speed with currently relevant information
   As a participant
   I want to be able to see my challenges, upcoming challenges, notifications, and updates of friends on a clear dashboard
-
+  @focus
   Scenario: View relevant new challenges
     Given the following challenge records
       | title | description | start_date | end_date |
