@@ -23,7 +23,8 @@
     <td><%= challenge.count %></td>
     <td><%= link_to 'Show', challenge %></td>
     <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
-    <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Revoke', revoke_challenge_path(challenge) %></td>
   </tr>
 <% end %>
 </table>

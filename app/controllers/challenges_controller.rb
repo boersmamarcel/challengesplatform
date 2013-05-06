@@ -24,7 +24,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/proposal
     # GET /challenges/proposal
     def proposal
-        @challenges = Challenge.where(:state => "proposal")
+        @challenges = Challenge.proposal
         
         respond_to do |format|
             format.html
@@ -35,7 +35,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/approved
   # GET /challenges/approved.json
   def approved
-      @challenges = Challenge.where(:state => "approved")
+      @challenges = Challenge.approved
       
       respond_to do |format|
           format.html
@@ -46,7 +46,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
-        @challenges = Challenge.where(:state => "declined")
+        @challenges = Challenge.declined
         
         respond_to do |format|
             format.html
@@ -57,7 +57,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/pending
     # GET /challenges/pending
     def pending
-        @challenges = Challenge.where(:state => "pending")
+        @challenges = Challenge.pending
         
         respond_to do |format|
             format.html
@@ -79,20 +79,31 @@ class ChallengesController < ApplicationController
   # GET /challenges/1/edit
   def edit
     @challenge = Challenge.find(params[:id])
+    # Only allow challenges in certain states to be edited...
+    respond_to do |format|
+      if Challenge.editable.exists?(@challenge)
+        format.html
+      else
+        format.html { redirect_to @challenge, alert: 'This challenge can not be edited by you.' }
+      end
+    end
   end
 
   # POST /challenges
   # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
+    
+    @challenge.submit = true if params[:commit] == "Create Challenge"
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
+        format.html { redirect_to @challenge, notice: 'Challenge is pending for review.' } if @challenge.submit
+        format.html { redirect_to @challenge, notice: 'Challenge successfully saved' } unless @challenge.submit
         format.json { render json: @challenge, status: :created, location: @challenge }
       else
         format.html { render action: "new" }
-        format.json { render json: @challenge.errors, status: :unprocessable_entity }
+        format.json { render json: @challenge.errors, notice: @challenges.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -101,7 +112,7 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
-
+    @challenge.count += 1
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
@@ -124,4 +135,20 @@ class ChallengesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def revoke
+    @challenge = Challenge.find(params[:id])
+    @challenge.count += 1
+    
+    respond_to do |format|
+      if @challenge.save
+        format.html { redirect_to challenges_path , notice: 'Challenge successfully revoked' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}
+        format.html { head :no_content }
+      end
+    end
+  end
+  
 end

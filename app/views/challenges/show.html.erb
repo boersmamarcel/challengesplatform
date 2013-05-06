@@ -1,35 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<p id="title">
   <b>Title:</b>
   <%= @challenge.title %>
 </p>
 
-<p>
+<p id="description">
   <b>Description:</b>
   <%= @challenge.description %>
 </p>
 
-<p>
+<p id="start_date">
   <b>Start date:</b>
-  <%= @challenge.start_date %>
+  <%= @challenge.start_date.strftime("%d-%m-%Y") %>
 </p>
 
-<p>
+<p id="end_date">
   <b>End date:</b>
-  <%= @challenge.end_date %>
+  <%= @challenge.end_date.strftime("%d-%m-%Y") %>
 </p>
 
-<p>
+<p id="state">
   <b>State:</b>
   <%= @challenge.state %>
 </p>
 
-<p>
+<p id="count">
   <b>Count:</b>
   <%= @challenge.count %>
 </p>
 
 
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<% if(@challenge.state.eql? "approved" or @challenge.state.eql? "pending") %>
+  <%= link_to 'Revoke', revoke_challenge_path(@challenge) %> |
+<% end %>
 <%= link_to 'Back', challenges_path %>
