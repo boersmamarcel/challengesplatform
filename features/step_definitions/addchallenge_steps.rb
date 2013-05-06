@@ -22,7 +22,6 @@ Then(/^I should not see "(.*?)" in the list$/) do |title|
 end
 
 When(/^I edit the challenge with id "(.*?)" and a new description "(.*?)"$/) do |id, description|
-    
     visit edit_challenge_path(id)
     fill_in :challenge_description, :with => description
 end

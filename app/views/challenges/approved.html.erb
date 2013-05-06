@@ -22,7 +22,11 @@
     <td><%= challenge.state %></td>
     <td><%= challenge.count %></td>
     <td><%= link_to 'Show', challenge %></td>
-    <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+    <% if Challenge.editable.exists?(challenge) %>
+      <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+    <% else %>
+      <td></td>
+    <% end %>
     <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <td><%= link_to 'Revoke', revoke_challenge_path(challenge) %></td>
     

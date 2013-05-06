@@ -14,6 +14,8 @@ def getRoute(name)
     destroy_user_session_path
   when "registration.form"
     new_user_registration_path
+  when "challenges.index"
+    challenges_path
   when "challenge.new"
     new_challenge_path
   when "challenges.pending"

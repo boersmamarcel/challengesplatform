@@ -30,8 +30,10 @@
   <%= @challenge.count %>
 </p>
 
+<% if Challenge.editable.exists?(@challenge) %>
+  <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+<% end %>
 
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <% if(@challenge.state.eql? "approved" or @challenge.state.eql? "pending") %>
   <%= link_to 'Revoke', revoke_challenge_path(@challenge) %> |
 <% end %>
