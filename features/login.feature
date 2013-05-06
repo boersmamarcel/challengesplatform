@@ -4,7 +4,7 @@ Feature: Login
 	As a user
 	I want to login
 
-    Scenario: Login with correct user credentials
+  Scenario: Login with correct user credentials
 	Given the following user records
 		| email | password | password_confirmation |
 		| j.p.balkenende@student.utwente.nl | abcd1234 | abcd1234 |

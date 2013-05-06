@@ -2,6 +2,9 @@ class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
   attr_accessor :submit
   
+  belongs_to :supervisor, :class_name => "User", :foreign_key => "user_id"
+  
+  has_many :enrollments
   
   validate :submit?
   

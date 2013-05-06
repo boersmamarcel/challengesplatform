@@ -38,10 +38,10 @@ end
 
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)"$/) do |title, description, start_date, end_date|
   
-    within("div#title").should have_content(title)
-    within("div#description").should have_content(description)
-    within("div#start_date").should have_content(start_date)
-    within("div#end_date").should have_content(end_date)
+    page.find_by_id("title").should have_content(title)
+    page.find_by_id("description").should have_content(description)
+    page.find_by_id("start_date").should have_content(start_date)
+    page.find_by_id("end_date").should have_content(end_date)
     
 end
 

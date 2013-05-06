@@ -9,15 +9,22 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list
-  # attr_accessible :title, :body
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :role
   
-  
+  has_many :challenges
+  has_many :enrollments
   
   before_save :default_values
 
   def default_values
       self.join_mailing_list = TRUE
+      self.role = 0
+      
+      #roles
+      # 0 = normal user
+      # 1 = supervisor
+      # 2 = admin
+      
   end
   
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)

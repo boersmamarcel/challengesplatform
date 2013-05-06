@@ -13,10 +13,12 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.where("id = ? AND state = 'approved'", params[:id]).first
+
+    redirect_to challenges_path and return if @challenge.nil?
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { @challenge }# show.html.erb
       format.json { render json: @challenge }
     end
   end
@@ -138,9 +140,39 @@ class ChallengesController < ApplicationController
         format.json { head :no_content }
       else
         format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}
-        format.html { head :no_content }
+        format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def enroll
+      @challenge = Challenge.find(params[:id])
+      
+      @enrollment = @challenge.enrollments.build
+      @enrollment.user = current_user
+      
+      respond_to do |format|
+        if @challenge.save
+            format.html{ redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'}
+            format.json{ head :no_content}
+        else
+          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        end
+      end
+      
+  end
+  
+  def unenroll
+    @challenge = Challenge.find(params[:id])
+    @enrollment = Enrollment.where('user_id = ? AND challenge_id = ? ', current_user.id, @challenge.id).first
+    
+    @enrollment.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled' }
+      format.json { head :no_content }
+    end
+    
   end
   
 end
