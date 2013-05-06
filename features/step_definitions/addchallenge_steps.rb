@@ -1,3 +1,8 @@
+Given(/^I am logged in as a supervisor$/) do
+	# We might want to change this a little once the user roles are defined better.
+	step "I log in with Google \"supervisor@utwente.nl\""
+end
+
 When(/^I fill in title with "(.*?)" description with "(.*?)"  and fill in start_date with "(.*?)" and end_date with "(.*?)"$/) do | title, description, start_date, end_date |
     fill_in :challenge_title, :with => title
     fill_in :challenge_description, :with => description
@@ -38,17 +43,21 @@ end
 
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)"$/) do |title, description, start_date, end_date|
   
-    within("div#title").should have_content(title)
-    within("div#description").should have_content(description)
-    within("div#start_date").should have_content(start_date)
-    within("div#end_date").should have_content(end_date)
+    page.find_by_id("title").should have_content(title)
+    page.find_by_id("description").should have_content(description)
+    page.find_by_id("start_date").should have_content(start_date)
+    page.find_by_id("end_date").should have_content(end_date)
     
 end
 
-Then(/^I should see a button "(.*?)"$/) do |button|
+Then(/^I should see a (button|link) "(.*?)"$/) do |type, button|
     page.should have_selector(:link_or_button, button)
 end
 
 When(/^I visit the edit challenge "(.*?)" page$/) do |id|
     visit edit_challenge_path(id)
+end
+
+Then(/^I should be redirected to "(.*?)" page$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
