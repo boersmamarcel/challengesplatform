@@ -20,6 +20,16 @@ def getRoute(name)
 		destroy_user_session_path
 	when "registration.form"
 		new_user_registration_path
+    when "challenge.new"
+        new_challenge_path
+    when "challenges.pending"
+        pending_challenges_path
+    when "challenges.approved"
+        approved_challenges_path
+    when "challenges.declined"
+        declined_challenges_path
+    when "challenges.proposal"
+        proposal_challenges_path
 	else
 		print("Invalid route requested (" + name + ")")
 	end

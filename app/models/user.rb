@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list
   # attr_accessible :title, :body
   
+  
+  
   before_save :default_values
 
   def default_values
