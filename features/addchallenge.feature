@@ -45,15 +45,17 @@ Feature: Add challenge
     Scenario: View declined challenges
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | declined    | 1     |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     |
         | 2  | Title2  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
         | 3  | Title3  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
         | 4  | Title4  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     |
+        | 5  | Title5  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 2     |
         When I visit the "challenges.declined" page
         Then I should see "Title1" in the list
         And I should not see "Title2" in the list
         And I should not see "Title3" in the list
         And I should not see "Title4" in the list
+        And I should not see "Title5" in the list
         
     @focus
     Scenario: Resubmit a declined challenge (submit count should increase)

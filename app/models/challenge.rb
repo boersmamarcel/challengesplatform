@@ -15,7 +15,7 @@ class Challenge < ActiveRecord::Base
   scope :upcoming, where('start_date > ?', Date.today)
   scope :pending, where(:state => "pending")
   scope :proposal, where(:state => "proposal")
-  scope :declined, where(:state => "proposal", :count => greater_than 1)
+  scope :declined, where("state = ? AND count > ?", "proposal", 1)
   scope :approved, where(:state => "approved")
   
   @protected
