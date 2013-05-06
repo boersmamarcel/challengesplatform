@@ -15,7 +15,7 @@ class Challenge < ActiveRecord::Base
   scope :upcoming, where('start_date > ?', Date.today)
   scope :pending, where(:state => "pending")
   scope :proposal, where(:state => "proposal")
-  scope :declined, where(:state => "declined")
+  scope :declined, where(:state => "proposal", :count => greater_than 1)
   scope :approved, where(:state => "approved")
   
   @protected
@@ -25,10 +25,10 @@ class Challenge < ActiveRecord::Base
   end
 
 
-   def dates
-     errors.add(:dates, "End date can not be before start date") if start_date.nil? || end_date.nil? || start_date > end_date
-     errors.add(:dates, "Start date can not be in the past") if start_date.nil? || start_date < DateTime.now
-   end
+  def dates
+    errors.add(:dates, "End date can not be before start date") if start_date.nil? || end_date.nil? || start_date > end_date
+    errors.add(:dates, "Start date can not be in the past") if start_date.nil? || start_date < DateTime.now
+  end
   
 
 end

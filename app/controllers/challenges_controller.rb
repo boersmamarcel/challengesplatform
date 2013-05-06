@@ -130,7 +130,7 @@ class ChallengesController < ApplicationController
   
   def revoke
     @challenge = Challenge.find(params[:id])
-    @challenge.state = "declined"
+    @challenge.count += 1
     
     respond_to do |format|
       if @challenge.save
