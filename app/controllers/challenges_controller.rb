@@ -79,6 +79,14 @@ class ChallengesController < ApplicationController
   # GET /challenges/1/edit
   def edit
     @challenge = Challenge.find(params[:id])
+    # Only allow challenges in certain states to be edited...
+    respond_to do |format|
+      if Challenge.editable.exists?(@challenge)
+        format.html
+      else
+        format.html { redirect_to @challenge, alert: 'This challenge can not be edited by you.' }
+      end
+    end
   end
 
   # POST /challenges

@@ -17,6 +17,8 @@ class Challenge < ActiveRecord::Base
   scope :proposal, where(:state => "proposal")
   scope :declined, where("state = ? AND count > ?", "proposal", 1)
   scope :approved, where(:state => "approved")
+  # Edit for quick change of what is and is not editable
+  scope :editable, where(:state => "proposal")
   
   @protected
   
