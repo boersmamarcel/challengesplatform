@@ -43,7 +43,7 @@ Then(/^I should see the "(.*?)" page$/) do |pageName|
 end
 
 Then(/^I should see "(.*?)" in section "(.*?)"$/) do |text, section|
-  within("#"+section.css_case(section)) do
+  within("#"+css_case(section)) do
     page.should have_content(text)
   end
 end
@@ -54,6 +54,6 @@ Then(/^I should not see "(.*?)" in section "(.*?)"$/) do |text, section|
   end
 end
 
-def css_case(str) do
+def css_case(str)
   str.squish.underscore.downcase.tr(" ","_")
 end
