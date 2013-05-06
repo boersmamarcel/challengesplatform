@@ -1,8 +1,3 @@
-Given(/^I am logged in as a supervisor$/) do
-	# We might want to change this a little once the user roles are defined better.
-	step "I log in with Google \"supervisor@utwente.nl\""
-end
-
 When(/^I fill in title with "(.*?)" description with "(.*?)"  and fill in start_date with "(.*?)" and end_date with "(.*?)"$/) do | title, description, start_date, end_date |
     fill_in :challenge_title, :with => title
     fill_in :challenge_description, :with => description
