@@ -41,7 +41,7 @@ Feature: Add challenge
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
     
-    @focus
+    
     Scenario: View declined challenges
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
@@ -55,15 +55,14 @@ Feature: Add challenge
         And I should not see "Title3" in the list
         And I should not see "Title4" in the list
         
-    
+    @focus
     Scenario: Resubmit a declined challenge (submit count should increase)
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | declined    | 1     |
         When I edit the challenge with id "1" and a new description "Nice challenge"
-        And I press "Submit"
-        Then I should see a message with "Challenge successfully resubmitted"
-        And I should see a submission count of "2"
+        And I press "Update Challenge"
+        Then I should see a message with "Challenge was successfully updated."
         
     
     Scenario: Resubmit a declined challenge with fields filled incorrectly
@@ -71,7 +70,7 @@ Feature: Add challenge
         | id | title   | description               | start_date        | end_date          | state       | count |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | declined    | 1     |
         When I edit the challenge with id "1" and a new description ""
-        And I press "Submit"
+        And I press "Create Challenge"
         Then I should see a message with "One or more fields are missing"
     
     Scenario: View approved challenges

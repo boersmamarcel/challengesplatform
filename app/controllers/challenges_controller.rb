@@ -104,7 +104,7 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
-
+    @challenge.count += 1
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
