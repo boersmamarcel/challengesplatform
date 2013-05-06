@@ -6,7 +6,7 @@ When(/^I fill in title with "(.*?)" description with "(.*?)"  and fill in start_
 end
 
 When(/^I press "(.*?)"$/) do |button|
-  click_botton button
+  click_button button
 end
 
 Then(/^I should see "(.*?)" in the list$/) do |title|
