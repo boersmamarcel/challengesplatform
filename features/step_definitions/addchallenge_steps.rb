@@ -51,7 +51,3 @@ end
 When(/^I visit the edit challenge "(.*?)" page$/) do |id|
     visit edit_challenge_path(id)
 end
-
-Then(/^I should be redirected to "(.*?)" page$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end

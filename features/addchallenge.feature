@@ -121,11 +121,6 @@ Feature: Add challenge
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
         When I visit the edit challenge "1" page
         Then I should see a message with "This challenge can not be edited by you."
-        
-        
-    Scenario: Not logged in and visit challenges.*
-      When I visit the "challenges.index" page
-      Then I should be redirected to "session.new" page
       
     Scenario: Supervisor can not delete a challenge only revoke a challenge
     
