@@ -5,7 +5,7 @@ class CreateChallenges < ActiveRecord::Migration
       t.text :description
       t.timestamp :start_date
       t.timestamp :end_date
-      t.string :state, :default => proposal
+      t.string :state
       t.integer :count, :default => 1
 
       t.timestamps
