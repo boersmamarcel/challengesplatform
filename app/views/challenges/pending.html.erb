@@ -15,14 +15,14 @@
 
 <% @challenges.each do |challenge| %>
   <tr>
-    <td><%= challenge.title %></td>
+    <td><%= challenge %></td>
     <td><%= challenge.description %></td>
     <td><%= challenge.start_date %></td>
     <td><%= challenge.end_date %></td>
     <td><%= challenge.state %></td>
     <td><%= challenge.count %></td>
-    <td><%= link_to 'Show', challenge %></td>
- 
+     <td><%= link_to 'Edit', challenge %></td>
+
     <% if Challenge.editable.exists?(challenge) %>
       <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
     <% else %>

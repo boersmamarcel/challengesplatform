@@ -34,8 +34,6 @@
   <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <% end %>
 
-
-
 <% if !@challenge.start_date.nil? && @challenge.start_date > Time.now && @challenge.state == "approved" && !enrolled? %>
   <%= link_to 'Enroll', enroll_challenge_path(@challenge) %>
 <% elsif enrolled? %>
@@ -47,4 +45,3 @@
   <%= link_to 'Revoke', revoke_challenge_path(@challenge) %> |
 <% end %>
 <%= link_to 'Back', challenges_path %>
-
