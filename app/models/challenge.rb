@@ -1,8 +1,7 @@
 class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
   attr_accessor :submit
-  
-  
+
   validate :submit?
   
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :submit?
@@ -25,7 +24,6 @@ class Challenge < ActiveRecord::Base
   def submit?
       submit
   end
-
 
   def dates
     errors.add(:dates, "End date can not be before start date") if start_date.nil? || end_date.nil? || start_date > end_date

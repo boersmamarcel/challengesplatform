@@ -46,7 +46,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
-        @challenges = Challenge.declined
+        @challenges = Challenge.where("state = 'proposal' AND count > 1")
         
         respond_to do |format|
             format.html
@@ -89,12 +89,23 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def save?
+    params[:commit] == "Create Challenge"
+  end
+
   # POST /challenges
   # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
     
-    @challenge.submit = true if params[:commit] == "Create Challenge"
+    if self.save?
+      @challenge.submit = true
+      @challenge.state = 'pending'
+    else
+      @challenge.state = 'proposal'
+    end
+
+    @challenge.count = 1
 
     respond_to do |format|
       if @challenge.save
@@ -112,7 +123,7 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
-    @challenge.count += 1
+    @challenge.submit = true
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
