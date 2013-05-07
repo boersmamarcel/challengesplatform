@@ -13,7 +13,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @challenge = Challenge.where("id = ? AND state = 'approved'", params[:id]).first
+    @challenge = Challenge.where("id = ? AND (state = 'approved' OR user_id = ?)", params[:id], current_user.id).first
 
     redirect_to challenges_path and return if @challenge.nil?
     
@@ -86,12 +86,15 @@ class ChallengesController < ApplicationController
       if Challenge.editable.exists?(@challenge)
         format.html
       else
-        format.html { redirect_to @challenge, alert: 'This challenge can not be edited by you.' }
+        # You can't edit this challenge, but you are allowed to view it
+        format.html { redirect_to @challenge, alert: 'This challenge can not be edited by you.' } unless Challenge.pending.exists?(@challenge)
+        # You can't even view it...
+        format.html { redirect_to challenges_path, alert: 'This challenge can not be edited by you.' } if Challenge.pending.exists?(@challenge)
       end
     end
   end
 
-  def save?
+  def submit?
     params[:commit] == "Create Challenge"
   end
 
@@ -100,7 +103,8 @@ class ChallengesController < ApplicationController
   def create
     @challenge = Challenge.new(params[:challenge])
     @challenge.submit = false
-    if self.save?
+
+    if self.submit?
       @challenge.submit = true
       @challenge.state = 'pending'
     else
@@ -111,8 +115,8 @@ class ChallengesController < ApplicationController
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge is pending for review' } if @challenge.submit
-        format.html { redirect_to @challenge, notice: 'Challenge successfully saved' } unless @challenge.submit
+        format.html { redirect_to challenges_path, notice: 'Challenge is pending for review' } if @challenge.submit
+        format.html { redirect_to challenges_path, notice: 'Challenge successfully saved' } unless @challenge.submit
         format.json { render json: @challenge, status: :created, location: @challenge }
       else
         format.html { render action: "new" }
@@ -128,7 +132,7 @@ class ChallengesController < ApplicationController
     @challenge.submit = true
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
-        format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
+        format.html { redirect_to challenges_path, notice: 'Challenge was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
