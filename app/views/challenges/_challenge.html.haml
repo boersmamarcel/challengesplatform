@@ -1,0 +1,8 @@
+%li.challenge
+  %h3= challenge.title 
+  %p= challenge.description 
+  %span.date challenge.start_date 
+  %span.date challenge.end_date 
+  %span.state challenge.state 
+  %span.count challenge.count 
+  %span.link = link_to 'Show', challenge 

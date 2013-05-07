@@ -1,0 +1,43 @@
+<h1>Listing challenges</h1>
+<input type="hidden" id="page_identifier" value="challenges.index">
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>State</th>
+    <th>Count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @challenges.each do |challenge| %>
+  <tr>
+    <% if !(Challenge.editable.exists?(challenge) or Challenge.pending.exists?(challenge)) or challenge.user_id == current_user.id or current_user.role == 2 %>
+      <td class='title'><%= link_to challenge.title , challenge %></td>
+    <% else %>
+      <td class='title'><%= challenge.title %>
+    <% end %>
+
+    <td class="description"><%= challenge.description %></td>
+    <td class='start_date'><%= challenge.start_date.strftime("%d-%m-%Y") %></td>
+    <td class='end_date'><%= challenge.end_date.strftime("%d-%m-%Y") %></td>
+    <td><%= challenge.state %></td>
+    <td><%= challenge.count %></td>
+
+    <% if Challenge.editable.exists?(challenge) %>
+      <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Challenge', new_challenge_path %>
