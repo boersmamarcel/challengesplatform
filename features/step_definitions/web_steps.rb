@@ -54,6 +54,10 @@ Then(/^I should not see "(.*?)" in section "(.*?)"$/) do |text, section|
   end
 end
 
+Then(/^I should see a "(.*?)" field in the form$/) do |fieldName|
+  page.should have_xpath('//input[@name="{fieldName}"] | //textarea[@name="{fieldName}"] | //select[@name="{fieldName}"]')
+end
+
 def css_case(str)
   str.squish.underscore.downcase.tr(" ","_")
 end
