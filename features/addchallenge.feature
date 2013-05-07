@@ -3,6 +3,15 @@ Feature: Add challenge
     As an admin or supervisor
     I want to be able to submit a proposal for review and see the current stats of an approved challenge
     
+    Background:
+    Given the following user records
+    | email                           | password | password_confirmation  | role  |
+		| supervisor@student.utwente.nl   | abcd1234 | abcd1234               | 1     |
+		| participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
+		When I visit the "login" page
+  	And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
+    
+    
     Scenario Outline: Submit new challenge
 		Given I am logged in as a supervisor
         When I visit the "challenge.new" page
@@ -28,8 +37,8 @@ Feature: Add challenge
     
     Scenario: Revoke a pending for review challenge
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
 		And I am logged in as a supervisor
         When I visit the "challenges.pending" page
         And I follow "Revoke"
@@ -38,8 +47,8 @@ Feature: Add challenge
     
     Scenario: Revoke an approved challenge
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
 		And I am logged in as a supervisor
         When I visit the "challenges.approved" page
         And I follow "Revoke"
@@ -48,12 +57,12 @@ Feature: Add challenge
     
     Scenario: View declined challenges
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     |
-        | 2  | Title2  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
-        | 3  | Title3  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
-        | 4  | Title4  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     |
-        | 5  | Title5  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 2     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
+        | 2  | Title2  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
+        | 3  | Title3  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
+        | 4  | Title4  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     | 1       |
+        | 5  | Title5  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 2     | 1       |
 		And I am logged in as a supervisor
         When I visit the "challenges.declined" page
         Then I should see "Title1" in the list
@@ -64,8 +73,8 @@ Feature: Add challenge
         
     Scenario: Resubmit a declined challenge (submit count should increase)
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
 		And I am logged in as a supervisor
         When I edit the challenge with id "1" and a new description "Nice challenge"
         And I press "Update Challenge"
@@ -73,8 +82,8 @@ Feature: Add challenge
     
     Scenario: Resubmit a declined challenge with fields filled incorrectly
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
 		And I am logged in as a supervisor
         When I edit the challenge with id "1" and a new description ""
         And I press "Update Challenge"
@@ -82,8 +91,8 @@ Feature: Add challenge
     
     Scenario: View approved challenges
        Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
 		And I am logged in as a supervisor
 		When I visit the "challenges.approved" page
 		When I open the challenge with id "1"
@@ -92,8 +101,8 @@ Feature: Add challenge
         
     Scenario: View pending for review challenges
        Given the following challenge records
-       | id | title   | description               | start_date   | end_date         | state       | count |
-       | 1  | Title1  | Awesome challenge         | 03-08-2013   | 09-09-2013       | pending     | 1     |
+       | id | title   | description               | start_date   | end_date         | state       | count | user_id |
+       | 1  | Title1  | Awesome challenge         | 03-08-2013   | 09-09-2013       | pending     | 1     | 1       |
        When I visit the "challenges.pending" page
        When I open the challenge with id "1"
        Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013" 
@@ -101,8 +110,8 @@ Feature: Add challenge
 
     Scenario: View a proposal challenge
       Given the following challenge records
-      | id | title   | description               | start_date        | end_date          | state       | count |
-      | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     |
+      | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+      | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     | 1       |
       When I visit the "challenges.proposal" page
       When I open the challenge with id "1"
       Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
@@ -110,22 +119,17 @@ Feature: Add challenge
     
     Scenario: Edit a pending for review challenge
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
         When I visit the edit challenge "1" page
         Then I should see a message with "This challenge can not be edited by you."
     
     Scenario: Edit an approved challenge
         Given the following challenge records
-        | id | title   | description               | start_date        | end_date          | state       | count |
-        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     |
+        | id | title   | description               | start_date        | end_date          | state       | count | user_id |
+        | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
         When I visit the edit challenge "1" page
         Then I should see a message with "This challenge can not be edited by you."
-        
-        
-    Scenario: Not logged in and visit challenges.*
-      When I visit the "challenges.index" page
-      Then I should be redirected to "session.new" page
       
     Scenario: Supervisor can not delete a challenge only revoke a challenge
     

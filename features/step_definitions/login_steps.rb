@@ -10,6 +10,7 @@ Given(/^I am logged in as a supervisor$/) do
 	step "I log in with Google \"test@student.utwente.nl\""
 end
 
+
 Given(/^I am not logged in$/) do
 	step "I log out"
 end

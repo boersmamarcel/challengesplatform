@@ -22,7 +22,6 @@ Then(/^I should not see "(.*?)" in the list$/) do |title|
 end
 
 When(/^I edit the challenge with id "(.*?)" and a new description "(.*?)"$/) do |id, description|
-    
     visit edit_challenge_path(id)
     fill_in :challenge_description, :with => description
 end
@@ -51,8 +50,4 @@ end
 
 When(/^I visit the edit challenge "(.*?)" page$/) do |id|
     visit edit_challenge_path(id)
-end
-
-Then(/^I should be redirected to "(.*?)" page$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
 end

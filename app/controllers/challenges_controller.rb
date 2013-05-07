@@ -12,10 +12,12 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.where("id = ? AND state = 'approved'", params[:id]).first
+
+    redirect_to challenges_path and return if @challenge.nil?
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { @challenge }# show.html.erb
       format.json { render json: @challenge }
     end
   end
@@ -45,8 +47,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
-        @challenges = Challenge.declined
-
+        @challenges = Challenge.where("state = 'proposal' AND count > 1")
         respond_to do |format|
             format.html
             format.json { render json: @challenges}
@@ -88,16 +89,28 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def save?
+    params[:commit] == "Create Challenge"
+  end
+
   # POST /challenges
   # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
 
-    @challenge.submit = true if params[:commit] == "Create Challenge"
+    @challenge.submit = false
+    if self.save?
+      @challenge.submit = true
+      @challenge.state = 'pending'
+    else
+      @challenge.state = 'proposal'
+    end
+
+    @challenge.count = 1
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge is pending for review.' } if @challenge.submit
+        format.html { redirect_to @challenge, notice: 'Challenge is pending for review' } if @challenge.submit
         format.html { redirect_to @challenge, notice: 'Challenge successfully saved' } unless @challenge.submit
         format.json { render json: @challenge, status: :created, location: @challenge }
       else
@@ -111,7 +124,7 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
-    @challenge.count += 1
+    @challenge.submit = true
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
@@ -145,9 +158,39 @@ class ChallengesController < ApplicationController
         format.json { head :no_content }
       else
         format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}
-        format.html { head :no_content }
+        format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def enroll
+      @challenge = Challenge.find(params[:id])
+
+      @enrollment = @challenge.enrollments.build
+      @enrollment.user = current_user
+
+      respond_to do |format|
+        if @challenge.save
+            format.html{ redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'}
+            format.json{ head :no_content}
+        else
+          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        end
+      end
+
+  end
+
+  def unenroll
+    @challenge = Challenge.find(params[:id])
+    @enrollment = Enrollment.where('user_id = ? AND challenge_id = ? ', current_user.id, @challenge.id).first
+
+    @enrollment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled' }
+      format.json { head :no_content }
+    end
+
   end
 
 end

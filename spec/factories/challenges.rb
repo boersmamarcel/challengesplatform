@@ -1,10 +1,11 @@
 FactoryGirl.define do
-  factory :challenge do
-   title "Default title"
-   description "Default description"
-   start_date Date.today + 2
-   end_date Date.today + 4
-   state "proposal"
-   count 0
+  factory :challenge do |c|
+   c.title "Default title"
+   c.description "Default description"
+   c.start_date Date.today + 2
+   c.end_date Date.today + 4
+   c.state "proposal"
+   c.count 0
+   c.association :user_id, :factory => :user
   end
 end

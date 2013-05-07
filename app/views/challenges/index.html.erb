@@ -1,4 +1,5 @@
 <h1>Listing challenges</h1>
+<input type="hidden" id="page_identifier" value="challenges.index">
 
 <table>
   <tr>
@@ -15,14 +16,18 @@
 
 <% @challenges.each do |challenge| %>
   <tr>
-    <td><%= challenge.title %></td>
-    <td><%= challenge.description %></td>
-    <td><%= challenge.start_date %></td>
-    <td><%= challenge.end_date %></td>
+    <td class='title'><%= challenge.title %></td>
+    <td class="description"><%= challenge.description %></td>
+    <td class='start_date'><%= challenge.start_date.strftime("%d-%m-%Y") %></td>
+    <td class='end_date'><%= challenge.end_date.strftime("%d-%m-%Y") %></td>
     <td><%= challenge.state %></td>
     <td><%= challenge.count %></td>
     <td><%= link_to 'Show', challenge %></td>
-    <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+    <% if Challenge.editable.exists?(challenge) %>
+      <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+    <% else %>
+      <td></td>
+    <% end %>
     <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
