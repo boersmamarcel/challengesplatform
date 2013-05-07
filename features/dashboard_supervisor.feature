@@ -23,9 +23,9 @@ Feature: A dashboard for supervisor
       When I visit the "dashboard" page
         And I click on "make announcement" for the challenge
       Then I should see "Announcement for Innovate education" as a header
-        And I should see a "Send" button on the bottom of the form
-        And I should see a "message" field in the form
-        And I should see a "title" field in the form
+        And I should see the "Send" button on the bottom of the form
+        And I should see the "message" field in the form
+        And I should see the "title" field in the form
 
   Scenario: One of my challenges ended
       Given I have a challenge named "Innovate education"
@@ -33,8 +33,8 @@ Feature: A dashboard for supervisor
         And I have not yet handed out certificates
         And I am logged in as a supervisor
       When I visit the "dashboard" page
-      Then I should see a message stating "You need to hand out certificates for some challenges"
-        And I should see a "Do now" button below the message
+      Then I should see a message with "You need to hand out certificates for some challenges"
+        And I should see the "Do now" button below the message
 
   Scenario: View my challenges
     Given I am logged in as a supervisor
