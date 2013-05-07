@@ -30,8 +30,8 @@ Feature: Login
 	Then I should see a message with "Go to dashboard" 
 
 	Scenario: Visit the login page while logged in
-	When I am logged in
-	And I visit the "login" page
+	Given I am logged in
+	When I visit the "login" page
   Then I should see the "dashboard.index" page
 
 
