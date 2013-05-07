@@ -1,7 +1,7 @@
 Feature: A dashboard for supervisor
   In order to quickly get up to speed with currently relevant information
   As a supervisor
-  I want to be able to see my challenges, notifications, quickly navigate to enrolled participants or create an anncouncement for active challenges, and activity updates for my challenges on a clear dashboard
+  I want to be able to see my challenges, notifications, quickly navigate to enrolled participants or create an announcement for active challenges, and activity updates for my challenges on a clear dashboard
 
   Scenario: View enrolled participants
     Given I have a challenge named "Innovate education"
@@ -36,7 +36,7 @@ Feature: A dashboard for supervisor
       Then I should see a message stating "You need to hand out certificates for some challenges"
         And I should see a "Do now" button below the message
 
-  Scenario: View my active Challenges
+  Scenario: View my challenges
     Given I am logged in as a supervisor
       And I have the following challenges
       | title | description | start_date | end_date | review_passed |
@@ -52,3 +52,4 @@ Feature: A dashboard for supervisor
      And I should see "Innovate education" in section "Challenges starting soon"
      And I should not see "Shark hunting" in section "Active Challenges"
      And I should not see "Norvig Award" in section "Challenges starting soon"
+     And I should see a link for "Past challenges"
