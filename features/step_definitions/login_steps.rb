@@ -2,27 +2,17 @@ Given(/^I am logged in$/) do
 	step "I log in with Google \"test@student.utwente.nl\""
 end
 
+Given(/^I am logged in as a participant$/) do
+  step "I log in with Google \"test@student.utwente.nl\""
+end
+
+Given(/^I am logged in as a supervisor$/) do
+	step "I log in with Google \"test@student.utwente.nl\""
+end
+
+
 Given(/^I am not logged in$/) do
 	step "I log out"
-end
-
-When(/^I visit the "(.*?)" page$/) do |pageName|
-	visit getRoute(pageName)
-end
-
-def getRoute(name)
-	case name
-	when "login"
-		new_user_session_path
-	when "home"
-		root_path
-	when "logout"
-		destroy_user_session_path
-	when "registration.form"
-		new_user_registration_path
-	else
-		print("Invalid route requested (" + name + ")")
-	end
 end
 
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
@@ -32,21 +22,8 @@ When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, pass
     click_button "Sign in"
 end
 
-Then(/^I should see the "(.*?)" page$/) do |pageName|
-	page.should_not be_nil
-	find('input#page_identifier').value.should eql pageName 
-end
-
 When(/^I log out$/) do
 	step "I visit the \"logout\" page"
-end
-
-Then(/^see the "(.*?)" button$/) do |buttonID|
-	find("#" + buttonID).should_not be_nil
-end
-
-Then(/^I should see a message with "(.*?)"$/) do |contents|
-    page.should have_content(contents)
 end
 
 When(/^I log in with Google "(.*?)"$/) do |email|
