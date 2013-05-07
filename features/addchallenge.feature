@@ -13,7 +13,6 @@ Feature: Add challenge
     
     
     Scenario Outline: Submit new challenge
-		Given I am logged in as a supervisor
         When I visit the "challenge.new" page
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
         And I press "Create Challenge"
@@ -28,7 +27,6 @@ Feature: Add challenge
 
     
     Scenario: Save a challenge proposal
-		Given I am logged in as a supervisor
         When I visit the "challenge.new" page
         And I fill in title with "Title 1" description with "description"  and fill in start_date with "03-08-2013" and end_date with "09-09-2013"
         And I press "Save"
