@@ -132,5 +132,4 @@ Feature: Add challenge
         Then I should see a message with "This challenge can not be edited by you."
       
     Scenario: Supervisor can not delete a challenge only revoke a challenge
-    
-      
+        
