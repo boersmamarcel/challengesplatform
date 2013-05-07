@@ -18,7 +18,7 @@ end
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
     fill_in :user_email, :with => email
     fill_in :user_password, :with => password
-    
+
     click_button "Sign in"
 end
 
@@ -30,7 +30,7 @@ When(/^I log in with Google "(.*?)"$/) do |email|
 	google = { :provider => :google_oauth2,
 		:uuid     => "1234",
 		:google_oauth2 => {
-			:name => "Foo", 
+			:name => "Foo",
 			:email => email
 		}
 	}
@@ -59,10 +59,4 @@ def set_omniauth(opts = {})
 			"email" => user_hash[:email],
 		}
 	})
-end
-
-Given(/^the following (.+) records?$/) do |factory, table|
-  table.hashes.each do |hash|
-       FactoryGirl.create(factory, hash)
-  end
 end
