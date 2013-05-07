@@ -22,7 +22,6 @@ Then(/^I should not see "(.*?)" in the list$/) do |title|
 end
 
 When(/^I edit the challenge with id "(.*?)" and a new description "(.*?)"$/) do |id, description|
-    
     visit edit_challenge_path(id)
     fill_in :challenge_description, :with => description
 end
@@ -45,7 +44,7 @@ Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?
     
 end
 
-Then(/^I should see a button "(.*?)"$/) do |button|
+Then(/^I should see a (button|link) "(.*?)"$/) do |type, button|
     page.should have_selector(:link_or_button, button)
 end
 

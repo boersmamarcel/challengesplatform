@@ -48,7 +48,7 @@ class ChallengesController < ApplicationController
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
-        @challenges = Challenge.declined
+        @challenges = Challenge.where("state = 'proposal' AND count > 1")
         
         respond_to do |format|
             format.html
@@ -81,18 +81,37 @@ class ChallengesController < ApplicationController
   # GET /challenges/1/edit
   def edit
     @challenge = Challenge.find(params[:id])
+    # Only allow challenges in certain states to be edited...
+    respond_to do |format|
+      if Challenge.editable.exists?(@challenge)
+        format.html
+      else
+        format.html { redirect_to @challenge, alert: 'This challenge can not be edited by you.' }
+      end
+    end
+  end
+
+  def save?
+    params[:commit] == "Create Challenge"
   end
 
   # POST /challenges
   # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
-    
-    @challenge.submit = true if params[:commit] == "Create Challenge"
+    @challenge.submit = false
+    if self.save?
+      @challenge.submit = true
+      @challenge.state = 'pending'
+    else
+      @challenge.state = 'proposal'
+    end
+
+    @challenge.count = 1
 
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: 'Challenge is pending for review.' } if @challenge.submit
+        format.html { redirect_to @challenge, notice: 'Challenge is pending for review' } if @challenge.submit
         format.html { redirect_to @challenge, notice: 'Challenge successfully saved' } unless @challenge.submit
         format.json { render json: @challenge, status: :created, location: @challenge }
       else
@@ -106,7 +125,7 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
-    @challenge.count += 1
+    @challenge.submit = true
     respond_to do |format|
       if @challenge.update_attributes(params[:challenge])
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
@@ -132,7 +151,7 @@ class ChallengesController < ApplicationController
   
   def revoke
     @challenge = Challenge.find(params[:id])
-    @challenge.state = "declined"
+    @challenge.count += 1
     
     respond_to do |format|
       if @challenge.save
