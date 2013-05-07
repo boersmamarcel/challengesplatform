@@ -5,10 +5,10 @@ Feature: A dashboard for participant
 
   Scenario: View relevant new challenges
     Given the following challenge records
-      | title | description | start_date | end_date |
-      | Save the world | It's a hit (song)! | next week | next month |
-      | Innovate education | About time. | next week | next month |
-      | Norvig Award | We have a winner! | last week | next month |
+      | title               | description        | start_date | end_date   |
+      | Save the world      | It's a hit (song)! | next week  | next month |
+      | Innovate education  | About time.        | next week  | next month |
+      | Norvig Award        | We have a winner!  | last week  | next month |
       And I am logged in as a participant
     When I visit the "dashboard" page
     Then I should see "Save the World" in section "Upcoming Challenges"
@@ -18,11 +18,11 @@ Feature: A dashboard for participant
   Scenario: View my active Challenges
     Given I am logged in as a participant
       And the following challenge records
-      | title | description | start_date | end_date |
-      | Save the world | It's a hit (song)! | next week | next month |
-      | Innovate education | About time. | next week | next month |
-      | Norvig Award | We have a winner! | last week | next month |
-      | Shark hunting | Dangerous! | last year | last month |
+      | title              | description        | start_date | end_date   |
+      | Save the world     | It's a hit (song)! | next week  | next month |
+      | Innovate education | About time.        | next week  | next month |
+      | Norvig Award       | We have a winner!  | last week  | next month |
+      | Shark hunting      | Dangerous!         | last year  | last month |
       And I enrolled for the "Norvig Award" challenge
       And I enrolled for the "Shark hunting" challenge
     When I visit the "dashboard" page

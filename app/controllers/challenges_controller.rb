@@ -3,7 +3,6 @@ class ChallengesController < ApplicationController
   # GET /challenges.json
   def index
     @challenges = Challenge.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @challenges }
@@ -20,45 +19,45 @@ class ChallengesController < ApplicationController
       format.json { render json: @challenge }
     end
   end
-    
+
     # GET /challenges/proposal
     # GET /challenges/proposal
     def proposal
         @challenges = Challenge.proposal
-        
+
         respond_to do |format|
             format.html
             format.json { render json: @challenges}
         end
     end
-    
+
   # GET /challenges/approved
   # GET /challenges/approved.json
   def approved
       @challenges = Challenge.approved
-      
+
       respond_to do |format|
           format.html
           format.json { render json: @challenges}
       end
   end
-    
+
     # GET /challenges/declined
     # GET /challenges/declined
     def declined
         @challenges = Challenge.declined
-        
+
         respond_to do |format|
             format.html
             format.json { render json: @challenges}
         end
     end
-    
+
     # GET /challenges/pending
     # GET /challenges/pending
     def pending
         @challenges = Challenge.pending
-        
+
         respond_to do |format|
             format.html
             format.json { render json: @challenges}
@@ -93,7 +92,7 @@ class ChallengesController < ApplicationController
   # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
-    
+
     @challenge.submit = true if params[:commit] == "Create Challenge"
 
     respond_to do |format|
@@ -135,11 +134,11 @@ class ChallengesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def revoke
     @challenge = Challenge.find(params[:id])
     @challenge.count += 1
-    
+
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to challenges_path , notice: 'Challenge successfully revoked' }
@@ -150,5 +149,5 @@ class ChallengesController < ApplicationController
       end
     end
   end
-  
+
 end
