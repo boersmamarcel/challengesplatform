@@ -37,7 +37,6 @@ Feature: Add challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
-		And I am logged in as a supervisor
         When I visit the "challenges.pending" page
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
