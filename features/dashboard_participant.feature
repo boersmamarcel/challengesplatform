@@ -38,6 +38,6 @@ Feature: A dashboard for participant
       And "Rick" enrolled for the "Innovate education" challenge
       And "Rick" unenrolled for the "Innovate education" challenge
     When I visit the "dashboard" page
-    Then I should see "Peter and Rick enrolled for the Innovate Education challenge" in secion "Activity"
-      And I should see "Joyce enrolled for the Save the World challenge" in secion "Activity"
-      And I should see "Rick unenrolled for the Innovate Education challenge" in secion "Activity"
+    Then I should see "Peter and Rick enrolled for the Innovate Education challenge" in section "Activity"
+      And I should see "Joyce enrolled for the Save the World challenge" in section "Activity"
+      And I should see "Rick unenrolled for the Innovate Education challenge" in section "Activity"
