@@ -4,16 +4,26 @@ end
 
 Given(/^user "(.*?)" is enrolled in challenge "(.*?)"$/) do |user_email, challenge_id|
   user = User.find_by_email(user_email)
-  if !user.nil?
-    Enrollment.create!(:user_id => user.id, :challenge_id => challenge_id)
-  end
+  challenge = Challenge.find(challenge_id)
+  challenge.participants << user
+end
+
+Given(/^user "(.*?)" is enrolled in challenge with title "(.*?)"$/) do |user_email, challenge_title|
+  user = User.find_by_email(user_email)
+  challenge = Challenge.find_by_title(challenge_title)
+  challenge.participants << user
+end
+
+Given(/^I am enrolled in challenge with title "(.*?)"$/) do |challenge_title|
+  user = User.find_by_email("participant@student.utwente.nl")
+  challenge = Challenge.find_by_title(challenge_title)
+  challenge.participants << user
 end
 
 Given(/^I am enrolled in challenge "(.*?)"$/) do |challenge_id|
   user = User.find_by_email("participant@student.utwente.nl")
-  if !user.nil?
-    Enrollment.create!(:user_id => user.id, :challenge_id => challenge_id)
-  end
+  challenge = Challenge.find(challenge_id)
+  challenge.participants << user
 end
 
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)" in the list$/) do |title, description, start_date, end_date|

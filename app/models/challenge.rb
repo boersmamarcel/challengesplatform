@@ -2,9 +2,9 @@ class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
   attr_accessor :submit
 
-  belongs_to :supervisor, :class_name => "User", :foreign_key => "user_id"
+  belongs_to :supervisor, :class_name => "User"
 
-  has_many :enrollments
+  has_many :enrollments, :dependent => :destroy
   has_many :participants, :through => :enrollments, :class_name => "User"
 
   validate :submit?
@@ -17,12 +17,16 @@ class Challenge < ActiveRecord::Base
 
   validate :dates, :if => :submit?
   scope :upcoming, where('start_date > ?', Date.today)
+  scope :running, where('end_date > ? && start_date < ?', Date.today, Date.today)
+  scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
   scope :proposal, where(:state => "proposal")
   scope :declined, where("state = ? AND count > ?", "proposal", 1)
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
+  scope :running_first, order('start_date ASC')
+
 
   @protected
 

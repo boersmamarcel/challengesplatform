@@ -34,20 +34,22 @@ Feature: A dashboard for participant
       | Norvig Award       | We have a winner!  | last week  | next month |
       | Shark hunting      | Dangerous!         | last year  | last month |
 
-      And I am enrolled in challenge "Norvig Award"
-      And I am enrolled in challenge "Shark hunting"
+      And I am enrolled in challenge with title "Norvig Award"
+      And I am enrolled in challenge with title "Shark hunting"
     When I visit the "dashboard" page
     Then I should see "Norvig Award" in list "My Challenges"
+    # Old challenges shouldn't show up
     And I should not see "Shark hunting" in list "My Challenges"
+    # My challenges should not come up in Upcoming challenges
     And I should not see "Norvig Award" in list "Upcoming Challenges"
 
-  Scenario: View activities of friends
+  Scenario: View activities of following
     Given I am logged in as a participant
-      And I'm friends with "Peter", "Joyce", "Alice" and "Rick"
-      And user "Peter" is enrolled in challenge "Innovate education"
-      And user "Joyce" is enrolled in challenge "Save the World"
-      And user "Rick" is enrolled in challenge "Innovate education"
-      And user "Rick" is unenrolled in challenge "Innovate education"
+      And I'm following "Peter", "Joyce", "Alice" and "Rick"
+      And user "Peter" is enrolled in challenge with title "Innovate education"
+      And user "Joyce" is enrolled in challenge with title "Save the World"
+      And user "Rick" is enrolled in challenge with title "Innovate education"
+      And user "Rick" is unenrolled in challenge with title "Innovate education"
     When I visit the "dashboard" page
     Then I should see "Peter and Rick enrolled in the Innovate Education challenge" in list "Activity"
       And I should see "Joyce enrolled in the Save the World challenge" in list "Activity"

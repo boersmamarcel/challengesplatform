@@ -12,7 +12,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @challenge = Challenge.where("id = ? AND (state = 'approved' OR user_id = ?)", params[:id], current_user.id).first
+    @challenge = Challenge.where("id = ? AND (state = 'approved' OR supervisor_id = ?)", params[:id], current_user.id).first
 
     redirect_to challenges_path and return if @challenge.nil?
 
@@ -171,10 +171,10 @@ class ChallengesController < ApplicationController
       @challenge = Challenge.find(params[:id])
 
       @enrollment = @challenge.enrollments.build
-      @enrollment.user = current_user
+      @enrollment.participant = current_user
 
       respond_to do |format|
-        if @challenge.save
+        if @enrollment.save
             format.html{ redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'}
             format.json{ head :no_content}
         else
@@ -186,7 +186,7 @@ class ChallengesController < ApplicationController
 
   def unenroll
     @challenge = Challenge.find(params[:id])
-    @enrollment = Enrollment.where('user_id = ? AND challenge_id = ? ', current_user.id, @challenge.id).first
+    @enrollment = Enrollment.where('participant_id = ? AND challenge_id = ? ', current_user.id, @challenge.id).first
 
     @enrollment.destroy
 

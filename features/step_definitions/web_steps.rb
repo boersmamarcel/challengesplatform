@@ -31,7 +31,7 @@ def getRoute(name)
   end
 end
 
-Then(/^see the "(.*?)" button$/) do |buttonID|
+Then(/^I should see the "(.*?)" button$/) do |buttonID|
   find("#" + buttonID).should_not be_nil
 end
 

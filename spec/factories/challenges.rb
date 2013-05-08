@@ -6,6 +6,6 @@ FactoryGirl.define do
    c.end_date Date.today + 4
    c.state "proposal"
    c.count 0
-   # c.association :user_id, :factory => :user
+   # c.association :supervisor_id, :factory => :user
   end
 end

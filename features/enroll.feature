@@ -10,12 +10,12 @@ Feature: Participants can enroll to challenges
       		| supervisor@student.utwente.nl   | abcd1234 | abcd1234               | 1     |
       		| participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
           And the following challenge records
-          | id  | title   | description               | start_date        | end_date  | state       | count | user_id |
-          | 1   | Title1  | Description1              | 09-09-2059        | 09-09-2060| approved    | 1     | 1       |
-          | 2   | Title2  | Description2              | 09-09-2059        | 09-09-2060| pending     | 2     | 1       |
-          | 3   | Title3  | Description3              | 09-09-2059        | 09-09-2060| proposal    | 1     | 1       |
-          | 4   | Title4  | Description4              | 09-09-2059        | 09-09-2060| proposal    | 4     | 1       |
-          | 5   | Title5  | Description5              | 09-09-2009        | 09-09-2060| approved    | 2     | 1       |
+          | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
+          | 1   | Title1  | Description1 | 09-09-2059 | 09-09-2060| approved | 1     | 1             |
+          | 2   | Title2  | Description2 | 09-09-2059 | 09-09-2060| pending  | 2     | 1             |
+          | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| proposal | 1     | 1             |
+          | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| proposal | 4     | 1             |
+          | 5   | Title5  | Description5 | 09-09-2009 | 09-09-2060| approved | 2     | 1             |
           When I visit the "login" page
         	And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
 
