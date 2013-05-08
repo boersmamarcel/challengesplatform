@@ -5,9 +5,9 @@ Feature: User should be able to follow other users
         
         Background:
         Given the following user records
-        | email                       | password | password_confirmation | role |
-        | student1@student.utwente.nl | pass123  | pass123               | 1    |
-        | student2@student.utwente.nl | pass123  | pass123               | 1    |
+        | email                       | password    | password_confirmation | role |
+        | student1@student.utwente.nl | pass123567  | pass123567            | 1    |
+        | student2@student.utwente.nl | pass123567  | pass123567            | 1    |
         When I visit the "login" page
       	And I fill in email with "student2@student.utwente.nl" and password with "pass123"
         
