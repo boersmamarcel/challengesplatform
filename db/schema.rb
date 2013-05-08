@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507154316) do
+ActiveRecord::Schema.define(:version => 20130508152939) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20130507154316) do
     t.datetime "updated_at",     :null => false
     t.integer  "participant_id"
   end
+
+  add_index "enrollments", ["challenge_id", "participant_id"], :name => "index_enrollments_on_challenge_id_and_participant_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
