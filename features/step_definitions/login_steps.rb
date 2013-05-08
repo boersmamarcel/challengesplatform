@@ -1,5 +1,5 @@
 Given(/^I am logged in$/) do
-	step "I log in with Google \"test@student.utwente.nl\""
+  step "I log in with Google \"test@student.utwente.nl\""
 end
 
 Given(/^I am logged in as a participant$/) do
@@ -61,10 +61,4 @@ def set_omniauth(opts = {})
                                                                    "email" => user_hash[:email],
                                                                  }
                                                                })
-end
-
-Given(/^the following (.+) records?$/) do |factory, table|
-  table.hashes.each do |hash|
-       FactoryGirl.create(factory, hash)
-  end
 end

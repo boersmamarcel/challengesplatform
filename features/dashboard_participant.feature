@@ -19,6 +19,7 @@ Feature: A dashboard for participant
       | Save the world     | It's a hit (song)! | next week  | next month |
       | Innovate education | About time.        | next week  | next month |
       | Norvig Award       | We have a winner!  | last week  | next month |
+
     When I visit the "dashboard" page
     Then I should see "Save the world" in list "Upcoming Challenges"
       And I should see "Innovate education" in list "Upcoming Challenges"
@@ -32,6 +33,7 @@ Feature: A dashboard for participant
       | Innovate education | About time.        | next week  | next month |
       | Norvig Award       | We have a winner!  | last week  | next month |
       | Shark hunting      | Dangerous!         | last year  | last month |
+
       And I am enrolled in challenge "Norvig Award"
       And I am enrolled in challenge "Shark hunting"
     When I visit the "dashboard" page
