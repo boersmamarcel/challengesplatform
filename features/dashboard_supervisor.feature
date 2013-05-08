@@ -1,3 +1,4 @@
+@no-txn
 Feature: A dashboard for supervisor
   In order to quickly get up to speed with currently relevant information
   As a supervisor

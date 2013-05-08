@@ -3,5 +3,5 @@ test:
   encoding: utf8
   reconnect: false
   pool: 5
-  user: postgres 
+  user: postgres
   database: testDB
