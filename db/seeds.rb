@@ -11,3 +11,5 @@
 # Challenge.create title: "Norvig Award", description: "About time.", start_date: Date.today << 1, end_date: Date.today
 
 # users = User.create([{"email": "participant@student.utwente.nl"}])
+
+load(Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb"))
