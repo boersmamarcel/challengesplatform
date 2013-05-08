@@ -3,17 +3,18 @@ class Challenge < ActiveRecord::Base
   attr_accessor :submit
 
   belongs_to :supervisor, :class_name => "User", :foreign_key => "user_id"
-  
+
   has_many :enrollments
-  
+  has_many :participants, :through => :enrollments, :class_name => "User"
+
   validate :submit?
-  
+
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :submit?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :submit?
-  
+
   validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
-  
+
   validate :dates, :if => :submit?
   scope :upcoming, where('start_date > ?', Date.today)
   scope :pending, where(:state => "pending")
@@ -22,9 +23,9 @@ class Challenge < ActiveRecord::Base
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
-  
+
   @protected
-  
+
   def submit?
       submit
   end

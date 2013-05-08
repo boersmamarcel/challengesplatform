@@ -9,3 +9,5 @@
 Challenge.create title: "Save the world", description: "It's a hit!", start_date: Date.today >> 1, end_date: Date.today >> 2
 Challenge.create title: "Revolutionize Education", description: "About time.", start_date: Date.today >> 1, end_date: Date.today >> 3
 Challenge.create title: "Norvig Award", description: "About time.", start_date: Date.today << 1, end_date: Date.today
+
+users = User.create([{"email": "participant@student.utwente.nl"}])

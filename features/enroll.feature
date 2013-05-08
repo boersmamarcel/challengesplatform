@@ -32,11 +32,10 @@ Feature: Participants can enroll to challenges
           And I should see a button "<buttons>"
         
         Examples:
-        |   challenge_id    | title   | description  |  buttons     | start_date | end_date |
-        |   1               | Title1  | Description1 |  Enroll      | 09-09-2059 | 9-09-2060|
-        |   5               | Title5  | Description5 |              | 09-09-2009 | 9-09-2060|
-        
-       
+        |   challenge_id    | title   | description  |  buttons     | start_date | end_date  |
+        |   1               | Title1  | Description1 |  Enroll      | 09-09-2059 | 9-09-2060 |
+        |   5               | Title5  | Description5 |              | 09-09-2009 | 9-09-2060 |
+
         Scenario: Subscribe to a challenge before start date
           When I open the challenge with id "1"
           And I follow "Enroll"
@@ -49,7 +48,7 @@ Feature: Participants can enroll to challenges
         
         
         Scenario Outline: Unsubscribe from a challenge
-          Given user "participant@student.utwente.nl" is subscribed to challenge "<challenge_id>"
+          Given user "participant@student.utwente.nl" is enrolled in challenge "<challenge_id>"
           When I open the challenge with id "<challenge_id>"
           And I follow "Unenroll"
           Then I should see a message with "Successfully unenrolled"
