@@ -16,7 +16,7 @@
 
 <% @challenges.each do |challenge| %>
   <tr>
-    <% if !(Challenge.editable.exists?(challenge) or Challenge.pending.exists?(challenge)) or challenge.user_id == current_user.id or current_user.role == 2 %>
+    <% if !(Challenge.editable.exists?(challenge) or Challenge.pending.exists?(challenge)) or challenge.supervisor_id == current_user.id or current_user.role == 2 %>
       <td class='title'><%= link_to challenge.title , challenge %></td>
     <% else %>
       <td class='title'><%= challenge.title %>

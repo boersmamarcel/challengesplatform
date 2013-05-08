@@ -35,7 +35,7 @@ Feature: Login
   Then I should see the "dashboard.index" page
 
 
-    #temporary scenario:
-    Scenario: Login with a not utwente.nl account in Google OAuth
-        When I log in with Google "test@gmail.com"
-        Then I should see the "index" page 
+  #temporary scenario:
+  Scenario: Login with a not utwente.nl account in Google OAuth
+      When I log in with Google "test@gmail.com"
+      Then I should see the "index" page 
