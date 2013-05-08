@@ -13,7 +13,6 @@ Feature: Add challenge
     
     
     Scenario Outline: Submit new challenge
-		Given I am logged in as a supervisor
         When I visit the "challenge.new" page
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
         And I press "Create Challenge"
@@ -28,7 +27,6 @@ Feature: Add challenge
 
     
     Scenario: Save a challenge proposal
-		Given I am logged in as a supervisor
         When I visit the "challenge.new" page
         And I fill in title with "Title 1" description with "description"  and fill in start_date with "03-08-2013" and end_date with "09-09-2013"
         And I press "Save"
@@ -39,7 +37,6 @@ Feature: Add challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
-		And I am logged in as a supervisor
         When I visit the "challenges.pending" page
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
@@ -49,7 +46,6 @@ Feature: Add challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
-		And I am logged in as a supervisor
         When I visit the "challenges.approved" page
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
@@ -63,7 +59,6 @@ Feature: Add challenge
         | 3  | Title3  | Awesome challenge         | 03-08-2013        | 09-09-2013        | pending     | 1     | 1       |
         | 4  | Title4  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 1     | 1       |
         | 5  | Title5  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 2     | 1       |
-		And I am logged in as a supervisor
         When I visit the "challenges.declined" page
         Then I should see "Title1" in the list
         And I should not see "Title2" in the list
@@ -75,7 +70,6 @@ Feature: Add challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
-		And I am logged in as a supervisor
         When I edit the challenge with id "1" and a new description "Nice challenge"
         And I press "Update Challenge"
         Then I should see a message with "Challenge was successfully updated."
@@ -84,7 +78,6 @@ Feature: Add challenge
         Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
-		And I am logged in as a supervisor
         When I edit the challenge with id "1" and a new description ""
         And I press "Update Challenge"
         Then I should see a message with "One or more fields are missing"
@@ -93,7 +86,6 @@ Feature: Add challenge
        Given the following challenge records
         | id | title   | description               | start_date        | end_date          | state       | count | user_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | approved    | 1     | 1       |
-		And I am logged in as a supervisor
 		When I visit the "challenges.approved" page
 		When I open the challenge with id "1"
 		Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013" 
@@ -132,5 +124,4 @@ Feature: Add challenge
         Then I should see a message with "This challenge can not be edited by you."
       
     Scenario: Supervisor can not delete a challenge only revoke a challenge
-    
-      
+        
