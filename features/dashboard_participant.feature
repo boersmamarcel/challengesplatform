@@ -42,6 +42,7 @@ Feature: A dashboard for participant
     # My challenges should not come up in Upcoming challenges
     And I should not see "Norvig Award" in list "Upcoming Challenges"
 
+  @wip
   Scenario: View activities of following
       And I'm following "Peter", "Joyce", "Alice" and "Rick"
       And user "Peter" is enrolled in challenge with title "Innovate education"
