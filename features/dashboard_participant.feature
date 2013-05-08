@@ -14,7 +14,6 @@ Feature: A dashboard for participant
       And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
 
   Scenario: View relevant new challenges
-    Given I am logged in as a supervisor
       And the following challenge records
       | title              | description        | start_date | end_date   |
       | Save the world     | It's a hit (song)! | next week  | next month |
@@ -27,7 +26,6 @@ Feature: A dashboard for participant
       And I should not see "Norvig Award" in list "Upcoming Challenges"
 
   Scenario: View my active Challenges
-    Given I am logged in as a participant
       And the following challenge records
       | title              | description        | start_date | end_date   |
       | Save the world     | It's a hit (song)! | next week  | next month |
@@ -45,7 +43,6 @@ Feature: A dashboard for participant
     And I should not see "Norvig Award" in list "Upcoming Challenges"
 
   Scenario: View activities of following
-    Given I am logged in as a participant
       And I'm following "Peter", "Joyce", "Alice" and "Rick"
       And user "Peter" is enrolled in challenge with title "Innovate education"
       And user "Joyce" is enrolled in challenge with title "Save the World"
