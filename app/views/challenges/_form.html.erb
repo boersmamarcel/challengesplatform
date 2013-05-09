@@ -11,26 +11,40 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <br />
+
+  <div class="field row">
+    <div class="span8 offset2">
+      <%= f.text_field :title, :class => "lead", :placeholder => "Challenge name" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+
+  <div class="field row">
+    <div class="span8 offset2">
+      <%= f.text_area :description, :class => "span8", :rows => "10", :placeholder => "Description..." %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.text_field :start_date %>
+
+  <div class="row">
+    <div class="field span4 offset2">
+      Start date: <%= f.text_field :start_date %>
+    </div>
+    <div class="field span4 text-right">
+      End date: <%= f.text_field :end_date %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.text_field :end_date %>
+
+  <div class="row">
+    <div class="field span4 offset2">
+      <%= f.submit :class => "btn", :confirm => "You are submitting your challenge for review, continue?" %>
+    </div>
+    <div class="field span4 text-right">
+      <%= f.submit 'Save draft', :class => "btn"%>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Save'%>
-  </div>
+
 <% end %>
+
+<script type="text/javascript">
+  setDateControl($('#challenge_start_date'), $('#challenge_end_date'));
+</script>
