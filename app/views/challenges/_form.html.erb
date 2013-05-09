@@ -1,44 +1,54 @@
 <%= form_for(@challenge) do |f| %>
-  <% if @challenge.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
-
-      <ul>
-      <% @challenge.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
 
   <br />
 
-  <div class="field row">
+  <div class="row">
+    <div class="span8 center">
+      <% if @challenge.errors.any? %>
+        <div id="error_explanation" class="alert alert-error">
+          <a class='close' data-dismiss='alert'>×</a>
+          <p>
+            <%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:
+          </p>
+
+          <ul>
+            <% @challenge.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+
+        </div>
+      <% end %>
+    </div>
+  <div>
+
+  <div class="row">
     <div class="span8 offset2">
       <%= f.text_field :title, :class => "lead", :placeholder => "Challenge name" %>
     </div>
   </div>
 
-  <div class="field row">
+  <div class="row">
     <div class="span8 offset2">
       <%= f.text_area :description, :class => "span8", :rows => "10", :placeholder => "Description..." %>
     </div>
   </div>
 
   <div class="row">
-    <div class="field span4 offset2">
-      Start date: <%= f.text_field :start_date %>
+    <div class="span4 offset2">
+      Start date: <%= f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y") %>
     </div>
-    <div class="field span4 text-right">
-      End date: <%= f.text_field :end_date %>
+    <div class="span4 text-right">
+      End date: <%= f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") %>
     </div>
   </div>
 
   <div class="row">
-    <div class="field span4 offset2">
+    <div class="span4 offset2">
       <%= f.submit :class => "btn", :confirm => "You are submitting your challenge for review, continue?" %>
     </div>
-    <div class="field span4 text-right">
+    <div class="span4 text-right">
       <%= f.submit 'Save draft', :class => "btn"%>
     </div>
   </div>

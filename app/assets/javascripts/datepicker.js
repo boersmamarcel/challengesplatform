@@ -16,14 +16,16 @@ function setDateControl(input1, input2) {
       var newDate = new Date(ev.date)
       newDate.setDate(newDate.getDate() + 1);
       end.setValue(newDate);
+      end.render
     }
     start.hide();
-    input2[0].focus();
+    //input2[0].focus();
   }).data('datepicker');
 
   var end = input2.datepicker({
     onRender: function(date) {
       return date.valueOf() <= start.date.valueOf() ? 'disabled' : '';
+      alert('Render event input2');
     }
   }).on('changeDate', function(ev) {
     end.hide();
