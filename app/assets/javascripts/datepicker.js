@@ -13,11 +13,15 @@ function setDateControl(input1, input2) {
     }
   }).on('changeDate', function(ev) {
     if (ev.date.valueOf() > end.date.valueOf()) {
-      var newDate = new Date(ev.date)
+      var newDate = new Date(ev.date);
       newDate.setDate(newDate.getDate() + 1);
       end.setValue(newDate);
-      end.render
     }
+    else{
+      /* Enforce a render; recalculates the disabled dates */
+      end.setValue(new Date(end.date));
+    }
+
     start.hide();
     //input2[0].focus();
   }).data('datepicker');
