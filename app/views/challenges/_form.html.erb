@@ -1,5 +1,6 @@
 <%= form_for(@challenge) do |f| %>
-  
+  <% r1 = !@challenge.nil? && !@challenge.start_date.nil? %>
+  <% r2 = !@challenge.nil? && !@challenge.end_date.nil? %>
 
   <br />
 
@@ -37,10 +38,13 @@
 
   <div class="row">
     <div class="span4 offset2">
-      Start date: <%= f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y") %>
+      Start date:
+      <%= f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y") if r1 %>
+      <%= f.text_field :start_date unless r1 %>
     </div>
     <div class="span4 text-right">
-      End date: <%= f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") %>
+      <%= f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") if r2 %>
+      <%= f.text_field :end_date unless r2 %>
     </div>
   </div>
 
