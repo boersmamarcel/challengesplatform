@@ -40,6 +40,7 @@ Feature: Add challenge
         When I visit the "challenges.pending" page
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
+        Then I should see "Title1" in the list
 
 
     Scenario: Revoke an approved challenge
@@ -49,6 +50,7 @@ Feature: Add challenge
         When I visit the "challenges.approved" page
         And I follow "Revoke"
         Then I should see a message with "Challenge successfully revoked"
+        Then I should see "Title1" in the list
 
 
     Scenario: View declined challenges
@@ -73,6 +75,7 @@ Feature: Add challenge
         When I edit the challenge with id "1" and a new description "Nice challenge"
         And I press "Update Challenge"
         Then I should see a message with "Challenge was successfully updated."
+        Then I should see "Title1" in the list
 
     Scenario: Resubmit a declined challenge with fields filled incorrectly
         Given the following challenge records

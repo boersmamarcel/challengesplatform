@@ -111,6 +111,7 @@ class ChallengesController < ApplicationController
     end
 
     @challenge.count = 1
+    @challenge.supervisor = @current_user
 
     respond_to do |format|
       if @challenge.save
@@ -155,10 +156,11 @@ class ChallengesController < ApplicationController
   def revoke
     @challenge = Challenge.find(params[:id])
     @challenge.count += 1
-
+    @challenge.state = "proposal"
+    
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to challenges_path , notice: 'Challenge successfully revoked' }
+        format.html { redirect_to declined_challenges_path , notice: 'Challenge successfully revoked' }
         format.json { head :no_content }
       else
         format.html { redirect_to challenges_path,  notice: "Couldn't revoke challenge"}
