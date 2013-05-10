@@ -14,6 +14,7 @@ Challengesplatform::Application.routes.draw do
 
   resources :users do
     get 'profile', :on => :member, :to => "profile#show"
+    resources :follow, :except => [:update, :show], :on => :member
   end
 
   get "static/index"

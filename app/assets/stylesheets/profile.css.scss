@@ -1,3 +1,28 @@
 // Place all the styles related to the Profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile_name{
+    font-size: 20px;
+}
+
+.profile_bottons{
+    background-color: black;
+}
+
+.profile_info_icons{
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 100;
+    margin-right: 5px;
+    color:  gray;
+}
+
+.profile_info_icons a{
+  text-decoration: none;
+  color: gray;
+}
+
+.year_icon{
+  margin-left: 5px;
+}

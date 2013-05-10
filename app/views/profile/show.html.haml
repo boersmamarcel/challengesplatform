@@ -1,6 +1,42 @@
-My profile page!!!
-%br
-%h3
-  =@user.email
-  
-= link_to 'Follow', follow_path(@user)
+%div.row
+  %span.span9
+    %div.profile.span6
+      %span.profile_image.pull-left
+        = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
+      %span.profile_info.span4
+        %div.profile_name
+          = @user.email
+        %div.profile_info_icons
+          %a{'data-toggle' => "tooltip", :title => "Computer Science", :id => "education_tooltip", "data-placement"=> 'bottom'} 
+            %span.eduction_icon
+              %i.icon-book
+            %span.education
+              TI
+          %span.year_icon
+            %i.icon-circle-blank
+          %span.year
+            3
+        %div.profile_buttons
+          - if follows?
+            = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
+          - else
+            = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
+
+    %div.challenges_list.span6
+      %div.challenge.span5
+        %span.challenge_image.span2
+          image challenge1
+        %span.challengeinfo.span2
+          info
+      %div.challenge.span5
+        %span.challenge_image.span2
+          image callenge1
+        %span.challengeinfo.span2
+          info
+  %span.span3
+    %div.follows
+      follow
+    %div.following
+      following
+%script
+  $("#education_tooltip").tooltip()

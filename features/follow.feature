@@ -10,7 +10,8 @@ Feature: User should be able to follow other users
         | student2@student.utwente.nl | pass123567  | pass123567            | 1    |
         When I visit the "login" page
       	And I fill in email with "student2@student.utwente.nl" and password with "pass123"
-        
+
+        @focus
         Scenario: See follow button on profile page
         Given "student1@student.utwente.nl" is not following "student2@student.utwente.nl"
         When I visit the profile of "student1@student.utwente.nl"

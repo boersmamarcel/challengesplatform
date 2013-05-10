@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :enrollments
   
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id'
-  has_many :follows, :through => :followrelations 
+  has_many :follows, :through => :followrelations, :source => :follows 
   has_many :inverse_followrelations, :class_name => 'Follow', :foreign_key => 'following_id'
   has_many :followee, :through => :inverse_followrelations, :source => :user
 
