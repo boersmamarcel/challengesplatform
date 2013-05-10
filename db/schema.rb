@@ -19,17 +19,17 @@ ActiveRecord::Schema.define(:version => 20130507230037) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "state"
-    t.integer  "count",       :default => 1
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.integer  "user_id"
+    t.integer  "count",         :default => 1
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "supervisor_id"
   end
 
   create_table "enrollments", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "challenge_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "participant_id"
   end
 
   create_table "follows", :force => true do |t|

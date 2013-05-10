@@ -6,6 +6,7 @@ set :application, "Challengesplatform"
 
 role :web, "198.199.77.172"                          # Your HTTP server, Apache/etc
 role :app, "198.199.77.172"                          # This may be the same as your `Web` server
+role :db, "198.199.77.172", :primary => true         # This may be the same as your `Web` server
 # role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
 # role :db,  "your slave db-server here"
 set :keep_releases, 3
@@ -20,7 +21,7 @@ set :use_sudo, false
 set :rvm_install_with_sudo, true
 after "deploy:restart", "deploy:cleanup"
 set :rvm_type, :system
-set :rvm_ruby_string, "ruby-2.0.0-p0@challenges"               # use the same ruby as used locally for deployment
+set :rvm_ruby_string, "1.9.3@challenges" #"ruby-2.0.0-p0@challenges"               # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
@@ -30,8 +31,8 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 before "deploy", "deploy:deploying"
 before "deploy:assets:precompile", "deploy:symlink_db"
 after "deploy:symlink_db", "deploy:symlink_keys"
-after "deploy:restart", "deploy:done"
-after "deploy", "deploy:migrate"
+before "deploy:restart", "deploy:migrate"
+after "deploy", "deploy:done"
 require "rvm/capistrano"
 
 namespace :deploy do
