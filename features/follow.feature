@@ -13,24 +13,30 @@ Feature: User should be able to follow other users
 
         @focus
         Scenario: See follow button on profile page
-        Given "student1@student.utwente.nl" is not following "student2@student.utwente.nl"
+        Given "student2@student.utwente.nl" is not following "student1@student.utwente.nl"
         When I visit the profile of "student1@student.utwente.nl"
         Then I should see a button "Follow"
         
         Scenario: Follow an user
-        Given "student1@student.utwente.nl" is not following "student2@student.utwente.nl"
+        Given "student2@student.utwente.nl" is not following "student1@student.utwente.nl"
         When I visit the profile of "student1@student.utwente.nl"
         And I press "Follow"
         Then I should see a message with "You started following this user"
+        And I should see "student2@student.utwente.nl" in the followed by list
         
         Scenario: Unfollow an user
         Given "student2@student.utwente.nl" is following "student1@student.utwente.nl"
         When I visit the profile of "student1@student.utwente.nl"
         And I press "Unfollow"
         Then I should see a message with "You stopped following this user"
+        And I should not see "student2@student.utwente.nl" in the followed by list
         
         Scenario: Follow yourself
         When I visit the profile of "student2@student.utwente.nl"
         Then I should not see button "Follow"
+        
+        Scenario: Open followers list and check if the user is in the list
+        
+        Scenario: Open follows list and check if the user is in the list
         
         

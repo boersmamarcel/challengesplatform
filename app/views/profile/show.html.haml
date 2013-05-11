@@ -5,9 +5,9 @@
         = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
       %span.profile_info.span4
         %div.profile_name
-          Marcel Boersma
+          student name
         %div.profile_info_icons
-          3th year Computer Science student
+          student study 3th year Computer Science student
         %div.profile_buttons
           - if follows? && @user.id != current_user.id
             = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
