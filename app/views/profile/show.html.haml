@@ -5,38 +5,53 @@
         = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
       %span.profile_info.span4
         %div.profile_name
-          = @user.email
+          Marcel Boersma
         %div.profile_info_icons
-          %a{'data-toggle' => "tooltip", :title => "Computer Science", :id => "education_tooltip", "data-placement"=> 'bottom'} 
-            %span.eduction_icon
-              %i.icon-book
-            %span.education
-              TI
-          %span.year_icon
-            %i.icon-circle-blank
-          %span.year
-            3
+          3th year Computer Science student
         %div.profile_buttons
-          - if follows?
+          - if follows? && @user.id != current_user.id
             = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
-          - else
+          - elsif ( @user.id != current_user.id)
             = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
 
     %div.challenges_list.span6
-      %div.challenge.span5
-        %span.challenge_image.span2
-          image challenge1
-        %span.challengeinfo.span2
-          info
-      %div.challenge.span5
-        %span.challenge_image.span2
-          image callenge1
-        %span.challengeinfo.span2
-          info
+      %h3 
+        Challenges
+      - @user.participating_challenges.each do |challenge|
+        %div.challenge.pull-left
+          %span.challenge_image.pull-left
+            = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
+          %span.challengeinfo.span4
+            %div.challenge_title
+              = challenge.title
+            %div.challenge_description
+              = challenge.description
+            %div.challenge_icons
+              = link_to 'Visit', challenge_path(challenge), :class => "btn btn-success"
   %span.span3
     %div.follows
-      follow
+      %h3
+        Marcel's followers
+      - @user.followers.limit(5).each do |follower|
+        %div.follows_item
+          %span.follow_image
+            = image_tag 'http://placekitten.com/30/30', :class => 'img-rounded'
+          %span.follow_name
+            = follower.email
+      
+      See all     
+  
     %div.following
-      following
+      %h3
+        Marcel follows
+      - @user.follows.limit(5).each do |follows|
+        %div.follows_item
+          %span.follow_image
+            = image_tag 'http://placekitten.com/30/30', :class => 'img-rounded'
+          %span.follow_name
+            = follows.email
+      
+    See all
 %script
   $("#education_tooltip").tooltip()
+  $("#year_tooltip").tooltip()

@@ -2,12 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.profile_name{
-    font-size: 20px;
+.profile
+{
+  margin-top: 15px;
 }
 
-.profile_bottons{
-    background-color: black;
+.profile_name{
+    font-size: 25px;
+}
+
+.profile_buttons{
+     margin-top: 45px;
 }
 
 .profile_info_icons{
@@ -26,3 +31,37 @@
 .year_icon{
   margin-left: 5px;
 }
+
+.challenges_list{
+  margin-top: 50px;
+}
+.challenge{
+  margin-bottom: 20px;
+  border: 1px gray solid;
+  border-radius: 6px;
+  padding: 5px;
+  height: 120px;
+  position: relative;
+}
+
+.challenge_title{
+  font-size: 20px;
+}
+.challenge_description{
+  margin-top: 5px;
+}
+
+.challenge_icons{
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.follows_item{
+  margin-bottom: 10px;
+}
+
+.following{
+margin-top: 40px;
+}
+

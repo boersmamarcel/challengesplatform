@@ -33,3 +33,4 @@ Feature: User should be able to follow other users
         When I visit the profile of "student2@student.utwente.nl"
         Then I should not see button "Follow"
         
+        
