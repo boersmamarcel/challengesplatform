@@ -1,10 +1,12 @@
 class FollowController < ApplicationController
 
-  def index
-    @following = current_user.following
-
+  def follows
+    @user = User.find(params[:user_id])
   end
-
+  
+  def followers
+    @user = User.find(params[:user_id])
+  end
 
 
   def create

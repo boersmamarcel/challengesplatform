@@ -14,6 +14,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem 'draper', '~>1.0'
 gem 'haml'
+gem 'gravatar-ultimate'
 
 gem "devise_mailchimp"  # Last officially released gem
 

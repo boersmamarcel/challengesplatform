@@ -1,8 +1,8 @@
 module ProfileHelper
 
-  def follows?
+  def follows?(user)
     return false if current_user.nil?
-    current_user.follows.include?(@user)
+    current_user.follows.include?(user)
   end
 
 end

@@ -14,7 +14,11 @@ Challengesplatform::Application.routes.draw do
 
   resources :users do
     get 'profile', :on => :member, :to => "profile#show"
-    resources :follow, :except => [:update, :show], :on => :member
+    get 'followers' => 'follow#followers'
+    get 'follows' => 'follow#follows'
+    
+    resources :follow, :only => [:create, :destroy]
+    
   end
 
   get "static/index"

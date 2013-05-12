@@ -2,14 +2,14 @@
   %span.span9
     %div.profile.span6
       %span.profile_image.pull-left
-        = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
+        = image_tag Gravatar.new(@user.email).image_url, :class => 'img-rounded'
       %span.profile_info.span4
         %div.profile_name
-          student name
+          = "#{@user.firstname} #{@user.lastname}"
         %div.profile_info_icons
-          student study 3th year Computer Science student
+         
         %div.profile_buttons
-          - if follows? && @user.id != current_user.id
+          - if follows?(@user) && @user.id != current_user.id
             = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
           - elsif ( @user.id != current_user.id)
             = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
@@ -31,27 +31,27 @@
   %span.span3
     %div.follows
       %h3
-        Marcel's followers
+        = "#{@user.firstname}'s followers"
       - @user.followers.limit(5).each do |follower|
         %div.follows_item
           %span.follow_image
-            = image_tag 'http://placekitten.com/30/30', :class => 'img-rounded'
+            = image_tag Gravatar.new(follower.email).image_url, :class => 'img-rounded follow_image_small'
           %span.follow_name
-            = follower.email
+            = link_to "#{follower.firstname} #{follower.lastname}", profile_user_path(follower)
       
-      See all     
+      = link_to 'See all', user_followers_path(@user)
   
     %div.following
       %h3
-        Marcel follows
+        ="#{@user.firstname} follows"
       - @user.follows.limit(5).each do |follows|
         %div.follows_item
           %span.follow_image
-            = image_tag 'http://placekitten.com/30/30', :class => 'img-rounded'
+            = image_tag Gravatar.new(follows.email).image_url, :class => 'img-rounded follow_image_small'
           %span.follow_name
-            = follows.email
+            = link_to "#{follows.firstname} #{follows.lastname}", profile_user_path(follows)
       
-    See all
+    = link_to 'See all', user_follows_path(@user)
 %script
   $("#education_tooltip").tooltip()
   $("#year_tooltip").tooltip()
