@@ -54,9 +54,9 @@ Feature: Participants can enroll to challenges
     Then I should see a message with "Successfully unenrolled"
 
   Examples:
-  |  challenge_id   |
-  |   1             |
-  |   5             |
+  | challenge_id |
+  | 1            |
+  | 5            |
 
 
   Scenario Outline: View challenge with state

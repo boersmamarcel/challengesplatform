@@ -6,9 +6,9 @@ Feature: Add challenge
     Background:
     Given the following user records
     | id | email                           | password | password_confirmation  | role  |
-		| 1  | supervisor@student.utwente.nl   | abcd1234 | abcd1234               | 1     |
-		| 2  | participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
-		When I visit the "login" page
+	| 1  | supervisor@student.utwente.nl   | abcd1234 | abcd1234               | 1     |
+	| 2  | participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
+	When I visit the "login" page
   	And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507230037) do
+ActiveRecord::Schema.define(:version => 20130508152939) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(:version => 20130507230037) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "state"
-    t.integer  "count",         :default => 1
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "count"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "supervisor_id"
   end
 
@@ -32,12 +32,7 @@ ActiveRecord::Schema.define(:version => 20130507230037) do
     t.integer  "participant_id"
   end
 
-  create_table "follows", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "following_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
+  add_index "enrollments", ["challenge_id", "participant_id"], :name => "index_enrollments_on_challenge_id_and_participant_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
