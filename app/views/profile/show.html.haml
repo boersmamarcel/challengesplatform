@@ -29,22 +29,22 @@
             %div.challenge_icons
               = link_to 'Visit', challenge_path(challenge), :class => "btn btn-success"
   %span.span3
-    %div.follows
+    %div.followers
       %h3
         = "#{@user.firstname}'s followers"
-      - @user.followers.limit(5).each do |follower|
+      - @user.followers.order("created_at DESC").limit(5).each do |follower|
         %div.follows_item
           %span.follow_image
             = image_tag Gravatar.new(follower.email).image_url, :class => 'img-rounded follow_image_small'
           %span.follow_name
             = link_to "#{follower.firstname} #{follower.lastname}", profile_user_path(follower)
       
-      = link_to 'See all', user_followers_path(@user)
+      = link_to 'See all followers', user_followers_path(@user)
   
     %div.following
       %h3
         ="#{@user.firstname} follows"
-      - @user.follows.limit(5).each do |follows|
+      - @user.follows.order("created_at DESC").limit(5).each do |follows|
         %div.follows_item
           %span.follow_image
             = image_tag Gravatar.new(follows.email).image_url, :class => 'img-rounded follow_image_small'
