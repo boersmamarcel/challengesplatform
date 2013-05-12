@@ -1,36 +1,64 @@
 <%= form_for(@challenge) do |f| %>
-  <% if @challenge.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
+  <% r1 = !@challenge.nil? && !@challenge.start_date.nil? %>
+  <% r2 = !@challenge.nil? && !@challenge.end_date.nil? %>
 
-      <ul>
-      <% @challenge.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <br />
+
+  <div class="row">
+    <div class="span8 center">
+      <% if @challenge.errors.any? %>
+        <div id="error_explanation" class="alert alert-error">
+          <a class='close' data-dismiss='alert'>×</a>
+          <p>
+            <%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:
+          </p>
+
+          <ul>
+            <% @challenge.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
+  <div>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="row">
+    <div class="span8 offset2">
+      <%= f.text_field :title, :class => "lead", :placeholder => "Challenge name" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+
+  <div class="row">
+    <div class="span8 offset2">
+      <%= f.text_area :description, :class => "span8", :rows => "10", :placeholder => "Description..." %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.text_field :start_date %>
+
+  <div class="row">
+    <div class="span4 offset2">
+      Start date:
+      <%= f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y") if r1 %>
+      <%= f.text_field :start_date unless r1 %>
+    </div>
+    <div class="span4 text-right">
+      <%= f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") if r2 %>
+      <%= f.text_field :end_date unless r2 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.text_field :end_date %>
+
+  <div class="row">
+    <div class="span4 offset2">
+      <%= f.submit :class => "btn", :confirm => "You are submitting your challenge for review, continue?" %>
+    </div>
+    <div class="span4 text-right">
+      <%= f.submit 'Save draft', :class => "btn"%>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Save'%>
-  </div>
+
 <% end %>
+
+<script type="text/javascript">
+  setDateControl($('#challenge_start_date'), $('#challenge_end_date'));
+</script>
