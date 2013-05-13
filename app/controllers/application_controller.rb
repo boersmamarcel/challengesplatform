@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
    dashboard_path
   end
   
+  
+  def after_update_path_for(resource)
+    profile_user_path(resource)
+  end
 end

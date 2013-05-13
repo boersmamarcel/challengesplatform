@@ -1,0 +1,57 @@
+%div.row
+  %span.span9
+    %div.profile.span6
+      %span.profile_image.pull-left
+        = image_tag Gravatar.new(@user.email).image_url, :class => 'img-rounded'
+      %span.profile_info.span4
+        %div.profile_name
+          = "#{@user.firstname} #{@user.lastname}"
+        %div.profile_info_icons
+         
+        %div.profile_buttons
+          - if follows?(@user) && @user.id != current_user.id
+            = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
+          - elsif ( @user.id != current_user.id)
+            = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
+
+    %div.challenges_list.span6
+      %h3 
+        Challenges
+      - @user.participating_challenges.each do |challenge|
+        %div.challenge.pull-left
+          %span.challenge_image.pull-left
+            = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
+          %span.challengeinfo.span4
+            %div.challenge_title
+              = challenge.title
+            %div.challenge_description
+              = challenge.description
+            %div.challenge_icons
+              = link_to 'Visit', challenge_path(challenge), :class => "btn btn-success"
+  %span.span3
+    %div.followers
+      %h3
+        = "#{@user.firstname}'s followers"
+      - @user.followers.order("created_at DESC").limit(5).each do |follower|
+        %div.follows_item
+          %span.follow_image
+            = image_tag Gravatar.new(follower.email).image_url, :class => 'img-rounded follow_image_small'
+          %span.follow_name
+            = link_to "#{follower.firstname} #{follower.lastname}", profile_user_path(follower)
+      
+      = link_to 'See all followers', user_followers_path(@user)
+  
+    %div.following
+      %h3
+        ="#{@user.firstname} follows"
+      - @user.follows.order("created_at DESC").limit(5).each do |follows|
+        %div.follows_item
+          %span.follow_image
+            = image_tag Gravatar.new(follows.email).image_url, :class => 'img-rounded follow_image_small'
+          %span.follow_name
+            = link_to "#{follows.firstname} #{follows.lastname}", profile_user_path(follows)
+      
+    = link_to 'See all', user_follows_path(@user)
+%script
+  $("#education_tooltip").tooltip()
+  $("#year_tooltip").tooltip()

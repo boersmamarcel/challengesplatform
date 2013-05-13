@@ -12,6 +12,15 @@ Challengesplatform::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'users/registrations' }
 
+  resources :users do
+    get 'profile', :on => :member, :to => "profile#show"
+    get 'followers' => 'follow#followers'
+    get 'follows' => 'follow#follows'
+    
+    resources :follow, :only => [:create, :destroy]
+    
+  end
+
   get "static/index"
 
   get "dashboard", :to => "dashboard#index"
