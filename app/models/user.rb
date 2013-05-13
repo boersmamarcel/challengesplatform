@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :role, :firstname, :lastname, :provider, :uid  
 
   
-  has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id'
-  has_many :follows, :through => :followrelations, :source => :follows 
-  has_many :inverse_followrelations, :class_name => 'Follow', :foreign_key => 'following_id'
+  has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
+  has_many :follows, :through => :followrelations, :source => :follows
+  has_many :inverse_followrelations, :class_name => 'Follow', :foreign_key => 'following_id', :dependent => :destroy
   has_many :followers, :through => :inverse_followrelations, :source => :user
 
   has_many :supervising_challenges, :foreign_key => 'supervisor_id', :class_name => 'Challenge'
