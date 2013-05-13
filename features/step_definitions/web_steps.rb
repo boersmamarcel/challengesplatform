@@ -31,6 +31,22 @@ def getRoute(name)
   end
 end
 
+def getRouteWithUser(name, user)
+  case name 
+  when "user.edit"
+    edit_user_registration_path(user)
+  else
+    print("Invalid route requested (" + name + ")")
+  end
+end
+
+When(/^I visit the "(.*?)" page for user "(.*?)"$/) do |page, email|
+  user = User.where(:email => email).first
+  
+  visit getRouteWithUser(page,user)
+
+end
+
 Then(/^I should see the "(.*?)" button$/) do |buttonID|
   find("#" + buttonID).should_not be_nil
 end
