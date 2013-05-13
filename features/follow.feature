@@ -11,7 +11,6 @@ Feature: User should be able to follow other users
         When I visit the "login" page
       	And I fill in email with "s.lang@student.utwente.nl" and password with "pass123567"
 
-        @focus
         Scenario: See follow button on profile page
         Given "s.lang@student.utwente.nl" is not following "h.kort@student.utwente.nl"
         When I visit the profile of "h.kort@student.utwente.nl"
