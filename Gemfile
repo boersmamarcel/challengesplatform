@@ -14,6 +14,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem 'draper', '~>1.0'
 gem 'haml'
+gem 'gravatar-ultimate'
 
 gem "devise_mailchimp"  # Last officially released gem
 
@@ -37,14 +38,14 @@ group :develop do
 end
 
 group :test, :develop  do
-
-    gem 'factory_girl_rails'
-    gem 'rspec'
-    gem 'rake'
-    gem 'cucumber-rails', :require => false
-    # database_cleaner is not required, but highly recommended
-    gem 'database_cleaner'
-    gem 'rspec-rails', '~> 2.0'
+  gem 'coveralls', require: false
+  gem 'factory_girl_rails'
+  gem 'rspec'
+  gem 'rake'
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 2.0'
 end
 
 

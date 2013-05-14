@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508152939) do
+ActiveRecord::Schema.define(:version => 20130514083836) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -30,9 +30,17 @@ ActiveRecord::Schema.define(:version => 20130508152939) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "participant_id"
+    t.datetime "unenrolled_at"
   end
 
   add_index "enrollments", ["challenge_id", "participant_id"], :name => "index_enrollments_on_challenge_id_and_participant_id", :unique => true
+
+  create_table "follows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -50,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20130508152939) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "role",                   :default => 0
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -15,7 +15,7 @@ Feature: Add challenge
     Scenario Outline: Submit new challenge
         When I visit the "challenge.new" page
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
-        And I press "Create Challenge"
+        And I press "Submit for Review"
         Then I should see a message with "<message>"
 
     Examples:
@@ -73,7 +73,7 @@ Feature: Add challenge
         | id | title   | description               | start_date        | end_date          | state       | count | supervisor_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
         When I edit the challenge with id "1" and a new description "Nice challenge"
-        And I press "Update Challenge"
+        And I press "Submit for Review"
         Then I should see a message with "Challenge was successfully updated."
         Then I should see "Title1" in the list
 
@@ -82,7 +82,7 @@ Feature: Add challenge
         | id | title   | description               | start_date        | end_date          | state       | count | supervisor_id |
         | 1  | Title1  | Awesome challenge         | 03-08-2013        | 09-09-2013        | proposal    | 2     | 1       |
         When I edit the challenge with id "1" and a new description ""
-        And I press "Update Challenge"
+        And I press "Submit for Review"
         Then I should see a message with "One or more fields are missing"
 
     Scenario: View approved challenges

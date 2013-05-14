@@ -41,11 +41,9 @@ Feature: Participants can enroll to challenges
     And I follow "Enroll"
     Then I should see a message with "Successfully enrolled"
 
-
   Scenario: Subscribe to a challenge after start date
     When I open the challenge with id "5"
     Then I should not see button "Enroll"
-
 
   Scenario Outline: Unsubscribe from a challenge
     Given user "participant@student.utwente.nl" is enrolled in challenge "<challenge_id>"

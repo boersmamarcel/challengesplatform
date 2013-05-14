@@ -15,6 +15,15 @@ Challengesplatform::Application.routes.draw do
     :registrations => 'users/registrations',
     :sessions => 'users/sessions' }
 
+  resources :users do
+    get 'profile', :on => :member, :to => "profile#show"
+    get 'followers' => 'follow#followers'
+    get 'follows' => 'follow#follows'
+    
+    resources :follow, :only => [:create, :destroy]
+    
+  end
+
   get "static/index"
 
   get "dashboard", :to => "dashboard#index"
