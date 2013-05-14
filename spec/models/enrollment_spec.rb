@@ -19,6 +19,7 @@ describe Enrollment do
     # Unenroll
     challenge.unenroll(user).should be_true
     enrollment = challenge.enrollments.first
+    enrollment.participant.should == user
     enrollment.unenrolled_at.should_not be_nil
 
     # Enroll
