@@ -24,7 +24,7 @@ Feature: Security - students
     | home                  | index           |
     | login                 | dashboard.index |
     | dashboard             | dashboard.index |
-    | challenges.3          | challenges.3    |
+    | challenges.3          | challenge.3    |
 
   Scenario Outline: Visit illegal urls as a student user (and get redirected)
     When I visit the "<path>" page

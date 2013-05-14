@@ -27,8 +27,9 @@ def getRoute(name)
   when "challenges.proposal"
     proposal_challenges_path
   when /^challenges.([0-9]+)$/ #matches a challenge id
-    print("requested challenge#{$1}")
-    challenges_path($1)
+    challenge_path($1)
+  when /^challenges.([0-9]+).edit$/ #matches a challenge id
+    edit_challenge_path($1)
   else
     print("Invalid route requested (" + name + ")")
   end
