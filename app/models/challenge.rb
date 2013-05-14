@@ -1,6 +1,5 @@
 class Challenge < ActiveRecord::Base
   attr_accessible :count, :description, :end_date, :start_date, :state, :title
-  attr_accessor :submit
 
   belongs_to :supervisor, :class_name => "User"
 
@@ -8,15 +7,13 @@ class Challenge < ActiveRecord::Base
   # Participants does has this default scope (See :conditions)
   has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
 
-  validate :submit?
+  validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
-  validates :title, :presence => { :message => "One or more fields are missing" }, :if => :submit?
-  validates :description, :presence => { :message => "One or more fields are missing" }, :if => :submit?
+  validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
-  validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
-  validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :submit?
-
-  validate :dates, :if => :submit?
+  validate :dates, :if => :pending?
   scope :upcoming, where('start_date > ?', Date.today)
   scope :running, where('end_date > ? && start_date < ?', Date.today, Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
@@ -40,11 +37,14 @@ class Challenge < ActiveRecord::Base
   def unenroll(user)
     enrollments.find_by_participant_id(user).unenroll
   end
-  @protected
 
-  def submit?
-      submit
+  def pending?
+    state == 'pending'
   end
+  def editable?
+    state == 'proposal'
+  end
+  @protected
 
   def dates
     errors.add(:dates, "End date can not be before start date") if start_date.nil? || end_date.nil? || start_date > end_date
