@@ -14,4 +14,4 @@ Feature: Registration
 	Given I am logged in
 	When I visit the "registration.form" page
 	Then I should see the "dashboard.index" page
-	And I should get the message "You do not have the permissions required to view this page."
+	And I should get the message "You are already signed in."

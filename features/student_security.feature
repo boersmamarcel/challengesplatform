@@ -28,7 +28,7 @@ Feature: Security - students
 
   Scenario Outline: Visit illegal urls as a student user (and get redirected)
     When I visit the "<path>" page
-    Then I should see the "dashboard" page
+    Then I should see the "dashboard.index" page
     And I should get the message "You do not have the permissions required to view this page."
 
   Examples: redirects for students
@@ -40,4 +40,4 @@ Feature: Security - students
     | challenges.1.edit     |
     | challenges.2.edit     |
     | challenges.3.edit     |
-    | challenges.new        |
+    | challenge.new         |

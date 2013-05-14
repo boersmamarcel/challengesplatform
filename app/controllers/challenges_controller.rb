@@ -17,7 +17,7 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.where("id = ? AND (state = 'approved' OR supervisor_id = ?)", params[:id], current_user.id).first
 
-    redirect_to challenges_path if @challenge.nil?
+    redirect_unauthorized_access if @challenge.nil?
   end
 
   # GET /challenges/proposal
