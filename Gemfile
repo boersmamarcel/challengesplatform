@@ -35,7 +35,6 @@ end
 
 group :develop do
   gem 'capistrano'
-  gem 'brakeman', :require => false
 end
 
 group :test, :develop  do
