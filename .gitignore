@@ -29,5 +29,4 @@ config/database.yml
 
 #ignore local config files
 config/initializers/devise_local.rb
-config/initializers/secret_token.rb
 
