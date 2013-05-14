@@ -22,7 +22,7 @@ Feature: Security - supervisor
   Examples: redirects for students
     | path                  | page             |
     | home                  | index            |
-    | login                 | dashboard.index  | # yeah... even admins can't log in twice
+    | login                 | dashboard.index  |
     | dashboard             | dashboard.index  |
     | challenges.1          | challenge.1      |
     | challenges.2          | challenge.2      |    
@@ -30,4 +30,4 @@ Feature: Security - supervisor
     | challenges.1.edit     | challenge.1.edit |
     | challenges.2.edit     | challenge.2.edit |    
     | challenges.3.edit     | challenge.3.edit |
-    | challenges.new        | challenges.new   | # not sure about this one... why would this be nessacery?
+    | challenges.new        | challenges.new   |
