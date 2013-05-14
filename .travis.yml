@@ -23,3 +23,4 @@ script:
   - echo $TEST_ENV
   - bundle exec cucumber -r features
   - bundle exec rspec -f d -c
+  - bundle exec rake :test_with_coveralls
