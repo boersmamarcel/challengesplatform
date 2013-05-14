@@ -1,0 +1,2 @@
+# This is a dummy secret token that is not used by production/staging servers
+Challengesplatform::Application.config.secret_token = '945e6852b860f0a3caa821888e609a605b7a80490dc180a539daa70553e70f18279af979b95371dec55f4a6142b0949644ab300f6a1707c733e58f1e422ec0a8'
