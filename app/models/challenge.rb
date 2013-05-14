@@ -41,8 +41,8 @@ class Challenge < ActiveRecord::Base
   def pending?
     state == 'pending'
   end
-  def editable?
-    state == 'proposal'
+  def editable_by_user?(user)
+    state == 'proposal' && user.id == supervisor_id
   end
   @protected
 

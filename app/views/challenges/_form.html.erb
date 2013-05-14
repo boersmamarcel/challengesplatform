@@ -43,6 +43,7 @@
       <%= f.text_field :start_date unless r1 %>
     </div>
     <div class="span4 text-right">
+      End date:
       <%= f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") if r2 %>
       <%= f.text_field :end_date unless r2 %>
     </div>

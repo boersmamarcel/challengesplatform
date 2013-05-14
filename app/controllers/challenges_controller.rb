@@ -46,7 +46,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1/edit
   def edit
     @challenge = Challenge.find(params[:id])
-    unless @challenge.editable?
+    unless @challenge.editable_by_user?(current_user)
       redirect_to @challenge, alert: 'This challenge can not be edited by you.'
     end
   end
