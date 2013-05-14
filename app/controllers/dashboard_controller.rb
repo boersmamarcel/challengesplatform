@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
 
-  skip_filter :require_admin
-  skip_filter :require_supervisor
+  skip_filter :require_admin, :require_supervisor
 
   def index
     @upcoming_challenges = Challenge.upcoming

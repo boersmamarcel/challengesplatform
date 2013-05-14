@@ -17,6 +17,7 @@ Feature: Security - visitors
     Given I am not logged in
     When I visit the "<path>" page
     Then I should see the "session.new" page
+    And I should get the message "You do not have the permissions required to view this page."
   
   Examples: Illegal pages
     | path                |

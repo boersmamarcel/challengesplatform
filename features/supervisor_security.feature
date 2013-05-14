@@ -29,7 +29,7 @@ Feature: Security - students
   Scenario Outline: Visit illegal urls as a student user (and get redirected)
     When I visit the "<path>" page
     Then I should see the "dashboard" page
-    And I should get the message "This page does not exist, or you have insufficient permissions to view it."
+    And I should get the message "You do not have the permissions required to view this page."
 
   Examples: redirects for students
     | path                  |

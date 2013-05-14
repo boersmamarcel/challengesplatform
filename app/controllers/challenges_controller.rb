@@ -1,12 +1,19 @@
 class ChallengesController < ApplicationController
+
+  # Do not allow regular users to see anything
+  # Allow regular users some views
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :approved, :enroll, :unenroll]
+
+  # Allow supervisors to see even more (they already see everything above)
+  skip_filter :require_admin, :only => [:proposal, :pending, :new, :edit, :create, :update, :revoke]
+
+
   # GET /challenges
-  # GET /challenges.json
   def index
     @challenges = Challenge.all
   end
 
   # GET /challenges/1
-  # GET /challenges/1.json
   def show
     @challenge = Challenge.where("id = ? AND (state = 'approved' OR supervisor_id = ?)", params[:id], current_user.id).first
 
@@ -14,31 +21,26 @@ class ChallengesController < ApplicationController
   end
 
   # GET /challenges/proposal
-  # GET /challenges/proposal
   def proposal
     @challenges = Challenge.proposal
   end
 
   # GET /challenges/approved
-  # GET /challenges/approved.json
   def approved
     @challenges = Challenge.approved
   end
 
-  # GET /challenges/declined
   # GET /challenges/declined
   def declined
     @challenges = Challenge.where("state = 'proposal' AND count > 1")
   end
 
   # GET /challenges/pending
-  # GET /challenges/pending
   def pending
     @challenges = Challenge.pending
   end
 
   # GET /challenges/new
-  # GET /challenges/new.json
   def new
     @challenge = Challenge.new
   end
@@ -56,7 +58,6 @@ class ChallengesController < ApplicationController
   end
 
   # POST /challenges
-  # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
 
@@ -78,7 +79,6 @@ class ChallengesController < ApplicationController
   end
 
   # PUT /challenges/1
-  # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
 
@@ -94,7 +94,6 @@ class ChallengesController < ApplicationController
   end
 
   # DELETE /challenges/1
-  # DELETE /challenges/1.json
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy
