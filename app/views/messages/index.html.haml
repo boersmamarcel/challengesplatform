@@ -1,0 +1,5 @@
+%h1 Inbox
+- current_user.received_messages.each do |message|
+  %p
+    %h4= message.subject
+    = link_to "delete message", message_path(message), :confirm => "are you sure?", :method => :delete

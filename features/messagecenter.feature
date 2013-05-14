@@ -8,9 +8,9 @@ Feature: Message Center Incoming Messages
     | 1  | supervisor@student.utwente.nl  | abcd1234 | abcd1234              | 1    |
     | 2  | participant@student.utwente.nl | abcd1234 | abcd1234              | 0    |
 	And the following message records
-     | subject             | body                             | sender | receiver | is_read |
-	 | Room Change         | Tomorrow we will meet outside!   | 1      | 2        | 0       |
-	 | Certificate Awarded | You have received a certificate. | 1      | 2        | 1       |
+     | subject             | body                             | sender_id | receiver_id | is_read |
+	 | Room Change         | Tomorrow we will meet outside!   | 1         | 2           | 0       |
+	 | Certificate Awarded | You have received a certificate. | 1         | 2           | 1       |
     When I visit the "login" page
    	And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
     
@@ -23,6 +23,7 @@ Feature: Message Center Incoming Messages
     When I visit the "dashboard" page
     Then I should see an "inactive" mailbox icon
 
+    @javascript
     Scenario: View the modal inbox overlay
     When I visit the "dashboard" page
     And I click on the "mailbox" button
@@ -30,9 +31,9 @@ Feature: Message Center Incoming Messages
     And I should see a title "Messages"
     And I should see a message with "Room Change"
 
+    @javascript
     Scenario: View the inbox page
     When I visit the "dashboard" page
     And I click on the "mailbox" button
     And I click on the "go to inbox" button
-    Then I should see the "message.index" page
-    And I should see a title "Inbox"
+    Then I should see a title "Inbox"

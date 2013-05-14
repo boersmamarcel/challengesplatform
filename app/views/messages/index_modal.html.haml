@@ -1,0 +1,20 @@
+%div.modal-header
+  %h3
+    Messages
+%div.modal-body
+  - current_user.received_messages.limit(3).each do |message|
+    .message
+      %h4
+        - unless message.is_read
+          %i.icon-flag
+        = message.subject
+      %p= truncate(message.body, :length => 150)
+      %p
+        %a
+          = link_to "Read full &raquo;".html_safe, message_path(message)
+%div.modal-footer
+  %span.pull-right
+    %a.btn{:href => '#', :onClick => '$(this.parentNode.parentNode.parentNode).modal("hide")'}
+      Close
+    %a#gotoinbox.btn.btn-primary{:href => messages_path}
+      Go to Inbox

@@ -3,4 +3,7 @@ class Message < ActiveRecord::Base
   
   belongs_to :sender, :class_name => 'User'
   belongs_to :receiver, :class_name => 'User'
+  
+  scope :unread, where(:is_read => false)
+  default_scope order('created_at DESC')
 end

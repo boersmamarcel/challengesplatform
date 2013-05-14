@@ -1,0 +1,22 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.message {
+	border-bottom: 1px solid gray;
+	padding: 0px;
+	margin:0px;
+	padding: 15px;
+}
+
+.message:nth-child(even) {
+	background-color: #fafafa;
+}
+
+.modal-body {
+	padding:0px;
+}
+
+.message:last-child {
+	border-bottom: none;
+}
