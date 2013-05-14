@@ -30,42 +30,41 @@ Feature: Review challenges as admin
   Scenario: View a challenge in non pending state
     When I open the review challenge page for challenge with id "3"
     Then I should see the "admin/review.index" page
-    And see a message with "This challenge can't be reviewed"
+    And I should see a message with "This challenge can't be reviewed"
     
   Scenario: View pending challenge
     When I open the review challenge page for challenge with id "2"
     Then I should see the "admin/review.show" page
   
-  Scenario: Add comment to pending challenge
-    Given I am on the review challenge page for challenge with id "2"
-    And I fill in comment with "Description is to vague"
+  Scenario Outline: Add comment to pending challenge
+    Given I am on the review challenge page for challenge with id "<challenge_id>"
+    And I fill in comment with "<comment>"
     And I press "Add comment"
-    Then I should see a message with "Comment successfully added"
-    And I should see the "admin/review.show" page
-  
-  Scenario: Add empty comment to pending challenge
-    Given I am on the review challenge page for challenge with id "2"
-    And I fill in comment with ""
-    And I press "Add comment"
-    Then I should see a message with "Comment can not be empty"
-    And I should see the "admin/review.show" page
+    Then I should see a message with "<message>"
+    And I should see the "<page>" page
+    
+  Examples:
+  | challenge_id | comment                  | message                     | page              |
+  | 2            | Description is to vague  | Comment successfully added  | admin/review.show |
+  | 2            |                          | Comment can not be empty    | admin/review.show |
   
   Scenario: Edit a pending challenge
     Given I am on the review challenge page for challenge with id "2"
     And I press "Edit"
     Then I should see the "admin/review.edit" page
   
-  Scenario: Approve a pending challenge
-    Given I am on the review challenge page for challenge with id "2"
-    And I press "Approve"
-    Then I should see the "admin/review.index" page
-    And I should see a message with "Challenge successfully approved"
+  Scenario Outline: Approve/Decline a pending challenge with and without comments
+    Given I am on the review challenge page for challenge with id "<challenge_id>"
+    And I press "<button>"
+    And I fill in comment with "<comment>"
+    Then I should see the "<page>" page
+    And I should see a message with "<message>"
+    
+  Examples:
+  | challenge_id | button   | comment              | page                | message                                         |
+  | 2            | Decline  | To vague please edit | admin/review.index  | Challenge successfully revoked                  |
+  | 2            | Decline  |                      | admin/review.show   | Challenge can not be declined without comments  |
+  | 2            | Approve  |                      | admin/review.index  | Challenge successfully approved                 |
   
-  Scenario: Decline a pending challenge and add comments
-    Given I am on the review challenge page for challenge with id "2"
-    And I press "Decline"
-    And I fill in comment with "To vague please edit"
-    Then I should see the "admin/review.index" page
-    And I should see a message with "Challenge successfully revoked"
+    
   
-  Scenario: Decline a pending challenge and don't add any comments
