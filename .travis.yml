@@ -21,4 +21,5 @@ before_script:
   - phantomjs --version
 script:
   - echo $TEST_ENV
+  - bundle exec rake -T
   - bundle exec rake :test_with_coveralls
