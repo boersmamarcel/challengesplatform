@@ -22,48 +22,48 @@ class ChallengesController < ApplicationController
     end
   end
 
-    # GET /challenges/proposal
-    # GET /challenges/proposal
-    def proposal
-        @challenges = Challenge.proposal
+  # GET /challenges/proposal
+  # GET /challenges/proposal
+  def proposal
+    @challenges = Challenge.proposal
 
-        respond_to do |format|
-            format.html
-            format.json { render json: @challenges}
-        end
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenges}
     end
+  end
 
   # GET /challenges/approved
   # GET /challenges/approved.json
   def approved
-      @challenges = Challenge.approved
+    @challenges = Challenge.approved
 
-      respond_to do |format|
-          format.html
-          format.json { render json: @challenges}
-      end
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenges}
+    end
   end
 
-    # GET /challenges/declined
-    # GET /challenges/declined
-    def declined
-        @challenges = Challenge.where("state = 'proposal' AND count > 1")
-        respond_to do |format|
-            format.html
-            format.json { render json: @challenges}
-        end
+  # GET /challenges/declined
+  # GET /challenges/declined
+  def declined
+    @challenges = Challenge.where("state = 'proposal' AND count > 1")
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenges}
     end
+  end
 
-    # GET /challenges/pending
-    # GET /challenges/pending
-    def pending
-        @challenges = Challenge.pending
+  # GET /challenges/pending
+  # GET /challenges/pending
+  def pending
+    @challenges = Challenge.pending
 
-        respond_to do |format|
-            format.html
-            format.json { render json: @challenges}
-        end
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenges}
     end
+  end
 
   # GET /challenges/new
   # GET /challenges/new.json
@@ -157,7 +157,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @challenge.count += 1
     @challenge.state = "proposal"
-    
+
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to declined_challenges_path , notice: 'Challenge successfully revoked' }
@@ -170,19 +170,19 @@ class ChallengesController < ApplicationController
   end
 
   def enroll
-      @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.find(params[:id])
+    
+    @enrollment = @challenge.enrollments.build
+    @enrollment.participant = current_user
 
-      @enrollment = @challenge.enrollments.build
-      @enrollment.participant = current_user
-
-      respond_to do |format|
-        if @enrollment.save
-            format.html{ redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'}
-            format.json{ head :no_content}
-        else
-          format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @enrollment.save
+        format.html{ redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'}
+        format.json{ head :no_content}
+      else
+        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
       end
+    end
 
   end
 
@@ -190,11 +190,13 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @enrollment = Enrollment.where('participant_id = ? AND challenge_id = ? ', current_user.id, @challenge.id).first
 
-    @enrollment.destroy
-
     respond_to do |format|
-      format.html { redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled' }
-      format.json { head :no_content }
+      if @enrollment.unenroll
+        format.html { redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled' }
+        format.json{ head :no_content}
+      else
+        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+      end
     end
 
   end

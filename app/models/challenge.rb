@@ -4,8 +4,9 @@ class Challenge < ActiveRecord::Base
 
   belongs_to :supervisor, :class_name => "User"
 
-  has_many :enrollments, :dependent => :destroy
-  has_many :participants, :through => :enrollments, :class_name => "User"
+  has_many :enrollments, :dependent => :destroy # Enrollments does not have a default scope for unenrolled users
+  # Participants does has this default scope (See :conditions)
+  has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
 
   validate :submit?
 
@@ -27,7 +28,18 @@ class Challenge < ActiveRecord::Base
   scope :editable, where(:state => "proposal")
   scope :running_first, order('start_date ASC')
 
+  def enroll(user)
+    enrollment = enrollments.find_by_participant_id(user)
+    if enrollment.present?
+      enrollment.reenroll
+    else
+      Enrollment.create!(:challenge_id => self.id, :participant_id => user.id)
+    end
+  end
 
+  def unenroll(user)
+    enrollments.find_by_participant_id(user).unenroll
+  end
   @protected
 
   def submit?
