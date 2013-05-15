@@ -4,11 +4,10 @@
   <b>Title:</b>
   <%= @challenge.title %>
 </p>
-
-<p id="description">
-  <b>Description:</b>
+<b>Description:</b>
+<div id="description">
   <%= markdown(@challenge.description) %>
-</p>
+</div>
 
 <p id="start_date">
   <b>Start date:</b>
