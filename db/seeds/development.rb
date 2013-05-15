@@ -85,6 +85,9 @@ end
 supervisors.each do |supervisor|
  User.create!(:firstname => supervisor['firstname'], :lastname => supervisor['lastname'], :email => "#{supervisor['firstname']}@utwente.nl", :password => "supervisorpass", :password_confirmation => "supervisorpass", :role => 1)
 end
+
+User.create!(:firstname => "Kevin", :lastname => "Flynn", :email => "admin@utwente.nl", :password => "adminpass", :password_confirmation => "adminpass", :role => 2)
+
 challenges.each do |challenge|
     supervisor = User.where(:firstname => challenge['supervisor']['firstname'], :lastname => challenge['supervisor']['lastname']).first;
 
