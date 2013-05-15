@@ -14,16 +14,14 @@ env:
     - BUNDLE_ARCHIVE="travis_challenges_bundle"
   matrix:
     - DB=postgres
-# before_install:
-#   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-#   - gem install bundler
-#   - "./script/travis/bundle_install.sh"
-# after_script:
-#   - "ruby script/travis/bundle_cache.rb"
+before_install:
+  - sudo apt-get install expect
+  - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+  - gem install bundler
+  - "./script/travis/bundle_install.sh"
+after_script:
+  - "ruby script/travis/bundle_cache.rb"
 before_script:
-  - echo "test"
-  - cat ~/.ssh/id_rsa.pub
-  - echo "test"
   - cp config/database.travis.yml config/database.yml
   - cat config/database.yml
   - bundle exec rake db:create
