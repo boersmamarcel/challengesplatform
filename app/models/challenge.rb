@@ -6,6 +6,7 @@ class Challenge < ActiveRecord::Base
 
   has_many :enrollments, :dependent => :destroy
   has_many :participants, :through => :enrollments, :class_name => "User"
+  has_many :comments, :order => 'updated_at DESC'
 
   validate :submit?
 

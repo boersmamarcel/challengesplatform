@@ -36,7 +36,6 @@ Feature: Review challenges as admin
     When I open the review challenge page for challenge with id "2"
     Then I should see the "admin/review.show" page
   
-  @focus
   Scenario Outline: Add comment to pending challenge
     Given I am on the review challenge page for challenge with id "<challenge_id>"
     And I fill in comment with "<comment>"
@@ -45,18 +44,28 @@ Feature: Review challenges as admin
     And I should see the "<page>" page
     
   Examples:
-  | challenge_id | comment                  | message                     | page              |
-  | 2            | Description is to vague  | Comment successfully added  | admin/review.show |
-  | 2            |                          | Comment can not be empty    | admin/review.show |
+  | challenge_id | comment                  | message                                     | page              |
+  | 2            | Description is to vague  |                                             | admin/review.show |
+  | 2            |                          | Comments must have at least 3 characters    | admin/review.show |
+  
+  Scenario: Comment color green for new comment
+    Given the following comment records
+      | user_id | challenge_id  | comment                               | updated_at |
+      | 1       | 2             | This is a comment after my last login | tomorrow   |
+      | 1       | 2             | This is a comment before my last login| last week  |
+    And I am on the review challenge page for challenge with id "2"
+    Then the comment "This is a comment after my last login" should be green
+    And the comment "This is a comment before my last login" should not be green
   
   Scenario: Edit a pending challenge
     Given I am on the review challenge page for challenge with id "2"
-    And I press "Edit"
-    Then I should see the "admin/review.edit" page
-  
+    And I follow "Edit"
+    Then I should see the "challenge.edit" page
+    
+  @focus
   Scenario Outline: Approve/Decline a pending challenge with and without comments
     Given I am on the review challenge page for challenge with id "<challenge_id>"
-    And I press "<button>"
+    And I follow "<button>"
     And I fill in comment with "<comment>"
     Then I should see the "<page>" page
     And I should see a message with "<message>"

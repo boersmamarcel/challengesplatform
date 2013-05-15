@@ -81,7 +81,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     # Only allow challenges in certain states to be edited...
     respond_to do |format|
-      if Challenge.editable.exists?(@challenge)
+      if current_user.is_admin? || Challenge.editable.exists?(@challenge)
         format.html
       else
         # You can't edit this challenge, but you are allowed to view it

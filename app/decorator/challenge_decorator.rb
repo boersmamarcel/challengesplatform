@@ -9,4 +9,5 @@ class ChallengeDecorator < Draper::Decorator
     object.end_date.strftime("%d-%m-%Y")
   end
   
+  
 end

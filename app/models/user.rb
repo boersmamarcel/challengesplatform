@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :role, :firstname, :lastname, :provider, :uid  
 
+  has_many :comments
   
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
   has_many :follows, :through => :followrelations, :source => :follows
@@ -33,7 +34,6 @@ class User < ActiveRecord::Base
 
   def default_values
       self.join_mailing_list = TRUE
-      self.role = 0
 
       #roles
       # 0 = normal user
