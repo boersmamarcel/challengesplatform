@@ -20,12 +20,13 @@ gem "devise_mailchimp"  # Last officially released gem
 
 gem 'draper', '~> 1.0'
 
+gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.6'
   gem "bootstrap-sass", '~> 2.3.1.0'
-  gem "font-awesome-rails", "~> 3.0.2.0"
+  gem "font-awesome-rails", "~> 3.1.1.0"
   gem 'coffee-rails', '~> 3.2.1'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -35,18 +36,19 @@ end
 
 group :develop do
   gem 'capistrano'
+  gem 'debugger'
 end
 
 group :test, :develop  do
-
-    gem 'factory_girl_rails'
-    gem 'rspec'
-    gem 'rake'
-    gem 'cucumber-rails', :require => false
-    # database_cleaner is not required, but highly recommended
-    gem 'database_cleaner'
-    gem 'rspec-rails', '~> 2.0'
-    gem 'poltergeist'
+  gem 'coveralls', require: false
+  gem 'factory_girl_rails'
+  gem 'rspec'
+  gem 'rake'
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'poltergeist'
 end
 
 

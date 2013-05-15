@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(:version => 20130514122051) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "participant_id"
+    t.datetime "unenrolled_at"
   end
+
+  add_index "enrollments", ["challenge_id", "participant_id"], :name => "index_enrollments_on_challenge_id_and_participant_id", :unique => true
 
   create_table "follows", :force => true do |t|
     t.integer  "user_id"

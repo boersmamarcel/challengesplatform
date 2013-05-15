@@ -1,6 +1,6 @@
 %li.challenge
   %h3= challenge.title
-  %p= challenge.description
+  = markdown(challenge.description)
   %span.date= challenge.start_date
   %span.date= challenge.end_date
   %span.state= challenge.state
