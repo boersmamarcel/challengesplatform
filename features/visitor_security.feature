@@ -8,9 +8,9 @@ Feature: Security - visitors
     Then I should see the "<page>" page
 
   Examples: redirects for not logged on visitors
-    | path                | page          |
-    | home                | index         | 
-    | login               | session.new   |
+    | path  | page        |
+    | index | index       | 
+    | login | session.new |
 
 
   Scenario Outline: Visit an illegal url as not loggedon visitor
@@ -21,11 +21,12 @@ Feature: Security - visitors
   
   Examples: Illegal pages
     | path                |
-    | dashboard           |
+    | dashboard.index     |
     | challenge.new       |
     | challenges.index    |
     | challenges.pending  |
     | challenges.approved |
     | challenges.declined |
     | challenges.proposal |
+    | user.1.profile      |
     #TODO add more pages, e.g. user homepage, edit account, specific challenge, etc.

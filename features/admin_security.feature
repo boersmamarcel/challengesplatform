@@ -16,18 +16,18 @@ Feature: Security - supervisor
     And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"    
 
   Scenario Outline: Visit any url as an admin user, and get to see it
-    And I visit the "<path>" page
+    And I visit the "<page>" page
     Then I should see the "<page>" page
 
-  Examples: redirects for admins
-    | path                  | page              |
-    | home                  | index             |
-    | login                 | dashboard.index   |
-    | dashboard             | dashboard.index   |
-    | challenges.1          | challenges.1      |
-    | challenges.2          | challenges.2      |    
-    | challenges.3          | challenges.3      |
-    | challenges.1.edit     | challenges.1.edit |
-    | challenges.2.edit     | challenges.2.edit |    
-    | challenges.3.edit     | challenges.3.edit |
-    | challenge.new         | challenge.new    |
+  Examples: allowed urls for admins
+    | page              |
+    | index             |
+    | dashboard.index   |
+    | challenges.1      |
+    | challenges.2      |
+    | challenges.3      |
+    | challenges.1.edit |
+    | challenges.2.edit |
+    | challenges.3.edit |
+    | challenge.new     |
+    | user.1.profile    |

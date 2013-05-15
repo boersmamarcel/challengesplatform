@@ -16,15 +16,15 @@ Feature: Security - students
     And I fill in email with "student@student.utwente.nl" and password with "abcd1234"
 
   Scenario Outline: Visit legal urls as a student user
-    When I visit the "<path>" page
+    When I visit the "<page>" page
     Then I should see the "<page>" page
 
-  Examples: redirects for students
-    | path                  | page            |
-    | home                  | index           |
-    | login                 | dashboard.index |
-    | dashboard             | dashboard.index |
-    | challenges.3          | challenges.3    |
+  Examples: allowed paths for students
+    | page            |
+    | index           |
+    | dashboard.index |
+    | challenges.3    |
+    | user.1.profile  |
 
   Scenario Outline: Visit illegal urls as a student user (and get redirected)
     When I visit the "<path>" page

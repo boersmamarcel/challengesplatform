@@ -24,22 +24,22 @@ Feature: Security - supervisors
     And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
 
   Scenario Outline: Visit legal urls as a supervisor user
-    When I visit the "<path>" page
+    When I visit the "<page>" page
     Then I should see the "<page>" page
 
-  Examples: redirects for supervisors
-    | path                  | page                |
-    | home                  | index               |
-    | login                 | dashboard.index     |
-    | dashboard             | dashboard.index     |
-    | challenges.1          | challenges.1        |
-    | challenges.2          | challenges.2        |
-    | challenges.3          | challenges.3        |
-    | challenges.6          | challenges.6        |
-    | challenges.1.edit     | challenges.1.edit   |
-    | challenge.new         | challenge.new       |
-    | challenges.proposal   | challenges.proposal |
-    | challenges.pending    | challenges.pending  |
+  Examples: allowed paths for supervisors
+    | page                |
+    | index               |
+    | dashboard.index     |
+    | challenges.1        |
+    | challenges.2        |
+    | challenges.3        |
+    | challenges.6        |
+    | challenges.1.edit   |
+    | challenge.new       |
+    | challenges.proposal |
+    | challenges.pending  |
+    | user.1.profile      |
 
   Scenario Outline: Visit illegal urls as a supervisor user (and get redirected)
     When I visit the "<path>" page
