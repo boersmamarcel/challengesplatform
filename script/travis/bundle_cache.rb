@@ -32,11 +32,11 @@ else
   `cd ~ && tar -cjf #{file_name} .bundle`
 
   puts "=> Uploading the bundle"
-  `./send_files.sh ~/#{file_name}`
+  `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{file_name}`
 
   puts "=> Uploading the digest file"
   `echo "#{bundle_digest}" > ~/#{digest_filename}`
-  `./send_files.sh ~/#{digest_filename}`
+  `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{digest_filename}`
 
 end
 
