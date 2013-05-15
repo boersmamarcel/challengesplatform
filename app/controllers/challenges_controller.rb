@@ -8,9 +8,10 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
-    @challenge = Challenge.where("id = ? AND (state = 'approved' OR supervisor_id = ?)", params[:id], current_user.id).first
+    @challenge = Challenge.find(params[:id])
 
-    redirect_to challenges_path if @challenge.nil?
+
+    redirect_to challenges_path unless @challenge.visible_for_user?(current_user)
   end
 
   # GET /challenges/proposal

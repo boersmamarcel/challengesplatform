@@ -20,6 +20,7 @@ gem "devise_mailchimp"  # Last officially released gem
 
 gem 'draper', '~> 1.0'
 
+gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -35,6 +36,7 @@ end
 
 group :develop do
   gem 'capistrano'
+  gem 'debugger'
 end
 
 group :test, :develop  do
