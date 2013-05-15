@@ -14,7 +14,8 @@
           %i.icon-envelope
       - else
         %a#mailbox.active{ :onClick => "addModal()" }
-          %i.icon-flag
+          %i.icon-envelope.icon-active
+          %strong= "(" + current_user.received_messages.unread.count.to_s + ")"
     %li
       = link_to('Logout', destroy_user_session_path)
 

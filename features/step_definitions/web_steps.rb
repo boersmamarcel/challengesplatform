@@ -26,6 +26,8 @@ def getRoute(name)
     declined_challenges_path
   when "challenges.proposal"
     proposal_challenges_path
+  when "messages"
+    messages_path
   else
     print("Invalid route requested (" + name + ")")
   end

@@ -1,5 +1,29 @@
 %h1 Inbox
-- current_user.received_messages.each do |message|
-  %p
-    %h4= message.subject
-    = link_to "delete message", message_path(message), :confirm => "are you sure?", :method => :delete
+- if current_user.received_messages.empty?
+  %h2 You have no messages
+- else
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Subject
+        %th 
+    %tbody
+      - current_user.received_messages.each do |message|
+        %tr{:class => message.is_read ? "mail-message read" : "mail-message unread"}
+          %td
+            = link_to message_path(message) do
+              = message.subject
+            = simple_format(truncate(message.body, :length => 80))
+            - unless message.is_read
+              %span.readstatus
+                &#9679; unread
+            %span.time
+              %i.icon-time
+              = message.created_at.strftime("%d-%m-%Y %H:%M:%S")
+            %span.from-user
+              %i.icon-user
+              = "#{message.sender.firstname} #{message.sender.lastname}"
+          %td
+            = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
+              %i.icon-trash
+              &nbsp;&nbsp;delete

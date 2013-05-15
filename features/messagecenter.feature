@@ -37,3 +37,25 @@ Feature: Message Center Incoming Messages
     And I click on the "mailbox" button
     And I click on the "go to inbox" button
     Then I should see a title "Inbox"
+
+    @javascript
+    Scenario: View the inbox page
+    When I have no messages
+    And I visit the "dashboard" page
+    And I click on the "mailbox" button
+    Then I should see a message with "You have no messages"
+
+    Scenario: I view a message
+    When I visit the "messages" page
+    And I click on the "Room Change" link
+    Then I should see a message with "back to Inbox"
+
+    Scenario: I delete a message
+    When I visit the "messages" page
+    And I click on the "delete" link
+    Then I should see a message with "Message deleted."
+
+    Scenario: Viewing inbox without any messages
+    When I have no messages
+    And I visit the "messages" page
+    Then I should see a message with "You have no messages"

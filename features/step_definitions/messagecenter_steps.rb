@@ -22,3 +22,13 @@ end
 Then(/^I should see a title "(.*?)"$/) do |title|
   page.should have_xpath("//h1 | //h2 | //h3 | //h4", :text => title)
 end
+
+When(/^I click on the "(.*?)" link$/) do |linktext|
+  page.all(:xpath, "//a", :text => linktext).first.click
+end
+
+When(/^I have no messages$/) do
+  Message.all.each do |m|
+    m.destroy
+  end
+end

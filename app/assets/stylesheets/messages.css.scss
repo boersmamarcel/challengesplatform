@@ -20,3 +20,28 @@
 .message:last-child {
 	border-bottom: none;
 }
+
+.icon-active {
+/*	background-color: #ccc;*/
+}
+
+.mail-message .from-user {
+	margin-left: 15px;
+}
+
+.mail-message td a {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+tr.mail-message.unread {
+	background-color: #B2E0FF;
+}
+
+tr.mail-message.unread:nth-child(odd) {
+	background-color: #C9E9FF;
+}
+
+.readstatus {
+	margin-right: 15px;
+}
