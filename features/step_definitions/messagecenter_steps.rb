@@ -19,7 +19,7 @@ Then(/^I should see a modal overlay$/) do
   page.should have_css('.modal')
 end
 
-Then(/^I should see a title "(.*?)"$/) do |title|
+Then(/^I should see a section title "(.*?)"$/) do |title|
   page.should have_xpath("//h1 | //h2 | //h3 | //h4", :text => title)
 end
 

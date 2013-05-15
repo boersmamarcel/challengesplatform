@@ -28,7 +28,7 @@ Feature: Message Center Incoming Messages
     When I visit the "dashboard" page
     And I click on the "mailbox" button
     Then I should see a modal overlay
-    And I should see a title "Messages"
+    And I should see a section title "Messages"
     And I should see a message with "Room Change"
 
     @javascript
@@ -36,7 +36,7 @@ Feature: Message Center Incoming Messages
     When I visit the "dashboard" page
     And I click on the "mailbox" button
     And I click on the "go to inbox" button
-    Then I should see a title "Inbox"
+    Then I should see a section title "Inbox"
 
     @javascript
     Scenario: View the inbox page
