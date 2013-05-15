@@ -10,13 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_supervisor
-    # Also allow admins, otherwise it fails
-    if(current_user.nil?)
-      print("You are not logged in")
-    else
-      print("Your role is #{current_user.role}, and your encrypted password is #{current_user.encrypted_password}")
-    end
-
     redirect_unauthorized_request unless ( (!current_user.nil?) && (current_user.role == 1 || current_user.role == 2) )
   end
 
