@@ -18,6 +18,7 @@ before_install:
   - sudo apt-get install expect
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
   - gem install bundler
+  - "chmod 777 script/travis/bundle_install.sh"
   - "./script/travis/bundle_install.sh"
 after_script:
   - "ruby script/travis/bundle_cache.rb"
