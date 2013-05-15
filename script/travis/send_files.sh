@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
-
-spawn scp $1 travis@$SECRET_BUNDLE_IP:~/www
+set file [lindex $argv 0]
+spawn scp $file travis@$SECRET_BUNDLE_IP:~/www
 expect "password:"
 send $SECRET_BUNDLE_PASS
 send "\r"

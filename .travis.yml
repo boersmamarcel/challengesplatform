@@ -23,6 +23,8 @@ before_install:
   - ls
   - pwd
   - ls ~
+  - sudo apt-get install expect
+  - which expect
 after_script:
   - "ruby script/travis/bundle_cache.rb"
 before_script:

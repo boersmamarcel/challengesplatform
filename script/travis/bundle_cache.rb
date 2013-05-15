@@ -25,8 +25,8 @@ else
     puts "  => New checksum: #{bundle_digest}"
   end
 
-  puts "Fetch expect"
-  `sudo apt-get install expect`
+  # puts "Fetch expect"
+  # `sudo apt-get install expect`
 
   puts "=> Preparing bundle archive"
   `cd ~ && tar -cjf #{file_name} .bundle`
