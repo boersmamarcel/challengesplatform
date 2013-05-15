@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  #roles
+  # 0 = normal user
+  # 1 = supervisor
+  # 2 = admin
 
 
   devise :database_authenticatable, :registerable,
@@ -35,10 +36,6 @@ class User < ActiveRecord::Base
       self.join_mailing_list = TRUE
       self.role = 0
 
-      #roles
-      # 0 = normal user
-      # 1 = supervisor
-      # 2 = admin
 
   end
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
