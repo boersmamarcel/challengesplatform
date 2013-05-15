@@ -3,7 +3,7 @@
 %h2= @message.subject
 %p
   %em
-    = @message.created_at.strftime("%d-%m-%Y %H:%M:%S")
+    = get_date(@message)
     &mdash; from 
-    = link_to @message.sender.firstname + " " + @message.sender.lastname, profile_user_path(@message.sender)
+    = link_to get_name(@message.sender), profile_user_path(@message.sender)
 = simple_format(h(@message.body))

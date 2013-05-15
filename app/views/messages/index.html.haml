@@ -19,10 +19,10 @@
                 &#9679; unread
             %span.time
               %i.icon-time
-              = message.created_at.strftime("%d-%m-%Y %H:%M:%S")
+              = get_date(message)
             %span.from-user
               %i.icon-user
-              = link_to "#{message.sender.firstname} #{message.sender.lastname}", profile_user_path(message.sender)
+              = link_to get_name(message.sender), profile_user_path(message.sender)
           %td
             = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
               %i.icon-trash
