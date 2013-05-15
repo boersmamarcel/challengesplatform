@@ -2,7 +2,7 @@
 Feature: Security - supervisor
   Admins should never be redirected
 
-  # Log in as a student user for all upcoming scenarios
+  # Log in as an admin user for all upcoming scenarios
   Background:
     Given the following user records
       | id | email                      | password | password_confirmation | role |
@@ -13,21 +13,21 @@ Feature: Security - supervisor
       | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
       | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
     When I visit the "login" page
-    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"
+    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"    
 
   Scenario Outline: Visit any url as an admin user, and get to see it
-    When I visit the "<path>" page
+    And I visit the "<path>" page
     Then I should see the "<page>" page
 
-  Examples: redirects for students
-    | path                  | page             |
-    | home                  | index            |
-    | login                 | dashboard.index  |
-    | dashboard             | dashboard.index  |
-    | challenges.1          | challenge.1      |
-    | challenges.2          | challenge.2      |    
-    | challenges.3          | challenge.3      |
-    | challenges.1.edit     | challenge.1.edit |
-    | challenges.2.edit     | challenge.2.edit |    
-    | challenges.3.edit     | challenge.3.edit |
-    | challenges.new        | challenges.new   |
+  Examples: redirects for admins
+    | path                  | page              |
+    | home                  | index             |
+    | login                 | dashboard.index   |
+    | dashboard             | dashboard.index   |
+    | challenges.1          | challenges.1      |
+    | challenges.2          | challenges.2      |    
+    | challenges.3          | challenges.3      |
+    | challenges.1.edit     | challenges.1.edit |
+    | challenges.2.edit     | challenges.2.edit |    
+    | challenges.3.edit     | challenges.3.edit |
+    | challenge.new         | challenges.new    |

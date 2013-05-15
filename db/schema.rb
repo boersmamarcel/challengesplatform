@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(:version => 20130514083836) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "state"
-    t.integer  "count"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "count",         :default => 1
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "supervisor_id"
   end
 
