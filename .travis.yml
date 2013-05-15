@@ -20,6 +20,9 @@ before_install:
   - "chmod 777 script/travis/bundle_install.sh"
   - "chmod 777 script/travis/send_files.sh"
   - "./script/travis/bundle_install.sh"
+  - ls
+  - pwd
+  - ls ~
 after_script:
   - "ruby script/travis/bundle_cache.rb"
 before_script:

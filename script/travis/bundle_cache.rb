@@ -29,7 +29,7 @@ else
   `sudo apt-get install expect`
 
   puts "=> Preparing bundle archive"
-  `tar -cjf ~/#{file_name} ~/.bundle`
+  `cd ~ && tar -cjf #{file_name} .bundle`
 
   puts "=> Uploading the bundle"
   `./send_files.sh ~/#{file_name}`
