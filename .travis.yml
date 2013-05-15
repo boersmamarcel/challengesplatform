@@ -1,6 +1,6 @@
 ---
 language: ruby
-
+bundler_args: --without develop --path=~/.bundle
 rvm:
   - 1.9.3
 env:
@@ -9,9 +9,21 @@ env:
     - secure: "IL5x5UL21pyP+dvSGwyHzx9Dvua8aBnpVexTSScUvCbb/m7VhrfftfQYpDee\nQcNAbcM7OFdrPokg3RhPGwMwBsMXedkFE6sLOH8tml6IGWgOmGemV8E7LmzL\nadxpMilgxdKsYgVwi6WZ+mt5LdM0prlW5NabZTmMHaosDyBGERg="
     - secure: "H8HnHZjxhvEuZ2LRI012i2Y2PKRJqRbA6nuJaK0nkLjviFjEe+KNB6rsuosd\nWcVYqxJP0mb6JjKrwCmeAgCyE4swy4p1slC6Er0wpMEQ+ndseCAUWhUO5RLL\n+wHP1Bfu0u8qoMdSOWRnPg8Q1boE8kM71xQ0oLdRo9X600ZjU5I="
     - secure: "biE7FXW01hxze4qEIEs+8lUhNYdVkRViGsEJpyiRs/XIM75/TfPZ7fdiGxXr\nDAL0Sbfj+jI6PY0h7sjPVZVpuJwG69A9Rk+WJuFD2qVcInLhdcL1xMX+vtHM\nr2/X5Oa889LUGMxcj7qxB6I8S8PPIoEWlZ6sZ9mqAlmwYkd5gS4="
+    - secure: "lhoE1Z30G2ze71ySULDysXGnB4foOTlLsc25KAann74tWZIZ8nu6VgcMsASQ\nORM0t2p8KuwTUlqVh5uhYxUt1gsuUkTQNThUeT6WBAcUARnDEzcdo5QVG5YJ\nzb5jtWDxIjz+B+FrsB/rHSloWAuXffCwVe1sl0bDvAFPQ+8O2wQ=" #pass
+    - secure: "dnOEJKj74OH5pOs0VQ7u/geLIKxs5a5e4B2vgNMG9yoZtfNfIyrkBs14B6YI\n2EDxScToBggKIwGlL44xIkxRsQjRLxHL765VMCQGvaCDIkMH6mY/rL74DvYs\ne+P4ZNVY9yVNN+XVRgCm40eQ3ifbf0QZKNgVfjmKIAm/QiWb3DE=" #ip
+    - BUNDLE_ARCHIVE="travis_challenges_bundle"
   matrix:
     - DB=postgres
+# before_install:
+#   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+#   - gem install bundler
+#   - "./script/travis/bundle_install.sh"
+# after_script:
+#   - "ruby script/travis/bundle_cache.rb"
 before_script:
+  - echo "test"
+  - cat ~/.ssh/id_rsa.pub
+  - echo "test"
   - cp config/database.travis.yml config/database.yml
   - cat config/database.yml
   - bundle exec rake db:create
