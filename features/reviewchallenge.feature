@@ -36,6 +36,7 @@ Feature: Review challenges as admin
     When I open the review challenge page for challenge with id "2"
     Then I should see the "admin/review.show" page
   
+  @focus
   Scenario Outline: Add comment to pending challenge
     Given I am on the review challenge page for challenge with id "<challenge_id>"
     And I fill in comment with "<comment>"

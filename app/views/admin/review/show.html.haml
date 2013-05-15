@@ -1,0 +1,5 @@
+%input{:type => :hidden, :id =>'page_identifier', :value => 'admin/review.show'}
+%h2
+  Review
+= render :partial => 'shared/challenge', :object => @challenge, :as => 'challenge'
+= render 'admin/shared/comments'

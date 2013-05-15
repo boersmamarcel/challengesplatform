@@ -21,6 +21,10 @@ Challengesplatform::Application.routes.draw do
     
   end
 
+  namespace :admin do
+    resources :review
+  end
+
   get "static/index"
 
   get "dashboard", :to => "dashboard#index"
