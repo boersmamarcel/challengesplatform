@@ -30,4 +30,4 @@ Feature: Security - supervisor
     | challenges.1.edit     | challenges.1.edit |
     | challenges.2.edit     | challenges.2.edit |    
     | challenges.3.edit     | challenges.3.edit |
-    | challenge.new         | challenges.new    |
+    | challenge.new         | challenge.new    |

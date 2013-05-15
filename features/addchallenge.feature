@@ -116,14 +116,14 @@ Feature: Add challenge
         | id | title   | description       | start_date | end_date   | state   | count | supervisor_id |
         | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | pending | 1     | 1             |
       When I visit the edit challenge "1" page
-      Then I should see a message with "This challenge can not be edited by you."
+      Then I should see a message with "You do not have the permissions required to view this page."
 
     Scenario: Edit an approved challenge
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
         | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 1     | 1             |
       When I visit the edit challenge "1" page
-      Then I should see a message with "This challenge can not be edited by you."
+      Then I should see a message with "You do not have the permissions required to view this page."
 
     Scenario: Supervisor can not delete a challenge only revoke a challenge
 

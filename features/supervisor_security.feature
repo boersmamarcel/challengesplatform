@@ -1,43 +1,55 @@
-#language en
-Feature: Security - students
-  Students with insufficient permissions should (in some cases) be redirected
+# Summarized challenge rw policy;
+# You can always see your own challenge
+# Your view rights for other challenges equal that of students (only approved)
+# You can only edit you own challenges, and only if they are proposals
 
-  # Log in as a student user for all upcoming scenarios
+#language en
+Feature: Security - supervisors
+  Supervisors with insufficient permissions should (in some cases) be redirected
+
+  # Log in as a supervisor user for all upcoming scenarios
   Background:
     Given the following user records
-      | id | email                      | password | password_confirmation | role |
-      | 1  | student@student.utwente.nl | abcd1234 | abcd1234              | 0    |
+      | id | email                         | password | password_confirmation | role |
+      | 1  | supervisor@student.utwente.nl | abcd1234 | abcd1234              | 1    |
     And the following challenge records
       | id | title  | description | start_date | end_date   | state    | count | supervisor_id |
       | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | proposal | 1     | 1             |
-      | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
-      | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
+      | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 1             |
+      | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 1             |
+      | 4  | Title4 | Challenge4  | 03-08-2113 | 09-09-2113 | proposal | 1     | 2             |
+      | 5  | Title5 | Challenge5  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
+      | 6  | Title6 | Challenge6  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
     When I visit the "login" page
-    And I fill in email with "student@student.utwente.nl" and password with "abcd1234"
+    And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
 
-  Scenario Outline: Visit legal urls as a student user
+  Scenario Outline: Visit legal urls as a supervisor user
     When I visit the "<path>" page
     Then I should see the "<page>" page
 
-  Examples: redirects for students
-    | path                  | page            |
-    | home                  | index           |
-    | login                 | dashboard.index |
-    | dashboard             | dashboard.index |
-    | challenges.3          | challenge.3    |
+  Examples: redirects for supervisors
+    | path                  | page                |
+    | home                  | index               |
+    | login                 | dashboard.index     |
+    | dashboard             | dashboard.index     |
+    | challenges.1          | challenges.1        |
+    | challenges.2          | challenges.2        |
+    | challenges.3          | challenges.3        |
+    | challenges.6          | challenges.6        |
+    | challenges.1.edit     | challenges.1.edit   |
+    | challenge.new         | challenge.new       |
+    | challenges.proposal   | challenges.proposal |
+    | challenges.pending    | challenges.pending  |
 
-  Scenario Outline: Visit illegal urls as a student user (and get redirected)
+  Scenario Outline: Visit illegal urls as a supervisor user (and get redirected)
     When I visit the "<path>" page
-    Then I should see the "dashboard" page
+    Then I should see the "<page>" page
     And I should get the message "You do not have the permissions required to view this page."
 
-  Examples: redirects for students
-    | path                  |
-    | challenges.proposal   |
-    | challenges.pending    |
-    | challenges.1          |
-    | challenges.2          |
-    | challenges.1.edit     |
-    | challenges.2.edit     |
-    | challenges.3.edit     |
-    | challenges.new        |
+  Examples: redirects for supervisor
+    | path              | page            |
+    | challenges.2.edit | challenges.2    |
+    | challenges.3.edit | challenges.3    |
+    | challenges.4.edit | dashboard.index |
+    | challenges.5.edit | dashboard.index |
+    | challenges.6.edit | challenges.6    |

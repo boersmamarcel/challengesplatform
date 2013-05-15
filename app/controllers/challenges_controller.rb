@@ -49,7 +49,7 @@ class ChallengesController < ApplicationController
   def edit
     @challenge = Challenge.find(params[:id])
     unless @challenge.editable_by_user?(current_user)
-      redirect_to @challenge, alert: 'This challenge can not be edited by you.'
+      redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end
   end
 
