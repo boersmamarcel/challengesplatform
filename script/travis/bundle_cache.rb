@@ -1,5 +1,4 @@
 require "digest"
-require "fog"
 
 architecture    = `uname -m`.strip
 
