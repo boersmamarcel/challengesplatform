@@ -30,17 +30,14 @@ else
   `cd ~ && tar -cjf #{file_name} .bundle`
 
   puts "=> Uploading the bundle"
-  `spawn scp ~/#{file_name} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
+  `pscp -pw "#{ENV['SECRET_BUNDLE_PASS']}" ~/#{file_name} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
   `expect "password:"`
-  `send "#{ENV['SECRET_BUNDLE_PASS']}\r"`
+  `send "\r"`
   `expect eof`
 
   puts "=> Uploading the digest file"
   `echo "#{bundle_digest}" > ~/#{digest_filename}`
-  `spawn scp ~/#{digest_filename} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
-  `expect "password:"`
-  `send "#{ENV['SECRET_BUNDLE_PASS']}\r"`
-  `expect eof`
+  `pscp -pw "#{ENV['SECRET_BUNDLE_PASS']}" ~/#{digest_filename} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
 
 end
 
