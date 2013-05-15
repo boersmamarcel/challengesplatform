@@ -15,11 +15,10 @@ env:
   matrix:
     - DB=postgres
 before_install:
-  - sudo apt-get install pscp
-  - pscp -pw $SECRET_BUNDLE_PASS README.md travis@$SECRET_BUNDLE_IP:~/www
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
   - gem install bundler
   - "chmod 777 script/travis/bundle_install.sh"
+  - "chmod 777 script/travis/send_files.sh"
   - "./script/travis/bundle_install.sh"
 after_script:
   - "ruby script/travis/bundle_cache.rb"

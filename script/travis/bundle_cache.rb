@@ -8,8 +8,6 @@ lock_file       = File.join(File.expand_path(ENV["TRAVIS_BUILD_DIR"]), "Gemfile.
 digest_filename = "#{file_name}.sha2"
 old_digest      = File.expand_path("~/remote_#{digest_filename}")
 
-puts "Fetch expect"
-`sudo apt-get install expect`
 puts "Checking for changes"
 
 bundle_digest = Digest::SHA2.file(lock_file).hexdigest
@@ -18,6 +16,7 @@ old_digest    = File.exists?(old_digest) ? File.read(old_digest) : ""
 if bundle_digest == old_digest
   puts "=> There were no changes, doing nothing"
 else
+
   if old_digest == ""
     puts "=> There was no existing digest, uploading a new version of the archive"
   else
@@ -26,18 +25,18 @@ else
     puts "  => New checksum: #{bundle_digest}"
   end
 
+  puts "Fetch expect"
+  `sudo apt-get install expect`
+
   puts "=> Preparing bundle archive"
-  `cd ~ && tar -cjf #{file_name} .bundle`
+  `tar -cjf ~/#{file_name} ~/.bundle`
 
   puts "=> Uploading the bundle"
-  `pscp -pw "#{ENV['SECRET_BUNDLE_PASS']}" ~/#{file_name} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
-  `expect "password:"`
-  `send "\r"`
-  `expect eof`
+  `./send_files.sh ~/#{file_name}`
 
   puts "=> Uploading the digest file"
   `echo "#{bundle_digest}" > ~/#{digest_filename}`
-  `pscp -pw "#{ENV['SECRET_BUNDLE_PASS']}" ~/#{digest_filename} travis@#{ENV['SECRET_BUNDLE_IP']}:~/www`
+  `./send_files.sh ~/#{digest_filename}`
 
 end
 
