@@ -17,6 +17,7 @@ Feature: Add challenge
         And I fill in title with "<title>" description with "<description>"  and fill in start_date with "<start_date>" and end_date with "<end_date>"
         And I press "Submit for Review"
         Then I should see a message with "<message>"
+        And show me the page
 
     Examples:
      |  title   | description               | start_date        | end_date          | message                                   |
