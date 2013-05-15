@@ -6,4 +6,5 @@ class Message < ActiveRecord::Base
   
   scope :unread, where(:is_read => false)
   default_scope order('created_at DESC')
+  
 end

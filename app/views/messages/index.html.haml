@@ -13,7 +13,7 @@
           %td
             = link_to message_path(message) do
               = message.subject
-            = simple_format(truncate(message.body, :length => 80))
+            = simple_format(h(truncate(message.body, :length => 80)))
             - unless message.is_read
               %span.readstatus
                 &#9679; unread
@@ -22,7 +22,7 @@
               = message.created_at.strftime("%d-%m-%Y %H:%M:%S")
             %span.from-user
               %i.icon-user
-              = "#{message.sender.firstname} #{message.sender.lastname}"
+              = link_to "#{message.sender.firstname} #{message.sender.lastname}", profile_user_path(message.sender)
           %td
             = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
               %i.icon-trash

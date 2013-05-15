@@ -14,6 +14,9 @@
           = message.subject
         %p= truncate(message.body, :length => 150)
         %p
+          %i.icon-user
+          = link_to "#{message.sender.firstname} #{message.sender.lastname}", profile_user_path(message.sender)
+          &mdash;
           %a
             = link_to "Read full &raquo;".html_safe, message_path(message)
 %div.modal-footer
