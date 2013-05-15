@@ -42,7 +42,11 @@ class Challenge < ActiveRecord::Base
     state == 'pending'
   end
   def editable_by_user?(user)
-    (state == 'proposal' && user.id == supervisor_id) || (user.role == 2)
+    (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
+  end
+
+  def visible_for_user?(user)
+   state == 'approved' || supervisor_id == user.id || user.is_admin?
   end
   @protected
 
