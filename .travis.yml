@@ -15,7 +15,6 @@ env:
   matrix:
     - DB=postgres
 before_install:
-  - sudo apt-get install expect
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
   - gem install bundler
   - "chmod 777 script/travis/bundle_install.sh"

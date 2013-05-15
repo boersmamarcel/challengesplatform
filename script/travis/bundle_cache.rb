@@ -8,7 +8,10 @@ lock_file       = File.join(File.expand_path(ENV["TRAVIS_BUILD_DIR"]), "Gemfile.
 digest_filename = "#{file_name}.sha2"
 old_digest      = File.expand_path("~/remote_#{digest_filename}")
 
+puts "Fetch expect"
+`sudo apt-get install expect`
 puts "Checking for changes"
+
 bundle_digest = Digest::SHA2.file(lock_file).hexdigest
 old_digest    = File.exists?(old_digest) ? File.read(old_digest) : ""
 
