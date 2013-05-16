@@ -1,8 +1,23 @@
-%li.challenge
-  %h3= challenge.title
-  = markdown(challenge.description)
-  %span.date= challenge.start_date
-  %span.date= challenge.end_date
-  %span.state= challenge.state
-  %span.count= challenge.count
-  %span.link= link_to 'Show', challenge
+.challenge.span4
+  %a{:href => challenge_path(challenge)}
+    %img.thumb{:alt => "", "data-src" => "holder.js/280x80"}
+  %a{:href => challenge_path(challenge)}
+    %h4= challenge.title
+  .details
+    .supervisor
+      / %i.icon-star
+      %strong Supervised by
+      = challenge.supervisor.decorate.fullname
+    .description= challenge.synopsis
+    .date
+      %i.icon-calendar
+      %span.start-stop
+        %strong Starts at
+        = challenge.human_readable_start_date
+        %br
+        %strong Runs till
+        = challenge.human_readable_end_date
+
+  .actions
+    %a.btn.btn{:href => challenge_path(challenge)} Show
+    %a.btn.btn-success{:href => enroll_challenge_path(challenge)} Enroll

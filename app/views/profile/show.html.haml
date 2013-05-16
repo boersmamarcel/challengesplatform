@@ -16,20 +16,11 @@
           - elsif ( @user.id != current_user.id)
             = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
 
-    %div.challenges_list.span6
-      %h3 
+    %div.span6
+      %h3
         Challenges
-      - @user.participating_challenges.each do |challenge|
-        %div.challenge.pull-left
-          %span.challenge_image.pull-left
-            = image_tag 'http://placekitten.com/120/120', :class => 'img-rounded'
-          %span.challengeinfo.span4
-            %div.challenge_title
-              = challenge.title
-            %div.challenge_description
-              = challenge.description
-            %div.challenge_icons
-              = link_to 'Visit', challenge_path(challenge), :class => "btn btn-success"
+      .challenges-list.row#challenges
+        = render @user.participating_challenges.decorate
   %span.span3
     %div.followers
       %h3

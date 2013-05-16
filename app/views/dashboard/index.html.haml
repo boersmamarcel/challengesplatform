@@ -2,9 +2,9 @@
 
 - unless @my_challenges.empty?
   %h1 Listing My Challenges
-  %ul#my_challenges
+  .challenges-list.row#my_challenges
     = render @my_challenges
 
 %h1 Listing New Challenges
-%ul#upcoming_challenges
+.challenges-list.row#upcoming_challenges
   = render @upcoming_challenges

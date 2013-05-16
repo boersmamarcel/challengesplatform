@@ -10,7 +10,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = Challenge.all
+    @challenges = Challenge.all.decorate
   end
 
   # GET /challenges/1

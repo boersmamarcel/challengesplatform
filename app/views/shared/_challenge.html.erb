@@ -28,7 +28,7 @@
   <%= challenge.count %>
 </p>
 
-<% if Challenge.editable.exists?(challenge) %>
+<% if challenge.editable_by_user? current_user%>
   <%= link_to 'Edit', edit_challenge_path(challenge) %> |
 <% end %>
 

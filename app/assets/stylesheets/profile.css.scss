@@ -39,27 +39,27 @@
 
 .challenges_list{
   margin-top: 20px;
-}
-.challenge{
-  margin-bottom: 20px;
-  border: 1px gray solid;
-  border-radius: 6px;
-  padding: 5px;
-  height: 120px;
-  position: relative;
-}
+  .challenge{
+    margin-bottom: 20px;
+    border: 1px gray solid;
+    border-radius: 6px;
+    padding: 5px;
+    height: 120px;
+    position: relative;
+  }
 
-.challenge_title{
-  font-size: 20px;
-}
-.challenge_description{
-  margin-top: 5px;
-}
+  .challenge_title{
+    font-size: 20px;
+  }
+  .challenge_description{
+    margin-top: 5px;
+  }
 
-.challenge_icons{
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
+  .challenge_icons{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
 }
 
 .follows_item{

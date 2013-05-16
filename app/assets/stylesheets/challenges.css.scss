@@ -1,3 +1,60 @@
 // Place all the styles related to the Challenges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.challenges-list{
+  .challenge {
+     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; 
+    // @extend .span4;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+
+    .thumb {
+      margin: 0 auto
+    }
+    .description {
+      text-overflow: ellipsis;
+      // white-space: nowrap;
+      overflow: hidden;
+      padding: 3px 0px;
+    }
+    .actions {
+      display: block;
+      a {
+        display: inline-block;
+        clear: both;
+      }
+    }
+    i {
+      display: block;
+      float: left;
+      overflow: auto;
+      margin-right: 5px;
+      margin-top: 2px;
+    }
+    .date {
+      margin-top: 8px;
+      i {
+        // margin-top: 10px;
+      }
+      .start-stop {
+        font-size: 13px;
+        // clear: both;
+        display: block;
+        float: left;
+        overflow: auto;
+      }
+      clear: both;
+        overflow: auto;
+    }
+    .description {
+      font-size: 13px;
+      height: 5em;
+    }
+  }
+}
