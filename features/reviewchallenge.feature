@@ -1,4 +1,4 @@
-@wip
+
 Feature: Review challenges as admin
   In order to review challenges
   As an admin
@@ -61,18 +61,19 @@ Feature: Review challenges as admin
   Scenario: Edit a pending challenge
     Given I am on the review challenge page for challenge with id "2"
     And I follow "Edit"
-    Then I should see the "challenge.edit" page
+    Then I should see the "challenges.2.edit" page
     
-  @focus
+  
   Scenario Outline: Approve/Decline a pending challenge with and without comments
     Given I am on the review challenge page for challenge with id "<challenge_id>"
     And I follow "<button>"
-    And I fill in comment with "<comment>"
+    And I fill in reason with "<reason>"
+    And I press "Submit"
     Then I should see the "<page>" page
     And I should see a message with "<message>"
     
   Examples:
-  | challenge_id | button   | comment              | page                | message                                         |
+  | challenge_id | button   | reason               | page                | message                                         |
   | 2            | Decline  | To vague please edit | admin/review.index  | Challenge successfully revoked                  |
   | 2            | Decline  |                      | admin/review.show   | Challenge can not be declined without comments  |
   | 2            | Approve  |                      | admin/review.index  | Challenge successfully approved                 |

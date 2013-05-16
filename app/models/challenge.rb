@@ -15,8 +15,8 @@ class Challenge < ActiveRecord::Base
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
   validate :dates, :if => :pending?
-  scope :upcoming, where('start_date > ?', Date.today)
-  scope :running, where('end_date > ? && start_date < ?', Date.today, Date.today)
+  scope :upcoming, where('start_date > ? AND state = ?', Date.today, "approved")
+  scope :running, where('end_date > ? AND start_date < ?', Date.today, Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
   scope :proposal, where(:state => "proposal")
@@ -57,7 +57,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def upcoming?
-    Date.today.to_time_in_current_zone < start_date
+    Date.today.to_time_in_current_zone < start_date 
   end
   def editable_by_user?(user)
     (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
@@ -74,6 +74,12 @@ class Challenge < ActiveRecord::Base
   def can_enroll?
     upcoming?
   end
+
+  def to_declined
+      self.state = "declined"
+      self.count = count + 1
+  end
+
   @protected
 
   def dates

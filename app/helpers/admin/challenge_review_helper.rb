@@ -5,7 +5,7 @@ module Admin::ChallengeReviewHelper
   end
   
   def new_message_after_last_visit(c)
-    (current_user.current_sign_in_at < c.updated_at)
+    (c.challenge.updated_at < c.updated_at)
   end
   
 end

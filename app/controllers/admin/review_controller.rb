@@ -6,7 +6,7 @@ class Admin::ReviewController < Admin::AdminController
   end
   
   def show
-    @challenge = Challenge.pending.where(:id => params[:id]).first
+    @challenge = Challenge.pending.where(:id => params[:id]).first.decorate
     if @challenge.present?
       @new_comment = @challenge.comments.new
       @challenge.reload
@@ -17,12 +17,34 @@ class Admin::ReviewController < Admin::AdminController
     
   end
   
-  def edit
-    
+
+  def approve
+      @challenge = Challenge.find(params[:id])
+      @challenge.state = 'approved'
+
+      if @challenge.save
+        flash[:notice] = "Challenge is successfully approved"
+        redirect_to challenge_path(@challenge)
+      else
+        flash[:notice] = "Something went wrong please try again"
+        redirect_to admin_review_path(@challenge)
+      end
   end
-  
-  def update
-    
+
+
+  def decline
+    @comment = Comment.new(:comment => params[:reason], :user_id => current_user.id)
+    @challenge =Challenge.find(params[:id])
+
+    @comment.challenge =  @challenge
+    @challenge.to_declined
+
+    if @comment.save && @challenge.save
+      notice = "Chalenge successfully declined"
+      redirect_to admin_review_index_path, :alert => notice
+    else
+      redirect_to admin_review_path(@comment.challenge.id)
+    end
   end
   
   def comment

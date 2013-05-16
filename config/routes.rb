@@ -24,14 +24,14 @@ Challengesplatform::Application.routes.draw do
     
   end
   
-  #generate some test messages on this page
-  get "messages/generate"
-  
+
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do
     resources :review do
       post 'comment', :on => :member
+      post 'decline', :on => :member
+      post 'approve', :on => :member
     end
   end
 
