@@ -1,23 +1,64 @@
 .challenge.span4
+  - if challenge.current_user_enrolled?
+    .status
+      %span.badge.badge-success You're enrolled!
+  - elsif challenge.warn_current_user_enrollment?
+    .status
+      %span.badge.badge-warning
+        Enrollment closes in
+        = challenge.days_till_enrollment_closes
+        days!
   %a{:href => challenge_path(challenge)}
-    %img.thumb{:alt => "", "data-src" => "holder.js/280x80"}
+    %img.thumb{:alt => "", "data-src" => "holder.js/280x120"}
   %a{:href => challenge_path(challenge)}
     %h4= challenge.title
-  .details
-    .supervisor
-      / %i.icon-star
-      %strong Supervised by
-      = challenge.supervisor.decorate.fullname
-    .description= challenge.synopsis
-    .date
-      %i.icon-calendar
-      %span.start-stop
-        %strong Starts at
-        = challenge.human_readable_start_date
-        %br
-        %strong Runs till
-        = challenge.human_readable_end_date
 
-  .actions
-    %a.btn.btn{:href => challenge_path(challenge)} Show
-    %a.btn.btn-success{:href => enroll_challenge_path(challenge)} Enroll
+  %p.date
+    %span.start-stop
+      = challenge.human_date_string
+  %p.muted.description= challenge.synopsis
+
+  .supervisor
+    %i.icon-user
+    %strong Supervised by
+    = link_to challenge.supervisor.decorate.fullname, profile_user_path(challenge.supervisor)
+  / %hr
+
+  .progress
+    .bar.bar-success{style: "width: #{challenge.percentage_date}"}
+
+  %ul.details
+    - if challenge.running?
+      %li
+        %strong
+          %i.icon-calendar
+          = challenge.days_till_end
+        %span.muted
+          = pluralize(challenge.days_till_end, "Day").split.last
+          to go
+    - elsif challenge.upcoming?
+      %li
+        %strong
+          %i.icon-calendar
+          = challenge.days_till_start
+        %span.muted
+          = pluralize(challenge.days_till_end, "Day").split.last
+          till start
+    - else
+      %li
+        %span.muted Challenge is over
+    %li
+      %strong
+        %i.icon-group
+        = challenge.participants.count
+      %span.muted= pluralize(challenge.participants.count, "Participant").split.last
+    %li
+      %strong
+        %i.icon-time
+        = challenge.commitment
+      %span.muted Hours/week
+
+
+  / .actions
+  /   %a.btn.btn{:href => challenge_path(challenge)} Show
+  /   %a.enroll.btn.btn-success{:href => enroll_challenge_path(challenge)} Enroll

@@ -41,6 +41,18 @@ class Challenge < ActiveRecord::Base
   def pending?
     state == 'pending'
   end
+
+  def running?
+    Date.today.to_time_in_current_zone >= start_date && Date.today.to_time_in_current_zone <= end_date
+  end
+  # TODO: add commitment field to database
+  def commitment #hours/weeek
+    rand(2..10)
+  end
+
+  def upcoming?
+    Date.today.to_time_in_current_zone < start_date
+  end
   def editable_by_user?(user)
     (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
   end

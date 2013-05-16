@@ -6,7 +6,7 @@
   .challenge {
      -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; 
     // @extend .span4;
-    border: 1px solid gray;
+    border: 1px solid #eeeeee;
     border-radius: 4px;
     display: inline-block;
     margin-top: 20px;
@@ -14,14 +14,24 @@
     overflow: hidden;
     padding: 10px;
 
+    font-size: 13px;
+    .status {
+      position: absolute;
+      right: 6px;
+      top: 4px;
+    }
     .thumb {
       margin: 0 auto
+    }
+    h4 {
+      margin-bottom: 0px;
     }
     .description {
       text-overflow: ellipsis;
       // white-space: nowrap;
       overflow: hidden;
       padding: 3px 0px;
+      margin-bottom: 0px;
     }
     .actions {
       display: block;
@@ -30,21 +40,18 @@
         clear: both;
       }
     }
-    i {
-      display: block;
-      float: left;
-      overflow: auto;
-      margin-right: 5px;
-      margin-top: 2px;
-    }
     .date {
-      margin-top: 8px;
+      margin-bottom: 0px;
       i {
-        // margin-top: 10px;
+        display: block;
+        float: left;
+        overflow: auto;
+        margin-right: 5px;
+        margin-top: 2px;
       }
       .start-stop {
-        font-size: 13px;
         // clear: both;
+        // font-size: 12px;
         display: block;
         float: left;
         overflow: auto;
@@ -52,9 +59,38 @@
       clear: both;
         overflow: auto;
     }
+    .progress {
+      margin-top: 10px;
+      height: 10px;
+      margin-bottom: 10px;
+    }
+    ul.details {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      li {
+        display: inline-block;
+        margin-right: 10px;
+        strong {
+          display: block;
+          line-height: 10px;
+          font-size: 13px
+        }
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+    }
     .description {
-      font-size: 13px;
       height: 5em;
+    }
+    .actions {
+      // border-top: 1px solid gray;
+      text-align: center;
+      margin-top: 10px;
+      padding: 10px 10px 0px 10px;
+      .enroll {
+
+      }
     }
   }
 }
