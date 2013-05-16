@@ -1,10 +1,10 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'dashboard.index'}
 
 - unless @my_challenges.empty?
-  %h1 Listing My Challenges
+  %h1 Your Challenges
   .challenges-list.row#my_challenges
     = render @my_challenges
 
-%h1 Listing New Challenges
+%h1 Upcoming Challenges
 .challenges-list.row#upcoming_challenges
   = render @upcoming_challenges

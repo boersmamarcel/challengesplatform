@@ -11,14 +11,25 @@
  *= require_self
  *= require_tree
  */
+$font-notosans: 'Noto Sans', sans-serif;
+$font-header: 'Roboto Slab', sans-serif;
+$font-notoserif: 'Noto Serif', serif;
 
 /* Config goes here */
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+$sansFontFamily: $font-notosans;
+$serifFontFamily: $font-notoserif;
+$headingsFontFamily: $font-notoserif;
+$headingsFontWeight: 400;
 /* This should come after the custom variables */
 @import "bootstrap";
 @import "font-awesome";
 // @import "bootstrap-responsive";
 // Fix the frickin' box model
 // * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+h1 {
+  font-family: $font-header;
+}

@@ -1,3 +1,4 @@
+@wip
 Feature: Review challenges as admin
   In order to review challenges
   As an admin
