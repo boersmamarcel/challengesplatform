@@ -25,8 +25,14 @@ class ChallengeDecorator < Draper::Decorator
     end
   end
 
+  def day_of_week
+    object.start_date.strftime("%A")
+  end
+  def from_till
+    "From " + human_readable_start_date + " till " + human_readable_end_date
+  end
   def human_date_string
-    "Every " + object.start_date.strftime("%A").downcase + " from " + human_readable_start_date + " till " + human_readable_end_date
+    "Every " + day_of_week.downcase + ", " + from_till
   end
 
   def synopsis

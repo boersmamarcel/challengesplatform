@@ -1,5 +1,21 @@
 <input type="hidden" id="page_identifier" value="index">
 
-%h1 Welcome
-%p This will become the landing page!
-%p Challenges are awesome, and you should definitly subscribe! Click Login in the top bar...
+.hero-unit
+  %h1
+    %i.icon-rocket
+    Unlock your
+    %strong potential.
+  %p
+    Sciencechallenges organizes engaging challenges for students of the
+    %strong University of Twente.
+    Challenges are fun and engaging projects that
+    %em tax your skills and
+    can help you excel. Are you up to it?
+  %p
+    %a.btn.btn-primary.btn-large{:href => new_user_session_path} Join now!
+    %a.btn.btn-large{:href => "mailto:dummy"} Organize a challenge
+
+%h1 
+  %i.icon-lightbulb.color-sun-flower
+  Highlited Challenges
+= render 'shared/challenges_list' , :challenges => @highlited_challenges, :options => {:no_status => true}

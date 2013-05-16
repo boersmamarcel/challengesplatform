@@ -1,24 +1,26 @@
 .challenge.span4
-  - if challenge.current_user_enrolled?
+  - if !options[:no_status] && challenge.current_user_enrolled?
     .status
-      %span.badge.badge-success You're enrolled!
-  - elsif challenge.warn_current_user_enrollment?
+      %span.badge.badge-success
+        %i.icon-check-sign
+        You're enrolled
+  - elsif !options[:no_status] && challenge.warn_current_user_enrollment?
     .status
       %span.badge.badge-warning
         Enrollment closes in
         = challenge.days_till_enrollment_closes
         days!
-  %a{:href => challenge_path(challenge)}
-    %img.thumb{:alt => "", src: "http://lorempixel.com/280/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
-  %a{:href => challenge_path(challenge)}
+  %a.thumb{:href => challenge_path(challenge)}
+    %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
     %h4= challenge.title
+  / %a{:href => challenge_path(challenge)}
   - if challenge.supervisor.present?
     .supervisor
       %i.icon-user
       %strong Supervised by
       = link_to challenge.supervisor.fullname, profile_user_path(challenge.supervisor)
 
-  %p.muted.description= challenge.synopsis
+  %p.description= challenge.synopsis
 
   %p.date
     %span.start-stop

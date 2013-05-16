@@ -1,4 +1,3 @@
-%h1 Challenges Overview
-%input#page_identifier{:type => "hidden", :value => "challenges.index"}/
-.challenges-list.row#challenges
-  = render @challenges
+%h2 Challenges Overview
+%input#page_identifier{:type => "hidden", :value => "challenges.index"}
+= render 'shared/challenges_list' , :challenges => @challenges
