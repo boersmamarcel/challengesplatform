@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree
  */
+ @import 'colors';
 $font-notosans: 'Noto Sans', sans-serif;
 $font-header: 'Roboto Slab', sans-serif;
 $font-notoserif: 'Noto Serif', serif;
@@ -23,6 +24,15 @@ $sansFontFamily: $font-notosans;
 $serifFontFamily: $font-notoserif;
 $headingsFontFamily: $font-notoserif;
 $headingsFontWeight: 400;
+
+$blue: $color-belize-hole;
+$green: $color-emerland;
+$red: $color-pomegranate;
+$yellow: $color-sun-flower;
+$orange: $color-pumpkin;
+$pink: $color-amethyst;
+$purple: $color-wisteria;
+
 /* This should come after the custom variables */
 @import "bootstrap";
 @import "font-awesome";
@@ -30,6 +40,22 @@ $headingsFontWeight: 400;
 // Fix the frickin' box model
 // * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-h1 {
+h1,h2 {
   font-family: $font-header;
+}
+h2 {
+  font-size: 22px;
+  border-bottom: 1px solid #ececec;
+}
+.navbar .brand {
+  font-family: $font-header;
+  font-weight: 300;
+}
+.hero-unit {
+  text-shadow: 1px 1px 0px white;
+  padding: 40px;
+  p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
 }
