@@ -20,6 +20,9 @@ Feature: Security - supervisors
       | 4  | Title4 | Challenge4  | 03-08-2113 | 09-09-2113 | proposal | 1     | 2             |
       | 5  | Title5 | Challenge5  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
       | 6  | Title6 | Challenge6  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
+    And the following message records
+      | id | subject             | body                             | sender_id | receiver_id | is_read |
+      | 1  | Test message        | This is a test message           | 1         | 1           | 0       |
     When I visit the "login" page
     And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
 
@@ -40,6 +43,7 @@ Feature: Security - supervisors
     | challenges.proposal |
     | challenges.pending  |
     | user.1.profile      |
+    | messages.1          |
 
   Scenario Outline: Visit illegal urls as a supervisor user (and get redirected)
     When I visit the "<path>" page

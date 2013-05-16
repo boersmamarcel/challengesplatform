@@ -36,6 +36,8 @@ def getRoute(name)
     profile_user_path($1)
   when "messages"
     messages_path
+  when /^messages.([0-9]+)$/
+    message_path($1)
   else
     print("Invalid route requested (" + name + ")")
   end

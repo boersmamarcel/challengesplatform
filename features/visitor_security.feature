@@ -29,4 +29,5 @@ Feature: Security - visitors
     | challenges.declined |
     | challenges.proposal |
     | user.1.profile      |
+    | messages            |
     #TODO add more pages, e.g. user homepage, edit account, specific challenge, etc.

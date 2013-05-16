@@ -12,6 +12,9 @@ Feature: Security - supervisor
       | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | proposal | 1     | 1             |
       | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
       | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
+    And the following message records
+      | id | subject             | body                             | sender_id | receiver_id | is_read |
+      | 1  | Test message        | This is a test message           | 1         | 1           | 0       |
     When I visit the "login" page
     And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"    
 
@@ -31,3 +34,4 @@ Feature: Security - supervisor
     | challenges.3.edit |
     | challenge.new     |
     | user.1.profile    |
+    | messages.1        |
