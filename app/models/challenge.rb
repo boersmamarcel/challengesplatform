@@ -46,6 +46,11 @@ class Challenge < ActiveRecord::Base
   def running?
     Date.today.to_time_in_current_zone >= start_date && Date.today.to_time_in_current_zone <= end_date
   end
+
+  def over?
+    Date.today.to_time_in_current_zone >= end_date
+  end
+
   # TODO: add commitment field to database
   def commitment #hours/weeek
     rand(2..10)
@@ -60,6 +65,14 @@ class Challenge < ActiveRecord::Base
 
   def visible_for_user?(user)
    state == 'approved' || supervisor_id == user.id || user.is_admin?
+  end
+
+  def can_unenroll?
+    !running?
+  end
+
+  def can_enroll?
+    upcoming?
   end
   @protected
 

@@ -1,3 +1,54 @@
 %input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
 %p#notice= notice
+.challenge_detail
+  %h2= @challenge.title
+  - if @challenge.supervisor.present?
+    %p.supervisor
+      %i.icon-user
+      %strong Supervised by
+      = link_to @challenge.supervisor.fullname, profile_user_path(@challenge.supervisor)
+  - if @challenge.running?
+    .alert.alert-success
+      This challenge has begun!
 
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href: "#"} Info
+    %li
+      %a{href: "#"} Discussion
+
+  .row
+    .description.span8
+      .video
+        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+      %p.lead
+        Ben jij super gaaf? Wij ook, doe mee en dan win je maximaal bonus punten. Ga vooruit, Science Challenges.
+      = markdown(@challenge.description)
+    .details.span4
+      %p
+        %i.icon-group
+        %strong
+          = @challenge.participants.count
+        %span= pluralize(@challenge.participants.count, "Participant").split.last
+      %p
+        %i.icon-time
+        %strong
+          = @challenge.commitment
+        %span Hours/week
+      %p
+        %i.icon-calendar
+        %strong
+          = @challenge.day_of_week
+        %span= @challenge.from_till
+      %p
+        %i.icon-map-marker
+        %strong Zilverling 3031
+      //------------------------------------------------------
+      %hr
+      .action
+        = render "shared/enroll_button", :challenge => @challenge
+      %hr
+      //------------------------------------------------------
+      .supervisor_detail
+        %h3 About the supervisor:
+        = render "profile/profile_tile", user: @challenge.supervisor

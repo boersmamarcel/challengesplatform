@@ -15,7 +15,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges/1
   def show
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.find(params[:id]).decorate
     redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
   end
 

@@ -1,12 +1,12 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'dashboard.index'}
 
 - unless @my_challenges.empty?
-  %h2
+  %h2.bordered
     %i.icon-check-sign.color-belize-hole
     Your Challenges
   = render 'shared/challenges_list' , :challenges => @my_challenges
 
-%h2
+%h2.bordered
   %i.icon-road.color-belize-hole
   Upcoming Challenges
 = render 'shared/challenges_list' , :challenges => @upcoming_challenges

@@ -15,7 +15,7 @@
 $font-notosans: 'Noto Sans', sans-serif;
 $font-header: 'Roboto Slab', sans-serif;
 $font-notoserif: 'Noto Serif', serif;
-
+$font-brand: 'Changa One', 'cursive';
 /* Config goes here */
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -45,11 +45,17 @@ h1,h2 {
 }
 h2 {
   font-size: 22px;
-  border-bottom: 1px solid #ececec;
+  &.bordered {
+    border-bottom: 1px solid #ececec;
+  }
 }
 .navbar .brand {
-  font-family: $font-header;
-  font-weight: 300;
+  font-family: $font-brand;
+  // font-weight: 300;
+  color: white;
+  letter-spacing: 1px;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 0px black;
 }
 .hero-unit {
   text-shadow: 1px 1px 0px white;
