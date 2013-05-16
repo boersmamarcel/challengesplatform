@@ -30,7 +30,9 @@ Challengesplatform::Application.routes.draw do
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do
-    resources :review
+    resources :review do
+      post 'comment', :on => :member
+    end
   end
 
   get "static/index"

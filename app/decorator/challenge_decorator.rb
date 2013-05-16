@@ -8,7 +8,7 @@ class ChallengeDecorator < Draper::Decorator
   def human_readable_end_date
     object.end_date.strftime("%d-%m-%Y")
   end
-
+  
   def current_user_enrolled?
     object.participants.exists? h.current_user
   end

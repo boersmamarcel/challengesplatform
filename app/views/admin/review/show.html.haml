@@ -2,4 +2,8 @@
 %h2
   Review
 = render :partial => 'shared/challenge', :object => @challenge, :as => 'challenge'
-= render 'admin/shared/comments'
+%div.adminbuttons
+  = link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn'
+  = link_to 'Decline', root_path, :class => 'btn btn-alert', :method => :delete, :data => { confirm: '<b>bold</b>' }
+  = link_to 'Approve', root_path, :class => 'btn btn-success'
+= render :partial => 'admin/shared/comments', :locals => {:comments => @challenge.comments, :new_comment => @new_comment}

@@ -6,6 +6,7 @@ class Challenge < ActiveRecord::Base
   has_many :enrollments, :dependent => :destroy # Enrollments does not have a default scope for unenrolled users
   # Participants does has this default scope (See :conditions)
   has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
+  has_many :comments, :order => 'updated_at DESC'
 
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
