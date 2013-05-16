@@ -1,5 +1,4 @@
 %input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
-%p#notice= notice
 .challenge_detail
   %h2= @challenge.title
   - if @challenge.supervisor.present?
