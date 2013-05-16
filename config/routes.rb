@@ -20,6 +20,11 @@ Challengesplatform::Application.routes.draw do
     resources :follow, :only => [:create, :destroy]
     
   end
+  
+  #generate some test messages on this page
+  get "messages/generate"
+  
+  resources :messages, :only => [:show, :destroy, :index]
 
   get "static/index"
 
