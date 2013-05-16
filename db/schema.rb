@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514083836) do
+ActiveRecord::Schema.define(:version => 20130515081532) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20130514083836) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.integer  "supervisor_id"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "challenge_id"
+    t.text     "comment"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "enrollments", :force => true do |t|
@@ -40,6 +48,16 @@ ActiveRecord::Schema.define(:version => 20130514083836) do
     t.integer  "following_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.boolean  "is_read"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -60,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20130514083836) do
     t.integer  "role",                   :default => 0
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
