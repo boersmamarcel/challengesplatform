@@ -23,7 +23,7 @@
       %p.lead
         Ben jij super gaaf? Wij ook, doe mee en dan win je maximaal bonus punten. Ga vooruit, Science Challenges.
       = markdown(@challenge.description)
-    .details.span4
+    .details.span4.well
       %p
         %i.icon-group
         %strong
@@ -51,3 +51,8 @@
       .supervisor_detail
         %h3 About the supervisor:
         = render "profile/profile_tile", user: @challenge.supervisor
+      %hr
+      //------------------------------------------------------
+      .participants_detail
+        %h3 Participants:
+        = render :partial => "profile/avatar", :collection => @challenge.participants.decorate, :as => :user
