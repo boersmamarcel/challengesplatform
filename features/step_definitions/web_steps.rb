@@ -8,6 +8,8 @@ def getRoute(name)
     new_user_session_path
   when "dashboard.index"
     dashboard_path
+  when "dashboard"
+    dashboard_path
   when "index"
     root_path
   when "logout"
@@ -32,6 +34,8 @@ def getRoute(name)
     edit_challenge_path($1)
   when /^user.([0-9]+).profile$/
     profile_user_path($1)
+  when "messages"
+    messages_path
   else
     print("Invalid route requested (" + name + ")")
   end

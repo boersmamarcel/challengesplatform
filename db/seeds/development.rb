@@ -79,11 +79,17 @@ follows = [{
   ];
 
 students.each do |student|
-  User.create!(:firstname => student['firstname'], :lastname => student['lastname'], :email => "#{student['firstname']}@student.utwente.nl", :password => "studentpass", :password_confirmation => "studentpass")
+  user = User.create!(:firstname => student['firstname'], :lastname => student['lastname'], :email => "#{student['firstname']}@student.utwente.nl", :password => "studentpass", :password_confirmation => "studentpass")
+  Message.create!(:subject => "The first test message", :body => "And this is the body text of that message.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
+  Message.create!(:subject => "A message with a very long title to see how that works, just for science", :body => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor est, gravida at lacinia sit amet, fringilla in lacus. Fusce rhoncus, elit a malesuada pharetra, nulla leo mollis arcu, nec euismod quam tortor in augue. Mauris nisi velit, ultricies eget gravida eu, vehicula in massa. Phasellus vestibulum porttitor lacinia. Suspendisse potenti. Nam volutpat, eros eget faucibus sollicitudin, lacus augue venenatis arcu, vel scelerisque erat nulla ut metus. Mauris dictum eros ut nunc pretium ultrices. Proin lacinia, ligula quis tempus rhoncus, dolor odio aliquam nulla, eu tempor ligula odio vel ligula. Nam fringilla, risus id vulputate venenatis, nunc elit gravida quam, quis imperdiet tortor tortor vestibulum tellus.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
+  
 end
 
 supervisors.each do |supervisor|
- User.create!(:firstname => supervisor['firstname'], :lastname => supervisor['lastname'], :email => "#{supervisor['firstname']}@utwente.nl", :password => "supervisorpass", :password_confirmation => "supervisorpass", :role => 1)
+ user = User.create!(:firstname => supervisor['firstname'], :lastname => supervisor['lastname'], :email => "#{supervisor['firstname']}@utwente.nl", :password => "supervisorpass", :password_confirmation => "supervisorpass", :role => 1)
+ Message.create!(:subject => "The first test message", :body => "And this is the body text of that message.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
+ Message.create!(:subject => "A message with a very long title to see how that works, just for science", :body => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor est, gravida at lacinia sit amet, fringilla in lacus. Fusce rhoncus, elit a malesuada pharetra, nulla leo mollis arcu, nec euismod quam tortor in augue. Mauris nisi velit, ultricies eget gravida eu, vehicula in massa. Phasellus vestibulum porttitor lacinia. Suspendisse potenti. Nam volutpat, eros eget faucibus sollicitudin, lacus augue venenatis arcu, vel scelerisque erat nulla ut metus. Mauris dictum eros ut nunc pretium ultrices. Proin lacinia, ligula quis tempus rhoncus, dolor odio aliquam nulla, eu tempor ligula odio vel ligula. Nam fringilla, risus id vulputate venenatis, nunc elit gravida quam, quis imperdiet tortor tortor vestibulum tellus.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
+
 end
 
 User.create!(:firstname => "Kevin", :lastname => "Flynn", :email => "admin@utwente.nl", :password => "adminpass", :password_confirmation => "adminpass", :role => 2)
@@ -113,5 +119,7 @@ follows.each do |relation|
     end
   end
 end
+
+
 
 

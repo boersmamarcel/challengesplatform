@@ -1,0 +1,47 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.message {
+	border-bottom: 1px solid gray;
+	padding: 0px;
+	margin:0px;
+	padding: 15px;
+}
+
+.message:nth-child(even) {
+	background-color: #fafafa;
+}
+
+.modal-body {
+	padding:0px;
+}
+
+.message:last-child {
+	border-bottom: none;
+}
+
+.icon-active {
+/*	background-color: #ccc;*/
+}
+
+.mail-message .from-user {
+	margin-left: 15px;
+}
+
+.mail-message td a:first-child {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+tr.mail-message.unread {
+	background-color: #B2E0FF;
+}
+
+tr.mail-message.unread:nth-child(odd) {
+	background-color: #C9E9FF;
+}
+
+.readstatus {
+	margin-right: 15px;
+}

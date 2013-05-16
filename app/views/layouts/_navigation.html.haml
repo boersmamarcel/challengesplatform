@@ -7,8 +7,18 @@
       = link_to('Challenges', challenges_path)
     %li
       = link_to('Edit account', edit_user_registration_path)
-    %li.pull-right
-      = link_to('Sign out', destroy_user_session_path)
+  %ul.nav.pull-right
+    %li
+      - if current_user.received_messages.unread.empty?
+        %a#mailbox.inactive{ :onClick => "addModal()" }
+          %i.icon-envelope
+      - else
+        %a#mailbox.active{ :onClick => "addModal()" }
+          %i.icon-envelope.icon-active
+          %strong= "(" + current_user.received_messages.unread.count.to_s + ")"
+    %li
+      = link_to('Logout', destroy_user_session_path)
+
 
 - else
   %ul.nav.pull-right

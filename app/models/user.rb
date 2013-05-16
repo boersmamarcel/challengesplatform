@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :supervising_challenges, :foreign_key => 'supervisor_id', :class_name => 'Challenge'
   has_many :participating_challenges, :through => :enrollments, :source => :challenge
   has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy
+  
+  has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
+  has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
 
   def is_supervisor?
     self.role > 0
