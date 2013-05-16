@@ -55,4 +55,4 @@
       //------------------------------------------------------
       .participants_detail
         %h3 Participants:
-        = render :partial => "profile/avatar", :collection => @challenge.participants.decorate, :as => :user
+        = render :partial => "profile/profile_small_tile", :collection => @challenge.participants.decorate, :as => :user
