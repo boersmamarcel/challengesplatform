@@ -91,6 +91,9 @@ supervisors.each do |supervisor|
  Message.create!(:subject => "A message with a very long title to see how that works, just for science", :body => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor est, gravida at lacinia sit amet, fringilla in lacus. Fusce rhoncus, elit a malesuada pharetra, nulla leo mollis arcu, nec euismod quam tortor in augue. Mauris nisi velit, ultricies eget gravida eu, vehicula in massa. Phasellus vestibulum porttitor lacinia. Suspendisse potenti. Nam volutpat, eros eget faucibus sollicitudin, lacus augue venenatis arcu, vel scelerisque erat nulla ut metus. Mauris dictum eros ut nunc pretium ultrices. Proin lacinia, ligula quis tempus rhoncus, dolor odio aliquam nulla, eu tempor ligula odio vel ligula. Nam fringilla, risus id vulputate venenatis, nunc elit gravida quam, quis imperdiet tortor tortor vestibulum tellus.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
 
 end
+
+User.create!(:firstname => "Kevin", :lastname => "Flynn", :email => "admin@utwente.nl", :password => "adminpass", :password_confirmation => "adminpass", :role => 2)
+
 challenges.each do |challenge|
     supervisor = User.where(:firstname => challenge['supervisor']['firstname'], :lastname => challenge['supervisor']['lastname']).first;
 

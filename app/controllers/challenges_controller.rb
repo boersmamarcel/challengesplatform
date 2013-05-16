@@ -1,45 +1,45 @@
 class ChallengesController < ApplicationController
+
+  # Do not allow regular users to see anything
+  # Allow regular users some views
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :approved, :enroll, :unenroll]
+
+  # Allow supervisors to see even more (they already see everything above)
+  skip_filter :require_admin, :only => [:proposal, :pending, :declined, :new, :edit, :create, :update, :revoke]
+
+
   # GET /challenges
-  # GET /challenges.json
   def index
     @challenges = Challenge.all
   end
 
   # GET /challenges/1
-  # GET /challenges/1.json
   def show
     @challenge = Challenge.find(params[:id])
-
-
-    redirect_to challenges_path unless @challenge.visible_for_user?(current_user)
+    redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
   end
 
-  # GET /challenges/proposal
   # GET /challenges/proposal
   def proposal
     @challenges = Challenge.proposal
   end
 
   # GET /challenges/approved
-  # GET /challenges/approved.json
   def approved
     @challenges = Challenge.approved
   end
 
-  # GET /challenges/declined
   # GET /challenges/declined
   def declined
     @challenges = Challenge.where("state = 'proposal' AND count > 1")
   end
 
   # GET /challenges/pending
-  # GET /challenges/pending
   def pending
     @challenges = Challenge.pending
   end
 
   # GET /challenges/new
-  # GET /challenges/new.json
   def new
     @challenge = Challenge.new
   end
@@ -48,7 +48,7 @@ class ChallengesController < ApplicationController
   def edit
     @challenge = Challenge.find(params[:id])
     unless @challenge.editable_by_user?(current_user)
-      redirect_to @challenge, alert: 'This challenge can not be edited by you.'
+      redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end
   end
 
@@ -57,7 +57,6 @@ class ChallengesController < ApplicationController
   end
 
   # POST /challenges
-  # POST /challenges.json
   def create
     @challenge = Challenge.new(params[:challenge])
 
@@ -79,7 +78,6 @@ class ChallengesController < ApplicationController
   end
 
   # PUT /challenges/1
-  # PUT /challenges/1.json
   def update
     @challenge = Challenge.find(params[:id])
 
@@ -95,7 +93,6 @@ class ChallengesController < ApplicationController
   end
 
   # DELETE /challenges/1
-  # DELETE /challenges/1.json
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy

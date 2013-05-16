@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
-  
+  # Allow regular users some views
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :destroy]
+
   def index
     if request.xhr?
       render "index_modal", :layout => false
