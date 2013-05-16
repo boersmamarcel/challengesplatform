@@ -1,0 +1,29 @@
+%h1 Inbox
+- if current_user.received_messages.empty?
+  %h2 You have no messages
+- else
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Subject
+        %th 
+    %tbody
+      - current_user.received_messages.each do |message|
+        %tr{:class => message.is_read ? "mail-message read" : "mail-message unread"}
+          %td
+            = link_to message_path(message) do
+              = message.subject
+            = simple_format(h(truncate(message.body, :length => 80)))
+            - unless message.is_read
+              %span.readstatus
+                &#9679; unread
+            %span.time
+              %i.icon-time
+              = get_date(message)
+            %span.from-user
+              %i.icon-user
+              = link_to get_name(message.sender), profile_user_path(message.sender)
+          %td
+            = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
+              %i.icon-trash
+              &nbsp;&nbsp;delete

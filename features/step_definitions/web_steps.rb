@@ -28,6 +28,8 @@ def getRoute(name)
     proposal_challenges_path
   when "admin/review.index"
     admin_review_index_path
+  when "messages"
+    messages_path
   else
     print("Invalid route requested (" + name + ")")
   end

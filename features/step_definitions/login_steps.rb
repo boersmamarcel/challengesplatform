@@ -7,6 +7,9 @@ Given(/^I am not logged in$/) do
 end
 
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
+  
+  find("#other-login p").click
+  
   fill_in :user_email, :with => email
   fill_in :user_password, :with => password
 
