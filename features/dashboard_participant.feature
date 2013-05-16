@@ -21,9 +21,9 @@ Feature: A dashboard for participant
       | Norvig Award       | We have a winner!  | last week  | next month |
 
     When I visit the "dashboard.index" page
-    Then I should see "Save the world" in list "Upcoming Challenges"
-      And I should see "Innovate education" in list "Upcoming Challenges"
-      And I should not see "Norvig Award" in list "Upcoming Challenges"
+    Then I should see "Save the world" in section "Upcoming Challenges"
+      And I should see "Innovate education" in section "Upcoming Challenges"
+      And I should not see "Norvig Award" in section "Upcoming Challenges"
 
   Scenario: View my active Challenges
       And the following challenge records
@@ -36,11 +36,11 @@ Feature: A dashboard for participant
       And I am enrolled in challenge with title "Norvig Award"
       And I am enrolled in challenge with title "Shark hunting"
     When I visit the "dashboard.index" page
-    Then I should see "Norvig Award" in list "My Challenges"
+    Then I should see "Norvig Award" in section "My Challenges"
     # Old challenges shouldn't show up
-    And I should not see "Shark hunting" in list "My Challenges"
+    And I should not see "Shark hunting" in section "My Challenges"
     # My challenges should not come up in Upcoming challenges
-    And I should not see "Norvig Award" in list "Upcoming Challenges"
+    And I should not see "Norvig Award" in section "Upcoming Challenges"
 
   @wip
   Scenario: View activities of following

@@ -9,7 +9,7 @@
         = challenge.days_till_enrollment_closes
         days!
   %a{:href => challenge_path(challenge)}
-    %img.thumb{:alt => "", "data-src" => "holder.js/280x120"}
+    %img.thumb{:alt => "", src: "http://lorempixel.com/280/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
   %a{:href => challenge_path(challenge)}
     %h4= challenge.title
 
@@ -17,12 +17,11 @@
     %span.start-stop
       = challenge.human_date_string
   %p.muted.description= challenge.synopsis
-
-  .supervisor
-    %i.icon-user
-    %strong Supervised by
-    = link_to challenge.supervisor.decorate.fullname, profile_user_path(challenge.supervisor)
-  / %hr
+  - if challenge.supervisor.present?
+    .supervisor
+      %i.icon-user
+      %strong Supervised by
+      = link_to challenge.supervisor.fullname, profile_user_path(challenge.supervisor)
 
   .progress
     .bar.bar-success{style: "width: #{challenge.percentage_date}"}

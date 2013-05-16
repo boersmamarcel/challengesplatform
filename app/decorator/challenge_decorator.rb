@@ -17,9 +17,18 @@ class ChallengeDecorator < Draper::Decorator
     object.upcoming? && !current_user_enrolled? && days_till_start < 10
   end
 
+  def supervisor
+    if object.supervisor.present?
+      object.supervisor.decorate
+    else
+      nil
+    end
+  end
+
   def human_date_string
     "Every " + object.start_date.strftime("%A").downcase + " from " + human_readable_start_date + " till " + human_readable_end_date
   end
+
   def synopsis
     h.truncate(h.strip_tags(h.markdown(object.description)), :length => 120, :separator => ' ')
   end

@@ -10,7 +10,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = ChallengeDecorator.decorate_collection(Challenge.all)
+    @challenges = ChallengeDecorator.decorate_collection(Challenge.running_first)
   end
 
   # GET /challenges/1
