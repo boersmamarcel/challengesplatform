@@ -52,9 +52,9 @@ Feature: Participants can enroll to challenges
     Then I should see a message with "Successfully unenrolled"
 
   Examples:
-  |  challenge_id   |
-  |   1             |
-  |   5             |
+  | challenge_id |
+  | 1            |
+  | 5            |
 
 
   Scenario Outline: View challenge with state
@@ -62,7 +62,7 @@ Feature: Participants can enroll to challenges
     Then I should see the "<redirect>" page
 
   Examples:
-  | challenge_id      |  redirect           |
-  | 3                 |  challenges.index   |
-  | 2                 |  challenges.index   |
-  | 4                 |  challenges.index   |
+  | challenge_id      |  redirect          |
+  | 3                 |  dashboard.index   |
+  | 2                 |  dashboard.index   |
+  | 4                 |  dashboard.index   |

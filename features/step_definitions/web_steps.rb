@@ -6,9 +6,11 @@ def getRoute(name)
   case name
   when "login"
     new_user_session_path
+  when "dashboard.index"
+    dashboard_path
   when "dashboard"
     dashboard_path
-  when "home"
+  when "index"
     root_path
   when "logout"
     destroy_user_session_path
@@ -26,8 +28,16 @@ def getRoute(name)
     declined_challenges_path
   when "challenges.proposal"
     proposal_challenges_path
+  when /^challenges.([0-9]+)$/ #matches a challenge id
+    challenge_path($1)
+  when /^challenges.([0-9]+).edit$/ #matches a challenge id
+    edit_challenge_path($1)
+  when /^user.([0-9]+).profile$/
+    profile_user_path($1)
   when "messages"
     messages_path
+  when /^messages.([0-9]+)$/
+    message_path($1)
   else
     print("Invalid route requested (" + name + ")")
   end

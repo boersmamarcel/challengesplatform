@@ -1,3 +1,4 @@
+%input{:type=>"hidden", :value => "messages.#{@message.id}", :id => "page_identifier"}
 = link_to "&laquo; back to Inbox".html_safe, messages_path
 = image_tag Gravatar.new(@message.sender.email).image_url, :class => 'img-rounded pull-right'
 %h2= @message.subject

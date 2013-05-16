@@ -20,7 +20,7 @@ Feature: A dashboard for participant
       | Innovate education | About time.        | next week  | next month |
       | Norvig Award       | We have a winner!  | last week  | next month |
 
-    When I visit the "dashboard" page
+    When I visit the "dashboard.index" page
     Then I should see "Save the world" in list "Upcoming Challenges"
       And I should see "Innovate education" in list "Upcoming Challenges"
       And I should not see "Norvig Award" in list "Upcoming Challenges"
@@ -35,7 +35,7 @@ Feature: A dashboard for participant
 
       And I am enrolled in challenge with title "Norvig Award"
       And I am enrolled in challenge with title "Shark hunting"
-    When I visit the "dashboard" page
+    When I visit the "dashboard.index" page
     Then I should see "Norvig Award" in list "My Challenges"
     # Old challenges shouldn't show up
     And I should not see "Shark hunting" in list "My Challenges"
@@ -49,7 +49,7 @@ Feature: A dashboard for participant
       And user "Joyce" is enrolled in challenge with title "Save the World"
       And user "Rick" is enrolled in challenge with title "Innovate education"
       And user "Rick" is unenrolled in challenge with title "Innovate education"
-    When I visit the "dashboard" page
+    When I visit the "dashboard.index" page
     Then I should see "Peter and Rick enrolled in the Innovate Education challenge" in list "Activity"
       And I should see "Joyce enrolled in the Save the World challenge" in list "Activity"
       And I should see "Rick unenrolled in the Innovate Education challenge" in list "Activity"
