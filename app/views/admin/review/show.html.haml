@@ -1,14 +1,7 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'admin/review.show'}
-.alert
-  %button.close{"data-dismiss" => "alert", :type => "button"} ×
-  %strong Alert!
-  You are in reviewing mode
-= render :partial => 'shared/challenge', :object => @challenge, :as => 'challenge'
-%hr
-
 %div.adminbuttons
   %h2 Review
-  = link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn'
+  = link_to 'Edit', edit_admin_review_path(@challenge), :class => 'btn'
   = link_to 'Decline', "#declineModal", :class => 'btn btn-danger', :data => { toggle: 'modal'}, :role => 'button'
   = link_to 'Approve', approve_admin_review_path, :class => 'btn btn-success', :method => :post
   #declineModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -23,5 +16,6 @@
         %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
         = submit_tag 'Submit', :class => 'btn btn-danger'
 %hr
+= render :partial => 'shared/challenge', :object => @challenge, :as => 'challenge'
 %div.comments
   = render :partial => 'admin/shared/comments', :locals => {:comments => @challenge.comments, :new_comment => @new_comment}

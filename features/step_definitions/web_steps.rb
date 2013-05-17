@@ -119,6 +119,28 @@ def interpret_dates(hash)
         value
       end
     end
+    if key.include?("updated_at")
+         hash[key] = case value
+      when 'today' then
+        Time.now
+      when 'tomorrow' then
+        Time.now + 24*3600
+      when 'next month' then
+        Time.now + 30*24*3600
+      when 'last month' then
+        Time.now - 30*24*3600
+      when 'last week' then
+        Time.now - 24*3600*7
+      when 'next week' then
+        Time.now + 24*3600*7
+      when 'last year' then
+        Time.now - 24*3600*365
+      when 'next year' then
+        Time.now + 24*3600*365
+      else
+        value
+      end
+    end
   end
 end
 

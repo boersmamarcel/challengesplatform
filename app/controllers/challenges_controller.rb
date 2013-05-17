@@ -51,6 +51,7 @@ class ChallengesController < ApplicationController
     unless @challenge.editable_by_user?(current_user)
       redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end
+
   end
 
   def submit_for_review?
@@ -87,7 +88,8 @@ class ChallengesController < ApplicationController
     end
 
     if @challenge.update_attributes(params[:challenge])
-      redirect_to challenges_path, notice: 'Challenge was successfully updated.'
+
+      redirect_to @challenge, notice: 'Challenge was successfully updated.'
     else
       render action: "edit"
     end

@@ -23,5 +23,5 @@ Then(/^the comment "(.*?)" should not be green$/) do |comment|
 end
 
 Given(/^I fill in reason with "(.*?)"$/) do |reason|
-  fill_in :reason, :with => reason
+  fill_in :reason, :with => reason unless reason.blank?
 end
