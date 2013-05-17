@@ -1,6 +1,6 @@
 %input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
 .challenge_detail
-  %h2= @challenge.title
+  %h2#title= @challenge.title
   - if @challenge.supervisor.present?
     %p.supervisor
       %i.icon-user
@@ -17,9 +17,9 @@
       %a{href: "#"} Discussion
 
   .row
-    .description.span8
+    .description#description.span8
       .video
-        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
       %p.lead
         Ben jij super gaaf? Wij ook, doe mee en dan win je maximaal bonus punten. Ga vooruit, Science Challenges.
       = markdown(@challenge.description)
@@ -28,31 +28,33 @@
         %i.icon-group
         %strong
           = @challenge.participants.count
-        %span= pluralize(@challenge.participants.count, "Participant").split.last
+        %span.type= pluralize(@challenge.participants.count, "Participant").split.last
       %p
         %i.icon-time
         %strong
           = @challenge.commitment
-        %span Hours/week
+        %span.type Hours/week
       %p
         %i.icon-calendar
         %strong
           = @challenge.day_of_week
-        %span= @challenge.from_till
+        %span.type= @challenge.from_till
       %p
         %i.icon-map-marker
         %strong Zilverling 3031
       //------------------------------------------------------
       %hr
       .action
-        = render "shared/enroll_button", :challenge => @challenge
+        = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
       %hr
       //------------------------------------------------------
-      .supervisor_detail
-        %h3 About the supervisor:
-        = render "profile/profile_tile", user: @challenge.supervisor
-      %hr
+      - if @challenge.supervisor.present?
+        .supervisor_detail
+          %h3 About the supervisor:
+          = render :partial => "profile/profile_tile", :object => @challenge.supervisor, :as => :user
+        %hr
       //------------------------------------------------------
       .participants_detail
         %h3 Participants:
         = render :partial => "profile/profile_small_tile", :collection => @challenge.participants.decorate, :as => :user
+        

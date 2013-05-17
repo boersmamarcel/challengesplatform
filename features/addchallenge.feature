@@ -31,7 +31,7 @@ Feature: Add challenge
       And I press "Save"
       Then I should see a message with "Challenge successfully saved"
 
-
+    @wip
     Scenario: Revoke a pending for review challenge
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state   | count | supervisor_id |
@@ -41,7 +41,7 @@ Feature: Add challenge
       Then I should see a message with "Challenge successfully revoked"
       Then I should see "Title1" in the list
 
-
+    @wip
     Scenario: Revoke an approved challenge
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
@@ -51,7 +51,7 @@ Feature: Add challenge
       Then I should see a message with "Challenge successfully revoked"
       Then I should see "Title1" in the list
 
-
+    @wip
     Scenario: View declined challenges
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
@@ -83,7 +83,7 @@ Feature: Add challenge
       When I edit the challenge with id "1" and a new description ""
       And I press "Submit for Review"
       Then I should see a message with "One or more fields are missing"
-
+    @wip
     Scenario: View approved challenges
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
@@ -92,7 +92,7 @@ Feature: Add challenge
 	    When I open the challenge with id "1"
 	    Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
 	    And I should see a button "Revoke"
-
+    @wip
     Scenario: View pending for review challenges
      Given the following challenge records
        | id | title   | description       | start_date | end_date   | state   | count | supervisor_id |
@@ -101,7 +101,7 @@ Feature: Add challenge
      When I open the challenge with id "1"
      Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
      And I should see a button "Revoke"
-
+    @wip
     Scenario: View a proposal challenge
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |

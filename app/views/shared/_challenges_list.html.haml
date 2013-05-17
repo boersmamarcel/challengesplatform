@@ -1,2 +1,3 @@
-.challenges-list.row
+- list_id ||= nil
+.challenges-list.row{id: list_id}
   = render challenges, :options => (options ||= {})

@@ -150,3 +150,9 @@ Given(/^the following (.+) records?$/) do |factory, table|
     FactoryGirl.create(factory, hash)
   end
 end
+
+Then(/^show me the page$/) do
+  print page.html
+  save_and_open_page
+end
+
