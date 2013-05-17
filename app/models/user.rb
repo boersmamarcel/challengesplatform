@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :mailchimp
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :role, :firstname, :lastname, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :firstname, :lastname
+  attr_protected :role, :provider, :uid
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
@@ -38,9 +39,10 @@ class User < ActiveRecord::Base
         :lastname => data["last_name"],
         :email => data["email"],
         :password => Devise.friendly_token[0,20],
-        :provider => access_token.provider,
-        :uid => access_token.uid,
       )
+      # protected attributes...
+      user.provider = access_token.provider 
+      user.uid = access_token.uid
 
       user.add_to_mailchimp_list("Challenges")
     end
