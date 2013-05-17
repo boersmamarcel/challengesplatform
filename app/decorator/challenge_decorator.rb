@@ -29,10 +29,10 @@ class ChallengeDecorator < Draper::Decorator
     object.start_date.strftime("%A")
   end
   def from_till
-    "From " + human_readable_start_date + " till " + human_readable_end_date
+    ("From " + h.content_tag(:span, human_readable_start_date, :id => 'start_date') + " till " +  h.content_tag(:span, human_readable_end_date, :id => 'end_date')).html_safe
   end
   def human_date_string
-    "Every " + day_of_week.downcase + ", " + from_till
+    ("Every " + day_of_week.downcase + ", " + from_till).html_safe
   end
 
   def synopsis

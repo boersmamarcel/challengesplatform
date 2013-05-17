@@ -1,13 +1,13 @@
 - if challenge.current_user_enrolled?
   - if challenge.can_unenroll?
-    %a.enroll.btn.btn-primary.btn-large{:href => unenroll_challenge_path(@challenge)}
+    %a.enroll.btn.btn-primary.btn-large{:href => unenroll_challenge_path(challenge)}
       %i.icon-remove-sign
       Unenroll
   - else
     .enroll.btn.btn-succes.disabled.btn-large You're participating
 - else
   - if challenge.can_enroll?
-    %a.enroll.btn.btn-success.btn-large{:href => enroll_challenge_path(@challenge)}
+    %a.enroll.btn.btn-success.btn-large{:href => enroll_challenge_path(challenge)}
       %i.icon-check-sign
       Enroll
   - else
