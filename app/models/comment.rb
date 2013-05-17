@@ -5,5 +5,7 @@ class Comment < ActiveRecord::Base
   belongs_to :challenge
   
   validates :comment, :length => {:minimum => 3}
+  validates :user_id, :presence => true
+  validates :challenge_id, :presence => true
   
 end
