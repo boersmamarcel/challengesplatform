@@ -49,6 +49,24 @@ challenges = [
     'count' => 2,
     'supervisor' => supervisors[1],
     'participants' => [students[2], students[3]]
+  },
+    { 'title' => 'Graph find',
+    'description' => 'learn to find a graph or so',
+    'start_date' => Time.now + 3600*24*5,
+    'end_date' => Time.now + 3600*24*30,
+    'state' => 'approved',
+    'count' => 2,
+    'supervisor' => supervisors[0],
+    'participants' => [students[2], students[3]]
+  },
+    { 'title' => 'Algorithm complexity',
+    'description' => 'Optimize the world with this kind of stuff',
+    'start_date' => Time.now + 3600*24*5,
+    'end_date' => Time.now + 3600*24*30,
+    'state' => 'approved',
+    'count' => 2,
+    'supervisor' => supervisors[1],
+    'participants' => [students[2], students[3]]
   }
   ];
   

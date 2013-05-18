@@ -15,19 +15,20 @@ Challengesplatform::Application.routes.draw do
     get 'profile', :on => :member, :to => "profile#show"
     get 'followers' => 'follow#followers'
     get 'follows' => 'follow#follows'
-    
     resources :follow, :only => [:create, :destroy]
     
   end
   
-  #generate some test messages on this page
-  get "messages/generate"
-  
+
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do
     resources :review do
       post 'comment', :on => :member
+      post 'decline', :on => :member
+      post 'approve', :on => :member
+      get 'edit', :on => :member
+      put 'edit', :on => :member
     end
   end
 

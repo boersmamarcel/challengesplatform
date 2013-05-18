@@ -21,3 +21,7 @@ Then(/^the comment "(.*?)" should not be green$/) do |comment|
     page.should_not have_content(comment)
   end
 end
+
+Given(/^I fill in reason with "(.*?)"$/) do |reason|
+  fill_in :reason, :with => reason unless reason.blank?
+end

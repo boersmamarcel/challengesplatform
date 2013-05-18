@@ -1,4 +1,3 @@
-@wip
 Feature: Review challenges as admin
   In order to review challenges
   As an admin
@@ -15,10 +14,10 @@ Feature: Review challenges as admin
     | 2 | Bas    | Veeling | b.veeling@student.utwente.nl | pass123456 | pass123456 | 1 |
     | 3 | Bram | Leenders | b.leenders@student.utwente.nl | pass123456 | pass123456 | 0 |
     And the following challenge records
-    | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
-    | 1 | Awesome challenge | This is an awesome challenge | next week | next month | pending | 1 | 2 |
-    | 2 | Not so awesome challenge | This is not so awesome | next week | next month | pending | 2 |  2 |
-    | 3 | Not pending challenge | this is a challenge description | next week | next month | proposal | 2 | 2 |
+    | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id | updated_at |
+    | 1 | Awesome challenge | This is an awesome challenge | next week | next month | pending | 1 | 2 | today |
+    | 2 | Not so awesome challenge | This is not so awesome | next week | next month | pending | 2 |  2 | today |
+    | 3 | Not pending challenge | this is a challenge description | next week | next month | proposal | 2 | 2 | today |
     When I visit the "login" page
     And I fill in email with "m.boersma-1@student.utwente.nl" and password with "pass123456"
   
@@ -52,30 +51,36 @@ Feature: Review challenges as admin
   Scenario: Comment color green for new comment
     Given the following comment records
       | user_id | challenge_id  | comment                               | updated_at |
-      | 1       | 2             | This is a comment after my last login | tomorrow   |
-      | 1       | 2             | This is a comment before my last login| last week  |
+      | 1       | 2             | This is a comment after my last edit  | tomorrow   |
+      | 1       | 2             | This is a comment before my last edit | last year  |
     And I am on the review challenge page for challenge with id "2"
-    Then the comment "This is a comment after my last login" should be green
-    And the comment "This is a comment before my last login" should not be green
+    Then the comment "This is a comment after my last edit" should be green
+    And the comment "This is a comment before my last edit" should not be green
   
   Scenario: Edit a pending challenge
     Given I am on the review challenge page for challenge with id "2"
     And I follow "Edit"
-    Then I should see the "challenge.edit" page
+    Then I should see the "challenges.2.edit" page
     
-  @focus
-  Scenario Outline: Approve/Decline a pending challenge with and without comments
+  
+  Scenario Outline: Decline a pending challenge with and without comments
     Given I am on the review challenge page for challenge with id "<challenge_id>"
     And I follow "<button>"
-    And I fill in comment with "<comment>"
+    And I fill in reason with "<reason>"
+    And I press "Submit"
     Then I should see the "<page>" page
     And I should see a message with "<message>"
     
   Examples:
-  | challenge_id | button   | comment              | page                | message                                         |
-  | 2            | Decline  | To vague please edit | admin/review.index  | Challenge successfully revoked                  |
+  | challenge_id | button   | reason               | page                | message                                         |
+  | 2            | Decline  | To vague please edit | admin/review.index  | Challenge successfully declined                 |
   | 2            | Decline  |                      | admin/review.show   | Challenge can not be declined without comments  |
-  | 2            | Approve  |                      | admin/review.index  | Challenge successfully approved                 |
+
+  Scenario: Approve a pending challenge
+    Given I am on the review challenge page for challenge with id "2"
+    And I follow "Approve"
+    Then I should see the "challenges.2" page
+    And I should see a message with "Challenge is successfully approved"
   
     
   

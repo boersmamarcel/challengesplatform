@@ -10,6 +10,9 @@
       = link_to('Challenges', challenges_path)
     %li{class: controller?("users/registrations") ? "active" : ""}
       = link_to('Edit account', edit_user_registration_path)
+    -if current_user.is_admin?
+      %li{class: controller?("admin/review") ? "active": ""}
+        = link_to('Review', admin_review_index_path)
   %ul.nav.pull-right
     %li.divider-vertical
     %li
