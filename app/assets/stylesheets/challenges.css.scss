@@ -151,7 +151,10 @@
         // font-size: 12px;
         display: block;
         float: left;
-        overflow: auto;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 12px;
+
       }
       clear: both;
         overflow: auto;
