@@ -15,7 +15,7 @@
     %li
       - if current_user.received_messages.unread.empty?
         %a#mailbox.inactive{ :onClick => "addModal()" }
-          %i.icon-envelope-alt.icon-large
+          %i.icon-envelope.icon-large
       - else
         %a#mailbox.active{ :onClick => "addModal()" }
           %i.icon-envelope-alt.icon-large.icon-active
