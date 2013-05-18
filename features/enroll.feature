@@ -16,7 +16,8 @@ Feature: Participants can enroll to challenges
     | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| proposal | 1     | 1             |
     | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| proposal | 4     | 1             |
     | 5   | Title5  | Description5 | next month | 09-09-2060| approved | 2     | 1             |
-    | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 1             |
+    | 6   | Title6  | Description6 | last week  | 09-09-2060| approved | 2     | 1             |
+    | 7   | Title7  | Description7 | 09-09-2059 | 09-09-2060| approved | 2     | 1             |
     When I visit the "login" page
     And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
 
@@ -34,7 +35,7 @@ Feature: Participants can enroll to challenges
 
   Examples:
   |   challenge_id    | title   | description  |  buttons     | start_date | end_date  |
-  |   6               | Title6  | Description6 |  Enroll      | 09-09-2059 | 9-09-2060 |
+  |   7               | Title7  | Description7 |  Enroll      | 09-09-2059 | 9-09-2060 |
 
   Scenario: Subscribe to a challenge before start date
     When I open the challenge with id "1"
@@ -42,7 +43,7 @@ Feature: Participants can enroll to challenges
     Then I should see a message with "Successfully enrolled"
 
   Scenario: Subscribe to a challenge after start date
-    When I open the challenge with id "5"
+    When I open the challenge with id "6"
     Then I should not see button "Enroll"
 
   Scenario Outline: Unsubscribe from a challenge

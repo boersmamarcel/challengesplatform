@@ -9,7 +9,7 @@ Feature: Security - visitors
 
   Examples: redirects for not logged on visitors
     | path  | page        |
-    | index | index       | 
+    | index | index       |
     | login | session.new |
 
 
@@ -18,16 +18,12 @@ Feature: Security - visitors
     When I visit the "<path>" page
     Then I should see the "session.new" page
     And I should get the message "You need to sign in or sign up before continuing."
-  
+
   Examples: Illegal pages
     | path                |
     | dashboard.index     |
     | challenge.new       |
     | challenges.index    |
-    | challenges.pending  |
-    | challenges.approved |
-    | challenges.declined |
-    | challenges.proposal |
     | user.1.profile      |
     | messages            |
     #TODO add more pages, e.g. user homepage, edit account, specific challenge, etc.

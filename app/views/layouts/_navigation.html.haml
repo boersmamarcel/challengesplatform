@@ -15,10 +15,10 @@
     %li
       - if current_user.received_messages.unread.empty?
         %a#mailbox.inactive{ :onClick => "addModal()" }
-          %i.icon-envelope.icon-large
+          %i.icon-envelope-alt.icon-large
       - else
         %a#mailbox.active{ :onClick => "addModal()" }
-          %i.icon-envelope.icon-large.icon-active
+          %i.icon-envelope-alt.icon-large.icon-active
           .badge
             = "" + current_user.received_messages.unread.count.to_s + ""
     %li.divider-vertical

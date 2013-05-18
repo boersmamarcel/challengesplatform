@@ -20,14 +20,6 @@ def getRoute(name)
     challenges_path
   when "challenge.new"
     new_challenge_path
-  when "challenges.pending"
-    pending_challenges_path
-  when "challenges.approved"
-    approved_challenges_path
-  when "challenges.declined"
-    declined_challenges_path
-  when "challenges.proposal"
-    proposal_challenges_path
   when "admin/review.index"
     admin_review_index_path
   when /^challenges.([0-9]+)$/ #matches a challenge id

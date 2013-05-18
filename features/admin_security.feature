@@ -16,7 +16,7 @@ Feature: Security - supervisor
       | id | subject             | body                             | sender_id | receiver_id | is_read |
       | 1  | Test message        | This is a test message           | 1         | 1           | 0       |
     When I visit the "login" page
-    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"    
+    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"
 
   Scenario Outline: Visit any url as an admin user, and get to see it
     And I visit the "<page>" page
