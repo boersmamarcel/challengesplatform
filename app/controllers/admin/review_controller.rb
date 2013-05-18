@@ -6,15 +6,14 @@ class Admin::ReviewController < Admin::AdminController
   end
   
   def show
-    @challenge = Challenge.pending.find_by_id(params[:id]).decorate
-
-    if @challenge.present?
-      @new_comment = @challenge.comments.new
-      @challenge.reload
-      render :show
-    else
-      redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
-    end
+  begin
+    @challenge = Challenge.pending.find_by_id!(params[:id]).decorate
+    @new_comment = @challenge.comments.new
+    @challenge.reload
+    render :show
+  rescue ActiveRecord::RecordNotFound
+    redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
+  end
     
   end
   
