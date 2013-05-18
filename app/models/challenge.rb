@@ -18,7 +18,7 @@ class Challenge < ActiveRecord::Base
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
   validate :dates, :if => :pending?
-  scope :upcoming, where('start_date > ? AND state = ?', Date.today, "approved")
+  scope :upcoming, where('start_date > ?', Date.today)
   scope :running, where('end_date > ? AND start_date < ?', Date.today, Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
