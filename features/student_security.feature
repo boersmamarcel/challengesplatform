@@ -33,8 +33,6 @@ Feature: Security - students
 
   Examples: redirects for students
     | path                  |
-    | challenges.proposal   |
-    | challenges.pending    |
     | challenges.1          |
     | challenges.2          |
     | challenges.1.edit     |

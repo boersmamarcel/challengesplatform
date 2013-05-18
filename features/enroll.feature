@@ -17,7 +17,9 @@ Feature: Participants can enroll to challenges
     | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| proposal | 4     | 1             |
     | 5   | Title5  | Description5 | next month | 09-09-2060| approved | 2     | 1             |
     | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 1             |
+    | 7   | Title7  | Description7 | 15-05-2013 | 09-09-2060| approved | 2     | 1             |
     When I visit the "login" page
+
     And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
 
 
@@ -42,8 +44,9 @@ Feature: Participants can enroll to challenges
     Then I should see a message with "Successfully enrolled"
 
   Scenario: Subscribe to a challenge after start date
-    When I open the challenge with id "5"
-    Then I should not see button "Enroll"
+    When I open the challenge with id "7"
+    Then I should see a message with "Enrollment has closed"
+    And I should not see button "Enroll"
 
   Scenario Outline: Unsubscribe from a challenge
     Given user "participant@student.utwente.nl" is enrolled in challenge "<challenge_id>"
