@@ -1,4 +1,8 @@
-= link_to "Science Challenges", root_path, :class => 'brand'
+%a.brand{href: root_path}
+  = image_tag "logowhite.png"
+  %span
+    = precede("Science") do
+      %strong Challenges
 %ul.nav
 - if user_signed_in?
   %ul.nav
