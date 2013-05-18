@@ -3,7 +3,7 @@
   %head
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "Myapp"
+    %title= content_for?(:title) ? yield(:title) : "ScienceChallenges"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag "application", :media => "all"
@@ -11,6 +11,10 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
+    %link{:href => "favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    %link{:href => asset_path("fav32.png"), :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => asset_path("fav64.png"), :rel => "icon", :sizes => "64x64", :type => "image/png"}/
+    %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
   %body
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
