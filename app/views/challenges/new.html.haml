@@ -1,0 +1,4 @@
+%h1 New challenge
+%input#page_identifier{:type => "hidden", :value => "challenge.new"}/
+= render :partial => 'shared/form'
+= link_to 'Back', challenges_path
