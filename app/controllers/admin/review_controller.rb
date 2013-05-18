@@ -6,9 +6,7 @@ class Admin::ReviewController < Admin::AdminController
   end
   
   def show
-    challenges = Challenge.pending.where(:id => params[:id])
-    challenges.map! { |u| u.decorate } unless challenges.nil?
-    @challenge = challenges.first
+    @challenge = Challenge.pending.find_by_id(params[:id]).decorate
 
     if @challenge.present?
       @new_comment = @challenge.comments.new

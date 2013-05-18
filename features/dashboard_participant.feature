@@ -15,10 +15,10 @@ Feature: A dashboard for participant
 
   Scenario: View relevant new challenges
       And the following challenge records
-      | title              | description        | start_date | end_date   |
-      | Save the world     | It's a hit (song)! | next week  | next month |
-      | Innovate education | About time.        | next week  | next month |
-      | Norvig Award       | We have a winner!  | last week  | next month |
+      | title              | description        | start_date | end_date   | state     |
+      | Save the world     | It's a hit (song)! | next week  | next month | approved  |
+      | Innovate education | About time.        | next week  | next month | approved  |
+      | Norvig Award       | We have a winner!  | last week  | next month | approved  |
 
     When I visit the "dashboard.index" page
     Then I should see "Save the world" in section "Upcoming Challenges"
