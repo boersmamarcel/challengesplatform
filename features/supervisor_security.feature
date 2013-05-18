@@ -40,8 +40,6 @@ Feature: Security - supervisors
     | challenges.6        |
     | challenges.1.edit   |
     | challenge.new       |
-    | challenges.proposal |
-    | challenges.pending  |
     | user.1.profile      |
     | messages.1          |
 

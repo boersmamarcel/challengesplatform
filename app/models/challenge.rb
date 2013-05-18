@@ -1,5 +1,8 @@
 class Challenge < ActiveRecord::Base
-  attr_accessible :count, :description, :end_date, :start_date, :state, :title
+  # Supervisors have write access to these fields:
+  attr_accessible :title, :description, :end_date, :start_date
+  # But these are protected:
+  attr_protected :count, :state
 
   belongs_to :supervisor, :class_name => "User"
 

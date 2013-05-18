@@ -19,26 +19,6 @@ class ChallengesController < ApplicationController
     redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
   end
 
-  # GET /challenges/proposal
-  def proposal
-    @challenges = Challenge.proposal
-  end
-
-  # GET /challenges/approved
-  def approved
-    @challenges = Challenge.approved
-  end
-
-  # GET /challenges/declined
-  def declined
-    @challenges = Challenge.where("state = 'proposal' AND count > 1")
-  end
-
-  # GET /challenges/pending
-  def pending
-    @challenges = Challenge.pending
-  end
-
   # GET /challenges/new
   def new
     @challenge = Challenge.new
