@@ -1,0 +1,15 @@
+%input{:type => :hidden, :id =>'page_identifier', :value => 'admin/review.index'}
+%h2
+  Review the following challenges
+%table.table.table-hover
+  %th
+    %td
+      %b Start date
+    %td
+      %b End date
+    %td
+      %b Review count
+    %td
+
+  - @challenges.each do |challenge|
+    = render :partial => 'admin/shared/challengetablerow', :object => challenge, :as => 'challenge'

@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#mailbox {
+	position: relative;
+	cursor:	pointer;
+	.badge {
+		// box-shadow: 0px 0px 5px rgb(241, 114, 101);
+		position: absolute;
+		top: 5px;
+		right: 8px;
+		border-radius: 100%;
+		padding: 0px 4px;
+		font-size: 11px;
+		background-color: #c0392b;
+	}
+}
 .message {
 	border-bottom: 1px solid gray;
 	padding: 0px;

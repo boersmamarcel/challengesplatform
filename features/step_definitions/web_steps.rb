@@ -20,14 +20,8 @@ def getRoute(name)
     challenges_path
   when "challenge.new"
     new_challenge_path
-  when "challenges.pending"
-    pending_challenges_path
-  when "challenges.approved"
-    approved_challenges_path
-  when "challenges.declined"
-    declined_challenges_path
-  when "challenges.proposal"
-    proposal_challenges_path
+  when "admin/review.index"
+    admin_review_index_path
   when /^challenges.([0-9]+)$/ #matches a challenge id
     challenge_path($1)
   when /^challenges.([0-9]+).edit$/ #matches a challenge id
@@ -72,14 +66,14 @@ Then(/^I should see the "(.*?)" page$/) do |pageName|
   find('input#page_identifier').value.should eql pageName
 end
 
-Then(/^I should see "(.*?)" in list "(.*?)"$/) do |text, section|
-  within(:xpath, "//ul[@id='#{css_case(section)}']") do
+Then(/^I should see "(.*?)" in section "(.*?)"$/) do |text, section|
+  within(:xpath, "//div[@id='#{css_case(section)}']") do
     page.should have_content(text)
   end
 end
 
-Then(/^I should not see "(.*?)" in list "(.*?)"$/) do |text, section|
-  within(:xpath, "//ul[@id='#{css_case(section)}']") do
+Then(/^I should not see "(.*?)" in section "(.*?)"$/) do |text, section|
+  within(:xpath, "//div[@id='#{css_case(section)}']") do
     page.should_not have_content(text)
   end
 end
@@ -126,3 +120,9 @@ Given(/^the following (.+) records?$/) do |factory, table|
     FactoryGirl.create(factory, hash)
   end
 end
+
+Then(/^show me the page$/) do
+  print page.html
+  save_and_open_page
+end
+

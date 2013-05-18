@@ -10,33 +10,13 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = Challenge.all
+    @challenges = ChallengeDecorator.decorate_collection(Challenge.running_first)
   end
 
   # GET /challenges/1
   def show
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.find(params[:id]).decorate
     redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
-  end
-
-  # GET /challenges/proposal
-  def proposal
-    @challenges = Challenge.proposal
-  end
-
-  # GET /challenges/approved
-  def approved
-    @challenges = Challenge.approved
-  end
-
-  # GET /challenges/declined
-  def declined
-    @challenges = Challenge.where("state = 'proposal' AND count > 1")
-  end
-
-  # GET /challenges/pending
-  def pending
-    @challenges = Challenge.pending
   end
 
   # GET /challenges/new
@@ -47,6 +27,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/1/edit
   def edit
     @challenge = Challenge.find(params[:id])
+
     unless @challenge.editable_by_user?(current_user)
       redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end

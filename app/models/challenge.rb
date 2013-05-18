@@ -1,11 +1,15 @@
 class Challenge < ActiveRecord::Base
-  attr_accessible :count, :description, :end_date, :start_date, :state, :title
+  # Supervisors have write access to these fields:
+  attr_accessible :title, :description, :end_date, :start_date
+  # But these are protected:
+  attr_protected :count, :state
 
   belongs_to :supervisor, :class_name => "User"
 
   has_many :enrollments, :dependent => :destroy # Enrollments does not have a default scope for unenrolled users
   # Participants does has this default scope (See :conditions)
   has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
+  has_many :comments, :order => 'updated_at DESC'
 
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
@@ -41,12 +45,37 @@ class Challenge < ActiveRecord::Base
   def pending?
     state == 'pending'
   end
+
+  def running?
+    Date.today.to_time_in_current_zone >= start_date && Date.today.to_time_in_current_zone <= end_date
+  end
+
+  def over?
+    Date.today.to_time_in_current_zone >= end_date
+  end
+
+  # TODO: add commitment field to database
+  def commitment #hours/weeek
+    rand(2..10)
+  end
+
+  def upcoming?
+    Date.today.to_time_in_current_zone < start_date
+  end
   def editable_by_user?(user)
     (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
   end
 
   def visible_for_user?(user)
    state == 'approved' || supervisor_id == user.id || user.is_admin?
+  end
+
+  def can_unenroll?
+    !running?
+  end
+
+  def can_enroll?
+    upcoming?
   end
   @protected
 

@@ -1,9 +1,5 @@
 Challengesplatform::Application.routes.draw do
   resources :challenges do
-      get 'approved', :on => :collection
-      get 'declined', :on => :collection
-      get 'pending', :on => :collection
-      get 'proposal', :on => :collection
       get 'revoke', :on => :member
       get 'enroll', :on => :member
       get 'unenroll', :on => :member
@@ -28,6 +24,12 @@ Challengesplatform::Application.routes.draw do
   get "messages/generate"
   
   resources :messages, :only => [:show, :destroy, :index]
+
+  namespace :admin do
+    resources :review do
+      post 'comment', :on => :member
+    end
+  end
 
   get "static/index"
 

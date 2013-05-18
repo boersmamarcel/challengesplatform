@@ -1,25 +1,29 @@
-= link_to "Home", root_path, :class => 'brand'
+= link_to "Science Challenges", root_path, :class => 'brand'
+%ul.nav
+  %li{class: controller?("static") ? "active" : ""}
+    = link_to('Home', static_index_path)
 - if user_signed_in?
   %ul.nav
-    %li
+    %li{class: controller?("dashboard") ? "active" : ""}
       = link_to('Dashboard', dashboard_path)
-    %li
+    %li{class: controller?("challenges") ? "active" : ""}
       = link_to('Challenges', challenges_path)
-    %li
+    %li{class: controller?("users/registrations") ? "active" : ""}
       = link_to('Edit account', edit_user_registration_path)
   %ul.nav.pull-right
+    %li.divider-vertical
     %li
       - if current_user.received_messages.unread.empty?
         %a#mailbox.inactive{ :onClick => "addModal()" }
-          %i.icon-envelope
+          %i.icon-envelope.icon-large
       - else
         %a#mailbox.active{ :onClick => "addModal()" }
-          %i.icon-envelope.icon-active
-          %strong= "(" + current_user.received_messages.unread.count.to_s + ")"
+          %i.icon-envelope-alt.icon-large.icon-active
+          .badge
+            = "" + current_user.received_messages.unread.count.to_s + ""
+    %li.divider-vertical
     %li
       = link_to('Logout', destroy_user_session_path)
-
-
 - else
   %ul.nav.pull-right
     %li
