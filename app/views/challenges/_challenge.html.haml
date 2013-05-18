@@ -13,7 +13,6 @@
   %a.thumb{:href => challenge_path(challenge)}
     %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
     %h4= challenge.title
-  / %a{:href => challenge_path(challenge)}
   - if challenge.supervisor.present?
     .supervisor
       %i.icon-user
@@ -58,8 +57,3 @@
         %i.icon-time
         = challenge.commitment
       %span.muted Hours/week
-
-
-  / .actions
-  /   %a.btn.btn{:href => challenge_path(challenge)} Show
-  /   %a.enroll.btn.btn-success{:href => enroll_challenge_path(challenge)} Enroll
