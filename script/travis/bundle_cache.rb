@@ -29,14 +29,14 @@ else
   # `sudo apt-get install expect`
 
   puts "=> Preparing bundle archive"
-  `cd ~ && tar -cjf #{file_name} .bundle`
+  puts `cd ~ && tar -cjf #{file_name} .bundle`
 
   puts "=> Uploading the bundle"
-  `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{file_name}`
+  puts `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{file_name}`
 
   puts "=> Uploading the digest file"
   `echo "#{bundle_digest}" > ~/#{digest_filename}`
-  `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{digest_filename}`
+  puts `/home/travis/build/boersmamarcel/challengesplatform/script/travis/send_files.sh ~/#{digest_filename}`
 
 end
 
