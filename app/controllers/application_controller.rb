@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  rescue_from 'ActiveRecord::RecordNotFound', :with => :show_404
+
   before_filter :authenticate_user!
   before_filter :require_supervisor
   before_filter :require_admin
@@ -25,4 +27,10 @@ class ApplicationController < ActionController::Base
   def after_update_path_for(resource)
     profile_user_path(resource)
   end
+
+  private 
+      def show_404
+          render :template => 'error_pages/404', :layout => false, :status => :not_found
+      end
+
 end
