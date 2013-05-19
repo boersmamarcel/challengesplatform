@@ -9,10 +9,8 @@ env:
     - secure: "IL5x5UL21pyP+dvSGwyHzx9Dvua8aBnpVexTSScUvCbb/m7VhrfftfQYpDee\nQcNAbcM7OFdrPokg3RhPGwMwBsMXedkFE6sLOH8tml6IGWgOmGemV8E7LmzL\nadxpMilgxdKsYgVwi6WZ+mt5LdM0prlW5NabZTmMHaosDyBGERg="
     - secure: "H8HnHZjxhvEuZ2LRI012i2Y2PKRJqRbA6nuJaK0nkLjviFjEe+KNB6rsuosd\nWcVYqxJP0mb6JjKrwCmeAgCyE4swy4p1slC6Er0wpMEQ+ndseCAUWhUO5RLL\n+wHP1Bfu0u8qoMdSOWRnPg8Q1boE8kM71xQ0oLdRo9X600ZjU5I="
     - secure: "biE7FXW01hxze4qEIEs+8lUhNYdVkRViGsEJpyiRs/XIM75/TfPZ7fdiGxXr\nDAL0Sbfj+jI6PY0h7sjPVZVpuJwG69A9Rk+WJuFD2qVcInLhdcL1xMX+vtHM\nr2/X5Oa889LUGMxcj7qxB6I8S8PPIoEWlZ6sZ9mqAlmwYkd5gS4="
-    - #IP
-    - secure: "NY6Qyz7W3nl+IBeQHoibPh2tV+V7HEOAWXpNjIctRWwbujfkAkILlMRrDEPI\n19nHCC6V6+LVqiR3EtiNZ3JTTH74oyHY90vHg+aQVG90UEXwxuJVq0djEFMX\nZZw02mG0M3GmM/7fZXrmHAKXJaZJbKHlu4ljwau6MLtJGFRw6wg="
-    - #Pass
-    - secure: "jjPuVaXLYUzYRdWkKo9e+vxMe5ioCh9aLOcs2Z9DR7ofqNU0ELEGjYkEWj3Z\nwiXoRMY4dizfT4SnGr5xX4VhWajVLFCSetjLI6JWN9WftOU9WQz9WnEepiju\nE/StLX6rbQ0DfsdHpPKf2+BYYxatn0PCNaQv55UNVfV427GUL2U="
+    - secure: "jjPuVaXLYUzYRdWkKo9e+vxMe5ioCh9aLOcs2Z9DR7ofqNU0ELEGjYkEWj3Z\nwiXoRMY4dizfT4SnGr5xX4VhWajVLFCSetjLI6JWN9WftOU9WQz9WnEepiju\nE/StLX6rbQ0DfsdHpPKf2+BYYxatn0PCNaQv55UNVfV427GUL2U=" #pass
+    - secure: "NY6Qyz7W3nl+IBeQHoibPh2tV+V7HEOAWXpNjIctRWwbujfkAkILlMRrDEPI\n19nHCC6V6+LVqiR3EtiNZ3JTTH74oyHY90vHg+aQVG90UEXwxuJVq0djEFMX\nZZw02mG0M3GmM/7fZXrmHAKXJaZJbKHlu4ljwau6MLtJGFRw6wg=" #ip
     - BUNDLE_ARCHIVE="travis_challenges_bundle"
   matrix:
     - DB=postgres

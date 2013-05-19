@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 # exp_internal 1 (For debugging)
-set timeout 180
+set timeout 60
 set file [lindex $argv 0]
 spawn scp $file travis@198.199.77.172:~/www
 expect {
