@@ -1,0 +1,5 @@
+%h1
+  Review comments
+= render :partial => 'admin/shared/commentform', :object => new_comment, :as => 'comment'
+= render :partial => 'admin/shared/comment', :collection => comments, :as => 'comment'
+  

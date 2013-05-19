@@ -1,0 +1,28 @@
+%div.modal-header
+  %h2
+    %i.icon-inbox
+    Messages
+%div.modal-body
+  - if current_user.received_messages.empty?
+    .message
+      You have no messages
+  - else
+    - current_user.received_messages.limit(3).each do |message|
+      .message
+        %h4
+          - unless message.is_read
+            %i.icon-circle
+          = message.subject
+        %p= truncate(message.body, :length => 150)
+        %p
+          %i.icon-user
+          = link_to get_name(message.sender), profile_user_path(message.sender)
+          &mdash;
+          %a
+            = link_to "Read full &raquo;".html_safe, message_path(message)
+%div.modal-footer
+  %span.pull-right
+    %a.btn{:href => '#', :onClick => '$(this.parentNode.parentNode.parentNode).modal("hide")'}
+      Close
+    %a#gotoinbox.btn.btn-primary{:href => messages_path}
+      Go to Inbox

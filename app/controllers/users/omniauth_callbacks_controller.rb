@@ -1,5 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
+  skip_filter :authenticate_user!, :require_admin, :require_supervisor
+
   def google_oauth2
 
       if request.env["omniauth.auth"].info['email'] =~ /(.+)utwente.nl/

@@ -1,24 +1,36 @@
 Challengesplatform::Application.routes.draw do
   resources :challenges do
-      get 'approved', :on => :collection
-      get 'declined', :on => :collection
-      get 'pending', :on => :collection
-      get 'proposal', :on => :collection
       get 'revoke', :on => :member
       get 'enroll', :on => :member
       get 'unenroll', :on => :member
   end
 
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'users/registrations' }
+  devise_for :users, :controllers => { 
+    :omniauth_callbacks => "users/omniauth_callbacks", 
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions',
+    :passwords => 'users/passwords' }
 
   resources :users do
     get 'profile', :on => :member, :to => "profile#show"
     get 'followers' => 'follow#followers'
     get 'follows' => 'follow#follows'
-    
     resources :follow, :only => [:create, :destroy]
     
+  end
+  
+
+  resources :messages, :only => [:show, :destroy, :index]
+
+  namespace :admin do
+    resources :review do
+      post 'comment', :on => :member
+      post 'decline', :on => :member
+      post 'approve', :on => :member
+      get 'edit', :on => :member
+      put 'edit', :on => :member
+    end
   end
 
   get "static/index"
