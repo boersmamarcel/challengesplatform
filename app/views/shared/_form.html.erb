@@ -1,4 +1,4 @@
-<%= form_for(@challenge) do |f| %>
+<%= form_for(@challenge, :url => @url) do |f| %>
   <% r1 = !@challenge.nil? && !@challenge.start_date.nil? %>
   <% r2 = !@challenge.nil? && !@challenge.end_date.nil? %>
 

@@ -31,42 +31,6 @@ Feature: Add challenge
       And I press "Save"
       Then I should see a message with "Challenge successfully saved"
 
-
-    Scenario: Revoke a pending for review challenge
-      Given the following challenge records
-        | id | title  | description       | start_date | end_date   | state   | count | supervisor_id |
-        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | pending | 1     | 1             |
-      When I visit the "challenges.pending" page
-      And I follow "Revoke"
-      Then I should see a message with "Challenge successfully revoked"
-      Then I should see "Title1" in the list
-
-
-    Scenario: Revoke an approved challenge
-      Given the following challenge records
-        | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 1     | 1             |
-      When I visit the "challenges.approved" page
-      And I follow "Revoke"
-      Then I should see a message with "Challenge successfully revoked"
-      Then I should see "Title1" in the list
-
-
-    Scenario: View declined challenges
-      Given the following challenge records
-        | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | proposal | 2     | 1             |
-        | 2  | Title2  | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 1     | 1             |
-        | 3  | Title3  | Awesome challenge | 03-08-2013 | 09-09-2013 | pending  | 1     | 1             |
-        | 4  | Title4  | Awesome challenge | 03-08-2013 | 09-09-2013 | proposal | 1     | 1             |
-        | 5  | Title5  | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 2     | 1             |
-      When I visit the "challenges.declined" page
-      Then I should see "Title1" in the list
-      And I should not see "Title2" in the list
-      And I should not see "Title3" in the list
-      And I should not see "Title4" in the list
-      And I should not see "Title5" in the list
-
     Scenario: Resubmit a declined challenge (submit count should increase)
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
@@ -83,33 +47,6 @@ Feature: Add challenge
       When I edit the challenge with id "1" and a new description ""
       And I press "Submit for Review"
       Then I should see a message with "One or more fields are missing"
-
-    Scenario: View approved challenges
-      Given the following challenge records
-        | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 1     | 1             |
-	    When I visit the "challenges.approved" page
-	    When I open the challenge with id "1"
-	    Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
-	    And I should see a button "Revoke"
-
-    Scenario: View pending for review challenges
-     Given the following challenge records
-       | id | title   | description       | start_date | end_date   | state   | count | supervisor_id |
-       | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | pending | 1     | 1             |
-     When I visit the "challenges.pending" page
-     When I open the challenge with id "1"
-     Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
-     And I should see a button "Revoke"
-
-    Scenario: View a proposal challenge
-      Given the following challenge records
-        | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | proposal | 1     | 1             |
-      When I visit the "challenges.proposal" page
-      When I open the challenge with id "1"
-      Then I should see a title "Title1" and description "Awesome challenge" and start_date "03-08-2013" and end_date "09-09-2013"
-      And I should see a link "Edit"
 
     Scenario: Edit a pending for review challenge
       Given the following challenge records

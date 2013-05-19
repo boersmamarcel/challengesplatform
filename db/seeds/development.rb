@@ -49,6 +49,24 @@ challenges = [
     'count' => 2,
     'supervisor' => supervisors[1],
     'participants' => [students[2], students[3]]
+  },
+    { 'title' => 'Graph find',
+    'description' => 'learn to find a graph or so',
+    'start_date' => Time.now + 3600*24*5,
+    'end_date' => Time.now + 3600*24*30,
+    'state' => 'approved',
+    'count' => 2,
+    'supervisor' => supervisors[0],
+    'participants' => [students[2], students[3]]
+  },
+    { 'title' => 'Algorithm complexity',
+    'description' => 'Optimize the world with this kind of stuff',
+    'start_date' => Time.now + 3600*24*5,
+    'end_date' => Time.now + 3600*24*30,
+    'state' => 'approved',
+    'count' => 2,
+    'supervisor' => supervisors[1],
+    'participants' => [students[2], students[3]]
   }
   ];
   
@@ -79,26 +97,34 @@ follows = [{
   ];
 
 students.each do |student|
-  user = User.create!(:firstname => student['firstname'], :lastname => student['lastname'], :email => "#{student['firstname']}@student.utwente.nl", :password => "studentpass", :password_confirmation => "studentpass")
+  user = User.new(:firstname => student['firstname'], :lastname => student['lastname'], :email => "#{student['firstname']}@student.utwente.nl", :password => "studentpass", :password_confirmation => "studentpass")
+  user.role = 0
+  user.save
   Message.create!(:subject => "The first test message", :body => "And this is the body text of that message.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
   Message.create!(:subject => "A message with a very long title to see how that works, just for science", :body => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor est, gravida at lacinia sit amet, fringilla in lacus. Fusce rhoncus, elit a malesuada pharetra, nulla leo mollis arcu, nec euismod quam tortor in augue. Mauris nisi velit, ultricies eget gravida eu, vehicula in massa. Phasellus vestibulum porttitor lacinia. Suspendisse potenti. Nam volutpat, eros eget faucibus sollicitudin, lacus augue venenatis arcu, vel scelerisque erat nulla ut metus. Mauris dictum eros ut nunc pretium ultrices. Proin lacinia, ligula quis tempus rhoncus, dolor odio aliquam nulla, eu tempor ligula odio vel ligula. Nam fringilla, risus id vulputate venenatis, nunc elit gravida quam, quis imperdiet tortor tortor vestibulum tellus.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
   
 end
 
 supervisors.each do |supervisor|
- user = User.create!(:firstname => supervisor['firstname'], :lastname => supervisor['lastname'], :email => "#{supervisor['firstname']}@utwente.nl", :password => "supervisorpass", :password_confirmation => "supervisorpass", :role => 1)
+ user = User.new(:firstname => supervisor['firstname'], :lastname => supervisor['lastname'], :email => "#{supervisor['firstname']}@utwente.nl", :password => "supervisorpass", :password_confirmation => "supervisorpass")
+ user.role = 1
+ user.save
  Message.create!(:subject => "The first test message", :body => "And this is the body text of that message.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
  Message.create!(:subject => "A message with a very long title to see how that works, just for science", :body => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor est, gravida at lacinia sit amet, fringilla in lacus. Fusce rhoncus, elit a malesuada pharetra, nulla leo mollis arcu, nec euismod quam tortor in augue. Mauris nisi velit, ultricies eget gravida eu, vehicula in massa. Phasellus vestibulum porttitor lacinia. Suspendisse potenti. Nam volutpat, eros eget faucibus sollicitudin, lacus augue venenatis arcu, vel scelerisque erat nulla ut metus. Mauris dictum eros ut nunc pretium ultrices. Proin lacinia, ligula quis tempus rhoncus, dolor odio aliquam nulla, eu tempor ligula odio vel ligula. Nam fringilla, risus id vulputate venenatis, nunc elit gravida quam, quis imperdiet tortor tortor vestibulum tellus.", :sender_id => user.id, :receiver_id => user.id, :is_read => false)
 
 end
 
-User.create!(:firstname => "Kevin", :lastname => "Flynn", :email => "admin@utwente.nl", :password => "adminpass", :password_confirmation => "adminpass", :role => 2)
+admin = User.new(:firstname => "Kevin", :lastname => "Flynn", :email => "admin@utwente.nl", :password => "adminpass", :password_confirmation => "adminpass")
+admin.role = 2
+admin.save
 
 challenges.each do |challenge|
     supervisor = User.where(:firstname => challenge['supervisor']['firstname'], :lastname => challenge['supervisor']['lastname']).first;
 
-    challengerecord = Challenge.new(:title => challenge['title'], :description => challenge['description'], :start_date => challenge['start_date'], :end_date => challenge['end_date'], :state => challenge['state'], :count => challenge['count'])
+    challengerecord = Challenge.new(:title => challenge['title'], :description => challenge['description'], :start_date => challenge['start_date'], :end_date => challenge['end_date'])
     challengerecord.supervisor = supervisor
+    challengerecord.state = challenge['state']
+    challengerecord.count = challenge['count']
     challengerecord.save
     
     challenge['participants'].each do |participant|

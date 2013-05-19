@@ -1,8 +1,59 @@
-%li.challenge
-  %h3= challenge.title
-  = markdown(challenge.description)
-  %span.date= challenge.start_date
-  %span.date= challenge.end_date
-  %span.state= challenge.state
-  %span.count= challenge.count
-  %span.link= link_to 'Show', challenge
+.challenge.span4
+  - if !options[:no_status] && challenge.current_user_enrolled?
+    .status
+      %span.badge.badge-success
+        %i.icon-check-sign
+        You're enrolled
+  - elsif !options[:no_status] && challenge.warn_current_user_enrollment?
+    .status
+      %span.badge.badge-warning
+        Enrollment closes in
+        = challenge.days_till_enrollment_closes
+        days!
+  %a.thumb{:href => challenge_path(challenge)}
+    %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+    %h4= challenge.title
+  - if challenge.supervisor.present?
+    .supervisor
+      %i.icon-user
+      %strong Supervised by
+      = link_to challenge.supervisor.fullname, profile_user_path(challenge.supervisor)
+
+  %p.description= challenge.synopsis
+
+  %p.date
+    %span.start-stop
+      = challenge.human_date_string
+  .progress
+    .bar.bar-success{style: "width: #{challenge.percentage_date}"}
+
+  %ul.details
+    - if challenge.running?
+      %li
+        %strong
+          %i.icon-calendar
+          = challenge.days_till_end
+        %span.muted
+          = pluralize(challenge.days_till_end, "Day").split.last
+          to go
+    - elsif challenge.upcoming?
+      %li
+        %strong
+          %i.icon-calendar
+          = challenge.days_till_start
+        %span.muted
+          = pluralize(challenge.days_till_end, "Day").split.last
+          till start
+    - else
+      %li
+        %span.muted Challenge is over
+    %li
+      %strong
+        %i.icon-group
+        = challenge.participants.count
+      %span.muted= pluralize(challenge.participants.count, "Participant").split.last
+    %li
+      %strong
+        %i.icon-time
+        = challenge.commitment
+      %span.muted Hours/week
