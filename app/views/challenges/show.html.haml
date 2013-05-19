@@ -1,0 +1,60 @@
+%input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
+.challenge_detail
+  %h2#title= @challenge.title
+  - if @challenge.supervisor.present?
+    %p.supervisor
+      %i.icon-user
+      %strong Supervised by
+      = link_to @challenge.supervisor.fullname, profile_user_path(@challenge.supervisor)
+  - if @challenge.running?
+    .alert.alert-success
+      This challenge has begun!
+
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href: "#"} Info
+    %li
+      %a{href: "#"} Discussion
+
+  .row
+    .description#description.span8
+      .video
+        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
+      %p.lead
+        Ben jij super gaaf? Wij ook, doe mee en dan win je maximaal bonus punten. Ga vooruit, Science Challenges.
+      = markdown(@challenge.description)
+    .details.span4.well
+      %p
+        %i.icon-group
+        %strong
+          = @challenge.participants.count
+        %span.type= pluralize(@challenge.participants.count, "Participant").split.last
+      %p
+        %i.icon-time
+        %strong
+          = @challenge.commitment
+        %span.type Hours/week
+      %p
+        %i.icon-calendar
+        %strong
+          = @challenge.day_of_week
+        %span.type= @challenge.from_till
+      %p
+        %i.icon-map-marker
+        %strong Zilverling 3031
+      //------------------------------------------------------
+      %hr
+      .action
+        = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
+      %hr
+      //------------------------------------------------------
+      - if @challenge.supervisor.present?
+        .supervisor_detail
+          %h3 About the supervisor:
+          = render :partial => "profile/profile_tile", :object => @challenge.supervisor, :as => :user
+        %hr
+      //------------------------------------------------------
+      .participants_detail
+        %h3 Participants:
+        = render :partial => "profile/profile_small_tile", :collection => @challenge.participants.decorate, :as => :user
+        

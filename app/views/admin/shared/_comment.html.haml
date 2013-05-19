@@ -1,0 +1,12 @@
+%div.commentbox.row
+  %span.user.span1
+    = image_tag Gravatar.new(comment.user.email).image_url, :class => 'img-rounded commentsmallimage' 
+  %span.commenttext.span4
+    %p.muted 
+      = "#{comment.user.firstname} #{comment.user.lastname} #{commentdate(comment)}"
+    -if new_message_after_last_visit(comment)
+      %p.text-success
+        = comment.comment
+    -else
+      %p
+        = comment.comment

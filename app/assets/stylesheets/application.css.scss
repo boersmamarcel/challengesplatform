@@ -9,5 +9,70 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree 
+ *= require_tree
  */
+ @import 'colors';
+$font-notosans: 'Noto Sans', sans-serif;
+$font-header: 'Roboto Slab', sans-serif;
+$font-notoserif: 'Noto Serif', serif;
+/* Config goes here */
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+$sansFontFamily: $font-notosans;
+$serifFontFamily: $font-notoserif;
+$headingsFontFamily: $font-notoserif;
+$headingsFontWeight: 400;
+
+$blue: $color-belize-hole;
+$green: $color-emerland;
+$red: $color-pomegranate;
+$yellow: $color-sun-flower;
+$orange: $color-pumpkin;
+$pink: $color-amethyst;
+$purple: $color-wisteria;
+
+/* This should come after the custom variables */
+@import "bootstrap";
+@import "font-awesome";
+// @import "bootstrap-responsive";
+// Fix the frickin' box model
+// * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+h1,h2 {
+  font-family: $font-header;
+}
+h2 {
+  font-size: 22px;
+  &.bordered {
+    border-bottom: 1px solid #ececec;
+  }
+}
+.navbar .brand {
+  font-family: $font-header;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 1px;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 0px black;
+  font-size: 18px;
+  span {
+    margin-left: 34px;
+  }
+  strong {
+    font-weight: 700;
+  }
+  img {
+    width: 28px;
+    position: absolute;
+    top: 6px;
+  }
+}
+.hero-unit {
+  text-shadow: 1px 1px 0px white;
+  padding: 40px;
+  p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+}

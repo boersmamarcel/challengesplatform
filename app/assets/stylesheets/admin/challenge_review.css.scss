@@ -1,0 +1,43 @@
+// Place all the styles related to the Admin::ChallengeReview controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.commenttextarea{
+  height: 200px;
+}
+
+img.commentsmallimage{
+  width: 50px;
+  height: 50px;
+}
+
+.commentform{
+  margin-top : 10px;
+}
+
+.adminbuttons{
+  text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.adminbuttons h2{
+	text-align: center;
+}
+
+div.comments{
+	margin-top: 50px;
+}
+
+.formmodal{
+	margin-bottom: -20px;
+}
+
+.declinereview{
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.declinereviewtext{
+	width: 95%;
+	height: 150px;
+}
