@@ -10,4 +10,3 @@ expect {
 
 expect "100%"
 expect eof
-EOF

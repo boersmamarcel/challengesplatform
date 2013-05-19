@@ -21,13 +21,13 @@ else
     puts "=> There was no existing digest, uploading a new version of the archive"
   else
     puts "=> There were changes, uploading a new version of the archive"
-    puts "  => Old checksum: #{old_digest}"
-    puts "  => New checksum: #{bundle_digest}"
+    puts "  => Old checksum: [#{old_digest}] (Length: #{old_digest.length})"
+    puts "  => New checksum: [#{bundle_digest}] (Length: #{bundle_digest.length})"
   end
 
-  # puts "Fetch expect"
-  # `sudo apt-get install expect`
-
+  puts "Fetch expect"
+  puts `sudo apt-get install expect`
+  `which expect`
   puts "=> Preparing bundle archive"
   puts `cd ~ && tar -cjf #{file_name} .bundle`
 
