@@ -13,7 +13,7 @@ puts "Checking for changes"
 bundle_digest = Digest::SHA2.file(lock_file).hexdigest
 old_digest    = File.exists?(old_digest) ? File.read(old_digest) : ""
 
-if bundle_digest == old_digest
+if bundle_digest.strip == old_digest.strip
   puts "=> There were no changes, doing nothing"
 else
 
