@@ -16,25 +16,24 @@
       .control-group
         = f.label :title , "Name:", :class => "control-label"
         .controls
-          = f.text_field :title, :placeholder => "Challenge name"
+          = f.text_field :title, :class => "span4 enable-popover", :placeholder => "Challenge name", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "Names should be short and to the point", :title => "Challenge name"
       .control-group
-        = f.label :lead , "Pitch your challenge", :class => "control-label"
+        = f.label :lead , "Pitch your challenge:", :class => "control-label"
         .controls
-          %small Why should people join your challenge? Keep it short and make it exciting :)!
-          = f.text_area :lead, :class => "span8", :rows => "2", :placeholder => "Challenge lead..."
+          = f.text_area :lead, :class => "span4  enable-popover", :rows => "3", :placeholder => "Challenge lead...", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "Why should people join your challenge? Keep it short and make it exciting! (120 characters max.)", :title => "Pitch your challenge"
       .control-group
-        = f.label :image , "", :class => "control-label"
+        = f.label :image , "Challenge Image:", :class => "control-label"
         .controls
           - if @challenge.image.present?
             = image_tag @challenge.image.thumb.url, :class => "img-rounded"
           = f.hidden_field :image_cache
-          = f.file_field :image, :title => "Select an image"
+          = f.file_field :image, :title => "<i class='icon-cloud-upload' /> Select an image"
       .control-group
-        = f.label :description , "Description", :class => "control-label"
+        = f.label :description , "Description:", :class => "control-label"
         .controls
-          = f.text_area :description, :class => "span8", :rows => "10", :placeholder => "Description..."
+          = f.text_area :description, :class => "span8 enable-popover", :rows => "10", :placeholder => "Description...", "data-toggle" => "popover", "data-placement" => "left", "data-trigger" => "focus", "data-content" => "Basic formatting with markdown: \n Use _text_ for italic, use **text** for bold. \n Make list via '* listitem' and '1.  listitem'. \nLinks are automatically parsed, you can also name them with [GitHub](http://github.com)", :title => "Description"
       .control-group
-        = f.label :start_date , "Dates", :class => "control-label"
+        = f.label :start_date , "Dates:", :class => "control-label"
         .controls
           - if r1
             = f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y")
@@ -46,19 +45,14 @@
           - else
             = f.text_field :end_date
       .control-group
-        = f.label :location , "Location", :class => "control-label"
+        = f.label :location , "Location:", :class => "control-label"
         .controls
-          = f.text_field :location, :placeholder => "Challenge location... "
-          %small (Leave blank if undecided)
+          = f.text_field :location, :placeholder => "Challenge location... ", :class => "enable-popover", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "This can be a roomnumber, office or something else. (Leave blank if undecided)", :title => "Challenge location"
       .control-group
         = f.label :commitment , "Commitment", :class => "control-label"
         .controls
-          = f.text_field :commitment, :placeholder => "Challenge commitment... "
-          %small (Hours/week)
+          = f.text_field :commitment, :placeholder => "Challenge commitment... ", :class => "enable-popover", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "What is the minimal number of hours per week a student should commit to this challenge?", :title => "Challenge Commitment"
       .control-group
         .controls
           = f.submit 'Save draft', :class => "btn"
           = f.submit 'Submit for Review', :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
-
-:javascript
-  setDateControl($('#challenge_start_date'), $('#challenge_end_date'));

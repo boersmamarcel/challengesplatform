@@ -72,6 +72,17 @@
     width: 150px;
     margin-right: 10px;
   }
+  .popover {
+    .popover-title {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .popover-content {
+      font-size: 12px;
+    }
+  }
 }
 // Challenge Tiles
 .challenges-list{
