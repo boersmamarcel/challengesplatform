@@ -2,7 +2,7 @@
   - if !options[:no_status] && challenge.current_user_enrolled?
     .status
       %span.badge.badge-success
-        %i.icon-check-sign
+        %i.icon-ok-sign
         You're enrolled
   - elsif !options[:no_status] && challenge.warn_current_user_enrollment?
     .status
@@ -19,7 +19,7 @@
       %strong Supervised by
       = link_to challenge.supervisor.fullname, profile_user_path(challenge.supervisor)
 
-  %p.description= challenge.synopsis
+  %p.description= challenge.lead
 
   %p.date
     %span.start-stop
@@ -46,6 +46,9 @@
           till start
     - else
       %li
+        %strong
+          %i.icon-calendar
+          0
         %span.muted Challenge is over
     %li
       %strong

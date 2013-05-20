@@ -1,0 +1,49 @@
+= form_for(@challenge, :url => @url) do |f|
+  - r1 = !@challenge.nil? && !@challenge.start_date.nil?
+  - r2 = !@challenge.nil? && !@challenge.end_date.nil?
+  %br/
+  .row
+    .span8.center
+      - if @challenge.errors.any?
+        #error_explanation.alert.alert-error
+          %a.close{"data-dismiss" => "alert"} ×
+          %p
+            = pluralize(@challenge.errors.count, "error")
+            prohibited this challenge from being saved:
+          %ul
+            - @challenge.errors.full_messages.each do |msg|
+              %li= msg
+    %div
+      .row
+        .span8.offset2
+          = f.text_field :title, :class => "lead", :placeholder => "Challenge name"
+      .row
+        .span8.offset2
+          %small Describe this challenge in one to two sentences (40 to 140 characters).
+          = f.text_area :lead, :class => "span8", :rows => "2", :placeholder => "Challenge lead..."
+      .row
+        .span8.offset2
+          = f.text_area :description, :class => "span8", :rows => "10", :placeholder => "Description..."
+      .row
+        .span4.offset2
+          Start date:
+          \#{f.text_field :start_date, :value => @challenge.start_date.strftime("%d-%m-%Y") if r1}
+          \#{f.text_field :start_date unless r1}
+        .span4.text-right
+          End date:
+          \#{f.text_field :end_date, :value => @challenge.end_date.strftime("%d-%m-%Y") if r2}
+          \#{f.text_field :end_date unless r2}
+      .row
+        .span8.offset2
+          = f.text_field :location, :class => "lead", :placeholder => "Challenge location... "
+          %small (Leave blank if undecided)
+      .row
+        .span8.offset2
+          = f.text_field :commitment, :class => "lead", :placeholder => "Challenge commitment... "
+          %small (Hours/week)
+      .row
+        .span8.offset2.text-right
+          = f.submit 'Save draft', :class => "btn"
+          = f.submit 'Submit for Review', :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+:javascript
+  setDateControl($('#challenge_start_date'), $('#challenge_end_date'));
