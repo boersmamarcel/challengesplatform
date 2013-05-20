@@ -2,7 +2,9 @@ students = [{"firstname" => "Bram", "lastname" => "Leenders"},
   {"firstname" => "Marcel", "lastname" => "Boersma"}, 
   {"firstname" => "Bas", "lastname" => "Veeling"}, 
   {"firstname" => "Koen", "lastname" => "van Urk"}];
-supervisors = [{"firstname" => "Djoerd", "lastname" => "Hiemstra"}, {"firstname" => "Rom", "lastname" => "Langerak"}];
+supervisors = [
+  {"firstname" => "Djoerd", "lastname" => "Hiemstra"}, 
+  {"firstname" => "Rom", "lastname" => "Langerak"}];
 
 challenges = [
   { 'title' => 'Norvig big data award',
@@ -91,31 +93,14 @@ challenges = [
   }
 ];
   
-follows = [{
-  'user' => students[0],
-  'follows' => [students[1]]
-  },
-  {
-    'user' => students[1],
-    'follows' => [students[0], students[3], students[2]]
-  },  
-  {
-   'user' => students[2],
-   'follows' => [supervisors[0]]
-  },
-  {
-   'user' => students[3],
-   'follows' => [students[0], students[1]]
-  },
-  {
-   'user' => supervisors[0],
-   'follows' => [students[1], students[2]]
-  },
-  {
-   'user' => supervisors[1],
-   'follows' => [supervisors[0]]
-  }
-  ];
+follows = [
+  { 'user' => students[0], 'follows' => [students[1]] },
+  { 'user' => students[1], 'follows' => [students[0], students[3], students[2]] },  
+  { 'user' => students[2], 'follows' => [supervisors[0]] },
+  { 'user' => students[3], 'follows' => [students[0], students[1]] },
+  { 'user' => supervisors[0], 'follows' => [students[1], students[2]] },
+  { 'user' => supervisors[1], 'follows' => [supervisors[0]] }
+];
 
 students.each do |student|
   user = User.new(:firstname => student['firstname'], :lastname => student['lastname'], :email => "#{student['firstname']}@student.utwente.nl", :password => "studentpass", :password_confirmation => "studentpass")
