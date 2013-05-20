@@ -1,6 +1,6 @@
 class Challenge < ActiveRecord::Base
   # Supervisors have write access to these fields:
-  attr_accessible :title, :description, :end_date, :start_date
+  attr_accessible :title, :description, :end_date, :start_date, :lead
   # But these are protected:
   attr_protected :count, :state
 
@@ -12,6 +12,8 @@ class Challenge < ActiveRecord::Base
   has_many :comments, :order => 'updated_at DESC'
 
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :lead, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :lead, :length => { :in => 40..120 }, :if => :pending?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
   validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?

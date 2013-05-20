@@ -8,7 +8,7 @@ class ChallengeDecorator < Draper::Decorator
   def human_readable_end_date
     object.end_date.strftime("%d-%m-%Y")
   end
-  
+
   def current_user_enrolled?
     object.participants.exists? h.current_user
   end
@@ -28,15 +28,13 @@ class ChallengeDecorator < Draper::Decorator
   def day_of_week
     object.start_date.strftime("%A")
   end
+
   def from_till
     ("From " + h.content_tag(:span, human_readable_start_date, :id => 'start_date') + " till " +  h.content_tag(:span, human_readable_end_date, :id => 'end_date')).html_safe
   end
+
   def human_date_string
     ("Every " + day_of_week.downcase + ", " + from_till).html_safe
-  end
-
-  def synopsis
-    h.truncate(h.strip_tags(h.markdown(object.description)), :length => 120, :separator => ' ')
   end
 
   def days_total
