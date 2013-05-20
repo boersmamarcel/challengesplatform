@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :challenge do |c|
    c.title "Default title"
+   c.lead "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. Nulla ullamcorper, nisl eget lacinia mattis, nunc."
    c.description "Default description"
    c.start_date Date.today + 2
    c.end_date Date.today + 4

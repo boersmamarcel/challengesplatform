@@ -26,9 +26,16 @@ Given(/^I am enrolled in challenge "(.*?)"$/) do |challenge_id|
   challenge.participants << user
 end
 
+Then(/^I should see a title "(.*?)" and start_date "(.*?)" and end_date "(.*?)" in the list$/) do |title, start_date, end_date|
+  page.should have_content(title)
+  page.should have_content(start_date)
+  page.should have_content(end_date)
+end
+
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)" in the list$/) do |title, description, start_date, end_date|
   page.should have_content(title)
   page.should have_content(description)
   page.should have_content(start_date)
   page.should have_content(end_date)
 end
+
