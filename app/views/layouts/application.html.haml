@@ -11,10 +11,10 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
-    %link{:href => "favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
     %link{:href => asset_path("fav32.png"), :rel => "icon", :sizes => "32x32", :type => "image/png"}/
     %link{:href => asset_path("fav64.png"), :rel => "icon", :sizes => "64x64", :type => "image/png"}/
     %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
+    %link{:href => asset_path("favicon.ico"), :rel => "shortcut icon", :type => "image/x-icon"}/
   %body
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner

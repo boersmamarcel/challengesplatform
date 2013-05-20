@@ -62,12 +62,14 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1
   def update
     @challenge = Challenge.find(params[:id])
-
+    image = params[:challenge].delete :image
     if self.submit_for_review?
       @challenge.state = 'pending'
     end
-
-    if @challenge.update_attributes(params[:challenge])
+    if image.present?
+      @challenge.image = image
+    end
+    if @challenge.update_attributes(params[:challenge]) && @challenge.save
 
       redirect_to @challenge, notice: 'Challenge was successfully updated.'
     else

@@ -1,4 +1,4 @@
-= form_for(@challenge, :url => @url) do |f|
+= form_for @challenge, :url => @url, :html => {:multipart => true} do |f|
   - r1 = !@challenge.nil? && !@challenge.start_date.nil?
   - r2 = !@challenge.nil? && !@challenge.end_date.nil?
   %br/
@@ -40,7 +40,13 @@
       .row
         .span8.offset2
           = f.text_field :commitment, :class => "lead", :placeholder => "Challenge commitment... "
-          %small (Hours/week)
+          %small (Hours/week).row
+      .row
+        .span8.offset2
+          - if @challenge.image.present?
+            = image_tag @challenge.image.thumb.url
+          = f.hidden_field :image_cache
+          = f.file_field :image
       .row
         .span8.offset2.text-right
           = f.submit 'Save draft', :class => "btn"

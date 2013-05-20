@@ -1,6 +1,6 @@
 class Challenge < ActiveRecord::Base
   # Supervisors have write access to these fields:
-  attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment
+  attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment, :image,  :image_cache, :remove_image
   # But these are protected:
   attr_protected :count, :state
 
@@ -30,6 +30,9 @@ class Challenge < ActiveRecord::Base
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
   scope :running_first, order('start_date ASC')
+
+  # Carrierwave Image Uploading
+  mount_uploader :image, ChallengeImageUploader
 
   def enroll(user)
     enrollment = enrollments.find_by_participant_id(user)
