@@ -62,6 +62,8 @@ class ChallengesController < ApplicationController
   def update
     @challenge = Challenge.find(params[:id])
 
+    #raise RoleException::SupervisorLevelRequired.new('Supervisor level required') @challenge.editable_by_user(current_user)
+
     if self.submit_for_review?
       @challenge.state = 'pending'
     end
