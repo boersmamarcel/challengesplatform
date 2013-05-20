@@ -10,7 +10,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = ChallengeDecorator.decorate_collection(Challenge.approved.running_first)
+    @challenges = ChallengeDecorator.decorate_collection(Challenge.visible_for_user(current_user).running_first)
   end
 
   # GET /challenges/1
@@ -31,7 +31,6 @@ class ChallengesController < ApplicationController
     unless @challenge.editable_by_user?(current_user)
       redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end
-
   end
 
   def submit_for_review?
