@@ -33,3 +33,5 @@ config/initializers/devise_local.rb
 coverage
 
 public/uploads
+#ignore Bram's database reset bash script
+reset.sh

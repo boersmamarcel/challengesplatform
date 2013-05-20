@@ -38,7 +38,7 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def human_date_string
-    ("Every " + day_of_week.downcase + ", " + from_till).html_safe
+    ("Every " + day_of_week.downcase + ", " + from_till.downcase).html_safe
   end
 
   def days_total
