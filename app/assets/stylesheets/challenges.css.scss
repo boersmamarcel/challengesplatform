@@ -31,24 +31,26 @@
     background: #ececec;
     padding: 20px;
     text-shadow: 1px 1px 0px white;
-    i {
-      font-size: 25px;
-      float: left;
-      width: 30px;
-      text-align: center;
-    }
-    strong {
-      font-size: 25px;
-      margin: 0px 0px 0px 0px;
-      padding-left: 40px;
-      display: block;
-      line-height: 25px;
-    }
-    span.type {
-      padding-left: 40px;
-      display: block;
-      font-size: 12px;
-      color: #666;
+    .detail { 
+      i {
+        font-size: 25px;
+        float: left;
+        width: 30px;
+        text-align: center;
+      }
+      strong {
+        font-size: 25px;
+        margin: 0px 0px 0px 0px;
+        padding-left: 40px;
+        display: block;
+        line-height: 25px;
+      }
+      span.type {
+        padding-left: 40px;
+        display: block;
+        font-size: 12px;
+        color: #666;
+      }
     }
     p {
       margin: 0px 0px 10px 0px;
@@ -139,6 +141,7 @@
     }
     .date {
       margin-bottom: 0px;
+      overflow: hidden;
       i {
         display: block;
         float: left;

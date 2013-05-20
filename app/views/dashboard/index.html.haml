@@ -2,7 +2,7 @@
 
 - unless @my_challenges.empty?
   %h2.bordered
-    %i.icon-check-sign.color-belize-hole
+    %i.icon-ok-sign.color-belize-hole
     Your Challenges
   = render :partial => 'shared/challenges_list' , :locals => {:challenges => @my_challenges, :list_id => "my_challenges"}
 

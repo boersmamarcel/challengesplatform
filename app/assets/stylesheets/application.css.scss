@@ -48,6 +48,13 @@ h2 {
     border-bottom: 1px solid #ececec;
   }
 }
+.brand {
+  font-family: $font-header;
+  font-weight: 400;
+  strong {
+    font-weight: 700;
+  }
+}
 .navbar .brand {
   font-family: $font-header;
   font-weight: 400;
@@ -58,9 +65,6 @@ h2 {
   font-size: 18px;
   span {
     margin-left: 34px;
-  }
-  strong {
-    font-weight: 700;
   }
   img {
     width: 28px;

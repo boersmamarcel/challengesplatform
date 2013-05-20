@@ -1,6 +1,6 @@
 class Challenge < ActiveRecord::Base
   # Supervisors have write access to these fields:
-  attr_accessible :title, :description, :end_date, :start_date
+  attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment
   # But these are protected:
   attr_protected :count, :state
 
@@ -12,8 +12,10 @@ class Challenge < ActiveRecord::Base
   has_many :comments, :order => 'updated_at DESC'
 
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :lead, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :lead, :length => { :in => 40..120 }, :if => :pending?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
-
+  validates :commitment, :numericality => {:only_integer => true, :greater_than_or_equal_to => 1, less_than_or_equal_to: 40}
   validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
 
@@ -52,11 +54,6 @@ class Challenge < ActiveRecord::Base
 
   def over?
     Date.today.to_time_in_current_zone >= end_date
-  end
-
-  # TODO: add commitment field to database
-  def commitment #hours/weeek
-    rand(2..10)
   end
 
   def upcoming?
