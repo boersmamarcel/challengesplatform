@@ -31,3 +31,5 @@ config/database.yml
 config/initializers/devise_local.rb
 
 coverage
+
+public/uploads
