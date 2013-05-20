@@ -17,6 +17,10 @@ class ChallengeDecorator < Draper::Decorator
     object.upcoming? && !current_user_enrolled? && days_till_start < 10
   end
 
+  def location
+    object.location || "TBA"
+  end
+
   def supervisor
     if object.supervisor.present?
       object.supervisor.decorate

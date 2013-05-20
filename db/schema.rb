@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520075847) do
+ActiveRecord::Schema.define(:version => 20130520134208) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20130520075847) do
     t.datetime "updated_at",                   :null => false
     t.integer  "supervisor_id"
     t.text     "lead"
+    t.text     "location"
+    t.integer  "commitment"
   end
 
   create_table "comments", :force => true do |t|
