@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap.file-input.js
+//= require datepicker.js
 //= require_tree .
+
+$('.enable-tooltip').tooltip();
+$('.enable-popover').popover();
