@@ -1,9 +1,10 @@
-When(/^I fill in title with "(.*?)" and description with "(.*?)" and fill in start_date with "(.*?)" and end_date with "(.*?)" and lead with "(.*?)"$/) do | title, description, start_date, end_date, lead |
+When(/^I fill in title with "(.*?)" and description with "(.*?)" and fill in start_date with "(.*?)" and end_date with "(.*?)" and lead with "(.*?)" and commitment with "(.*?)"$/) do | title, description, start_date, end_date, lead, commitment |
     fill_in :challenge_title, :with => title
     fill_in :challenge_description, :with => description
     fill_in :challenge_start_date, :with => start_date
     fill_in :challenge_end_date, :with => end_date
     fill_in :challenge_lead, :with => lead
+    fill_in :challenge_commitment, :with => commitment
 end
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)"$/) do |title, description, start_date, end_date|
   

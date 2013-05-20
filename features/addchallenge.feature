@@ -13,7 +13,7 @@ Feature: Add challenge
 
     Scenario Outline: Submit new challenge
       When I visit the "challenge.new" page
-      And I fill in title with "<title>" and description with "<description>" and fill in start_date with "<start_date>" and end_date with "<end_date>" and lead with "<lead>"
+      And I fill in title with "<title>" and description with "<description>" and fill in start_date with "<start_date>" and end_date with "<end_date>" and lead with "<lead>" and commitment with "5"
       And I press "Submit for Review"
       Then I should see a message with "<message>"
 
@@ -29,7 +29,7 @@ Feature: Add challenge
 
     Scenario: Save a challenge proposal
       When I visit the "challenge.new" page
-      And I fill in title with "Title 1" and description with "description" and fill in start_date with "03-08-2013" and end_date with "09-09-2013" and lead with "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla."
+      And I fill in title with "Title 1" and description with "description" and fill in start_date with "03-08-2013" and end_date with "09-09-2013" and lead with "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla." and commitment with "6"
       And I press "Save"
       Then I should see a message with "Challenge successfully saved"
 

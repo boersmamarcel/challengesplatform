@@ -7,6 +7,7 @@ FactoryGirl.define do
    c.end_date Date.today + 4
    c.location "Zilverling"
    c.state "proposal"
+   c.commitment 4
    c.count 0
    c.updated_at Time.now
    # c.association :supervisor_id, :factory => :user
