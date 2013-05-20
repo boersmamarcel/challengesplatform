@@ -142,7 +142,7 @@ admin.save
 challenges.each do |challenge|
     supervisor = User.where(:firstname => challenge['supervisor']['firstname'], :lastname => challenge['supervisor']['lastname']).first;
 
-    challengerecord = Challenge.new(:title => challenge['title'], :description => challenge['description'], :start_date => challenge['start_date'], :end_date => challenge['end_date'])
+    challengerecord = Challenge.new(:title => challenge['title'], :description => challenge['description'], :start_date => challenge['start_date'], :end_date => challenge['end_date'], :lead => challenge['lead'], :location => challenge['location'], :commitment => challenge['commitment'])
     challengerecord.supervisor = supervisor
     challengerecord.state = challenge['state']
     challengerecord.count = challenge['count']
