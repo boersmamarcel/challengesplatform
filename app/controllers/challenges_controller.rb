@@ -61,15 +61,13 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1
   def update
     @challenge = Challenge.find(params[:id])
-
-    #raise RoleException::SupervisorLevelRequired.new('Supervisor level required') @challenge.editable_by_user(current_user)
+    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
 
     if self.submit_for_review?
       @challenge.state = 'pending'
     end
 
     if @challenge.update_attributes(params[:challenge])
-
       redirect_to @challenge, notice: 'Challenge was successfully updated.'
     else
       render action: "edit"
@@ -79,6 +77,8 @@ class ChallengesController < ApplicationController
   # DELETE /challenges/1
   def destroy
     @challenge = Challenge.find(params[:id])
+    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
+
     @challenge.destroy
 
     redirect_to challenges_url
@@ -86,6 +86,8 @@ class ChallengesController < ApplicationController
 
   def revoke
     @challenge = Challenge.find(params[:id])
+    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
+
     @challenge.count += 1
     @challenge.state = "proposal"
 
