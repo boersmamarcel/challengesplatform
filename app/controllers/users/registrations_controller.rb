@@ -7,6 +7,14 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy]
+  
+  rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_to_sign_in_path
+  rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_to_sign_in_path
+
+
+  def redirect_to_sign_in_path
+    redirect_to new_user_session_path
+  end
 
   def update
     # required for settings form to submit when password is left blank
