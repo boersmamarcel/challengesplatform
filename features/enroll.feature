@@ -25,8 +25,8 @@ Feature: Participants can enroll to challenges
 
   Scenario: View all challenges
     When I visit the "challenges.index" page
-    Then I should see a title "Title2" and start_date "09-09-2059" and end_date "09-09-2060" in the list
-    And I should see a title "Title4" and start_date "09-09-2059" and end_date "09-09-2060" in the list
+    And I should see a title "Title6" and start_date "09-09-2059" and end_date "09-09-2060" in the list
+    And I should see a title "Title7" and start_date "15-05-2013" and end_date "09-09-2060" in the list
 
 
   Scenario Outline: View a challenge

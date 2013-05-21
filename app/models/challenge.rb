@@ -30,6 +30,16 @@ class Challenge < ActiveRecord::Base
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
   scope :running_first, order('start_date ASC')
+  
+  scope :visible_for_user, lambda { |user|
+    if user.is_admin?
+      all
+    elsif user.is_supervisor?
+      where("state = 'approved' OR supervisor_id = ?", user.id)
+    else
+      where(:state => 'approved')
+    end
+  }
 
   def enroll(user)
     enrollment = enrollments.find_by_participant_id(user)
@@ -59,6 +69,7 @@ class Challenge < ActiveRecord::Base
   def upcoming?
     Date.today.to_time_in_current_zone < start_date 
   end
+
   def editable_by_user?(user)
     (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
   end
