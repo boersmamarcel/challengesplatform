@@ -21,27 +21,27 @@
       .video
         %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
       %p.lead
-        Ben jij super gaaf? Wij ook, doe mee en dan win je maximaal bonus punten. Ga vooruit, Science Challenges.
+        = @challenge.lead
       = markdown(@challenge.description)
     .details.span4.well
-      %p
+      %p.detail
         %i.icon-group
-        %strong
+        %strong#participants_count
           = @challenge.participants.count
         %span.type= pluralize(@challenge.participants.count, "Participant").split.last
-      %p
+      %p.detail
         %i.icon-time
-        %strong
+        %strong#commitment
           = @challenge.commitment
         %span.type Hours/week
-      %p
+      %p.detail
         %i.icon-calendar
-        %strong
+        %strong#day_of_week
           = @challenge.day_of_week
         %span.type= @challenge.from_till
-      %p
+      %p.detail#location
         %i.icon-map-marker
-        %strong Zilverling 3031
+        %strong= @challenge.location
       //------------------------------------------------------
       %hr
       .action

@@ -31,3 +31,6 @@ config/database.yml
 config/initializers/devise_local.rb
 
 coverage
+
+#ignore Bram's database reset bash script
+reset.sh
