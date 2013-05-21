@@ -15,7 +15,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = ChallengeDecorator.decorate_collection(Challenge.visible_for_user(current_user).running_first)
+    @challenges = ChallengeDecorator.decorate_collection(Challenge.visible_for_user(current_user).sorted_start_date)
   end
 
   # GET /challenges/1

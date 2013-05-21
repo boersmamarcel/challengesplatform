@@ -29,7 +29,7 @@ class Challenge < ActiveRecord::Base
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
-  scope :running_first, order('start_date ASC')
+  scope :sorted_start_date, order('start_date ASC')
   
   scope :visible_for_user, lambda { |user|
     if user.is_admin?
