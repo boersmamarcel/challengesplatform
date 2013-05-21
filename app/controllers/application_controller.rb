@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from 'ActiveRecord::RecordNotFound', :with => :show_404
-  rescue_from 'RoleException::AdminLevelRequired', :with => :show_500
-  rescue_from 'RoleException::SupervisorLevelRequired', :with => :show_500
+  rescue_from 'RoleException::AdminLevelRequired', :with => :show_403
+  rescue_from 'RoleException::SupervisorLevelRequired', :with => :show_403
 
   before_filter :authenticate_user!
   before_filter :require_supervisor
@@ -25,13 +25,19 @@ class ApplicationController < ActionController::Base
     profile_user_path(resource)
   end
 
+
+  def redirect_unauthorized_request
+    flash[:info] = "You do not have the permissions required to view this page."
+    redirect_to dashboard_path
+  end
+
   private 
       def show_404
           render :template => 'error_pages/404', :layout => false, :status => :not_found
       end
 
-      def show_500
-          render :template => 'error_pages/500', :layout => false, :status => :not_found
+      def show_403
+          render :template => 'error_pages/403', :layout => false, :status => :not_found
       end
 
 end

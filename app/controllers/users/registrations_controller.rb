@@ -7,7 +7,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy]
-  
+
   def update
     # required for settings form to submit when password is left blank
     if params[:user][:password].blank?

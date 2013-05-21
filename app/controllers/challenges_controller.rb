@@ -1,5 +1,9 @@
 class ChallengesController < ApplicationController
 
+
+  rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_unauthorized_request
+  rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_unauthorized_request
+
   # Do not allow regular users to see anything
   # Allow regular users some views
   skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :approved, :enroll, :unenroll]
@@ -7,6 +11,7 @@ class ChallengesController < ApplicationController
   # Allow supervisors to see even more (they already see everything above)
   skip_filter :require_admin, :only => [:proposal, :pending, :declined, :new, :edit, :create, :update, :revoke]
 
+  
 
   # GET /challenges
   def index
