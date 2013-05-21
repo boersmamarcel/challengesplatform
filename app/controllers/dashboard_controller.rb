@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
   def index
     @supervising_challenges = current_user.supervising_challenges.upcoming_and_running.decorate if current_user.is_supervisor?
-    @my_challenges = current_user.participating_challenges.upcoming_and_running.running_first.decorate
+    @my_challenges = current_user.participating_challenges.upcoming_and_running.sorted_start_date.decorate
     @upcoming_challenges = Challenge.upcoming.approved.decorate - @my_challenges
   end
 end
