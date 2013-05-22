@@ -19,6 +19,8 @@ gem 'gravatar-ultimate'
 gem "devise_mailchimp"  # Last officially released gem
 
 gem 'draper', '~> 1.0'
+gem 'redis'
+gem 'split', :require => 'split/dashboard'
 
 gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 # Gems used only for assets and not required

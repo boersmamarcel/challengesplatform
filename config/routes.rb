@@ -20,6 +20,7 @@ Challengesplatform::Application.routes.draw do
     
   end
   
+  mount Split::Dashboard, :at => 'split'
 
   resources :messages, :only => [:show, :destroy, :index]
 
