@@ -20,7 +20,7 @@
       %h3
         Challenges
       .challenges-list.row#challenges
-        = render @user.participating_challenges.decorate
+        = render @user.participating_challenges.decorate, :options => (options ||= {})
   %span.span3
     %div.followers
       %h3
