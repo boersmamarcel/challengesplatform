@@ -29,9 +29,24 @@ class MessagesController < ApplicationController
   
   def deliver
     if params.has_key?(:grouptype) && params.has_key?(:groupid) && params.has_key?(:subject) && params.has_key?(:body)
-      render :inline => "Hello"
+      case params[:grouptype]
+        when "challenge"
+          if Challenge.exists?(params[:groupid])
+            @group = Challenge.find(params[:groupid]).participants
+          end
+        when "user"
+          if User.exists?(params[:groupid])
+            @group = [User.find(params[:groupid])]
+          end
+      end
+    end
+    
+    unless defined? @group
+      redirect_to dashboard_path, alert: "You do not have the permissions required to view this page."
     else
-      render :nothing => true
+      sendMessageToGroup(@group, params[:subject], params[:body])
+      
+      render :inline => "Messages have been sent!", :layout => true
     end
   end
   
