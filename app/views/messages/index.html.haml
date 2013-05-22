@@ -27,3 +27,6 @@
             = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
               %i.icon-trash
               &nbsp;&nbsp;delete
+%h1
+  %a{:class => "btn btn-primary", :onClick => "composeMessage('challenge', 3)"}
+    Send a Message
