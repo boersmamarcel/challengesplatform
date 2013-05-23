@@ -20,7 +20,8 @@ Challengesplatform::Application.routes.draw do
     
   end
   
-
+  get "messages/compose", :to => "messages#compose"
+  post "messages/deliver", :to => "messages#deliver"
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do

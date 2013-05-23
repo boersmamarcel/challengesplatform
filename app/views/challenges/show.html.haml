@@ -24,6 +24,11 @@
         = @challenge.lead
       = markdown(@challenge.description)
     .details.span4.well
+      - if @challenge.supervisor == current_user
+        %p.detail
+          %a{:class => "btn btn-primary", :onClick => "composeMessage('challenge', #{@challenge.id})"}
+            Send a Message
+        %hr
       %p.detail
         %i.icon-group
         %strong#participants_count
