@@ -22,8 +22,12 @@ class MessagesController < ApplicationController
   end
   
   def compose
+    # Only serve AJAX requests for now
+
     if request.xhr?
       render "compose_modal", :layout => false
+    else
+      render :nothing => true
     end
   end
   
@@ -32,21 +36,26 @@ class MessagesController < ApplicationController
       case params[:grouptype]
         when "challenge"
           if Challenge.exists?(params[:groupid])
-            @group = Challenge.find(params[:groupid]).participants
+            if Challenge.find(params[:groupid]).supervisor == current_user
+              @group = Challenge.find(params[:groupid]).participants
+            end
           end
-        when "user"
-          if User.exists?(params[:groupid])
-            @group = [User.find(params[:groupid])]
-          end
+        # Uncomment to allow users to send messages to eachother!
+        # when "user"
+        #   if User.exists?(params[:groupid])
+        #     @group = [User.find(params[:groupid])]
+        #   end
       end
     end
     
     unless defined? @group
+      # If malformed request, redirect the user.
       redirect_to dashboard_path, alert: "You do not have the permissions required to view this page."
     else
       sendMessageToGroup(@group, params[:subject], params[:body])
       
-      render :inline => "Messages have been sent!", :layout => true
+      # Redirect the user to previous page and show a flash message!
+      redirect_to :back, :notice => "Your message has been sent."
     end
   end
   
