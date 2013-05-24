@@ -5,7 +5,6 @@ Challengesplatform::Application.routes.draw do
       get 'unenroll', :on => :member
   end
 
-
   devise_for :users, :controllers => { 
     :omniauth_callbacks => "users/omniauth_callbacks", 
     :registrations => 'users/registrations',
@@ -17,9 +16,7 @@ Challengesplatform::Application.routes.draw do
     get 'followers' => 'follow#followers'
     get 'follows' => 'follow#follows'
     resources :follow, :only => [:create, :destroy]
-    
   end
-  
 
   resources :messages, :only => [:show, :destroy, :index]
 
@@ -30,6 +27,10 @@ Challengesplatform::Application.routes.draw do
       post 'approve', :on => :member
       get 'edit', :on => :member
       put 'edit', :on => :member
+    end
+
+    resources :usermanagement do
+      get 'index', :on => :member
     end
   end
 
