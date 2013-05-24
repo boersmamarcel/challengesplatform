@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include MessageCenter
+  
   protect_from_forgery
 
   rescue_from 'ActiveRecord::RecordNotFound', :with => :redirect_unauthorized_request

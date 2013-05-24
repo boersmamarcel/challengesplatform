@@ -234,6 +234,8 @@ GEM
       redis-namespace (>= 1.1.0)
       simple-random
       sinatra (>= 1.2.6)
+    split-analytics (0.3.0)
+      split (~> 0.3)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -286,4 +288,5 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2.6)
   split
+  split-analytics
   uglifier (>= 1.0.3)
