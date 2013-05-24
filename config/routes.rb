@@ -17,6 +17,9 @@ Challengesplatform::Application.routes.draw do
     get 'follows' => 'follow#follows'
     resources :follow, :only => [:create, :destroy]
   end
+  
+  get "messages/compose", :to => "messages#compose"
+  post "messages/deliver", :to => "messages#deliver"
 
   resources :messages, :only => [:show, :destroy, :index]
 
