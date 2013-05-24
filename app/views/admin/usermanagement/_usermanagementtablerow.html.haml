@@ -1,8 +1,6 @@
 %tr
   %td.id= user.id
-  %td.title
-    %a{ :href => profile_user_path(user) }
-      = user.firstname
+  %td.title= link_to user.firstname, profile_user_path(user)
   %td.title= user.lastname
   %td.email= user.email
   %td.actions
