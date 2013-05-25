@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from 'ActiveRecord::RecordNotFound', :with => :redirect_unauthorized_request
+  rescue_from 'ActiveResource::ResourceNotFound', :with => :redirect_unauthorized_request
   rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_unauthorized_request
   rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_unauthorized_request
 
