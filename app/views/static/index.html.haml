@@ -1,10 +1,11 @@
 <input type="hidden" id="page_identifier" value="index">
-
+= tracking_code(:account => ENV['GOOGLEANALYTICS'])
 .hero-unit
   %h1
     %i.icon-rocket
-    Unlock your
-    %strong potential.
+    - ab_test("title_text", "lock", "unlock") do |ab|
+      #{ab} your
+      %strong potential.
   %p
     %span.brand
       = precede("Science") do

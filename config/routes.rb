@@ -20,6 +20,14 @@ Challengesplatform::Application.routes.draw do
     
   end
   
+  match "split" => Split::Dashboard, :anchor => false, :constraints => lambda { |request|
+  request.env['warden'].authenticated? # are we authenticated?
+  request.env['warden'].authenticate! # authenticate if not already
+  # or even check any other condition
+  request.env['warden'].user.is_admin?
+}
+  get "messages/compose", :to => "messages#compose"
+  post "messages/deliver", :to => "messages#deliver"
 
   resources :messages, :only => [:show, :destroy, :index]
 

@@ -16,6 +16,14 @@
   %ul.nav.pull-right
     %li.divider-vertical
     %li
+      -if controller?("profile")
+        %a.active{:href => profile_user_path(current_user), 'data-toggle' => "tooltip", :title => "Profile", :id => "profile_tooltip", "data-placement"=> 'bottom'}
+          %i.icon-user.icon-large.icon-active
+      -else
+        %a.inactive{:href => profile_user_path(current_user), 'data-toggle' => "tooltip", :title => "Profile", :id => "profile_tooltip", "data-placement"=> 'bottom'}
+          %i.icon-user.icon-large
+    %li.divider-vertical
+    %li
       -if controller?("users/registrations")
         %a.active{:href => edit_user_registration_path, 'data-toggle' => "tooltip", :title => "Settings", :id => "settings_tooltip", "data-placement"=> 'bottom'}
           %i.icon-cog.icon-large.icon-active

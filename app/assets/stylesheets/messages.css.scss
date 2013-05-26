@@ -59,3 +59,12 @@ tr.mail-message.unread:nth-child(odd) {
 .readstatus {
 	margin-right: 15px;
 }
+
+#composeMessage .form {
+	margin: 0;
+	padding: 0;
+}
+
+#composeMessage textarea, #composeMessage input {
+	margin: 15px;
+}

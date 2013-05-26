@@ -19,3 +19,7 @@
 
 $('.enable-tooltip').tooltip();
 $('.enable-popover').popover();
+$("#logout_tooltip").tooltip()
+$("#mailbox").tooltip()
+$("#settings_tooltip").tooltip()
+$("#profile_tooltip").tooltip()

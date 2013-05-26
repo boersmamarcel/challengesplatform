@@ -19,6 +19,10 @@ gem 'draper', '~> 1.0' # For modeldecorators
 gem 'carrierwave', '~> 0.8' # For file uploading
 gem "mini_magick" # For image resizing. OSX: `brew install imagemagick`. UNIX: http://www.imagemagick.org/script/binary-releases.php#unix
 
+gem 'redis'
+gem 'split', :require => 'split/dashboard'
+gem 'split-analytics', :require => 'split/analytics'
+
 gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 
 

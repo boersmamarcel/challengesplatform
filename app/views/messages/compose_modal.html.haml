@@ -1,0 +1,18 @@
+= form_tag "/messages/deliver", :method => :post, :class => "form" do
+  %div.modal-header
+    %h2
+      %i.icon-edit
+      New Message
+  %div.modal-body
+    = hidden_field_tag(:grouptype)
+    = hidden_field_tag(:groupid)
+    %div
+      = text_field_tag(:subject, nil, :id => "subject", :placeholder => "Subject", :class => "span5")
+    %div
+      = text_area_tag(:body, nil, :id => "body", :class => "span5", :rows => 10)
+  %div.modal-footer
+    %span.pull-right
+      %a.btn{:href => '#', :onClick => '$(this.parentNode.parentNode.parentNode.parentNode).modal("hide")'}
+        Cancel
+      %button.btn.btn-primary{:type => "submit"}
+        Send
