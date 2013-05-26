@@ -1,4 +1,5 @@
 class Challenge < ActiveRecord::Base
+
   # Supervisors have write access to these fields:
   attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment, :image,  :image_cache, :remove_image
   # But these are protected:
@@ -11,6 +12,9 @@ class Challenge < ActiveRecord::Base
   has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
   has_many :comments, :order => 'updated_at DESC'
 
+  # Carrierwave Image Uploading
+  mount_uploader :image, ChallengeImageUploader
+
   validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :lead, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :lead, :length => { :in => 40..120 }, :if => :pending?
@@ -18,8 +22,10 @@ class Challenge < ActiveRecord::Base
   validates :commitment, :numericality => {:only_integer => true, :greater_than_or_equal_to => 1, less_than_or_equal_to: 40}
   validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
-
   validate :dates, :if => :pending?
+  validates_processing_of :image
+
+
   scope :upcoming, where('start_date > ?', Date.today)
   scope :running, where('end_date > ? AND start_date < ?', Date.today, Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
@@ -40,8 +46,6 @@ class Challenge < ActiveRecord::Base
     end
   }
 
-  # Carrierwave Image Uploading
-  mount_uploader :image, ChallengeImageUploader
 
   def enroll(user)
     enrollment = enrollments.find_by_participant_id(user)
