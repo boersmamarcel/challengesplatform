@@ -7,5 +7,7 @@
   %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Mine
   %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
 %input#page_identifier{:type => "hidden", :value => "challenges.index"}
+- if @challenges.empty?
+  %p.challenges_list No challenges to show
 = render 'shared/challenges_list' , :challenges => @challenges.decorate
 = paginate @challenges

@@ -26,7 +26,7 @@ class ChallengesController < ApplicationController
       else
         @challenges = Challenge.upcoming.sorted_start_date
     end
-    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(3)
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
   end
 
   # GET /challenges/1
