@@ -6,10 +6,10 @@ class ChallengesController < ApplicationController
 
   # Do not allow regular users to see anything
   # Allow regular users some views
-  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :approved, :enroll, :unenroll]
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :enroll, :unenroll]
 
   # Allow supervisors to see even more (they already see everything above)
-  skip_filter :require_admin, :only => [:proposal, :pending, :declined, :new, :edit, :create, :update, :revoke]
+  skip_filter :require_admin, :only => [:new, :edit, :create, :update, :revoke]
 
 
 
