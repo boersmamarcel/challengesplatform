@@ -19,7 +19,8 @@
   .row
     .description#description.span8
       .video
-        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
+        = image_tag @challenge.image.url
+        / %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
       %p.lead
         = @challenge.lead
       = markdown(@challenge.description)
