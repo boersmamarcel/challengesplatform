@@ -1,13 +1,11 @@
 %h2
   Challenges Overview
-.btn-group{"data-toggle" => "buttons-radio"}
+= paginate @challenges
+.filters.btn-group{"data-toggle" => "buttons-radio"}
   %a.button.btn{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
   %a.button.btn{:class => @filter == "upcoming" ? "active" : "", :href => "/challenges/upcoming", :type => "button"} Upcoming
   %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Mine
   %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
 %input#page_identifier{:type => "hidden", :value => "challenges.index"}
-
-
-= paginate @challenges
 = render 'shared/challenges_list' , :challenges => @challenges.decorate
 = paginate @challenges
