@@ -6,30 +6,6 @@
 %ul.nav
 - if user_signed_in?
   %ul.nav
-    %li{class: controller?("dashboard") ? "active" : ""}
-      = link_to('Dashboard', dashboard_path)
-    %li{class: controller?("challenges") ? "active" : ""}
-      = link_to('Challenges', challenges_path)
-    -if current_user.is_admin?
-      %li{class: controller?("admin/review") ? "active": ""}
-        = link_to('Review', admin_review_index_path)
-  %ul.nav.pull-right
-    %li.divider-vertical
-    %li
-      -if controller?("profile")
-        %a.active{:href => profile_user_path(current_user), 'data-toggle' => "tooltip", :title => "Profile", :id => "profile_tooltip", "data-placement"=> 'bottom'}
-          %i.icon-user.icon-large.icon-active
-      -else
-        %a.inactive{:href => profile_user_path(current_user), 'data-toggle' => "tooltip", :title => "Profile", :id => "profile_tooltip", "data-placement"=> 'bottom'}
-          %i.icon-user.icon-large
-    %li.divider-vertical
-    %li
-      -if controller?("users/registrations")
-        %a.active{:href => edit_user_registration_path, 'data-toggle' => "tooltip", :title => "Settings", :id => "settings_tooltip", "data-placement"=> 'bottom'}
-          %i.icon-cog.icon-large.icon-active
-      -else
-        %a.inactive{:href => edit_user_registration_path, 'data-toggle' => "tooltip", :title => "Settings", :id => "settings_tooltip", "data-placement"=> 'bottom'}
-          %i.icon-cog.icon-large
     %li.divider-vertical
     %li
       - if current_user.received_messages.unread.empty?
@@ -41,10 +17,32 @@
           .badge
             = "" + current_user.received_messages.unread.count.to_s + ""
     %li.divider-vertical
-    %li
-      %a{:href => destroy_user_session_path, 'data-toggle' => "tooltip", :title => "Logout", :id => "logout_tooltip", "data-placement"=> 'bottom'}
-        %i.icon-signout.icon-large
-    %li.divider-vertical
+    %li{class: controller?("dashboard") ? "active" : ""}
+      = link_to('Dashboard', dashboard_path)
+    %li{class: controller?("challenges") ? "active" : ""}
+      = link_to('Challenges', challenges_path)
+    -if current_user.is_admin?
+      %li{class: controller?("admin/review") ? "active": ""}
+        = link_to('Review', admin_review_index_path)
+  %ul.nav.pull-right
+    %li.dropdown
+      %a{"class" => "dropdown-toggle " + ((controller?("profile") || controller?("users/registrations")) ? "active" : ""), "data-toggle" => "dropdown", :href => "#"}
+        = current_user.decorate.fullname
+        %b.caret
+      %ul.dropdown-menu{"role" => "menu"}
+        %li
+          %a.active{:href => profile_user_path(current_user)}
+            %i.icon-user.icon-large
+            Profile
+        %li
+          %a{:href => edit_user_registration_path}
+            %i.icon-cog.icon-large
+            Settings
+        %li.divider
+        %li
+          %a{:href => destroy_user_session_path}
+            %i.icon-signout.icon-large
+            Sign out
 - else
   %ul.nav.pull-right
     %li
