@@ -23,7 +23,7 @@ gem 'redis'
 gem 'split', :require => 'split/dashboard'
 gem 'split-analytics', :require => 'split/analytics'
 
-gem 'redcarpet', '~> 2.2.2' # Markdown renderer
+gem 'redcarpet', '~> 2.3.0' # Markdown renderer
 
 
 # Gems used only for assets and not required
@@ -31,7 +31,7 @@ gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem "bootstrap-sass", '~> 2.3.1.0'
-  gem "font-awesome-rails", "~> 3.1.1.0"
+  gem "font-awesome-rails", "~> 3.1.1.2"
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
