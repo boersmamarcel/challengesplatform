@@ -11,7 +11,7 @@ class ChallengesController < ApplicationController
   # Allow supervisors to see even more (they already see everything above)
   skip_filter :require_admin, :only => [:proposal, :pending, :declined, :new, :edit, :create, :update, :revoke]
 
-  
+
 
   # GET /challenges
   def index
@@ -66,13 +66,20 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1
   def update
     @challenge = Challenge.find(params[:id])
+
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user?(current_user)
+
+    image = params[:challenge].delete :image
 
     if self.submit_for_review?
       @challenge.state = 'pending'
     end
 
-    if @challenge.update_attributes(params[:challenge])
+    if image.present?
+      @challenge.image = image
+    end
+
+    if @challenge.update_attributes(params[:challenge]) && @challenge.save
       redirect_to @challenge, notice: 'Challenge was successfully updated.'
     else
       render action: "edit"

@@ -8,10 +8,11 @@
     .status
       %span.badge.badge-warning
         Enrollment closes in
-        = challenge.days_till_enrollment_closes
-        days!
+        = pluralize(challenge.days_till_enrollment_closes, "day")
+        
   %a.thumb{:href => challenge_path(challenge)}
-    %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+    = image_tag challenge.image.thumb.url
+    / %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
     %h4= challenge.title
   - if challenge.supervisor.present?
     .supervisor
