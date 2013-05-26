@@ -15,7 +15,18 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @challenges = ChallengeDecorator.decorate_collection(Challenge.sorted_start_date.visible_for_user(current_user))
+    @filter = params[:filter]
+    case @filter
+      when "upcoming"
+        @challenges = Challenge.upcoming.sorted_start_date
+      when "past"
+        @challenges = Challenge.past.sorted_start_date
+      when "mine"
+        @challenges = current_user.participating_challenges.sorted_start_date
+      else
+        @challenges = Challenge.upcoming.sorted_start_date
+    end
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(3)
   end
 
   # GET /challenges/1

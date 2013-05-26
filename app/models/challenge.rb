@@ -28,6 +28,7 @@ class Challenge < ActiveRecord::Base
 
   scope :upcoming, where('start_date > ?', Date.today)
   scope :running, where('end_date > ? AND start_date < ?', Date.today, Date.today)
+  scope :past, where('end_date < ?', Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
   scope :proposal, where(:state => "proposal")

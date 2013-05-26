@@ -25,6 +25,8 @@ gem 'split-analytics', :require => 'split/analytics'
 
 gem 'redcarpet', '~> 2.2.2' # Markdown renderer
 
+gem 'kaminari' # Pagination and sorting gem
+
 
 # Gems used only for assets and not required
 # in production environments by default.
