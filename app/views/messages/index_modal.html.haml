@@ -1,18 +1,17 @@
 %div.modal-header
   %h2
     %i.icon-inbox
-    Messages
+    Unread Messages
 %div.modal-body
-  - if current_user.received_messages.empty?
+  - if current_user.received_messages.unread.empty?
     .message
-      You have no messages
+      You have no unread messages
   - else
-    - current_user.received_messages.limit(3).each do |message|
+    - current_user.received_messages.unread.limit(3).each do |message|
       .message
         %h4
-          - unless message.is_read
-            %i.icon-circle
-          = message.subject
+          = link_to message_path(message) do
+            = message.subject
         %p= truncate(message.body, :length => 150)
         %p
           %i.icon-user

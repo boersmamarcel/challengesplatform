@@ -31,3 +31,7 @@ function composeMessage(receiver_type, receiver_id) {
 	
 	$(el).modal('show');
 }
+
+$(function() {
+	$("#nosend_tooltip").tooltip()
+});
