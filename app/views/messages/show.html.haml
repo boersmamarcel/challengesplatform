@@ -7,4 +7,4 @@
     = get_date(@message)
     &mdash; from 
     = link_to get_name(@message.sender), profile_user_path(@message.sender)
-= markdown(simple_format(h(@message.body)))
+= markdown(h(@message.body))
