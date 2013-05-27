@@ -43,7 +43,7 @@ Feature: Message Center Incoming Messages
     When I have no messages
     And I visit the "dashboard" page
     And I click on the "mailbox" button
-    Then I should see a message with "You have no messages"
+    Then I should see a message with "You have no unread messages"
 
     Scenario: I view a message
     When I visit the "messages" page

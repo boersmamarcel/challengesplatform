@@ -16,6 +16,13 @@
           - elsif ( @user.id != current_user.id)
             = link_to 'Follow', user_follow_index_path(@user), :method => :post, :class => "btn btn-success"
 
+          - if current_user.can_send_message_to_user?(@user)
+            %a{:href => "javascript:;", :class => "btn btn-primary", :onClick => "composeMessage('user', #{@user.id})"} Send a Message
+          - else
+            %a{:href => "javascript:;", :class => "btn disabled", 'data-toggle' => "tooltip", :title => "You can only send messages to people who follow you, or who are enrolled in the same challenge as you.", :id => "nosend_tooltip", "data-placement"=> 'bottom'} Send a Message
+            %script
+              $("#nosend_tooltip").tooltip()
+
     %div.span6
       %h3
         Challenges

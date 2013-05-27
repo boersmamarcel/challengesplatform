@@ -35,16 +35,9 @@ class MessagesController < ApplicationController
     if params.has_key?(:grouptype) && params.has_key?(:groupid) && params.has_key?(:subject) && params.has_key?(:body)
       case params[:grouptype]
         when "challenge"
-          if Challenge.exists?(params[:groupid])
-            if Challenge.find(params[:groupid]).supervisor == current_user
-              @group = Challenge.find(params[:groupid]).participants
-            end
-          end
-        # Uncomment to allow users to send messages to eachother!
-        # when "user"
-        #   if User.exists?(params[:groupid])
-        #     @group = [User.find(params[:groupid])]
-        #   end
+          check_challenge
+        when "user"
+          check_user
       end
     end
     
@@ -58,5 +51,20 @@ class MessagesController < ApplicationController
       redirect_to :back, :notice => "Your message has been sent."
     end
   end
+  
+  
+  def check_challenge
+    if Challenge.exists?(params[:groupid]) && current_user.can_send_message_to_participants?(Challenge.find(params[:groupid]))
+      @group = Challenge.find(params[:groupid]).participants
+    end
+  end
+  
+  def check_user
+    if User.exists?(params[:groupid]) && current_user.can_send_message_to_user?(User.find(params[:groupid]))
+      @group = [User.find(params[:groupid])]
+    end
+  end
+  
+  private :check_challenge, :check_user
   
 end

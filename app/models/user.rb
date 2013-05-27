@@ -48,4 +48,19 @@ class User < ActiveRecord::Base
     end
     user
   end
+  
+  def can_send_message_to_user?(user)
+    to_follower = followers.exists?(user)
+    
+    my_challenges = participating_challenges
+    receiver_challenges = user.participating_challenges
+    to_participants = !(my_challenges & receiver_challenges).empty?
+    
+    to_follower || to_participants
+  end
+  
+  def can_send_message_to_participants?(challenge)
+    challenge.supervisor == self
+  end
+  
 end
