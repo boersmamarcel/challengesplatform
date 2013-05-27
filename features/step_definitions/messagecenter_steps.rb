@@ -33,11 +33,6 @@ When(/^I have no messages$/) do
   end
 end
 
-
-When(/^user "(.*?)" is enrolled for challenge "(.*?)"$/) do |userid, challengeid|
-  Challenge.find(challengeid).enroll User.find(userid)
-end
-
 When(/^I send a new message with subject "(.*?)" and contents "(.*?)" for challenge "(.*?)"$/) do |subject, body, challenge|
   page.evaluate_script "composeMessage('challenge', #{challenge})"
   fill_in :subject, :with => subject
@@ -45,10 +40,17 @@ When(/^I send a new message with subject "(.*?)" and contents "(.*?)" for challe
   click_button "Send"
 end
 
-Then(/^user "(.*?)" should have unread messages$/) do |userid|
-  assert User.find(userid).received_messages.unread.count > 0
+When(/^I try to send a message$/) do
+  page.evaluate_script "composeMessage('user', 4)"
+  fill_in :subject, :with => "A Subject"
+  fill_in :body, :with => "Some contents"
+  click_button "Send"
 end
 
-Then(/^user "(.*?)" should not have unread messages$/) do |userid|
-  assert User.find(userid).received_messages.unread.count == 0
+Then(/^user "(.*?)" should have unread messages$/) do |email|
+  assert User.find_by_email(email).received_messages.unread.count > 0
+end
+
+Then(/^user "(.*?)" should not have unread messages$/) do |email|
+  assert User.find_by_email(email).received_messages.unread.count == 0
 end
