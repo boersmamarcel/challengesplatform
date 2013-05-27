@@ -51,17 +51,25 @@ Feature: Sending Messages using the message center
         And I press "Send"
        Then I should see a message with "Your message has been sent"
        
-       @javascript
-       Scenario: Sending a message to a user who is enrolled in the same challenge as you
-         Given user "participant@student.utwente.nl" is enrolled in challenge "1"
-           And user "participant3@student.utwente.nl" is enrolled in challenge "1"
-          When I visit the "login" page
-           And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
-           And I follow "Challenges"
-           And I follow "Title1"
-           And I follow "A E"
-           And I follow "Send a Message"
-           And I fill in "subject" with "Hey!"
-           And I fill in "body" with "How are you?"
-           And I press "Send"
-          Then I should see a message with "Your message has been sent"
+    @javascript
+    Scenario: Sending a message to a user who is enrolled in the same challenge as you
+      Given user "participant@student.utwente.nl" is enrolled in challenge "1"
+        And user "participant3@student.utwente.nl" is enrolled in challenge "1"
+       When I visit the "login" page
+        And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
+        And I follow "Challenges"
+        And I follow "Title1"
+        And I follow "A E"
+        And I follow "Send a Message"
+        And I fill in "subject" with "Hey!"
+        And I fill in "body" with "How are you?"
+        And I press "Send"
+       Then I should see a message with "Your message has been sent"
+          
+    @javascript
+    Scenario: Sending a message to a user who doesn't follow you nor shares a challenge
+       When I visit the "login" page
+        And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
+        And I visit the "user.4.profile" page
+        And I try to send a message
+       Then I should see a message with "You do not have the permissions required to view this page"

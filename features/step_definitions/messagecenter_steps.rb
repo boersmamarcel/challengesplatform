@@ -40,10 +40,12 @@ When(/^I send a new message with subject "(.*?)" and contents "(.*?)" for challe
   click_button "Send"
 end
 
-When(/^I take a screenshot$/) do
-  page.save_screenshot('fail.png')
+When(/^I try to send a message$/) do
+  page.evaluate_script "composeMessage('user', 4)"
+  fill_in :subject, :with => "A Subject"
+  fill_in :body, :with => "Some contents"
+  click_button "Send"
 end
-
 
 Then(/^user "(.*?)" should have unread messages$/) do |email|
   assert User.find_by_email(email).received_messages.unread.count > 0
