@@ -84,9 +84,17 @@
     }
   }
 }
+.pagination {
+  margin: 0px;
+  float: left;
+  margin-right: 20px;
+  height: 20px;
+}
+.filters {
+}
 // Challenge Tiles
 .challenges-list{
-  margin-top: -10px;
+  clear: both;
   margin-bottom: 20px;
   .challenge {
      -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
