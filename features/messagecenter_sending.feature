@@ -43,7 +43,7 @@ Feature: Sending Messages using the message center
       Given "participant2@student.utwente.nl" is following "participant@student.utwente.nl"
        When I visit the "login" page
         And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
-        And I follow "profile_tooltip"
+        And I visit the "user.2.profile" page
         And I follow "A D"
         And I follow "Send a Message"
         And I fill in "subject" with "Hey!"
