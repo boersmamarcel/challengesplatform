@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
     
-    to_follower || to_participants
+    (to_follower || to_participants) && id != user.id
   end
   
   def can_send_message_to_participants?(challenge)
