@@ -61,7 +61,7 @@ class ChallengeDecorator < Draper::Decorator
     if object.upcoming?
       today = Date.today
       startd = object.start_date.to_date
-      (startd - today).to_i
+      (startd - today).to_i + 1
     else
       0
     end

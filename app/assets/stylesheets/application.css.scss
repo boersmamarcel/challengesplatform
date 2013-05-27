@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree
  */
- @import 'colors';
+@import 'colors';
 $font-notosans: 'Noto Sans', sans-serif;
 $font-header: 'Roboto Slab', sans-serif;
 $font-notoserif: 'Noto Serif', serif;
@@ -79,4 +79,8 @@ h2 {
     margin-top: 10px;
     margin-bottom: 0px;
   }
+}
+
+.navbar .nav li a {
+  padding: 10px 10px 0px 10px;
 }
