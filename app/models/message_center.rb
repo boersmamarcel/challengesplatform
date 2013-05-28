@@ -4,13 +4,11 @@ module MessageCenter
     raise MessageException::ParameterShouldBeUser.new('Group should be an array') unless user.is_a? User
     @message = Message.create(:subject => subject, :body => body, :sender_id => current_user.id, :receiver_id => user.id, :is_read => 0)
     
-    
-    
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-    markdown_body = markdown.render(body)
-    mail_footer = render_to_string "messages/mail_footer", :layout => false
-    
     if user.notify_by_email && !Rails.env.test?
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+      markdown_body = markdown.render(body)
+      mail_footer = render_to_string "messages/mail_footer", :layout => false
+      
       %x[sendmail #{user.email} << EOF
 Subject: #{subject}
 From: #{ENV['notification_email']}
