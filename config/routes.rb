@@ -12,7 +12,8 @@ Challengesplatform::Application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks", 
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
-  :passwords => 'users/passwords' }
+    :passwords => 'users/passwords' 
+  }
 
   resources :users do
     get 'profile', :on => :member, :to => "profile#show"
@@ -33,7 +34,7 @@ Challengesplatform::Application.routes.draw do
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do
-    resources :review do
+    resources :review, :only => [:comment, :decline, :approve, :edit, :index] do
       post 'comment', :on => :member
       post 'decline', :on => :member
       post 'approve', :on => :member
@@ -41,8 +42,14 @@ Challengesplatform::Application.routes.draw do
       put 'edit', :on => :member
     end
 
-    resources :usermanagement do
+    resources :usermanagement, :only => [:index] do
       get 'index', :on => :member
+    end
+
+    resources :users, :only => [:edit] do
+      get 'users/:id/edit', :on => :member
+      put 'users/:id/edit', :on => :member
+      # Insert routes for adding
     end
   end
 
