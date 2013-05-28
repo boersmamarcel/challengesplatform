@@ -60,6 +60,7 @@ namespace :deploy do
   desc "Symlinks the keys"
   task :symlink_keys, :roles => :app do
       run "ln -nfs #{deploy_to}/shared/config/initializers/devise_local.rb #{release_path}/config/initializers/devise_local.rb"
+      run "ln -nfs #{deploy_to}/shared/config/initializers/google_analytics.rb #{release_path}/config/initializers/google_analytics.rb"
       run "rm #{release_path}/config/initializers/secret_token.rb && ln -nfs #{deploy_to}/shared/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
   end
 end

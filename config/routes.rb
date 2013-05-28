@@ -1,15 +1,18 @@
 Challengesplatform::Application.routes.draw do
-  resources :challenges do
-      get 'revoke', :on => :member
-      get 'enroll', :on => :member
-      get 'unenroll', :on => :member
+  match '/challenges/page/:page' => "challenges#index"
+  match '/challenges/:filter/(page/:page)' => "challenges#index", :constraints => { :filter => /upcoming|past|mine/ }
+
+  resources :challenges, :constraints => { :id => /[0-9]+/ } do
+    get 'revoke', :on => :member
+    get 'enroll', :on => :member
+    get 'unenroll', :on => :member
   end
 
   devise_for :users, :controllers => { 
     :omniauth_callbacks => "users/omniauth_callbacks", 
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
-    :passwords => 'users/passwords' }
+  :passwords => 'users/passwords' }
 
   resources :users do
     get 'profile', :on => :member, :to => "profile#show"
@@ -17,7 +20,13 @@ Challengesplatform::Application.routes.draw do
     get 'follows' => 'follow#follows'
     resources :follow, :only => [:create, :destroy]
   end
-  
+
+  match "split" => Split::Dashboard, :anchor => false, :constraints => lambda { |request|
+    request.env['warden'].authenticated? # are we authenticated?
+    request.env['warden'].authenticate! # authenticate if not already
+    # or even check any other condition
+    request.env['warden'].user.is_admin?
+  }
   get "messages/compose", :to => "messages#compose"
   post "messages/deliver", :to => "messages#deliver"
 

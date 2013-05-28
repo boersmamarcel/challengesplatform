@@ -33,7 +33,7 @@ class Admin::ReviewController < Admin::AdminController
 
 
   def update
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.pending.find(params[:id])
 
     if self.submit_for_review?
       @challenge.state = 'pending'
@@ -49,7 +49,7 @@ class Admin::ReviewController < Admin::AdminController
 
 
   def approve
-      @challenge = Challenge.find(params[:id])
+      @challenge = Challenge.pending.find(params[:id])
       @challenge.state = 'approved'
 
       if @challenge.save
@@ -64,7 +64,7 @@ class Admin::ReviewController < Admin::AdminController
 
   def decline
     @comment = Comment.new(:comment => params[:reason], :user_id => current_user.id)
-    @challenge =Challenge.find(params[:id])
+    @challenge =Challenge.pending.find(params[:id])
 
     @comment.challenge =  @challenge
     @challenge.to_declined
@@ -81,7 +81,7 @@ class Admin::ReviewController < Admin::AdminController
     @comment = Comment.new(params[:comment])
     
     @comment.user = current_user
-    @comment.challenge = Challenge.find(params[:id])
+    @comment.challenge = Challenge.pending.find(params[:id])
 
     if !@comment.save
       notice = "Comments must have at least 3 characters"

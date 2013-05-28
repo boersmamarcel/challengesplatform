@@ -13,23 +13,24 @@ Feature: Add challenge
 
     Scenario Outline: Submit new challenge
       When I visit the "challenge.new" page
-      And I fill in title with "<title>" and description with "<description>" and fill in start_date with "<start_date>" and end_date with "<end_date>" and lead with "<lead>" and commitment with "5"
+      And I fill in title with "<title>" and description with "<description>" and fill in start_date with "<start_date>" and end_date with "<end_date>" and lead with "<lead>" and commitment with "5" and image with "<image>"
       And I press "Submit for Review"
+      # Then show me the page
       Then I should see a message with "<message>"
 
     Examples:
-      |  title  | description           | start_date | end_date   | message                               | lead |
-      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Challenge is pending for review       | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |
-      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Lead is too short                     | Short |
-      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Lead is too long                      | Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong |
-      | Title 1 | Challenge description | 09-09-2013 | 03-08-2013 | End date can not be before start date | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |
-      | Title 1 |                       | 03-08-2013 | 09-09-2013 | One or more fields are missing        | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |
-      | Title 1 |                       |            |            | One or more fields are missing        | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |
+      |  title  | description           | start_date | end_date   | message                               | lead | image |
+      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Challenge is pending for review       | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. | image1.jpg |
+      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Lead is too short                     | Short |  image2.jpg |
+      | Title 1 | Challenge description | 03-08-2013 | 09-09-2013 | Lead is too long                      | Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong |  image3.jpg |
+      | Title 1 | Challenge description | 09-09-2013 | 03-08-2013 | End date can not be before start date | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |  image4.jpg |
+      | Title 1 |                       | 03-08-2013 | 09-09-2013 | One or more fields are missing        | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. |  image1.jpg |
+      | Title 1 |                       |            |            | One or more fields are missing        | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. | image1.jpg |
 
 
     Scenario: Save a challenge proposal
       When I visit the "challenge.new" page
-      And I fill in title with "Title 1" and description with "description" and fill in start_date with "03-08-2013" and end_date with "09-09-2013" and lead with "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla." and commitment with "6"
+      And I fill in title with "Title 1" and description with "description" and fill in start_date with "03-08-2013" and end_date with "09-09-2013" and lead with "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla." and commitment with "6" and image with "image1.jpg"
       And I press "Save"
       Then I should see a message with "Challenge successfully saved"
 

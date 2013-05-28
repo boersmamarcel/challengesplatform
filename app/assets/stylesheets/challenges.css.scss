@@ -64,9 +64,37 @@
     }
   }
 }
+// Challenge form
+.challenge-form {
+  img {
+    display: inline;
+    vertical-align: top;
+    width: 150px;
+    margin-right: 10px;
+  }
+  .popover {
+    .popover-title {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .popover-content {
+      font-size: 12px;
+    }
+  }
+}
+.pagination {
+  margin: 0px;
+  float: left;
+  margin-right: 20px;
+  height: 20px;
+}
+.filters {
+}
 // Challenge Tiles
 .challenges-list{
-  margin-top: -10px;
+  clear: both;
   margin-bottom: 20px;
   .challenge {
      -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
@@ -91,7 +119,7 @@
       }
     }
     .thumb {
-      height: 120px;
+      height: 150px;
       display: block;
       background-color: #eee;
       margin: -10px 0px 10px -10px;

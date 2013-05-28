@@ -6,16 +6,27 @@ class ChallengesController < ApplicationController
 
   # Do not allow regular users to see anything
   # Allow regular users some views
-  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :approved, :enroll, :unenroll]
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :enroll, :unenroll]
 
   # Allow supervisors to see even more (they already see everything above)
-  skip_filter :require_admin, :only => [:proposal, :pending, :declined, :new, :edit, :create, :update, :revoke]
+  skip_filter :require_admin, :only => [:new, :edit, :create, :update, :revoke]
 
-  
+
 
   # GET /challenges
   def index
-    @challenges = ChallengeDecorator.decorate_collection(Challenge.sorted_start_date.visible_for_user(current_user))
+    @filter = params[:filter]
+    case @filter
+      when "upcoming"
+        @challenges = Challenge.upcoming.sorted_start_date
+      when "past"
+        @challenges = Challenge.past.sorted_start_date
+      when "mine"
+        @challenges = current_user.participating_challenges.sorted_start_date
+      else
+        @challenges = Challenge.upcoming.sorted_start_date
+    end
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
   end
 
   # GET /challenges/1
@@ -66,13 +77,20 @@ class ChallengesController < ApplicationController
   # PUT /challenges/1
   def update
     @challenge = Challenge.find(params[:id])
+
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user?(current_user)
+
+    image = params[:challenge].delete :image
 
     if self.submit_for_review?
       @challenge.state = 'pending'
     end
 
-    if @challenge.update_attributes(params[:challenge])
+    if image.present?
+      @challenge.image = image
+    end
+
+    if @challenge.update_attributes(params[:challenge]) && @challenge.save
       redirect_to @challenge, notice: 'Challenge was successfully updated.'
     else
       render action: "edit"

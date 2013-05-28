@@ -4,6 +4,8 @@
   %td.title= user.lastname
   %td.email= user.email
   %td.actions
-    %i.icon-envelope
+    %a{:class => "btn btn-primary", :onClick => "composeMessage('user', #{user.id})"}
+      %i.icon-envelope
     %i.icon-pencil
+
     %i.icon-trash.color-pomegranate
