@@ -56,11 +56,11 @@ class User < ActiveRecord::Base
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
     
-    (to_follower || to_participants) && id != user.id
+    ((to_follower || to_participants) && id != user.id) || is_admin?
   end
   
   def can_send_message_to_participants?(challenge)
-    challenge.supervisor == self
+    challenge.supervisor == self || is_admin?
   end
   
 end
