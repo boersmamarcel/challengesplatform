@@ -6,5 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+user = User.new(
+  :firstname => "Sciencechallenges", :lastname => "", :email => "challenge@localhost"
+)
+user.role = 1
+user.encrypted_password = "" # Can't fake that!
+user.save(validate: false)
 
-load(Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb"))
+load(Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb"))
