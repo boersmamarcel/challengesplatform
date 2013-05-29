@@ -8,16 +8,14 @@
     -if user.id.eql? current_user.id
       %a{:class => "btn disabled"}
         %i.icon-envelope
-    -else
-      %a{:class => "btn", :onClick => "composeMessage('user', #{user.id})"}
-        %i.icon-envelope
-
-    %a{:class => "btn", :href => edit_admin_user_path(user) }
-      %i.icon-pencil
-
-    -if user.id.eql? current_user.id
+      %a{:class => "btn", :href => edit_user_registration_path }
+        %i.icon-pencil
       %a{:class => "btn disabled"}
         %i.icon-trash.color-pomegranate
     -else
+      %a{:class => "btn", :onClick => "composeMessage('user', #{user.id})"}
+        %i.icon-envelope
+      %a{:class => "btn", :href => edit_admin_user_path(user) }
+        %i.icon-pencil
       %a{:class => "btn", :href => admin_user_path(user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user \"#{user.firstname}\" from the system?" }}
         %i.icon-trash.color-pomegranate
