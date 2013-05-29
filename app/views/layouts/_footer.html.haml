@@ -1,0 +1,48 @@
+%footer.footer
+  .container
+    .row
+      .span2.footer-logo
+        = image_tag 'fav64.png'
+      .span2
+        %p.footer-title
+          About us
+        %ul.footer-links
+          %li
+            = link_to 'Science challenges', aboutus_path
+          %li
+            = link_to 'Team', team_path
+          %li 
+            Press
+      .span2
+        %p.footer-title Create
+        %ul.footer-links
+          %li 
+            = link_to "Create a challenges", createchallenge_path
+          %li 
+            = link_to "Challenge guidelines", createchallenge_path
+      .span2
+        %p.footer-title Join
+        %ul.footer-links
+          %li 
+            = link_to "Universities", universities_path
+          %li 
+            = link_to "Companies", companies_path
+          %li 
+            = link_to "Students", students_path
+      .span2
+        %p.footer-title Legal
+        %ul.footer-links
+          %li 
+            = link_to "Terms of Service", termsofservice_path
+          %li 
+            = link_to "Privacy", privacy_path
+      .span2
+        %p.footer-title Share
+        %ul.footer-social
+          %li 
+            %i.icon-facebook
+          %li 
+            %i.icon-twitter
+          %li 
+            %a{:href => "https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.scienchallenges.nl", :target => :new}
+              %i.icon-linkedin

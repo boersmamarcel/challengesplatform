@@ -42,7 +42,17 @@ Challengesplatform::Application.routes.draw do
     end
   end
 
+
   get "static/index"
+  get "aboutus", :to => "static#aboutus"
+  get "team", :to => "static#team"
+  get "createchallenge", :to => "static#createchallenge"
+  get "challengeguidelines", :to => "static#challengeguidelines"
+  get "universities", :to => "static#universities"
+  get "companies", :to => "static#companies"
+  get "students", :to => "static#students"
+  get "termsofservice", :to => "static#termsofservice"
+  get "privacy", :to => "static#privacy"
 
   get "dashboard", :to => "dashboard#index"
   # The priority is based upon order of creation:
