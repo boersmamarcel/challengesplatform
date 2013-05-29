@@ -22,6 +22,8 @@ def getRoute(name)
     new_challenge_path
   when "admin/review.index"
     admin_review_index_path
+  when "admin/usermanagement.index"
+    admin_usermanagement_index_path
   when /^challenges.([0-9]+)$/ #matches a challenge id
     challenge_path($1)
   when /^challenges.([0-9]+).edit$/ #matches a challenge id
