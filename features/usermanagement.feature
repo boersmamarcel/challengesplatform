@@ -6,7 +6,7 @@ Feature: Usermanagement
   Background:
     Given the following user records
      | id | firstname | lastname | email            | password | password_confirmation | role |
-     | 1  | Keven     | Flyn     | admin@ut.nl      | abcd1234 | abcd1234              | 2    |
+     | 1  | Kevin     | Flyn     | admin@ut.nl      | abcd1234 | abcd1234              | 2    |
      | 2  | Tron      | Flyn     | supervisor@ut.nl | abcd1234 | abcd1234              | 1    |
      | 3  | Rinzler   | Flyn     | student@ut.nl    | abcd1234 | abcd1234              | 0    |
     And the following challenge records
@@ -23,5 +23,9 @@ Feature: Usermanagement
   Scenario: Visit the user overview
   When I visit the "admin/usermanagement.index" page
   Then I should see the "admin/usermanagement.index" page
-  And I should see a button "mail"
-  And I should see a button "delete"
+  And I should see a link "message Tron"
+  And I should see a link "delete Tron"
+  And I should see a link "message Rinzler"
+  And I should see a link "delete Rinzler"
+  And I should not see a link "message Kevin"
+  And I should not see a link "delete Kevin"

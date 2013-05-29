@@ -6,16 +6,16 @@
   %td.role= (['student', 'supervisor', 'admin'])[user.role]
   %td.actions
     -if user.id.eql? current_user.id
-      %a{:class => "btn disabled"}
+      %a{:class => "btn disabled", :title => "message is disabled"}
         %i.icon-envelope
-      %a{:class => "btn", :href => edit_user_registration_path }
+      %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_user_registration_path }
         %i.icon-pencil
-      %a{:class => "btn disabled"}
+      %a{:class => "btn disabled", :title => "delete is disabled"}
         %i.icon-trash.color-pomegranate
     -else
-      %a{:class => "btn", :onClick => "composeMessage('user', #{user.id})"}
+      %a{:class => "btn", :title => "message #{user.firstname}", :onClick => "composeMessage('user', #{user.id})"}
         %i.icon-envelope
-      %a{:class => "btn", :href => edit_admin_user_path(user) }
+      %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_admin_user_path(user) }
         %i.icon-pencil
-      %a{:class => "btn", :href => admin_user_path(user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user \"#{user.firstname}\" from the system?" }}
+      %a{:class => "btn", :title => "delete #{user.firstname}", :href => admin_user_path(user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user \"#{user.firstname}\" from the system?" }}
         %i.icon-trash.color-pomegranate
