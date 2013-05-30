@@ -9,8 +9,7 @@
   = form.text_field :email
 
   = label :user, :role
-  = form.select :role, ['student', 'supervisor', 'admin'], :selected => (['student', 'supervisor', 'admin'])[@user.role]
-
+  = form.select :role, options_for_select([['student', 0], ['supervisor', 1], ['admin', 2]], @user.role)
   = form.submit "Update user"
 
 %p
