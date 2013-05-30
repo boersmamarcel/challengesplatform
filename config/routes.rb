@@ -49,7 +49,17 @@ Challengesplatform::Application.routes.draw do
     resources :users, :only => [:edit, :update, :destroy]
   end
 
+
   get "static/index"
+  get "aboutus", :to => "static#aboutus"
+  get "team", :to => "static#team"
+  get "createchallenge", :to => "static#createchallenge"
+  get "challengeguidelines", :to => "static#challengeguidelines"
+  get "universities", :to => "static#universities"
+  get "companies", :to => "static#companies"
+  get "students", :to => "static#students"
+  get "termsofservice", :to => "static#termsofservice"
+  get "privacy", :to => "static#privacy"
 
   get "dashboard", :to => "dashboard#index"
 
