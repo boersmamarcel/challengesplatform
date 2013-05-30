@@ -4,38 +4,47 @@ end
 
 def getRoute(name)
   case name
-  when "login"
-    new_user_session_path
-  when "dashboard.index"
-    dashboard_path
-  when "dashboard"
-    dashboard_path
-  when "index"
-    root_path
-  when "logout"
-    destroy_user_session_path
-  when "registration.form"
-    new_user_registration_path
-  when "challenges.index"
-    challenges_path
-  when "challenge.new"
-    new_challenge_path
-  when "admin/review.index"
-    admin_review_index_path
-  when "admin/usermanagement.index"
-    admin_usermanagement_index_path
-  when /^challenges.([0-9]+)$/ #matches a challenge id
-    challenge_path($1)
-  when /^challenges.([0-9]+).edit$/ #matches a challenge id
-    edit_challenge_path($1)
-  when /^user.([0-9]+).profile$/
-    profile_user_path($1)
-  when "messages"
-    messages_path
-  when /^messages.([0-9]+)$/
-    message_path($1)
-  else
-    print("Invalid route requested (" + name + ")")
+    # authentication-related
+    when "login"
+      new_user_session_path
+    when "dashboard.index"
+      dashboard_path
+    when "dashboard"
+      dashboard_path
+    when "index"
+      root_path
+    when "logout"
+      destroy_user_session_path
+    when "registration.form"
+      new_user_registration_path
+    when "challenges.index"
+      challenges_path
+    when "challenge.new"
+      new_challenge_path
+
+    # Admin namespace
+    when "admin/review.index"
+      admin_review_index_path
+    when "admin/usermanagement.index"
+      admin_usermanagement_index_path
+    when /^admin\/users.([0-9]+).edit$/
+      edit_admin_user_path($1)
+
+    #Challenge related
+    when /^challenges.([0-9]+)$/ #matches a challenge id
+      challenge_path($1)
+    when /^challenges.([0-9]+).edit$/ #matches a challenge id
+      edit_challenge_path($1)
+    when /^user.([0-9]+).profile$/
+      profile_user_path($1)
+
+    # Message related
+    when "messages"
+      messages_path
+    when /^messages.([0-9]+)$/
+      message_path($1)
+    else
+      print("Invalid route requested (" + name + ")")
   end
 end
 

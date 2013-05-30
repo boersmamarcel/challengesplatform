@@ -46,7 +46,7 @@ Challengesplatform::Application.routes.draw do
       get 'index', :on => :member
     end
 
-    resources :users, :only => [:edit, :destroy]
+    resources :users, :only => [:edit, :update, :destroy]
   end
 
   get "static/index"

@@ -1,10 +1,19 @@
-%input{:type => :hidden, :id =>'page_identifier', :value => 'admin/users.edit'}
+%input{:type => :hidden, :id =>'page_identifier', :value => "admin/users.#{@user.id}.edit"}
 
 %h1
-  Admin user edit
+  Admin user edit - 
+  - @user.firstname
+
+=form_for :user, :url => admin_user_path(@user), :html => { :method => :put } do |form|
+  = label :user, :email
+  = form.text_field :email
+
+  = label :user, :role
+  = form.select :role, ['student', 'supervisor', 'admin'], :selected => (['student', 'supervisor', 'admin'])[@user.role]
+
+  = form.submit "Update user"
+
 %p
-  Edit some weirdo user with id #{@user.id}
-%p
-  But first, you should write the entire thing in haml (old one is still in ERB)
   %a{:href => admin_usermanagement_index_path }
-    Some link
+    Back
+  to user management

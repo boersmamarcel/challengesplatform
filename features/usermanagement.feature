@@ -44,9 +44,23 @@ Feature: Usermanagement
   Scenario: Edit a user
     When I visit the "admin/usermanagement.index" page
     And I click on the link with title "edit Abraxis"
-    Then I should see the "admin/users.edit" page
+    Then I should see the "admin/users.2.edit" page
 
   Scenario: Edit yourself
     When I visit the "admin/usermanagement.index" page
     And I click on the link with title "edit Kevin"
     Then I should see the "registrations.edit" page
+
+  Scenario: Promote a supervisor to admin
+    When I visit the "admin/users.2.edit" page
+    And I select "admin" from the "role" dropdown
+    And I click on the button with title "Update"
+    Then I should see the "admin/usermanagement.index" page
+    And user Abraxis should have "admin" as role
+
+  Scenario: Demote a supervisor to student
+    When I visit the "admin/users.2.edit" page
+    And I select "student" from the "role" dropdown
+    And I click on the button with title "Update"
+    Then I should see the "admin/usermanagement.index" page
+    And user Abraxis should have "student" as role
