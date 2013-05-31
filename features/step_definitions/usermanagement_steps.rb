@@ -15,5 +15,10 @@ When(/^I select "(.*?)" from the "(.*?)" dropdown$/) do |value, dropdown|
 end
 
 Then(/^user (.*?) should have "(.*?)" as (.*?)$/) do |username, value, column|
-  find("td#{column}", text: username).should have_content(value)
+  find("tr", text: username).find(".#{column}").should have_content(value)
+end
+
+Then(/^the supervisor should be "(.*?)"$/) do |supervisor|
+  print(User.find(1).firstname)
+  page.find("div.supervisor_detail").should have_content supervisor
 end
