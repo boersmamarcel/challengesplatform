@@ -7,9 +7,12 @@
 # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 user = User.new(
-  :firstname => "Sciencechallenges", :lastname => "", :email => "challenge@localhost"
+  :firstname => "Sciencechallenges", 
+  :lastname => "", 
+  :email => "challenge@localhost", 
+  :notify_by_email => false
 )
-user.role = 1
+user.role = 11
 user.encrypted_password = "" # Can't fake that!
 user.save(validate: false)
 
