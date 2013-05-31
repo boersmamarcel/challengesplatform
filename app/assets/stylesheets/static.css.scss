@@ -7,6 +7,10 @@
 	text-align: center;
 }
 
+.blue-icon{
+	color: rgba(0, 136, 204, 0.7);	
+}
+
 .static-text-row{
 	margin-top: 60px;
 }
@@ -19,9 +23,11 @@
 	border-radius: 50%;
 	height: 150px;
 }
-
 .vertical-spacing{
 	margin-top: 60px;
+}
+.vertical-spacing-big{
+	margin-top: 80px;
 }
 
 .center{
@@ -35,4 +41,7 @@
 
 .utwente-logo{
 	width: 500px;
+}
+.subtext-icon{
+	color: #777;
 }
