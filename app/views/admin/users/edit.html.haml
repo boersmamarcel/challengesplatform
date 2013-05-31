@@ -1,10 +1,15 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => "admin/users.#{@user.id}.edit"}
 
 %h1
-  Admin user edit - 
-  - @user.firstname
+  Admin user edit - @user.firstname
 
 =form_for :user, :url => admin_user_path(@user), :html => { :method => :put } do |form|
+  %p
+    = label :user, :firstname
+    = form.text_field :firstname
+  %p
+    = label :user, :lastname
+    = form.text_field :lastname
   %p
     = label :user, :email
     = form.text_field :email
@@ -12,7 +17,17 @@
     = label :user, :role
     = form.select :role, options_for_select([['student', 0], ['supervisor', 1], ['admin', 2]], @user.role)
   %p
-    = form.submit "Update user"
+    = label :user, :notify_by_email
+    = form.check_box :notify_by_email
+  %p
+    = form.submit "Update user", :class => "btn btn-primary"
+
+  %p.danger
+    %h3 Danger area
+    = form.submit "Send password reset", :class => "btn btn-danger"
+
+    %a{:class => "btn btn-danger", :title => "delete #{@user.firstname}", :href => admin_user_path(@user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user '#{@user.firstname}' from the system?" }}
+      Delete user
 
 %p
   %a{:href => admin_usermanagement_index_path }

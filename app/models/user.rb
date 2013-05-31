@@ -23,11 +23,11 @@ class User < ActiveRecord::Base
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
 
   def is_supervisor?
-    (self.role % 10) > 0
+    self.role > 0
   end
 
   def is_admin?
-    (self.role % 10) > 1
+    self.role > 1
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
