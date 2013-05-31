@@ -1,6 +1,6 @@
 .page-header
   %h1 Companies
-.row.vertical-spacing
+.container.vertical-spacing
   .span7.center.offset2
     %h1 Join science challenges?
     %p.lead
@@ -9,32 +9,53 @@
       %br
       %a{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!", :class => 'btn btn-primary btn-large'}
         Contact us now
-.row.vertical-spacing
+.container.vertical-spacing-big
   .span7.center.offset2
     %h1 How does it work
     %p.lead
       Send us a challenge
     .row
       .span1.offset1
-        %i.icon-file{:style => 'font-size: 80px;'}
+        %i.icon-file.blue-icon{:style => 'font-size: 80px;'}
+      .span1{:style => 'margin-top: 20px;' }
+        %i.icon-arrow-right.blue-icon{:style => 'font-size: 40px;'}
       .span1
-        %i.icon-arrow-right{:style => 'font-size: 40px;'}
+        %i.icon-search.blue-icon{:style => 'font-size: 80px;'}
+      .span1{:style => 'margin-top: 20px;' }
+        %i.icon-arrow-right.blue-icon{:style => 'font-size: 40px; margin-top: 30px;'}
       .span1
-        %i.icon-search{:style => 'font-size: 80px;'}
-      .span1
-        %i.icon-arrow-right{:style => 'font-size: 40px;'}
-      .span1
-        %i.icon-check{:style => 'font-size: 80px;'}
+        %i.icon-check.blue-icon{:style => 'font-size: 80px;'}
     .row
-      .span1.offset1
+      .span1.offset1.subtext-icon
         Your challenge
-      .span1.offset1
+      .span1.offset1.subtext-icon
         Reviewing process
-      .span1.offset1
+      .span1.offset1.subtext-icon
         Challenge accepted
-
-.row.vertical-spacing
+.container.vertical-spacing-big
   .span7.center.offset2
     %h1 Your challenges
     %p.lead
-      Students will join if it's awesome enough
+      Students enrolling
+    .row
+      .span1.offset1
+        %i.icon-group.blue-icon{:style => 'font-size: 70px;'}
+      .span1{:style => 'margin-top: 20px;' }
+        %i.icon-arrow-right.blue-icon{:style => 'font-size: 40px;'}
+      .span1
+        %i.icon-rocket.blue-icon{:style => 'font-size: 80px;'}
+      .span1{:style => 'margin-top: 20px;' }
+        %i.icon-arrow-right.blue-icon{:style => 'font-size: 40px; margin-top: 30px;'}
+      .span1
+        %i.icon-trophy.blue-icon{:style => 'font-size: 80px;'}
+    .row
+      .span1.offset1.subtext-icon
+        Enrolling
+      .span1.offset1.subtext-icon
+        Launching challenge
+      .span1.offset1.subtext-icon
+        Finished
+.container.vertical-spacing-big
+  .span7.center.offset2
+    %a{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!", :class => 'btn btn-primary btn-large'}
+      Contact us now

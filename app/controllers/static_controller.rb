@@ -1,6 +1,6 @@
 class StaticController < ApplicationController
 
-  skip_filter :authenticate_user!, :require_admin, :require_supervisor, :only => [:index, :aboutus, :team, :createchallenge, :challengeguidelines, :universities, :companies, :students, :privacy, :termsofservice]
+  skip_filter :authenticate_user!, :require_admin, :require_supervisor, :only => [:index, :aboutus, :team, :createchallenge, :challengeguidelines, :universities, :companies, :press, :privacy, :termsofservice]
 
   def index
       @highlited_challenges = Challenge.upcoming_and_running.sorted_start_date.limit(3).decorate
@@ -31,9 +31,6 @@ class StaticController < ApplicationController
   	render :companies
   end
 
-  def students
-  	render :students
-  end
 
   def termsofservice
   	render :termsofservice
@@ -43,4 +40,7 @@ class StaticController < ApplicationController
   	render :privacy
   end
 
+  def press
+    render :press
+  end
 end
