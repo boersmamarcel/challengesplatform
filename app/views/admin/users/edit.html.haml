@@ -1,7 +1,7 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => "admin/users.#{@user.id}.edit"}
 
 %h1
-  Admin user edit - @user.firstname
+  ="Admin user edit - #{@user.firstname} #{@user.lastname}"
 
 =form_for :user, :url => admin_user_path(@user), :html => { :method => :put } do |form|
   %p
