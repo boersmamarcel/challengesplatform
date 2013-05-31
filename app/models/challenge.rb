@@ -47,6 +47,9 @@ class Challenge < ActiveRecord::Base
     end
   }
 
+  scope :supervised_by_user, lambda { |user|
+    where("supervisor_id = ?", user.id)
+  }
 
   def enroll(user)
     enrollment = enrollments.find_by_participant_id(user)

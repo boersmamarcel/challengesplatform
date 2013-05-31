@@ -64,3 +64,5 @@ Feature: Usermanagement
     And I click on the button with title "Update"
     Then I should see the "admin/usermanagement.index" page
     And user Abraxis should have "student" as role
+
+    # Add checks about behaviour of challenges when their supervisor is disabled/removed
