@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :firstname, :lastname
-  attr_protected :role, :provider, :uid
+  attr_protected :role, :provider, :uid, :active
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
