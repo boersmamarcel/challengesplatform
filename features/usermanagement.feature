@@ -78,7 +78,16 @@ Feature: Usermanagement
     When I visit the "admin/users.3.edit" page
     And I uncheck "user_active"
     And I click on the button with title "Update user"
-    Then I should see the "admin/usermanagement.index" page
-    And user Abraxis should have "disabled" as state
     And I visit the "challenges.1" page
     Then the supervisor should be "Abraxis"
+
+  Scenario: Go funky changing user details
+    When I visit the "admin/users.3.edit" page
+    And I enter "Foo" in user_firstname
+    And I enter "Bar" in user_lastname
+    And I enter "foobar@example.com" in user_email
+    And I uncheck "user_active"
+    And I click on the button with title "Update user"
+    Then user Foo should have "Bar" as lastname
+    And user Foo should have "foobar@example.com" as email
+    And user Foo should have "disabled" as state

@@ -2,11 +2,15 @@ When(/^I click on the (?:link|button) with title "(.*?)"$/) do |title|
   click_on(title)
 end
 
-When (/^I check "(.*?)"$/) do |check_box|
+When(/^I enter "(.*?)" in (.*?)$/) do |value, field|
+  fill_in field, :with => value
+end
+
+When(/^I check "(.*?)"$/) do |check_box|
   page.check(check_box)
 end
 
-When (/^I uncheck "(.*?)"$/) do |check_box|
+When(/^I uncheck "(.*?)"$/) do |check_box|
   page.uncheck(check_box)
 end
 

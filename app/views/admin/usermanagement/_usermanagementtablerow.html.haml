@@ -1,16 +1,20 @@
 %tr
   %td.id= user.id
-  %td.title= link_to user.firstname, profile_user_path(user)
-  %td.title= user.lastname
+  %td.firstname= link_to user.firstname, profile_user_path(user)
+  %td.lastname= user.lastname
   %td.email= user.email
   %td.role= (['student', 'supervisor', 'admin'])[user.role]
   %td.state= user.active ? "active" : "disabled"
   %td.actions
-    -if user.id.eql? current_user.id
+    -if user.id.eql? current_user.id or user.id.eql? 1
       %a{:class => "btn disabled", :title => "message is disabled"}
         %i.icon-envelope
-      %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_user_registration_path }
-        %i.icon-pencil
+      -if user.id.eql? current_user.id
+        %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_user_registration_path }
+          %i.icon-pencil
+      -else
+        %a{:class => "btn disabled", :title => "edit disabled"}
+          %i.icon-pencil
       %a{:class => "btn disabled", :title => "delete is disabled"}
         %i.icon-trash.color-pomegranate
     -else
