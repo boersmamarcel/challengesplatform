@@ -55,3 +55,12 @@ Feature: Login
     	| admin      |
     	| supervisor |
     	| student    |
+
+  Scenario: Login as an inactive user
+    Given the following user records
+      | id | email                         | password | password_confirmation | role | active |
+      | 1  | admin@student.utwente.nl      | abcd1234 | abcd1234              | 2    | false  |
+    When I visit the "login" page
+    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"
+    Then I should see the "session.new" page
+    And I should see a message with "Your account is locked. Either you have not unlocked it yet, or you have been blocked."

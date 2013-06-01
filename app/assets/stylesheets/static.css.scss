@@ -1,3 +1,135 @@
 // Place all the styles related to the static controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bigicon{
+	font-size: 90px;
+	text-align: center;
+}
+
+.blue-icon{
+	color: rgba(0, 136, 204, 0.7);	
+}
+
+.static-text-row{
+	margin-top: 60px;
+}
+.left-icon{
+	padding-left: 40px;
+}
+
+.rounded-image{
+	text-align: center;
+	border-radius: 50%;
+	height: 150px;
+}
+.vertical-spacing{
+	margin-top: 60px;
+}
+.vertical-spacing-big{
+	margin-top: 80px;
+}
+
+.center{
+	text-align: center;
+}
+
+.team-name{
+	margin-top: 15px;
+	font-size: 20px;
+}
+
+.utwente-logo{
+	width: 500px;
+}
+.subtext-icon{
+	color: #777;
+}
+/**
+ * design shack - Use Pseudo Elements to Create an Image Stack Illusion
+ */
+
+* { margin: 0; padding: 0; } 
+
+div[class*='stack'] {
+	float: left;
+	position: relative;
+	margin: 50px;
+}
+
+div[class*='stack'], div[class*='stack']:before, div[class*='stack']:after {
+	border: 6px solid #fff;
+	height: 200px; width: 200px;
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+ 
+div[class*='stack']:before, div[class*='stack']:after {
+	background: #768590;
+	content: "";
+	position: absolute;
+	z-index: -1;
+	
+	/*Dirty IE8 hack*/	
+	height: 0px\9; width: 0px\9; 
+	border: none\9;
+}
+ 
+div[class*='stack']:before {
+	background: #eff4de;
+}
+
+/*STACK ONE*/
+.stackone:before {
+	top: 4px;
+	left: -6px;
+}
+ 
+.stackone:after {
+	top: -2px;
+	left: -6px;
+}
+ 
+/*STACK TWO*/
+.stacktwo:before {
+	top: 0px;
+	left: -10px;
+	-webkit-transform: rotate(-5deg);
+	-moz-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	-ms-transform: rotate(-5deg);
+	transform: rotate(-5deg);
+}
+ 
+.stacktwo:after {
+	top: 5px; left: 0px;
+	-webkit-transform: rotate(4deg);
+	-moz-transform: rotate(4deg);
+	-o-transform: rotate(4deg);
+	-ms-transform: rotate(4deg);
+	transform: rotate(4deg);
+}
+ 
+/*STACK THREE*/
+.stackthree:before {
+	top: 5px;
+	left: -15px;
+	z-index: -1;
+	-webkit-transform: rotate(-10deg);
+	-moz-transform: rotate(-10deg);
+	-o-transform: rotate(-10deg);
+	-ms-transform: rotate(-10deg);
+	transform: rotate(-10deg);
+}
+ 
+.stackthree:after {
+	top: -2px;
+	left: -10px;
+	-webkit-transform: rotate(-5deg);
+	-moz-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	-ms-transform: rotate(-5deg);
+	transform: rotate(-5deg);
+}
+

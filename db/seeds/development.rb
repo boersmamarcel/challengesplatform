@@ -155,7 +155,3 @@ follows.each do |relation|
     end
   end
 end
-
-
-
-

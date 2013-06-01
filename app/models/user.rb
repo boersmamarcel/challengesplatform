@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :firstname, :lastname
-  attr_protected :role, :provider, :uid
+  attr_protected :role, :provider, :uid, :active
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
 
   def is_admin?
     self.role > 1
+  end
+
+  def active_for_authentication?
+    (super and self.active)
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
@@ -56,11 +60,11 @@ class User < ActiveRecord::Base
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
     
-    (to_follower || to_participants) && id != user.id
+    ((to_follower || to_participants) && id != user.id) || is_admin?
   end
   
   def can_send_message_to_participants?(challenge)
-    challenge.supervisor == self
+    challenge.supervisor == self || is_admin?
   end
   
 end

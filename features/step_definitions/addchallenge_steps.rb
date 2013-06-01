@@ -49,7 +49,6 @@ end
 
 
 Then(/^I should see a (button|link) "(.*?)"$/) do |type, button|
-
    page.should have_selector(:link_or_button, button)
 end
 
