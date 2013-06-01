@@ -1,4 +1,11 @@
 class Admin::UsersController < Admin::AdminController
+  def transfer_challenges(user)
+    Challenge.supervised_by_user(user).each do |challenge|
+      challenge.supervisor_id = 1
+      challenge.save
+    end
+  end
+
   def edit
     @user = User.find(params[:id])
     redirect_to edit_user_registration_path if current_user.id.eql? @user.id
@@ -10,11 +17,7 @@ class Admin::UsersController < Admin::AdminController
 
     # Update from supervisor to non-supervisor?
     if(@user.role == 1 and not params[:user][:role].eql? "1")
-      # Move all challenges supervised by this user to another user (the default sciencechallenges user)
-      Challenge.supervised_by_user(@user).each do |challenge|
-        challenge.supervisor_id = 1
-        challenge.save
-      end
+      transfer_challenges(@user)
     end
 
     @user.firstname = params[:user][:firstname]
@@ -32,11 +35,7 @@ class Admin::UsersController < Admin::AdminController
     redirect_to edit_user_registration_path if current_user.id.eql? @user.id
     
     if(@user.is_supervisor?)
-      # Move all challenges supervised by this user to another user (the default sciencechallenges user)
-      Challenge.supervised_by_user(@user).each do |challenge|
-        challenge.supervisor_id = 1
-        challenge.save
-      end
+      transfer_challenges(@user)
     end
 
     @user.destroy
