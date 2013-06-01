@@ -1,14 +1,24 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'admin/usermanagement.index'}
 %h2
   User management
-%table.table.table-hover
-  %th ID
-  %th Firstname
-  %th Lastname
-  %th Email
-  %th Role
-  %th State
-  %th Actions
 
-  - @users.each do |user|
-    = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
+%p
+  %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
+    %i.icon-plus-sign
+    Add user
+
+%p
+  %table.table
+    %th ID
+    %th Firstname
+    %th Lastname
+    %th Email
+    %th Role
+    %th State
+    %th Actions
+    - @users.each do |user|
+      = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
+%p
+  %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
+    %i.icon-plus-sign
+    Add user
