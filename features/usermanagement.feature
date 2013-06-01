@@ -5,12 +5,12 @@ Feature: Usermanagement
   # Log in as an admin user for all upcoming scenarios
   Background:
     Given the following user records
-     | id | firstname | lastname | email                  | password | password_confirmation | role |
-     | 1  | sciencechallenges |  | challenge@localhost.nl | abcd1234 | abcd1234              | 11   |
-     | 2  | Kevin     | Flyn     | admin@ut.nl            | abcd1234 | abcd1234              | 2    |
-     | 3  | Abraxis   | Flyn     | abraxis@ut.nl          | abcd1234 | abcd1234              | 1    |
-     | 4  | Rinzler   | Flyn     | student@ut.nl          | abcd1234 | abcd1234              | 0    |
-     | 5  | Tron      | Flyn     | tron@ut.nl             | abcd1234 | abcd1234              | 1    |
+     |id| firstname | lastname | email                  | password | password_confirmation | role | active |
+     |1 | sciencechallenges |  | challenge@localhost.nl | abcd1234 | abcd1234              | 1    | false  |
+     |2 | Kevin     | Flyn     | admin@ut.nl            | abcd1234 | abcd1234              | 2    | true   |
+     |3 | Abraxis   | Flyn     | abraxis@ut.nl          | abcd1234 | abcd1234              | 1    | true   |
+     |4 | Rinzler   | Flyn     | student@ut.nl          | abcd1234 | abcd1234              | 0    | true   |
+     |5 | Tron      | Flyn     | tron@ut.nl             | abcd1234 | abcd1234              | 1    | true   |
     And the following challenge records
       | id | title  | description | start_date | end_date   | state    | count | supervisor_id |
       | 1  | Title1 | Abraxis'    | 03-08-2113 | 09-09-2113 | proposal | 1     | 3             |

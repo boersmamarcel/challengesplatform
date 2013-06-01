@@ -20,6 +20,7 @@ class Admin::UsersController < Admin::AdminController
     @user.firstname = params[:user][:firstname]
     @user.lastname = params[:user][:lastname]
     @user.role = params[:user][:role]
+    @user.active = params[:user][:notify_by_email]
     @user.notify_by_email = params[:user][:notify_by_email]
     @user.save
 
@@ -32,7 +33,7 @@ class Admin::UsersController < Admin::AdminController
     
     if(@user.is_supervisor?)
       # Move all challenges supervised by this user to another user (the default sciencechallenges user)
-      Challenge.supervised_by_user(current_user).each do |challenge|
+      Challenge.supervised_by_user(@user).each do |challenge|
         challenge.supervisor_id = 1
         challenge.save
       end

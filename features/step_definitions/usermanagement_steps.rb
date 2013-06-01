@@ -19,6 +19,5 @@ Then(/^user (.*?) should have "(.*?)" as (.*?)$/) do |username, value, column|
 end
 
 Then(/^the supervisor should be "(.*?)"$/) do |supervisor|
-  print(User.find(1).firstname)
-  page.find("div.supervisor_detail").should have_content supervisor
+  page.should have_content "Supervised by #{supervisor}"
 end

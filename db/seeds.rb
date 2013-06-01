@@ -12,7 +12,8 @@ user = User.new(
   :email => "challenge@localhost", 
   :notify_by_email => false
 )
-user.role = 11
+user.role = 1
+user.active = false
 user.encrypted_password = "" # Can't fake that!
 user.save(validate: false)
 
