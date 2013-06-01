@@ -27,3 +27,12 @@ Feature: User adding
     And user John should have "Doe" as lastname
     And user John should have "johndoe@example.com" as email
     And user John should have "active" as state
+
+  Scenario: Add a user with a duplicate email
+    When I visit the "admin/users.new" page
+    And I enter "John" in user_firstname
+    And I enter "Doe" in user_lastname
+    And I enter "admin@ut.nl" in user_email
+    And I click on the button with title "Save user"
+    Then I should see the "admin/users.new" page
+    And I should see a message with "Duplicate email address"

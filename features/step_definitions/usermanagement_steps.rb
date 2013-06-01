@@ -1,5 +1,9 @@
-When(/^I click on the (?:link|button) with title "(.*?)"$/) do |title|
+When(/^I click on the button with title "(.*?)"$/) do |title|
   click_on(title)
+end
+
+When(/^I click on the link with title "(.*?)"$/) do |title|
+  page.first(:link, title).click
 end
 
 When(/^I enter "(.*?)" in (.*?)$/) do |value, field|

@@ -29,6 +29,9 @@ def getRoute(name)
       admin_usermanagement_index_path
     when /^admin\/users.([0-9]+).edit$/
       edit_admin_user_path($1)
+    when "admin/users.new"
+      new_admin_user_path
+    
 
     #Challenge related
     when /^challenges.([0-9]+)$/ #matches a challenge id
