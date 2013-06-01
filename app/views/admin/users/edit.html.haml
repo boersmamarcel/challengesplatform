@@ -4,6 +4,15 @@
   ="Admin user edit - #{@user.firstname} #{@user.lastname}"
 
 =form_for :user, :url => admin_user_path(@user), :html => { :method => :put } do |form|
+  -if @user.errors.any?
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert"} ×
+      %p
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
   %p
     = label :user, :firstname
     = form.text_field :firstname
