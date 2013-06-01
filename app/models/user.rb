@@ -8,8 +8,16 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :mailchimp
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :firstname, :lastname
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname
   attr_protected :role, :provider, :uid, :active
+
+  #Yeah, let's suppose admins are wise enough not to screw things up
+  attr_accessible :email, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
+
+  validates :email, :presence => { :message => "Email address is missing" }
+  validates :email, :uniqueness => true
+  validates :firstname, :presence => { :message => "First name is missing"}
+  validates :lastname, :presence => { :message => "Last name is missing"}
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy

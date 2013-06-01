@@ -46,7 +46,7 @@ Challengesplatform::Application.routes.draw do
       get 'index', :on => :member
     end
 
-    resources :users, :only => [:edit, :update, :destroy, :new]
+    resources :users, :only => [:edit, :update, :destroy, :new, :create]
   end
 
 

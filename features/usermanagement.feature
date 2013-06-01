@@ -6,7 +6,7 @@ Feature: Usermanagement
   Background:
     Given the following user records
      |id| firstname | lastname | email                  | password | password_confirmation | role | active |
-     |1 | sciencechallenges |  | challenge@localhost.nl | abcd1234 | abcd1234              | 1    | false  |
+     |1 | sciencechallenges |- | challenge@localhost.nl | abcd1234 | abcd1234              | 1    | false  |
      |2 | Kevin     | Flyn     | admin@ut.nl            | abcd1234 | abcd1234              | 2    | true   |
      |3 | Abraxis   | Flyn     | abraxis@ut.nl          | abcd1234 | abcd1234              | 1    | true   |
      |4 | Rinzler   | Flyn     | student@ut.nl          | abcd1234 | abcd1234              | 0    | true   |
