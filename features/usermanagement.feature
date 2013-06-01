@@ -62,7 +62,7 @@ Feature: Usermanagement
   Scenario: Demote a supervisor to student
     When I visit the "admin/users.3.edit" page
     And I select "student" from the "user_role" dropdown
-    And I click on the button with title "Update"
+    And I click on the button with title "Update user"
     Then I should see the "admin/usermanagement.index" page
     And user Abraxis should have "student" as role
 
@@ -72,3 +72,13 @@ Feature: Usermanagement
     And I click on the link with title "delete Abraxis"
     And I visit the "challenges.1" page
     Then the supervisor should be "sciencechallenges"
+
+  # Deactivation should not remove a supervisisor role
+  Scenario: de-activate a user
+    When I visit the "admin/users.3.edit" page
+    And I uncheck "user_active"
+    And I click on the button with title "Update user"
+    Then I should see the "admin/usermanagement.index" page
+    And user Abraxis should have "disabled" as state
+    And I visit the "challenges.1" page
+    Then the supervisor should be "Abraxis"

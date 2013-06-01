@@ -4,6 +4,7 @@
   %td.title= user.lastname
   %td.email= user.email
   %td.role= (['student', 'supervisor', 'admin'])[user.role]
+  %td.state= user.active ? "active" : "disabled"
   %td.actions
     -if user.id.eql? current_user.id
       %a{:class => "btn disabled", :title => "message is disabled"}

@@ -2,6 +2,14 @@ When(/^I click on the (?:link|button) with title "(.*?)"$/) do |title|
   click_on(title)
 end
 
+When (/^I check "(.*?)"$/) do |check_box|
+  page.check(check_box)
+end
+
+When (/^I uncheck "(.*?)"$/) do |check_box|
+  page.uncheck(check_box)
+end
+
 Then(/^I should see a link with title "(.*?)"$/) do |title|
   !first("a", :text => title).nil?
 end

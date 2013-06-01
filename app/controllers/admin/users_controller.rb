@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::AdminController
     redirect_to edit_user_registration_path if current_user.id.eql? @user.id
 
     # Update from supervisor to non-supervisor?
-    if(params[:user][:role] != 1 and @user.is_supervisor?)
+    if(@user.role == 1 and not params[:user][:role].eql? "1")
       # Move all challenges supervised by this user to another user (the default sciencechallenges user)
       Challenge.supervised_by_user(@user).each do |challenge|
         challenge.supervisor_id = 1
@@ -20,7 +20,7 @@ class Admin::UsersController < Admin::AdminController
     @user.firstname = params[:user][:firstname]
     @user.lastname = params[:user][:lastname]
     @user.role = params[:user][:role]
-    @user.active = params[:user][:notify_by_email]
+    @user.active = params[:user][:active]
     @user.notify_by_email = params[:user][:notify_by_email]
     @user.save
 
