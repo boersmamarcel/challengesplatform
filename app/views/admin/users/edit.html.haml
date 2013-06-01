@@ -27,8 +27,6 @@
 
   %p.danger
     %h3 Danger area
-    = form.submit "Send password reset", :class => "btn btn-danger"
-
     %a{:class => "btn btn-danger", :title => "delete #{@user.firstname}", :href => admin_user_path(@user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user '#{@user.firstname}' from the system?" }}
       Delete user
 
