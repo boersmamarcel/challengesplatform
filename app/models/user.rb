@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    debugger
     data = access_token.info
     user = User.where(:email => data["email"]).first
     unless user
@@ -40,27 +41,26 @@ class User < ActiveRecord::Base
         :email => data["email"],
         :password => Devise.friendly_token[0,20],
       )
-      # protected attributes...
-      user.provider = access_token.provider 
+      user.provider = access_token.provider
       user.uid = access_token.uid
-
+      user.save
       user.add_to_mailchimp_list("Challenges")
     end
     user
   end
-  
+
   def can_send_message_to_user?(user)
     to_follower = followers.exists?(user)
-    
+
     my_challenges = participating_challenges
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
-    
+
     (to_follower || to_participants) && id != user.id
   end
-  
+
   def can_send_message_to_participants?(challenge)
     challenge.supervisor == self
   end
-  
+
 end

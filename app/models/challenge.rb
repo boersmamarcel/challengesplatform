@@ -93,7 +93,7 @@ class Challenge < ActiveRecord::Base
     upcoming?
   end
 
-  def to_declined
+  def decline
       self.state = "declined"
       self.count = count + 1
   end

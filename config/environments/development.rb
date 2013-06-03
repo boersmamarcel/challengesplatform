@@ -1,3 +1,18 @@
+class DisableAssetsLogger
+  def initialize(app)
+    @app = app
+    Rails.application.assets.logger = Logger.new('/dev/null')
+  end
+
+  def call(env)
+    previous_level = Rails.logger.level
+    Rails.logger.level = Logger::ERROR if env['PATH_INFO'].index("/assets/") == 0
+    @app.call(env)
+  ensure
+    Rails.logger.level = previous_level
+  end
+end
+
 Challengesplatform::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -36,4 +51,7 @@ Challengesplatform::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Quiet assets
+  config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
 end

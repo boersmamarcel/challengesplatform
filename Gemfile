@@ -41,6 +41,7 @@ end
 group :develop do
   gem 'capistrano' # Easy deployment
   gem 'rvm-capistrano' # Enabling RVM support for capistrano
+  gem 'thin'
   gem 'debugger' # Debugging plugin for rails
 end
 
