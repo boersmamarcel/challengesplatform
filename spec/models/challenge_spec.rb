@@ -70,6 +70,11 @@ describe Challenge do
     starts_tomorrow.can_enroll?.should be_true
     started_yesterday.can_enroll?.should be_false
     ended_yesterday.can_enroll?.should be_false
+
+
+    starts_tomorrow.can_unenroll?.should be_true
+    started_yesterday.can_unenroll?.should be_false
+    ended_yesterday.can_unenroll?.should be_false
   end
 
   it "should be able to decline a challenge" do

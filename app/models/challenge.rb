@@ -86,7 +86,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def can_unenroll?
-    !running?
+    upcoming?
   end
 
   def can_enroll?
