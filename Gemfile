@@ -38,14 +38,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :develop do
+group :development do
   gem 'capistrano' # Easy deployment
   gem 'rvm-capistrano' # Enabling RVM support for capistrano
   gem 'thin'
   gem 'debugger' # Debugging plugin for rails
 end
 
-group :test, :develop  do
+group :test, :development  do
   gem 'coveralls', require: false # Testing coverage report
   gem 'factory_girl_rails' # Factories for tests
   gem 'rspec' # Testing framework for rails
