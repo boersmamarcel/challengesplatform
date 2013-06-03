@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => { :message => "Email address is missing" }
   validates :email, :uniqueness => true
-#  validates :firstname, :presence => { :message => "First name is missing"}
-#  validates :lastname, :presence => { :message => "Last name is missing"}
+  validates :firstname, :presence => { :message => "First name is missing"}
+  validates :lastname, :presence => { :message => "Last name is missing"}
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
