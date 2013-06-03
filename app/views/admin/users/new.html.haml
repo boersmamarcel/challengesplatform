@@ -4,6 +4,15 @@
   Add user
 
 =form_for :user, :url => admin_users_path, :html => { :method => :post } do |form|
+  -if @user.errors.any?
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert"} ×
+      %p
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
   %p
     = label :user, :firstname
     = form.text_field :firstname

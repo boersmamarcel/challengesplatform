@@ -35,4 +35,4 @@ Feature: User adding
     And I enter "admin@ut.nl" in user_email
     And I click on the button with title "Save user"
     Then I should see the "admin/users.new" page
-    And I should see a message with "Duplicate email address"
+    And I should see a message with "Email has already been taken"
