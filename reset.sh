@@ -36,6 +36,7 @@ if $b; then
 fi
 
 rake db:reset
+rake db:test:prepare
 
 if $s; then
 	rails s
