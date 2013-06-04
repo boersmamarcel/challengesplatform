@@ -6,16 +6,16 @@ Feature: Login
 
   Scenario: Login with correct user credentials
 		Given the following user records
-			| email | password | password_confirmation |
-			| j.p.balkenende@student.utwente.nl | abcd1234 | abcd1234 |
+			| email                             | password | password_confirmation | active |
+			| j.p.balkenende@student.utwente.nl | abcd1234 | abcd1234              | true   |
 		When I visit the "login" page
 		And I fill in email with "j.p.balkenende@student.utwente.nl" and password with "abcd1234"
 		Then I should see the "dashboard.index" page
 
 	Scenario: Login with incorrect user credentials
 		Given the following user records
-			| email | password | password_confirmation |
-			| j.p.balkenende@student.utwente.nl | abcd1234 | abcd1234 |
+			| email                             | password | password_confirmation | active |
+			| j.p.balkenende@student.utwente.nl | abcd1234 | abcd1234              | true   |
 		When I visit the "login" page
 		And I fill in email with "j.p.balkenende@studente.utwente.nl" and password with "wrong"
 		Then I should see a message with "Invalid email or password"
@@ -55,3 +55,12 @@ Feature: Login
     	| admin      |
     	| supervisor |
     	| student    |
+
+  Scenario: Login as an inactive user
+    Given the following user records
+      | id | email                         | password | password_confirmation | role | active |
+      | 1  | admin@student.utwente.nl      | abcd1234 | abcd1234              | 2    | false  |
+    When I visit the "login" page
+    And I fill in email with "admin@student.utwente.nl" and password with "abcd1234"
+    Then I should see the "session.new" page
+    And I should see a message with "Your account is locked. Either you have not unlocked it yet, or you have been blocked."

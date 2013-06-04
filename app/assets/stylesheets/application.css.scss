@@ -48,6 +48,12 @@ h2 {
     border-bottom: 1px solid #ececec;
   }
 }
+h3{
+  font-size: 18px;
+  &.bordered {
+    border-bottom: 1px solid #ececec;
+  }
+}
 .brand {
   font-family: $font-header;
   font-weight: 400;
@@ -85,3 +91,4 @@ h2 {
   padding-left: 10px;
   padding-right: 10px;
 }
+

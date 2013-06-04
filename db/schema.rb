@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20130604130417) do
     t.string   "firstname"
     t.string   "lastname"
     t.boolean  "notify_by_email",        :default => true
+    t.boolean  "active",                 :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
