@@ -1,20 +1,24 @@
-.challenge.span4
-  - if !options[:no_status] && challenge.current_user_enrolled?
-    .status
-      %span.badge.badge-success
-        %i.icon-ok-sign
-        You're enrolled
-  - elsif !options[:no_status] && challenge.warn_current_user_enrollment?
-    .status
-      %span.badge.badge-warning
-        - if challenge.days_till_enrollment_closes > 1
-          Enrollment closes in
-          = pluralize(challenge.days_till_enrollment_closes, "day")
-        - else
-          Enrollment closes today!
+.challenge.span4{"class" => "state_#{challenge.state}"}
   %a.thumb{:href => challenge_path(challenge)}
     = image_tag challenge.image.thumb.url
-    / %img{:alt => "", src: "http://lorempixel.com/300/120/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+    - if !options[:no_status] && challenge.current_user_enrolled?
+      .status
+        %span.badge.badge-success
+          %i.icon-ok-sign
+          You're enrolled
+    - elsif !options[:no_status] && challenge.warn_current_user_enrollment?
+      .status
+        %span.badge.badge-warning
+          - if challenge.days_till_enrollment_closes > 1
+            Enrollment closes in
+            = pluralize(challenge.days_till_enrollment_closes, "day")
+          - else
+            Enrollment closes today!
+    - if !options[:no_status] && (challenge.supervisor == current_user || current_user.is_admin?)
+      .status
+        %span.badge.badge-info
+          %i.icon-star
+          = challenge.state.camelize
     %h4= challenge.title
   - if challenge.supervisor.present?
     .supervisor

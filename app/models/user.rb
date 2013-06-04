@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_many :inverse_followrelations, :class_name => 'Follow', :foreign_key => 'following_id', :dependent => :destroy
   has_many :followers, :through => :inverse_followrelations, :source => :user
   has_many :supervising_challenges, :foreign_key => 'supervisor_id', :class_name => 'Challenge'
-  has_many :participating_challenges, :through => :enrollments, :source => :challenge
-  has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy
+  has_many :participating_challenges, :source => :challenge, :through => :enrollments
+  has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy, :conditions => {:unenrolled_at => nil}
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
 
@@ -40,27 +40,26 @@ class User < ActiveRecord::Base
         :email => data["email"],
         :password => Devise.friendly_token[0,20],
       )
-      # protected attributes...
-      user.provider = access_token.provider 
+      user.provider = access_token.provider
       user.uid = access_token.uid
-
+      user.save
       user.add_to_mailchimp_list("Challenges")
     end
     user
   end
-  
+
   def can_send_message_to_user?(user)
     to_follower = followers.exists?(user)
-    
+
     my_challenges = participating_challenges
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
-    
+
     (to_follower || to_participants) && id != user.id
   end
-  
+
   def can_send_message_to_participants?(challenge)
     challenge.supervisor == self
   end
-  
+
 end
