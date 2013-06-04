@@ -3,7 +3,7 @@ class StaticController < ApplicationController
   skip_filter :authenticate_user!, :require_admin, :require_supervisor, :only => [:index, :aboutus, :team, :createchallenge, :challengeguidelines, :universities, :companies, :press, :privacy, :termsofservice]
 
   def index
-      @highlited_challenges = Challenge.upcoming_and_running.sorted_start_date.limit(3).decorate
+      @highlighted_challenges = Challenge.upcoming_and_running.sorted_start_date.limit(3).decorate
       render :index
   end
 
