@@ -31,13 +31,13 @@ class Challenge < ActiveRecord::Base
   scope :past, where('end_date < ?', Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
-  scope :proposal, where(:state => "proposal")
-  scope :declined, where("state = ? AND count > ?", "proposal", 1)
+  scope :draft, where(:state => "draft")
+  scope :declined, where("state = ? AND count > ?", "draft", 1)
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
-  scope :editable, where(:state => "proposal")
+  scope :editable, where(:state => "draft")
   scope :sorted_start_date, order('start_date ASC')
-  
+
   scope :visible_for_user, lambda { |user|
     if user.is_admin?
     elsif user.is_supervisor?
@@ -81,7 +81,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def editable_by_user?(user)
-    (state == 'proposal' && user.id == supervisor_id) || user.is_admin?
+    (state == 'draft' && user.id == supervisor_id) || user.is_admin?
   end
 
   def visible_for_user?(user)

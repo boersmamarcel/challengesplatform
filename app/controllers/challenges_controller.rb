@@ -21,10 +21,16 @@ class ChallengesController < ApplicationController
         @challenges = Challenge.past.sorted_start_date
       when "mine"
         @challenges = current_user.participating_challenges.sorted_start_date
+      when "supervising"
+        if current_user.is_supervisor?
+          @challenges = current_user.supervising_challenges
+        else
+          redirect_to "/challenges"
+        end
       else
-        @challenges = Challenge.upcoming.sorted_start_date
+        @challenges = Challenge.upcoming_and_running.sorted_start_date
     end
-    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(3)
   end
 
   # GET /challenges/1
@@ -58,7 +64,7 @@ class ChallengesController < ApplicationController
     if self.submit_for_review?
       @challenge.state = 'pending'
     else
-      @challenge.state = 'proposal'
+      @challenge.state = 'draft'
     end
 
     @challenge.count = 1
@@ -110,7 +116,7 @@ class ChallengesController < ApplicationController
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
 
     @challenge.count += 1
-    @challenge.state = "proposal"
+    @challenge.state = "draft"
 
     if @challenge.save
       redirect_to declined_challenges_path , notice: 'Challenge successfully revoked'
