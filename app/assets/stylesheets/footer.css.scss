@@ -19,6 +19,11 @@
 .footer-links li {
   list-style-type: none;
 }
+.footer-links-inline li {
+  list-style-type: none;
+  display: inline;
+  padding-left: 20px;
+}
 .footer-links li:first-child {
   padding-left: 0;
 }
@@ -43,6 +48,11 @@
 .footer-logo
 {
 
+}
+
+.footersmall
+{
+  background-color: #FFF;
 }
 
 #push{
