@@ -1,4 +1,4 @@
-.challenge.span4
+.challenge.span4{"class" => "state_#{challenge.state}"}
   %a.thumb{:href => challenge_path(challenge)}
     = image_tag challenge.image.thumb.url
     - if !options[:no_status] && challenge.current_user_enrolled?

@@ -107,8 +107,11 @@
     position: relative;
     overflow: hidden;
     padding: 10px;
-
     font-size: 13px;
+
+    &.state_pending {
+      opacity: 0.5;
+    }
     .status {
       margin-right: 6px;
       margin-top: 4px;
