@@ -151,8 +151,3 @@ end
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in field, :with => value
 end
-
-When(/^I take a screenshot$/) do
-  sleep(3)
-  page.save_screenshot('fail.png')
-end
