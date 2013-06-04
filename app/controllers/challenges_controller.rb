@@ -11,8 +11,6 @@ class ChallengesController < ApplicationController
   # Allow supervisors to see even more (they already see everything above)
   skip_filter :require_admin, :only => [:new, :edit, :create, :update, :revoke]
 
-
-
   # GET /challenges
   def index
     @filter = params[:filter]

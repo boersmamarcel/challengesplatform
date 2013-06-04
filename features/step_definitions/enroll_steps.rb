@@ -1,4 +1,4 @@
-Then(/^I should not see button "(.*?)"$/) do |button|
+Then(/^I should not see(?: a)? (?:button|link) "(.*?)"$/) do |button|
   page.should_not have_selector(:link_or_button, button)
 end
 

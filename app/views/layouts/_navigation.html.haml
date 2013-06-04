@@ -24,6 +24,8 @@
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
         = link_to('Review', admin_review_index_path)
+      %li{class: controller?("admin/usermanagement") ? "active": ""}
+        = link_to('Usermanagement', admin_usermanagement_index_path)
   %ul.nav.pull-right
     %li.dropdown
       %a{"class" => "dropdown-toggle " + ((controller?("profile") || controller?("users/registrations")) ? "active" : ""), "data-toggle" => "dropdown", :href => "#"}

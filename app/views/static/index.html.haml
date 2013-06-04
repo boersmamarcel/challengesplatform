@@ -3,7 +3,7 @@
 .hero-unit
   %h1
     %i.icon-rocket
-    - ab_test("title_text", "lock", "unlock") do |ab|
+    - ab_test("title_text", "boost", "unlock") do |ab|
       #{ab} your
       %strong potential.
   %p
@@ -14,12 +14,14 @@
     %strong University of Twente.
     Challenges are short projects that allow you to do some pretty cool things. Are you up to it?
   %p
-    %a.btn.btn-primary.btn-large{:href => new_user_session_path} Join now!
-    %a.btn.btn-large{:href => "mailto:dummy"} Organize a challenge
+    %a.btn.btn-primary.btn-large{:href => new_user_session_path}
+      Join now!
+    %a.btn.btn-large{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!"}
+      Organize a challenge
   %p
     %a{:href => "#"}
       Read more about Science Challenges and its goal &raquo;
 %h1
   %i.icon-lightbulb.color-sun-flower
   Highlighted Challenges
-= render 'shared/challenges_list' , :challenges => @highlited_challenges, :options => {:no_status => true}
+= render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
