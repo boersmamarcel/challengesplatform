@@ -1,3 +1,5 @@
 - list_id ||= nil
 .challenges-list.row{id: list_id}
   = render challenges, :options => (options ||= {})
+- if challenges.blank?
+  %p No challenges found.

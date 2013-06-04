@@ -10,8 +10,7 @@
     %i.icon-ok-sign.color-belize-hole
     Enrolled Challenges
   = render :partial => 'shared/challenges_list' , :locals => {:challenges => @my_challenges, :list_id => "my_challenges"}
-- unless @upcoming_challenges.blank?
-  %h2.bordered
-    %i.icon-road.color-belize-hole
-    Upcoming Challenges
-  = render :partial => 'shared/challenges_list' ,  :locals => {:challenges => @upcoming_challenges, :list_id => "upcoming_challenges"}
+%h2.bordered
+  %i.icon-road.color-belize-hole
+  Upcoming Challenges
+= render :partial => 'shared/challenges_list' ,  :locals => {:challenges => @upcoming_challenges, :list_id => "upcoming_challenges"}

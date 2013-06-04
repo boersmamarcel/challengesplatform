@@ -66,7 +66,7 @@ class ChallengesController < ApplicationController
     if self.submit_for_review?
       @challenge.state = 'pending'
     else
-      @challenge.state = 'proposal'
+      @challenge.state = 'draft'
     end
 
     @challenge.count = 1
@@ -118,7 +118,7 @@ class ChallengesController < ApplicationController
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
 
     @challenge.count += 1
-    @challenge.state = "proposal"
+    @challenge.state = "draft"
 
     if @challenge.save
       redirect_to declined_challenges_path , notice: 'Challenge successfully revoked'
