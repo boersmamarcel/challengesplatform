@@ -4,7 +4,7 @@
 # (second answer)
 # and
 # http://stackoverflow.com/questions/8466822/devise-overriding-registrations-controller-uninitialized-constant-usersregis
-
+require "pp"
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy]
   
@@ -50,5 +50,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       render "edit"
     end
+  end
+
+  def cancel
+    @user = User.find(params[:id])
+    # You can't edit the sciencechallenges user, dummy!
+    redirect_to edit_user_registration_path if @user.id.eql? 1
+    if(@user.is_supervisor?)
+      transfer_challenges(@user)
+    end
+
+    @user.destroy
+
+    super cancel
   end
 end

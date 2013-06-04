@@ -46,6 +46,10 @@ def getRoute(name)
       messages_path
     when /^messages.([0-9]+)$/
       message_path($1)
+
+    #user
+    when "user.edit"
+        edit_user_registration_path
     else
       print("Invalid route requested (" + name + ")")
   end
