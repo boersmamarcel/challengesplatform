@@ -22,7 +22,6 @@ Feature: Login
 
 	Scenario: Login as a student (with Google OAuth)
 		When I log in with Google "test@utwente.nl"
-    And show me the page
 		Then I should see the "dashboard.index" page
 
 	Scenario: Visit the index page while logged in
