@@ -8,8 +8,16 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :mailchimp
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :join_mailing_list, :firstname, :lastname
-  attr_protected :role, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname
+  attr_protected :role, :provider, :uid, :active
+
+  #Yeah, let's suppose admins are wise enough not to screw things up
+  attr_accessible :email, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
+
+  validates :email, :presence => { :message => "Email address is missing" }
+  validates :email, :uniqueness => true
+  validates :firstname, :presence => { :message => "First name is missing"}
+  validates :lastname, :presence => { :message => "Last name is missing"}
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
@@ -17,8 +25,8 @@ class User < ActiveRecord::Base
   has_many :inverse_followrelations, :class_name => 'Follow', :foreign_key => 'following_id', :dependent => :destroy
   has_many :followers, :through => :inverse_followrelations, :source => :user
   has_many :supervising_challenges, :foreign_key => 'supervisor_id', :class_name => 'Challenge'
-  has_many :participating_challenges, :through => :enrollments, :source => :challenge
-  has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy
+  has_many :participating_challenges, :source => :challenge, :through => :enrollments
+  has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy, :conditions => {:unenrolled_at => nil}
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
 
@@ -28,6 +36,10 @@ class User < ActiveRecord::Base
 
   def is_admin?
     self.role > 1
+  end
+
+  def active_for_authentication?
+    (super and self.active)
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
@@ -40,27 +52,25 @@ class User < ActiveRecord::Base
         :email => data["email"],
         :password => Devise.friendly_token[0,20],
       )
-      # protected attributes...
-      user.provider = access_token.provider 
+      user.provider = access_token.provider
       user.uid = access_token.uid
-
+      user.save
       user.add_to_mailchimp_list("Challenges")
     end
     user
   end
-  
+
   def can_send_message_to_user?(user)
     to_follower = followers.exists?(user)
-    
+
     my_challenges = participating_challenges
     receiver_challenges = user.participating_challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
-    
-    (to_follower || to_participants) && id != user.id
+    ((to_follower || to_participants) && id != user.id) || is_admin?
   end
-  
+
   def can_send_message_to_participants?(challenge)
-    challenge.supervisor == self
+    challenge.supervisor == self || is_admin?
   end
-  
+
 end

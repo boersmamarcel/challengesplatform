@@ -7,7 +7,6 @@ Given(/^I am not logged in$/) do
 end
 
 When(/^I fill in email with "(.*?)" and password with "(.*?)"$/) do |email, password|
-  
   find("#other-login p").click
   
   fill_in :user_email, :with => email
@@ -38,8 +37,10 @@ def set_omniauth(opts = {})
     :provider => :google_oauth2,
     :uuid     => "1234",
     :google_oauth2 => {
-      :name => "Foo",
-      :email => "test@student.utwente.nl"
+      :name => "John Doe",
+      :email => "test@student.utwente.nl",
+      :first_name => "John",
+      :last_name => "Doe",
     }
   }
 
@@ -52,7 +53,9 @@ def set_omniauth(opts = {})
   OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new({
                                                                  'uid' => credentials[:uuid],
                                                                  "info" => {
-                                                                   "email" => user_hash[:email],
+                                                                    "email" => user_hash[:email],
+                                                                    "first_name" => "John",
+                                                                    "last_name" => "Doe"
                                                                  }
                                                                })
 end

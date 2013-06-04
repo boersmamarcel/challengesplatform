@@ -15,8 +15,8 @@ Feature: Sending Messages using the message center
     | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
     | 1   | Title1  | Description1 | next week  | 09-09-2060| approved | 1     | 1             |
     | 2   | Title2  | Description2 | 09-09-2059 | 09-09-2060| pending  | 2     | 1             |
-    | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| proposal | 1     | 1             |
-    | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| proposal | 4     | 1             |
+    | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| draft | 1     | 1             |
+    | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| draft | 4     | 1             |
     | 5   | Title5  | Description5 | next month | 09-09-2060| approved | 2     | 1             |
     | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 1             |
     | 7   | Title7  | Description7 | 15-05-2013 | 09-09-2060| approved | 2     | 1             |
@@ -74,14 +74,3 @@ Feature: Sending Messages using the message center
         And I visit the "user.4.profile" page
         And I try to send a message
        Then I should see a message with "You do not have the permissions required to view this page"
-       
-    @javascript @wip
-    Scenario: Recommending a challenge to a user who follows you
-      Given "participant4@student.utwente.nl" is following "participant@student.utwente.nl"
-       When I visit the "login" page
-        And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
-        And I visit the "challenges.1" page
-        And I follow "Recommend to a friend"
-        And I fill in "to-field" with "Joh"
-        And I take a screenshot
-       Then I should see a message with "John Doe"

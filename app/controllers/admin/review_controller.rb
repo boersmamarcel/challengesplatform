@@ -6,15 +6,14 @@ class Admin::ReviewController < Admin::AdminController
   end
   
   def show
-  begin
-    @challenge = Challenge.pending.find(params[:id]).decorate
-    @new_comment = @challenge.comments.new
-    @challenge.reload
-    render :show
-  rescue ActiveRecord::RecordNotFound
-    redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
-  end
-    
+    begin
+      @challenge = Challenge.pending.find_by_id!(params[:id]).decorate
+      @new_comment = @challenge.comments.new
+      @challenge.reload
+      render :show
+    rescue ActiveRecord::RecordNotFound
+      redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
+    end
   end
   
 
@@ -68,7 +67,7 @@ class Admin::ReviewController < Admin::AdminController
     @challenge =Challenge.pending.find(params[:id])
 
     @comment.challenge =  @challenge
-    @challenge.to_declined
+    @challenge.decline
 
     if @comment.save && @challenge.save
       notice = "Challenge successfully declined"

@@ -1,0 +1,26 @@
+%tr
+  %td.id= user.id
+  %td.firstname= link_to user.firstname, profile_user_path(user)
+  %td.lastname= user.lastname
+  %td.email= user.email
+  %td.role= (['student', 'supervisor', 'admin'])[user.role]
+  %td.state= user.active ? "active" : "disabled"
+  %td.actions
+    -if user.id.eql? current_user.id or user.id.eql? 1
+      %a{:class => "btn disabled", :title => "message is disabled"}
+        %i.icon-envelope
+      -if user.id.eql? current_user.id
+        %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_user_registration_path }
+          %i.icon-pencil
+      -else
+        %a{:class => "btn disabled", :title => "edit disabled"}
+          %i.icon-pencil
+      %a{:class => "btn disabled", :title => "delete is disabled"}
+        %i.icon-trash.color-pomegranate
+    -else
+      %a{:class => "btn", :title => "message #{user.firstname}", :onClick => "composeMessage('user', #{user.id})"}
+        %i.icon-envelope
+      %a{:class => "btn", :title => "edit #{user.firstname}", :href => edit_admin_user_path(user) }
+        %i.icon-pencil
+      %a{:class => "btn", :title => "delete #{user.firstname}", :href => admin_user_path(user), :data => {:method => :delete, :confirm => "Are you sure you want to remove user \"#{user.firstname}\" from the system?" }}
+        %i.icon-trash.color-pomegranate

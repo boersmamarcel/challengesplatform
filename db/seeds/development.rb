@@ -11,7 +11,7 @@ challenges = [
     'description' => '#Review process Submissions of results will be reviewed by our jury, and participants will be notified of the results before February 22, 2013. #Prizes The winner gets a tablet (type TBA), and 1500 Euro to spend on travel, accommodation, and conference registration for SIGIR 2013, for one person, to be held in Dublin, Ireland. The winner is also expected to give a lightning talk at Hadoop Summit Amsterdam, and gets a free access pass for the whole event. If applicants have entered as a group and the group produced the winning entry, the prize will be awarded to whomever the group decides, but each prize is awarded to a single person only. #Award Ceremony The award ceremony will be held on March 18 2013 at the University of Twente. #The name of the award The award is named after Peter Norvig, Googles director of research with a resume too impressive to summarize. Peter is on the advisory board of Common Crawl, and is part of the jury for this award.',
     'start_date' => Time.now + 3600*24*5,
     'end_date' => Time.now + 3600*24*30,
-    'state' => 'proposal',
+    'state' => 'draft',
     'count' => 0,
     'lead' => 'The Norvig Web Data Science Award is an award for students and researchers studying at or employed by a research institute or university in the Netherlands. It is a challenge in which participants show what they can do with the Common Crawl dataset - a snapshot of a large part of the web - using SURFsaras Hadoop service to provide big data compute power.', 
     'location' => 'Ravelijn 10', 
@@ -51,7 +51,7 @@ This Kaggle Getting Started Competition provides an ideal starting place for peo
     'description' => 'Learn how to clean windows real good. Ultra-clean windows are the max!',
     'start_date' => Time.now + 3600*24*5,
     'end_date' => Time.now + 3600*24*30,
-    'state' => 'proposal',
+    'state' => 'draft',
     'count' => 2,
     'lead' => 'Shine on, you crazy window', 
     'location' => 'ZI 1', 
@@ -155,7 +155,3 @@ follows.each do |relation|
     end
   end
 end
-
-
-
-

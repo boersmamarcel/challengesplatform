@@ -1,4 +1,4 @@
-Then(/^I should not see button "(.*?)"$/) do |button|
+Then(/^I should not see(?: a)? (?:button|link) "(.*?)"$/) do |button|
   page.should_not have_selector(:link_or_button, button)
 end
 
@@ -27,6 +27,7 @@ Given(/^I am enrolled in challenge "(.*?)"$/) do |challenge_id|
 end
 
 Then(/^I should see a title "(.*?)" and start_date "(.*?)" and end_date "(.*?)" in the list$/) do |title, start_date, end_date|
+  start_date = (Date.today + 7).strftime("%d-%m-%Y") if start_date == "next week"
   page.should have_content(title)
   page.should have_content(start_date)
   page.should have_content(end_date)
