@@ -29,7 +29,8 @@ Challengesplatform::Application.routes.draw do
   }
   get "messages/compose", :to => "messages#compose"
   post "messages/deliver", :to => "messages#deliver"
-
+  get "messages/autosuggest", :to => "messages#autosuggest"
+  
   resources :messages, :only => [:show, :destroy, :index]
 
   namespace :admin do

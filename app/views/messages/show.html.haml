@@ -7,4 +7,7 @@
     = get_date(@message)
     &mdash; from 
     = link_to get_name(@message.sender), profile_user_path(@message.sender)
-= markdown(h(@message.body))
+= sanitize(@message.body, :tags => %w(h1 h2 h3 h4 h5 h6 p strong b i em div span a), :attributes => %w(href src) )
+
+%p
+  = button_to "Delete", message_path(@message), :confirm => "are you sure?", :method => :delete

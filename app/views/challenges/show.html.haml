@@ -52,6 +52,10 @@
       %hr
       .action
         = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
+      .action
+        &nbsp;
+      .action
+        %a.enroll.btn.btn-primary.btn-large{ :onClick => "composeMessage('user', null, {'subject': 'Test!', 'show_user_field': true})", :href => "#" } Recommend to a friend
       %hr
       //------------------------------------------------------
       - if @challenge.supervisor.present?

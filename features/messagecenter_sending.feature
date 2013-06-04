@@ -10,6 +10,7 @@ Feature: Sending Messages using the message center
     | A         | C        | participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
     | A         | D        | participant2@student.utwente.nl | abcd1234 | abcd1234               | 0     |
     | A         | E        | participant3@student.utwente.nl | abcd1234 | abcd1234               | 0     |
+    | John      | Doe      | participant4@student.utwente.nl | abcd1234 | abcd1234               | 0     |
     And the following challenge records
     | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
     | 1   | Title1  | Description1 | next week  | 09-09-2060| approved | 1     | 1             |
@@ -73,3 +74,14 @@ Feature: Sending Messages using the message center
         And I visit the "user.4.profile" page
         And I try to send a message
        Then I should see a message with "You do not have the permissions required to view this page"
+       
+    @javascript @wip
+    Scenario: Recommending a challenge to a user who follows you
+      Given "participant4@student.utwente.nl" is following "participant@student.utwente.nl"
+       When I visit the "login" page
+        And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
+        And I visit the "challenges.1" page
+        And I follow "Recommend to a friend"
+        And I fill in "to-field" with "Joh"
+        And I take a screenshot
+       Then I should see a message with "John Doe"

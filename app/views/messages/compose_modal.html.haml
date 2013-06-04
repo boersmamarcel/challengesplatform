@@ -5,7 +5,8 @@
       New Message
   %div.modal-body
     = hidden_field_tag(:grouptype)
-    = hidden_field_tag(:groupid)
+    %div
+      = hidden_field_tag(:groupid, nil, :placeholder => "To", :class => "span5")
     %div
       = text_field_tag(:subject, nil, :id => "subject", :placeholder => "Subject", :class => "span5")
     %div

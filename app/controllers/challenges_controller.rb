@@ -125,6 +125,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
 
     if @challenge.enroll current_user
+      sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been enrolled!", "notifications/enrollment", { :challenge => @challenge })
       redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'
     end
   end
