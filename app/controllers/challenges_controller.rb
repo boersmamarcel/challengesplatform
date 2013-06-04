@@ -23,10 +23,16 @@ class ChallengesController < ApplicationController
         @challenges = Challenge.past.sorted_start_date
       when "mine"
         @challenges = current_user.participating_challenges.sorted_start_date
+      when "supervising"
+        if current_user.is_supervisor?
+          @challenges = current_user.supervising_challenges
+        else
+          redirect_to "/challenges"
+        end
       else
-        @challenges = Challenge.upcoming.sorted_start_date
+        @challenges = Challenge.upcoming_and_running.sorted_start_date
     end
-    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(3)
   end
 
   # GET /challenges/1

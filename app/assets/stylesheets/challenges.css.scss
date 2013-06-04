@@ -110,13 +110,13 @@
 
     font-size: 13px;
     .status {
-      position: absolute;
-      right: 6px;
-      top: 4px;
-      z-index: 1;
+      margin-right: 6px;
+      margin-top: 4px;
+      float: right;
       .badge {
         box-shadow: 1px 1px 1px rgba(0,0,0,.3);
       }
+      position: relative;
     }
     .thumb {
       height: 150px;
@@ -125,6 +125,10 @@
       margin: -10px 0px 10px -10px;
       width: 300px;
       position: relative;
+      img {
+        position: absolute;
+        top: 0px;
+      }
       h4 {
         font-weight: 300;
         text-shadow: 0px 0px 1px rgba(0,0,0,0.6);
@@ -135,11 +139,11 @@
         bottom: 0px;
         margin: 0px;
         padding: 20px 0px 10px 10px;
-        background-image: linear-gradient(bottom, rgb(0,0,0) 0%, rgb(130,121,130) 76%);
-        background-image: -o-linear-gradient(bottom, rgb(0,0,0) 0%, rgb(130,121,130) 76%);
-        background-image: -moz-linear-gradient(bottom, rgb(0,0,0) 0%, rgb(130,121,130) 76%);
-        background-image: -webkit-linear-gradient(bottom, rgb(0,0,0) 0%, rgb(130,121,130) 76%);
-        background-image: -ms-linear-gradient(bottom, rgb(0,0,0) 0%, rgb(130,121,130) 76%);
+        background-image: linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
+        background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
+        background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
+        background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
+        background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
 
         background-image: -webkit-gradient(
           linear,

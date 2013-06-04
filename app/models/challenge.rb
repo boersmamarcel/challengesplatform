@@ -37,7 +37,7 @@ class Challenge < ActiveRecord::Base
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "proposal")
   scope :sorted_start_date, order('start_date ASC')
-  
+
   scope :visible_for_user, lambda { |user|
     if user.is_admin?
     elsif user.is_supervisor?
