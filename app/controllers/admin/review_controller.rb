@@ -67,7 +67,7 @@ class Admin::ReviewController < Admin::AdminController
     @challenge =Challenge.pending.find(params[:id])
 
     @comment.challenge =  @challenge
-    @challenge.to_declined
+    @challenge.decline
 
     if @comment.save && @challenge.save
       notice = "Challenge successfully declined"

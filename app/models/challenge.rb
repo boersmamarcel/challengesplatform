@@ -89,14 +89,14 @@ class Challenge < ActiveRecord::Base
   end
 
   def can_unenroll?
-    !running?
+    upcoming?
   end
 
   def can_enroll?
     upcoming?
   end
 
-  def to_declined
+  def decline
       self.state = "declined"
       self.count = count + 1
   end
