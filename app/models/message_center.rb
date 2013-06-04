@@ -3,8 +3,8 @@ module MessageCenter
   @@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
   
   def sendMessageToUser(to_user, from_user, subject, body, render_markdown = true)
-    raise MessageException::ParameterShouldBeUser.new('User should be of type User') unless to_user.is_a? User
-    raise MessageException::ParameterShouldBeUser.new('User should be of type User') unless from_user.is_a? User
+    raise MessageException::ParameterShouldBeUser.new('To User should be of type User') unless to_user.is_a? User
+    raise MessageException::ParameterShouldBeUser.new('From User should be of type User') unless from_user.is_a? User
     if render_markdown
       body = @@markdown.render(body)
     end
