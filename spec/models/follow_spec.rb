@@ -7,14 +7,14 @@ describe Follow do
       :email => 'user1@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "John"
+      :first_name => "John",
       :last_name => "Doe"
     )
     user_two = User.create(
       :email => 'user2@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "Jane"
+      :first_name => "Jane",
       :last_name => "Doe"
     )
     
@@ -32,14 +32,14 @@ describe Follow do
       :email => 'user1@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "John"
+      :first_name => "John",
       :last_name => "Doe"
     )
     user_two = User.create(
       :email => 'user2@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "Jane"
+      :first_name => "Jane",
       :last_name => "Doe"
     )
 
