@@ -7,15 +7,15 @@ describe Follow do
       :email => 'user1@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "John",
-      :last_name => "Doe"
+      :firstname => "John",
+      :lastname => "Doe"
     )
     user_two = User.create(
       :email => 'user2@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "Jane",
-      :last_name => "Doe"
+      :firstname => "Jane",
+      :lastname => "Doe"
     )
     
     follow = Follow.create(:user_id => user_one.id, :following_id => user_two.id)
@@ -32,15 +32,15 @@ describe Follow do
       :email => 'user1@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "John",
-      :last_name => "Doe"
+      :firstname => "John",
+      :lastname => "Doe"
     )
     user_two = User.create(
       :email => 'user2@student.utwente.nl', 
       :password => 'blaat123456', 
       :password_confirmation => 'blaat123456',
-      :first_name => "Jane",
-      :last_name => "Doe"
+      :firstname => "Jane",
+      :lastname => "Doe"
     )
 
     #user two follows user one
