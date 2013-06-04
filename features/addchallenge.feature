@@ -1,7 +1,7 @@
 Feature: Add challenge
     In order to add challenges
     As an admin or supervisor
-    I want to be able to submit a proposal for review and see the current stats of an approved challenge
+    I want to be able to submit a draft for review and see the current stats of an approved challenge
 
     Background:
       Given the following user records
@@ -28,7 +28,7 @@ Feature: Add challenge
       | Title 1 |                       |            |            | One or more fields are missing        | Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla. | image1.jpg |
 
 
-    Scenario: Save a challenge proposal
+    Scenario: Save a challenge draft
       When I visit the "challenge.new" page
       And I fill in title with "Title 1" and description with "description" and fill in start_date with "03-08-2013" and end_date with "09-09-2013" and lead with "Aenean mattis tellus ac urna suscipit quis tempor nisi fringilla." and commitment with "6" and image with "image1.jpg"
       And I press "Save"
@@ -37,7 +37,7 @@ Feature: Add challenge
     Scenario: Resubmit a declined challenge (submit count should increase)
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | proposal | 2     | 1             |
+        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | draft | 2     | 1             |
       When I edit the challenge with id "1" and a new description "Nice challenge"
       And I press "Submit for Review"
       Then I should see a message with "Challenge was successfully updated."
@@ -46,7 +46,7 @@ Feature: Add challenge
     Scenario: Resubmit a declined challenge with fields filled incorrectly
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | proposal | 2     | 1             |
+        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | draft | 2     | 1             |
       When I edit the challenge with id "1" and a new description ""
       And I press "Submit for Review"
       Then I should see a message with "One or more fields are missing"

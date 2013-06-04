@@ -1,7 +1,7 @@
 # Summarized challenge rw policy;
 # You can always see your own challenge
 # Your view rights for other challenges equal that of students (only approved)
-# You can only edit you own challenges, and only if they are proposals
+# You can only edit you own challenges, and only if they are drafts
 
 #language en
 Feature: Security - supervisors
@@ -14,10 +14,10 @@ Feature: Security - supervisors
       | 1  | supervisor@student.utwente.nl | abcd1234 | abcd1234              | 1    |
     And the following challenge records
       | id | title  | description | start_date | end_date   | state    | count | supervisor_id |
-      | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | proposal | 1     | 1             |
+      | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | draft | 1     | 1             |
       | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 1             |
       | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 1             |
-      | 4  | Title4 | Challenge4  | 03-08-2113 | 09-09-2113 | proposal | 1     | 2             |
+      | 4  | Title4 | Challenge4  | 03-08-2113 | 09-09-2113 | draft | 1     | 2             |
       | 5  | Title5 | Challenge5  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
       | 6  | Title6 | Challenge6  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
     And the following message records
