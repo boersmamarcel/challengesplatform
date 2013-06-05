@@ -39,7 +39,7 @@ class ChallengesController < ApplicationController
     redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
 
     #if a supervisor visits his own challenge it should see extra options so render the review view
-    redirect_to supervisor_review_path() if current_user.id == @challenge.supervisor.id
+    redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
   end
 
   # GET /challenges/new

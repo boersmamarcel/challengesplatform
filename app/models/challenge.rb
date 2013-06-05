@@ -89,7 +89,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def editable_by_user?(user)
-    ((state == 'draft' || state == 'declined' )&& user.id == supervisor_id) || user.is_admin?
+    ((state == 'draft' || state == 'declined' ) && user.id == supervisor_id) || user.is_admin?
   end
 
   def visible_for_user?(user)

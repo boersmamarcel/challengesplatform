@@ -1,4 +1,4 @@
-%input{:type => :hidden, :id =>'page_identifier', :value => 'supervisor/review.show'}
+%input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
 .alert{class: (@challenge.state == 'declined') ? 'alert-error' : 'alert-block'}
   %h1
     %i.icon-warning-sign
