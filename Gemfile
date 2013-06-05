@@ -26,6 +26,7 @@ gem 'split-analytics', :require => 'split/analytics'
 gem 'redcarpet', '~> 2.3.0' # Markdown renderer
 
 gem 'kaminari' # Pagination and sorting gem
+gem 'rspec' # Testing framework for rails
 
 
 # Gems used only for assets and not required
@@ -48,7 +49,6 @@ end
 group :test, :development  do
   gem 'coveralls', require: false # Testing coverage report
   gem 'factory_girl_rails' # Factories for tests
-  gem 'rspec' # Testing framework for rails
   gem 'rake'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner' # Database cleaner used for tests where transactions are not possible
