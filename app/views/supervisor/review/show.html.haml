@@ -1,0 +1,8 @@
+%input{:type => :hidden, :id =>'page_identifier', :value => 'supervisor/review.show'}
+.alert{class: (@challenge.state == 'declined') ? 'alert-error' : 'alert-block'}
+  %h1
+    %i.icon-warning-sign
+    = @challenge.state
+= render :partial => 'shared/challenge', :object => @challenge,  :options => (options ||= {}), :as => 'challenge'
+%div.comments
+  = render :partial => 'admin/shared/comments', :locals => {:comments => @challenge.comments, :new_comment => @new_comment}
