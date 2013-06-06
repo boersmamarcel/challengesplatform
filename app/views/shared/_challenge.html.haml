@@ -32,10 +32,8 @@
             Send a Message
           %br
           = form_for @challenge, :url => @url, :html => {:multipart => true, :class => "challenge-form form-horizontal"}  do |f|
-            -if @challenge.draft? 
-              = f.submit 'Submit for Review', :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
-            -elsif @challenge.declined?
-              = f.submit 'Resubmit for Review', :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+            = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+
         %hr
       %p.detail
         %i.icon-group
