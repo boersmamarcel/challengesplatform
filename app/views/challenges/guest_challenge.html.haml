@@ -1,0 +1,47 @@
+.challenge_detail
+  %h2#title= @challenge.title
+  - if @challenge.supervisor.present?
+    %p.supervisor
+      %i.icon-user
+      %strong Supervised by
+      = link_to @challenge.supervisor.fullname, profile_user_path(@challenge.supervisor)
+  - if @challenge.running?
+    .alert.alert-success
+      This challenge has begun!
+
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href: "#"} Info
+
+  .row
+    .description#description.span8
+      .video
+        = image_tag @challenge.image.url
+      %p.lead
+        = @challenge.lead
+        = markdown(@challenge.description)
+    .details.span4.well
+      %p.detail
+        %i.icon-time
+        %strong#commitment
+          = @challenge.commitment
+        %span.type Hours/week
+      %p.detail
+        %i.icon-calendar
+        %strong#day_of_week
+          = @challenge.day_of_week
+        %span.type= @challenge.from_till
+      %p.detail#location
+        %i.icon-map-marker
+        %strong= @challenge.location
+      //------------------------------------------------------
+      %hr
+      .action
+        %a{:href => new_user_session_path, :class => 'btn btn-large btn-primary'}
+          Sign in
+      %hr
+      //------------------------------------------------------
+      - if @challenge.supervisor.present?
+        .supervisor_detail
+          %h3 About the supervisor:
+          = render :partial => "profile/profile_tile", :object => @challenge.supervisor, :as => :user
