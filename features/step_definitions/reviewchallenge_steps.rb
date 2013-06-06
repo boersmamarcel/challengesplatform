@@ -25,3 +25,7 @@ end
 Given(/^I fill in reason with "(.*?)"$/) do |reason|
   fill_in :reason, :with => reason unless reason.blank?
 end
+
+Then(/^I should see "(.*?)" in the "(.*?)" list$/) do |title,listid|
+    page.find_by_id(listid).should have_content(title)
+end

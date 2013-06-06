@@ -15,7 +15,7 @@ class Challenge < ActiveRecord::Base
   # Carrierwave Image Uploading
   mount_uploader :image, ChallengeImageUploader
 
-  validates :title, :presence => { :message => "One or more fields are missing" }, :if => :pending?
+  validates :title, :presence => { :message => "You need to supply a title" }
   validates :lead, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :lead, :length => { :in => 40..120 }, :if => :pending?
   validates :description, :presence => { :message => "One or more fields are missing" }, :if => :pending?
@@ -27,16 +27,17 @@ class Challenge < ActiveRecord::Base
 
 
   scope :upcoming, where('start_date > ?', Date.today)
-  scope :running, where('end_date > ? AND start_date < ?', Date.today, Date.today)
+  scope :running, where('end_date >= ? AND start_date <= ?', Date.today, Date.today)
   scope :past, where('end_date < ?', Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
-  scope :draft, where(:state => "draft")
-  scope :declined, where("state = ? AND count > ?", "draft", 1)
+  scope :draft, where(:state => "draft AND count < 2")
+  scope :declined, where("state = ? AND count > 1", "draft")
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "draft")
   scope :sorted_start_date, order('start_date ASC')
+  scope :newest_first, order('start_date DESC')
 
   scope :visible_for_user, lambda { |user|
     if user.is_admin?
@@ -77,15 +78,27 @@ class Challenge < ActiveRecord::Base
   end
 
   def running?
-    Date.today.to_time_in_current_zone >= start_date && Date.today.to_time_in_current_zone <= end_date
+    if end_date.present? && start_date.present?
+      Date.today.to_time_in_current_zone >= start_date && Date.today.to_time_in_current_zone <= end_date
+    else
+      false
+    end
   end
 
   def over?
-    Date.today.to_time_in_current_zone >= end_date
+    if end_date.present?
+      Date.today.to_time_in_current_zone >= end_date
+    else
+      false
+    end
   end
 
   def upcoming?
-    Date.today.to_time_in_current_zone < start_date 
+    if start_date.present?
+      Date.today.to_time_in_current_zone < start_date
+    else
+      true
+    end
   end
 
   def editable_by_user?(user)
