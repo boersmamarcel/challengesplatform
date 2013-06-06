@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :challenge
   
-  validates :comment, :length => {:minimum => 3}
+  validates :comment, :length => {:minimum => 3, :message => "must have at least 3 characters"}
   validates :user_id, :presence => true
   validates :challenge_id, :presence => true
   
