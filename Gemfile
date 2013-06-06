@@ -36,6 +36,8 @@ group :assets do
   gem "font-awesome-rails", "~> 3.1.1.2"
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "rspec"
+  gem "rake"
 end
 
 group :development do
