@@ -23,9 +23,9 @@ Feature: Review challenges as admin
   
   Scenario: View pending challenges
     When I visit the "admin/review.index" page
-    Then I should see "Awesome challenge" in the list
-    And I should see "Not so awesome challenge" in the list
-    And I should not see "Not pending challenge" in the list
+    Then I should see "Awesome challenge" in the "pending_challenges" list
+    And I should see "Not so awesome challenge" in the "pending_challenges" list
+    And I should see "Not pending challenge" in the "declined_challenges" list
   
   Scenario: View a challenge in non pending state
     When I open the review challenge page for challenge with id "3"
@@ -44,9 +44,9 @@ Feature: Review challenges as admin
     And I should see the "<page>" page
     
   Examples:
-  | challenge_id | comment                  | message                                     | page              |
-  | 2            | Description is to vague  |                                             | admin/review.show |
-  | 2            |                          | Comments must have at least 3 characters    | admin/review.show |
+  | challenge_id | comment                  | message                                 | page              |
+  | 2            | Description is to vague  |                                         | admin/review.show |
+  | 2            |                          | Comment must have at least 3 characters | admin/review.show |
   
   Scenario: Comment color green for new comment
     Given the following comment records

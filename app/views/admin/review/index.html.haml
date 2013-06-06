@@ -1,7 +1,7 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'admin/review.index'}
 %h2
   Review the following challenges
-%table.table.table-hover
+%table.table.table-hover#pending_challenges
   %th
     %td
       %b Start date
@@ -16,7 +16,7 @@
 
 %h2
   The following challenges are declined
-%table.table.table-hover
+%table.table.table-hover#declined_challenges
   %th
     %td
       %b Start date
@@ -30,7 +30,7 @@
     = render :partial => 'admin/shared/challengetablerow', :object => challenge, :as => 'challenge'
 %h2
   The following challenges are in draft
-%table.table.table-hover
+%table.table.table-hover#draft_challenges
   %th
     %td
       %b Start date

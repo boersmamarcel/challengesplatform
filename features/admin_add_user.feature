@@ -6,8 +6,8 @@ Feature: User adding
   Background:
     Given the following user records
      |id| firstname | lastname | email                  | password | password_confirmation | role | active |
-     |1 | sciencechallenges |- | challenge@localhost.nl | abcd1234 | abcd1234              | 1    | false  |
-     |2 | Kevin     | Flyn     | admin@ut.nl            | abcd1234 | abcd1234              | 2    | true   |
+     |2 | sciencechallenges |- | challenge@localhost.nl | abcd1234 | abcd1234              | 1    | false  |
+     |3 | Kevin     | Flyn     | admin@ut.nl            | abcd1234 | abcd1234              | 2    | true   |
     When I visit the "login" page
     And I fill in email with "admin@ut.nl" and password with "abcd1234"
 
