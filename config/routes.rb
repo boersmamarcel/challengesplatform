@@ -35,7 +35,6 @@ Challengesplatform::Application.routes.draw do
 
   namespace :admin do
     resources :review, :only => [:comment, :decline, :approve, :edit, :index, :show, :update] do
-      post 'comment', :on => :member
       post 'decline', :on => :member
       post 'approve', :on => :member
       get 'edit', :on => :member
@@ -47,6 +46,12 @@ Challengesplatform::Application.routes.draw do
     end
 
     resources :users, :only => [:edit, :update, :destroy, :new, :create]
+  end
+
+  resources :comment
+
+  namespace :supervisor do
+    resources :review 
   end
 
 

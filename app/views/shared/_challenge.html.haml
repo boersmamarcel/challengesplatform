@@ -1,5 +1,5 @@
 .challenge_detail
-  %h2= @challenge.title
+  %h2#title= @challenge.title
   - if @challenge.supervisor.present?
     %p.supervisor
       %i.icon-user
@@ -12,46 +12,59 @@
   %ul.nav.nav-tabs
     %li.active
       %a{href: "#"} Info
-    %li
-      %a{href: "#"} Discussion
 
   .row
-    .description.span8
+    .description#description.span8
       .video
-        %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city','people'].sample}/?#{rand(1..999999)}"}
+        = image_tag @challenge.image.url
+        / %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
       %p.lead
         = @challenge.lead
       = markdown(@challenge.description)
     .details.span4.well
-      %p
+      - if @challenge.supervisor == current_user
+        %p.detail
+          -if @challenge.draft? || @challenge.declined?
+            = link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn'
+          -else
+            = link_to 'Edit', "#", :class => 'btn disabled'
+          %a{:class => "btn btn-primary", :onClick => "composeMessage('challenge', #{@challenge.id})"}
+            Send a Message
+          %br
+          = form_for @challenge, :url => @url, :html => {:multipart => true, :class => "challenge-form form-horizontal"}  do |f|
+            = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+
+        %hr
+      %p.detail
         %i.icon-group
-        %strong
+        %strong#participants_count
           = @challenge.participants.count
-        %span= pluralize(@challenge.participants.count, "Participant").split.last
-      %p
+        %span.type= pluralize(@challenge.participants.count, "Participant").split.last
+      %p.detail
         %i.icon-time
-        %strong
+        %strong#commitment
           = @challenge.commitment
-        %span Hours/week
-      %p
+        %span.type Hours/week
+      %p.detail
         %i.icon-calendar
-        %strong
+        %strong#day_of_week
           = @challenge.day_of_week
-        %span= @challenge.from_till
-      %p
+        %span.type= @challenge.from_till
+      %p.detail#location
         %i.icon-map-marker
-        %strong Zilverling 3031
+        %strong= @challenge.location
       //------------------------------------------------------
       %hr
       .action
-        = render "shared/enroll_button", :challenge => @challenge
+        = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
       %hr
       //------------------------------------------------------
-      .supervisor_detail
-        %h3 About the supervisor:
-        = render "profile/profile_tile", user: @challenge.supervisor
-      %hr
+      - if @challenge.supervisor.present?
+        .supervisor_detail
+          %h3 About the supervisor:
+          = render :partial => "profile/profile_tile", :object => @challenge.supervisor, :as => :user
+        %hr
       //------------------------------------------------------
       .participants_detail
         %h3 Participants:
-        = render :partial => "profile/avatar", :collection => @challenge.participants.decorate, :as => :user
+        = render :partial => "profile/profile_small_tile", :collection => @challenge.participants.decorate, :as => :user
