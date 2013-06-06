@@ -6,12 +6,13 @@ Feature: Security - students
   Background:
     Given the following user records
       | id | email                      | password | password_confirmation | role |
-      | 1  | student@student.utwente.nl | abcd1234 | abcd1234              | 0    |
+      | 2  | student@student.utwente.nl | abcd1234 | abcd1234              | 0    |
+      | 3  | super@student.utwente.nl   | abcd1234 | abcd1234              | 0    |
     And the following challenge records
       | id | title  | description | start_date | end_date   | state    | count | supervisor_id |
-      | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | draft | 1     | 2             |
-      | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 2             |
-      | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 2             |
+      | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | draft | 1        | 3             |
+      | 2  | Title2 | Challenge2  | 03-08-2113 | 09-09-2113 | pending  | 1     | 3             |
+      | 3  | Title3 | Challenge3  | 03-08-2113 | 09-09-2113 | approved | 1     | 3             |
     When I visit the "login" page
     And I fill in email with "student@student.utwente.nl" and password with "abcd1234"
 
@@ -24,7 +25,7 @@ Feature: Security - students
     | index           |
     | dashboard.index |
     | challenges.3    |
-    | user.1.profile  |
+    | user.2.profile  |
 
   Scenario Outline: Visit illegal urls as a student user (and get redirected)
     When I visit the "<path>" page

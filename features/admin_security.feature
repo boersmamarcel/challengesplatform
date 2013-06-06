@@ -7,6 +7,7 @@ Feature: Security - supervisor
     Given the following user records
       | id | email                      | password | password_confirmation | role |
       | 1  | admin@student.utwente.nl   | abcd1234 | abcd1234              | 2    |
+      | 2  | super@student.utwente.nl   | abcd1234 | abcd1234              | 2    |
     And the following challenge records
       | id | title  | description | start_date | end_date   | state    | count | supervisor_id |
       | 1  | Title1 | Challenge1  | 03-08-2113 | 09-09-2113 | draft | 1     | 1             |

@@ -37,6 +37,9 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id]).decorate
     redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
+
+    #if a supervisor visits his own challenge it should see extra options so render the review view
+    redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
   end
 
   # GET /challenges/new
@@ -54,7 +57,7 @@ class ChallengesController < ApplicationController
   end
 
   def submit_for_review?
-    params[:commit] == "Submit for Review"
+    params[:commit] == "Submit for Review" || params[:commit] == "Resubmit for Review"
   end
 
   # POST /challenges
@@ -84,7 +87,9 @@ class ChallengesController < ApplicationController
 
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user?(current_user)
 
-    image = params[:challenge].delete :image
+    if params[:challenge].present?
+      image = params[:challenge].delete :image
+    end
 
     if self.submit_for_review?
       @challenge.state = 'pending'
