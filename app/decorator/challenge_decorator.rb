@@ -3,7 +3,7 @@ class ChallengeDecorator < Draper::Decorator
 
   def human_readable_start_date
     if start_date.present?
-      object.start_date.strftime("%d-%m-%Y")
+      start_date.strftime("%d-%m-%Y")
     else
       "TBC."
     end
@@ -11,18 +11,18 @@ class ChallengeDecorator < Draper::Decorator
 
   def human_readable_end_date
     if end_date.present?
-      object.end_date.strftime("%d-%m-%Y")
+      end_date.strftime("%d-%m-%Y")
     else
       "TBC."
     end
   end
 
   def current_user_enrolled?
-    object.participants.exists? h.current_user
+    participants.exists? h.current_user
   end
 
   def warn_current_user_enrollment?
-    object.upcoming? && !current_user_enrolled? && days_till_start < 10
+    upcoming? && !current_user_enrolled? && days_till_start < 10
   end
 
   def location
@@ -39,7 +39,7 @@ class ChallengeDecorator < Draper::Decorator
 
   def day_of_week
     if start_date.present?
-      object.start_date.strftime("%A")
+      start_date.strftime("%A")
     else
       "TBC"
     end
@@ -55,16 +55,16 @@ class ChallengeDecorator < Draper::Decorator
 
   def days_total
     if start_date.present? && end_date.present?
-      startd = object.start_date.to_date
-      endd = object.end_date.to_date
+      startd = start_date.to_date
+      endd = end_date.to_date
       (endd - startd).to_i
     end
   end
 
   def days_till_end
-    if start_date.present? && end_date.present? && object.running?
+    if start_date.present? && end_date.present? && running?
       today = Date.today
-      endd = object.end_date.to_date
+      endd = end_date.to_date
       (endd - today).to_i
     else
       0
@@ -72,9 +72,9 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def days_till_start
-    if start_date.present? && end_date.present? && object.upcoming?
+    if start_date.present? && end_date.present? && upcoming?
       today = Date.today
-      startd = object.start_date.to_date
+      startd = start_date.to_date
       (startd - today).to_i + 1
     else
       0
@@ -85,12 +85,12 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def percentage_date
-    if start_date.present? && end_date.present? && object.running?
+    if start_date.present? && end_date.present? && running?
       today = Date.today
-      startd = object.start_date.to_date
-      endd = object.end_date.to_date
+      startd = start_date.to_date
+      endd = end_date.to_date
       ((((today - startd) / (endd - startd)) * 100 ).to_i).to_s + "%"
-    elsif start_date.present? && end_date.present? && object.upcoming?
+    elsif start_date.present? && end_date.present? && upcoming?
       "0%"
     else
       "100%"
