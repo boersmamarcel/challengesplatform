@@ -3,4 +3,7 @@
   %td.date= challenge.human_readable_start_date
   %td.date= challenge.human_readable_end_date
   %td.count= challenge.count
-  %td.link= link_to 'Review', admin_review_path(challenge)
+  - if challenge.pending?
+    %td.link= link_to 'Review', admin_review_path(challenge)
+  - else
+    %td.link= link_to 'Show', challenge_path(challenge)

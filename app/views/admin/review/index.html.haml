@@ -13,3 +13,32 @@
 
   - @challenges.each do |challenge|
     = render :partial => 'admin/shared/challengetablerow', :object => challenge, :as => 'challenge'
+
+%h2
+  The following challenges are declined
+%table.table.table-hover
+  %th
+    %td
+      %b Start date
+    %td
+      %b End date
+    %td
+      %b Review count
+    %td
+
+  - @declined_challenges.each do |challenge|
+    = render :partial => 'admin/shared/challengetablerow', :object => challenge, :as => 'challenge'
+%h2
+  The following challenges are in draft
+%table.table.table-hover
+  %th
+    %td
+      %b Start date
+    %td
+      %b End date
+    %td
+      %b Review count
+    %td
+
+  - @draft_challenges.each do |challenge|
+    = render :partial => 'admin/shared/challengetablerow', :object => challenge, :as => 'challenge'

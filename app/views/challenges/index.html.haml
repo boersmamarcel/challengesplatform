@@ -1,13 +1,18 @@
-%h2
-  Challenges Overview
-= paginate @challenges
-.filters.btn-group{"data-toggle" => "buttons-radio"}
-  %a.button.btn{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
-  - if current_user.is_supervisor?
-    %a.button.btn.btn-primary{:class => @filter == "supervising" ? "active" : "", :href => "/challenges/supervising", :type => "button"} Supervising
-  %a.button.btn{:class => @filter == "upcoming" ? "active" : "", :href => "/challenges/upcoming", :type => "button"} Upcoming
-  %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Enrolled
-  %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
 %input#page_identifier{:type => "hidden", :value => "challenges.index"}
-= render 'shared/challenges_list' , :challenges => @challenges.decorate
-= paginate @challenges
+#challenges_overview
+  %h2
+    Challenges Overview
+  .create_challenge
+    %a.btn.btn-success{href: new_challenge_path}
+      %i.icon-plus-sign
+      Create a challenge
+  .filters.btn-group{"data-toggle" => "buttons-radio"}
+    %a.button.btn{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
+    - if current_user.is_supervisor?
+      %a.button.btn.btn-primary{:class => @filter == "supervising" ? "active" : "", :href => "/challenges/supervising", :type => "button"} Supervising
+    %a.button.btn{:class => @filter == "upcoming" ? "active" : "", :href => "/challenges/upcoming", :type => "button"} Upcoming
+    %a.button.btn{:class => @filter == "running" ? "active" : "", :href => "/challenges/running", :type => "button"} Running
+    %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Enrolled
+    %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
+  = render 'shared/challenges_list' , :challenges => @challenges.decorate
+  = paginate @challenges

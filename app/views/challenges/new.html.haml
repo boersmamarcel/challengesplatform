@@ -1,4 +1,9 @@
-%h1 New challenge
+%h1 Create a challenge
+%p.lead
+  This is your chance to challenge students. With the following form you can submit a challenge for review. A member of the ScienceChallenge team will evaluate your submission and discuss the details with you. Feel free to save a draft and come back later to edit and submit your challenge. Please read our
+  %a{href: challengeguidelines_path, target: 'new'}
+    Challenge Guidelines
+    %i.icon-external-link-sign
+  on how to describe your challenge.
 %input#page_identifier{:type => "hidden", :value => "challenge.new"}/
 = render :partial => 'shared/form'
-= link_to 'Back', challenges_path

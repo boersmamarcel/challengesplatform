@@ -2,11 +2,19 @@ class ChallengeDecorator < Draper::Decorator
   delegate_all
 
   def human_readable_start_date
-    object.start_date.strftime("%d-%m-%Y")
+    if start_date.present?
+      object.start_date.strftime("%d-%m-%Y")
+    else
+      "TBC."
+    end
   end
 
   def human_readable_end_date
-    object.end_date.strftime("%d-%m-%Y")
+    if end_date.present?
+      object.end_date.strftime("%d-%m-%Y")
+    else
+      "TBC."
+    end
   end
 
   def current_user_enrolled?
@@ -30,7 +38,11 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def day_of_week
-    object.start_date.strftime("%A")
+    if start_date.present?
+      object.start_date.strftime("%A")
+    else
+      "TBC"
+    end
   end
 
   def from_till
@@ -42,13 +54,15 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def days_total
-    startd = object.start_date.to_date
-    endd = object.end_date.to_date
-    (endd - startd).to_i
+    if start_date.present? && end_date.present?
+      startd = object.start_date.to_date
+      endd = object.end_date.to_date
+      (endd - startd).to_i
+    end
   end
 
   def days_till_end
-    if object.running?
+    if start_date.present? && end_date.present? && object.running?
       today = Date.today
       endd = object.end_date.to_date
       (endd - today).to_i
@@ -58,7 +72,7 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def days_till_start
-    if object.upcoming?
+    if start_date.present? && end_date.present? && object.upcoming?
       today = Date.today
       startd = object.start_date.to_date
       (startd - today).to_i + 1
@@ -71,12 +85,12 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def percentage_date
-    if object.running?
+    if start_date.present? && end_date.present? && object.running?
       today = Date.today
       startd = object.start_date.to_date
       endd = object.end_date.to_date
       ((((today - startd) / (endd - startd)) * 100 ).to_i).to_s + "%"
-    elsif object.upcoming?
+    elsif start_date.present? && end_date.present? && object.upcoming?
       "0%"
     else
       "100%"

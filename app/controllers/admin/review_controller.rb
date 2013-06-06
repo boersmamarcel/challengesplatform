@@ -3,6 +3,8 @@ class Admin::ReviewController < Admin::AdminController
   def index
     # Get all pending for review challenges
     @challenges = Challenge.pending.decorate
+    @draft_challenges = Challenge.draft.decorate
+    @declined_challenges = Challenge.declined.decorate
   end
   
   def show

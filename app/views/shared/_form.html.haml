@@ -31,7 +31,7 @@
       .control-group
         = f.label :description , "Description:", :class => "control-label"
         .controls
-          = f.text_area :description, :class => "span8 enable-popover", :rows => "10", :placeholder => "Description...", "data-toggle" => "popover", "data-placement" => "left", "data-trigger" => "focus", "data-content" => "Basic formatting with markdown: \n Use _text_ for italic, use **text** for bold. \n Make list via '* listitem' and '1.  listitem'. \nLinks are automatically parsed, you can also name them with [GitHub](http://github.com)", :title => "Description"
+          = f.text_area :description, :class => "span8 enable-popover", :rows => "10", :placeholder => "Description...", "data-toggle" => "popover", "data-placement" => "left", "data-trigger" => "focus", "data-content" => "Basic formatting with markdown: \n Use _text_ for italic, use **text** for bold. Make lists via '* listitem' and '1.  listitem'. \nLinks are automatically parsed, you can also name them with [GitHub](http://github.com)", :title => "Description"
       .control-group
         = f.label :start_date , "Dates:", :class => "control-label"
         .controls

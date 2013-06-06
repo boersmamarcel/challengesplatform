@@ -61,8 +61,15 @@
 
 .container
   .span7.offset2.center
-    %h1 Join
-    %a{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!", :class => 'btn btn-primary btn-large'}
-      Contact us now
+    - if current_user.present? && current_user.is_supervisor?
+      %h1 Start your challenge now!
+      .create_challenge
+        %a.btn.btn-success.btn-large{href: new_challenge_path}
+          %i.icon-plus-sign
+          Create a challenge
+    - else
+      %h1 Join
+      %a{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!", :class => 'btn btn-primary btn-large'}
+        Contact us now
 
 
