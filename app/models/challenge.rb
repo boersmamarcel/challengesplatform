@@ -65,6 +65,14 @@ class Challenge < ActiveRecord::Base
     enrollments.find_by_participant_id(user).unenroll
   end
 
+  def draft?
+      state == 'draft'
+  end
+
+  def declined?
+      state == 'declined'
+  end
+
   def pending?
     state == 'pending'
   end
@@ -94,7 +102,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def editable_by_user?(user)
-    (state == 'draft' && user.id == supervisor_id) || user.is_admin?
+    ((state == 'draft' || state == 'declined' ) && user.id == supervisor_id) || user.is_admin?
   end
 
   def visible_for_user?(user)

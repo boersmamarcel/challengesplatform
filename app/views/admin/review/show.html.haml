@@ -16,6 +16,7 @@
         %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
         = submit_tag 'Submit', :class => 'btn btn-danger'
 %hr
-= render :partial => 'shared/challenge', :object => @challenge, :as => 'challenge'
+
+= render :partial => 'shared/challenge', :object => @challenge,  :options => (options ||= {}), :as => 'challenge'
 %div.comments
   = render :partial => 'admin/shared/comments', :locals => {:comments => @challenge.comments, :new_comment => @new_comment}

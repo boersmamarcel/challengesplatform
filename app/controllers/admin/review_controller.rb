@@ -79,19 +79,6 @@ class Admin::ReviewController < Admin::AdminController
     end
   end
   
-  def comment
-    @comment = Comment.new(params[:comment])
-    
-    @comment.user = current_user
-    @comment.challenge = Challenge.pending.find(params[:id])
 
-    if !@comment.save
-      notice = "Comments must have at least 3 characters"
-      redirect_to admin_review_path(@comment.challenge.id), :alert => notice
-    else
-      redirect_to admin_review_path(@comment.challenge.id)
-    end
-    
-  end
   
 end
