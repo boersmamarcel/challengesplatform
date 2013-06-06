@@ -11,6 +11,9 @@ class ChallengesController < ApplicationController
   # Allow supervisors to see even more (they already see everything above)
   skip_filter :require_admin, :only => [:new, :edit, :create, :update, :revoke]
 
+  #challenges are public
+  skip_filter :authenticate_user!, :only => [:show]
+
   # GET /challenges
   def index
     @filter = params[:filter]
@@ -36,10 +39,16 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   def show
     @challenge = Challenge.find(params[:id]).decorate
-    redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
 
-    #if a supervisor visits his own challenge it should see extra options so render the review view
-    redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
+    if current_user.present?
+      redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
+
+      #if a supervisor visits his own challenge it should see extra options so render the review view
+      redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
+    else
+      #render the public version
+      render :guest_challenge unless current_user.present?
+    end
   end
 
   # GET /challenges/new
