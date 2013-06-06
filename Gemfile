@@ -36,17 +36,16 @@ group :assets do
   gem "font-awesome-rails", "~> 3.1.1.2"
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'rspec' # Testing framework for rails
-  gem 'rake'
 end
 
-group :develop do
+group :development do
   gem 'capistrano' # Easy deployment
   gem 'rvm-capistrano' # Enabling RVM support for capistrano
   gem 'debugger' # Debugging plugin for rails
+  gem 'thin'
 end
 
-group :test, :develop  do
+group :test, :development  do
   gem 'coveralls', require: false # Testing coverage report
   gem 'factory_girl_rails' # Factories for tests
   gem 'rspec' # Testing framework for rails
