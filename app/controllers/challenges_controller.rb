@@ -20,10 +20,12 @@ class ChallengesController < ApplicationController
     case @filter
       when "upcoming"
         @challenges = Challenge.upcoming.sorted_start_date
+      when "running"
+        @challenges = Challenge.running.sorted_start_date
       when "past"
         @challenges = Challenge.past.sorted_start_date
       when "mine"
-        @challenges = current_user.participating_challenges.sorted_start_date
+        @challenges = current_user.participating_challenges.newest_first
       when "supervising"
         if current_user.is_supervisor?
           @challenges = current_user.supervising_challenges

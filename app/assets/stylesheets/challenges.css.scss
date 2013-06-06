@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 // Challenge Detail
+#challenges_overview {
+  .create_challenge {
+    float: right;
+  }
+}
 .challenge_detail {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
   h2 {
@@ -109,8 +114,9 @@
     padding: 10px;
     font-size: 13px;
 
-    &.state_pending {
-      opacity: 0.5;
+    opacity: 0.5;
+    &.state_approved {
+      opacity: 1;
     }
     .status {
       margin-right: 6px;
