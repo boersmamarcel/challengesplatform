@@ -1,4 +1,5 @@
-= form_for(comment, :method => :post, :url => comment_admin_review_path, :html => { :class => 'commentform'}) do |f|
+= form_for(comment, :method => :post, :url => comment_index_path, :html => { :class => 'commentform'}) do |f|
   = f.text_area :comment, :class => 'input commenttextarea span12', :placeholder => 'Comment'
+  = f.hidden_field :challenge_id, :value => @challenge.id
   %br
   = f.submit 'Add comment', :class => 'btn'

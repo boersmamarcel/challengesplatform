@@ -5,10 +5,13 @@
 require File.expand_path('../config/application', __FILE__)
 
 Challengesplatform::Application.load_tasks
-require 'rspec/core/rake_task'
-# RSpec::Core::RakeTask.new(:spec)
 
-require 'coveralls/rake/task'
+if Rails.env == 'test'
+  require 'rspec/core/rake_task'
+  # RSpec::Core::RakeTask.new(:spec)
 
-Coveralls::RakeTask.new
-task :test_with_coveralls => [:spec, :cucumber, 'coveralls:push']
+  require 'coveralls/rake/task'
+
+  Coveralls::RakeTask.new
+  task :test_with_coveralls => [:spec, :cucumber, 'coveralls:push']
+end

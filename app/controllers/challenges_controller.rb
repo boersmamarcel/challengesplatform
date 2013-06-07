@@ -11,16 +11,21 @@ class ChallengesController < ApplicationController
   # Allow supervisors to see even more (they already see everything above)
   skip_filter :require_admin, :only => [:new, :edit, :create, :update, :revoke]
 
+  #challenges are public
+  skip_filter :authenticate_user!, :only => [:show]
+
   # GET /challenges
   def index
     @filter = params[:filter]
     case @filter
       when "upcoming"
         @challenges = Challenge.upcoming.sorted_start_date
+      when "running"
+        @challenges = Challenge.running.sorted_start_date
       when "past"
         @challenges = Challenge.past.sorted_start_date
       when "mine"
-        @challenges = current_user.participating_challenges.sorted_start_date
+        @challenges = current_user.participating_challenges.newest_first
       when "supervising"
         if current_user.is_supervisor?
           @challenges = current_user.supervising_challenges
@@ -36,7 +41,16 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   def show
     @challenge = Challenge.find(params[:id]).decorate
-    redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
+
+    if current_user.present?
+      redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
+
+      #if a supervisor visits his own challenge it should see extra options so render the review view
+      redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
+    else
+      #render the public version
+      render :guest_challenge unless current_user.present?
+    end
   end
 
   # GET /challenges/new
@@ -54,7 +68,7 @@ class ChallengesController < ApplicationController
   end
 
   def submit_for_review?
-    params[:commit] == "Submit for Review"
+    params[:commit] == "Submit for Review" || params[:commit] == "Resubmit for Review"
   end
 
   # POST /challenges
@@ -84,7 +98,9 @@ class ChallengesController < ApplicationController
 
     raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user?(current_user)
 
-    image = params[:challenge].delete :image
+    if params[:challenge].present?
+      image = params[:challenge].delete :image
+    end
 
     if self.submit_for_review?
       @challenge.state = 'pending'

@@ -40,7 +40,6 @@ Feature: Add challenge
         | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | draft | 2     | 1             |
       When I edit the challenge with id "1" and a new description "Nice challenge"
       And I press "Submit for Review"
-      Then I should see a message with "Challenge was successfully updated."
       Then I should see "Title1" in the list
 
     Scenario: Resubmit a declined challenge with fields filled incorrectly
@@ -56,14 +55,14 @@ Feature: Add challenge
         | id | title   | description       | start_date | end_date   | state   | count | supervisor_id |
         | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | pending | 1     | 1             |
       When I visit the edit challenge "1" page
-      Then I should see a message with "You do not have the permissions required to view this page."
+      Then I should see the "challenges.1" page
 
     Scenario: Edit an approved challenge
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
         | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | approved | 1     | 1             |
       When I visit the edit challenge "1" page
-      Then I should see a message with "You do not have the permissions required to view this page."
+      Then I should see the "challenges.1" page
 
     Scenario: Supervisor can not delete a challenge only revoke a challenge
 
