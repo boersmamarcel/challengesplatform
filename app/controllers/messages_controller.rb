@@ -9,13 +9,13 @@ class MessagesController < ApplicationController
   end
   
   def show
-    @message = current_user.received_messages.where("id = ?", params[:id]).first
+    @message = current_user.received_messages.find(params[:id])
     @message.is_read = true
     @message.save
   end
   
   def destroy
-    @message = current_user.received_messages.where("id = ?", params[:id]).first
+    @message = current_user.received_messages.find(params[:id])
     @message.destroy
     
     redirect_to messages_path, :notice => "Message deleted."

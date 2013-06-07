@@ -11,19 +11,7 @@ module MessageCenter
     @message = Message.create(:subject => subject, :body => body, :sender_id => from_user.id, :receiver_id => to_user.id, :is_read => 0)
     
     if to_user.notify_by_email && !Rails.env.test?
-      mail_footer = render_to_string "messages/mail_footer", :layout => false
-      
-      %x[sendmail #{to_user.email} << EOF
-Subject: #{subject}
-From: #{ENV['notification_email']}
-To: #{to_user.email}
-Content-type: text/html
-MIME-Version: 1.0
-
-#{body}
-
-#{mail_footer}
-EOF]
+        UserMailer.personal_message(to_user.email, subject, body).deliver
     end
   end
   
