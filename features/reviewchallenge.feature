@@ -47,6 +47,7 @@ Feature: Review challenges as admin
   | challenge_id | comment                  | message                                 | page              |
   | 2            | Description is to vague  |                                         | admin/review.show |
   | 2            |                          | Comment must have at least 3 characters | admin/review.show |
+
   
   Scenario: Comment color green for new comment
     Given the following comment records
