@@ -10,9 +10,9 @@ Feature: Add challenge
       When I visit the "login" page
   	  And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
 
-
     Scenario Outline: Submit new challenge
-      When I visit the "challenge.new" page
+      When I visit the "challenges.index" page
+      And I follow "Create a challenge"
       And I fill in title with "<title>" and description with "<description>" and fill in start_date with "<start_date>" and end_date with "<end_date>" and lead with "<lead>" and commitment with "5" and image with "<image>"
       And I press "Submit for Review"
       # Then show me the page
