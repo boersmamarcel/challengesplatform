@@ -1,7 +1,11 @@
 module ApplicationHelper
-  @@markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true)
-  def markdown(text)
-    @@markdown_renderer.render(text).html_safe
+  @@markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:escape_html => true), :autolink => true)
+  def sanitized_markdown(text)
+     sanitizer(@@markdown_renderer.render(text))
+  end
+
+  def sanitizer(text)
+    sanitize(text, :tags => %w(h1 h2 h3 h4 h5 h6 p strong b i em div span a), :attributes => %w(href src) ).html_safe
   end
 
   # Used to figure out current page for nav
