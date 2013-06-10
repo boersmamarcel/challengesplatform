@@ -10,6 +10,7 @@ Feature: Sending Messages using the message center
     | A         | C        | participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
     | A         | D        | participant2@student.utwente.nl | abcd1234 | abcd1234               | 0     |
     | A         | E        | participant3@student.utwente.nl | abcd1234 | abcd1234               | 0     |
+    | John      | Doe      | participant4@student.utwente.nl | abcd1234 | abcd1234               | 0     |
     And the following challenge records
     | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
     | 1   | Title1  | Description1 | next week  | 09-09-2060| approved | 1     | 1             |

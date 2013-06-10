@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require bootstrap
 //= require bootstrap.file-input.js
 //= require datepicker.js
@@ -23,6 +24,7 @@ $("#logout_tooltip").tooltip();
 $("#mailbox").tooltip();
 $("#settings_tooltip").tooltip();
 $("#profile_tooltip").tooltip();
+
 <% unless Rails.env == 'test' %>
   (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];

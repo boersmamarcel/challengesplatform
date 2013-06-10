@@ -1,3 +1,4 @@
 %input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
 = render :partial => 'shared/challenge', :object =>  @challenge, :options => (options ||= {}), :as => 'challenge'
 
+

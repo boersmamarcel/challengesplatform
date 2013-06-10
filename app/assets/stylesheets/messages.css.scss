@@ -66,5 +66,17 @@ tr.mail-message.unread:nth-child(odd) {
 }
 
 #composeMessage textarea, #composeMessage input {
-	margin: 15px;
+	margin: 12px;
+}
+
+#peopletags {
+	margin: 12px 0px 0px 12px;
+}
+
+#peopletags a {
+	font-weight: bold;
+}
+
+#peopletags:before {
+	content: 'Recipients: ';
 }
