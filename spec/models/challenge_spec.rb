@@ -84,4 +84,13 @@ describe Challenge do
     starts_tomorrow.count.should eq(1)
     starts_tomorrow.state.should eq("declined")
   end
+
+  it "should see draft when challenge is draft?" do
+    draft = FactoryGirl.create(:challenge, :state => "draft")
+
+    draft.draft?.should be_true
+  end 
+
+
+
 end
