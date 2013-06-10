@@ -139,6 +139,7 @@ describe Challenge do
 
     Challenge.visible_for_user(u_participant).should include(challenge_approved)
     Challenge.visible_for_user(u_participant).should_not include(challenge_draft)
+
     
   end
 
