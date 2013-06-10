@@ -18,9 +18,10 @@ class FollowController < ApplicationController
     @follow = current_user.followrelations.build(:following_id => @followee.id) 
     respond_to do |format|
       if @follow.save
-          format.html {redirect_to profile_user_path(@followee), notice: 'You are now following this user'}
+        sendMessageTemplateToUser(@followee, current_user, "I am now following you!", "user_mailer/follows", { :follower => current_user })
+        format.html {redirect_to profile_user_path(@followee), notice: 'You are now following this user'}
       else
-          format.html { redirect_to profile_user_path(@followee), notice: 'Whoops something went wrong'}
+        format.html { redirect_to profile_user_path(@followee), notice: 'Whoops something went wrong'}
       end
     end
   end
