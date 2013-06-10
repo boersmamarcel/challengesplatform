@@ -206,19 +206,19 @@ describe Challenge do
  it "should show the correct days until start" do
     challenge = FactoryGirl.create(:challenge)
 
-    challenge.decorate.days_total.should eql 2
+    challenge.decorate.days_total.should eql 3
  end
 
  it "should show the correct days until end" do
     challenge = FactoryGirl.create(:challenge, :start_date => Date.today - 2)
 
-    challenge.decorate.days_till_end.should eql 3
+    challenge.decorate.days_till_end.should eql 4
  end
 
  it "should show the correct days until start" do
     challenge = FactoryGirl.create(:challenge)
 
-    challenge.decorate.days_till_start.should eql 2
+    challenge.decorate.days_till_start.should eql 3
 
  end
 
