@@ -51,6 +51,7 @@ Challengesplatform::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :sendmail
 
   # Quiet assets
   config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger

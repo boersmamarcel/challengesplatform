@@ -12,6 +12,7 @@
         %h4
           = link_to message_path(message) do
             = message.subject
+        %br
         %p= sanitized_markdown(h(truncate(message.body, :length => 150)))
         %p
           %i.icon-user

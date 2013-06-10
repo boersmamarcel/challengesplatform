@@ -1,1 +1,0 @@
-ENV['notification_email'] = 'notify' # Hostname will be automatically appended by server
