@@ -203,10 +203,10 @@ describe Challenge do
 
  end
 
- it "should show the correct days until start" do
+ it "should show the correct total days" do
     challenge = FactoryGirl.create(:challenge)
 
-    challenge.decorate.days_total.should eql 3
+    challenge.decorate.days_total.should eql 2
  end
 
  it "should show the correct days until end" do
