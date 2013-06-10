@@ -140,7 +140,17 @@ describe Challenge do
     Challenge.visible_for_user(u_participant).should include(challenge_approved)
     Challenge.visible_for_user(u_participant).should_not include(challenge_draft)
 
-    
+
+  end
+
+  it "should be in the supervised by list" do
+    u_super = FactoryGirl.create(:user, :role => 1)
+    challenge = FactoryGirl.create(:challenge, :supervisor_id => u_super.id)
+    u_super2 = FactoryGirl.create(:user, :email => "other@utwente.nl", :role => 1)
+
+    Challenge.supervised_by_user(u_super).should include(challenge)
+    Challenge.supervised_by_user(u_super2).should_not include(challenge)
+
   end
 
 end
