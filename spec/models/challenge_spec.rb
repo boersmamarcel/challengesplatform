@@ -85,12 +85,61 @@ describe Challenge do
     starts_tomorrow.state.should eq("declined")
   end
 
-  it "should see draft when challenge is draft?" do
+  it "should see draft? equals true when challenge has state draft" do
     draft = FactoryGirl.create(:challenge, :state => "draft")
 
     draft.draft?.should be_true
   end 
 
+  it "should see declined equals true when challenge has state delined" do
+    declined = FactoryGirl.create(:challenge, :state => "declined")
 
+    declined.declined?.should be_true
+  end
+
+  it "should not be running when end_date or start_date isn't present" do
+    challenge = FactoryGirl.create(:challenge, :start_date => "", :end_date => "", :state => "draft")
+
+    challenge.running?.should be_false
+
+  end
+
+  it "should not be over when the end_date isn't present" do
+    challenge = FactoryGirl.create(:challenge, :start_date => "", :end_date => "", :state => "draft")
+
+    challenge.over?.should be_false
+  end
+
+  it "should not be upcoming when start_date isn't present" do
+    challenge = FactoryGirl.create(:challenge, :start_date => "", :end_date => "", :state => "draft")
+
+    challenge.upcoming?.should be_true
+  end
+
+  it "should be visible for supervisor" do
+    u_super = FactoryGirl.create(:user, :role => 1)
+    challenge = FactoryGirl.create(:challenge, :supervisor_id => u_super.id)
+
+    Challenge.visible_for_user(u_super).should include(challenge)
+
+  end
+
+  it "should be visible for the admin" do
+    u_admin = FactoryGirl.create(:user, :role => 2)
+    challenge = FactoryGirl.create(:challenge)
+
+    Challenge.visible_for_user(u_admin).should include(challenge)
+
+  end
+
+  it "should not be visible for participants" do
+    u_participant = FactoryGirl.create(:user, :role => 0)
+    challenge_draft = FactoryGirl.create(:challenge)
+    challenge_approved = FactoryGirl.create(:challenge, :state => 'approved')
+
+    Challenge.visible_for_user(u_participant).should include(challenge_approved)
+    Challenge.visible_for_user(u_participant).should_not include(challenge_draft)
+    
+  end
 
 end
