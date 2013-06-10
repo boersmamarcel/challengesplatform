@@ -19,7 +19,7 @@
         = image_tag @challenge.image.url
       %p.lead
         = @challenge.lead
-        = markdown(@challenge.description)
+        = sanitized_markdown(@challenge.description)
     .details.span4.well
       %p.detail
         %i.icon-time
