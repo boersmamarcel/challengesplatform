@@ -1,0 +1,5 @@
+%p
+    = "Your challenge, #{values[:challenge].title}, has been declined. For more information, go to "
+    = link_to "this page.", challenge_url(values[:challenge], :only_path => false)
+  
+= render :partial => "messages/mail_footer", :layout => false

@@ -154,6 +154,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
 
     if @challenge.unenroll current_user
+      sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been unenrolled", "user_mailer/unenrollment", { :challenge => @challenge })
       redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled'
     end
   end
