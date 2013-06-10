@@ -10,10 +10,10 @@ old_digest      = File.expand_path("~/remote_#{digest_filename}")
 
 puts "Checking for changes"
 
-bundle_digest = Digest::SHA2.file(lock_file).hexdigest
-old_digest    = File.exists?(old_digest) ? File.read(old_digest) : ""
+bundle_digest = Digest::SHA2.file(lock_file).hexdigest.strip
+old_digest    = File.exists?(old_digest) ? File.read(old_digest).strip : ""
 
-if bundle_digest.strip == old_digest.strip
+if bundle_digest == old_digest
   puts "=> There were no changes, doing nothing"
 else
 
