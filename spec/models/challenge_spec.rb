@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
 
 describe Challenge do
+
   it "should be visible to only the right users" do
     u_admin = FactoryGirl.build(:user, :role => 2)
     u_super = FactoryGirl.build(:user, :role => 1)
@@ -152,5 +153,84 @@ describe Challenge do
     Challenge.supervised_by_user(u_super2).should_not include(challenge)
 
   end
+
+  it "should have a human_readable_start_date" do
+    challenge = FactoryGirl.create(:challenge)
+    challenge_missing = FactoryGirl.create(:challenge, :start_date => "")
+
+    challenge_missing.decorate.human_readable_start_date.should eql "TBC."
+    challenge.decorate.human_readable_start_date.should eql (Date.today + 2).strftime("%d-%m-%Y")
+
+  end
+
+  it "should have a human_readable_end_date" do
+    challenge = FactoryGirl.create(:challenge)
+    challenge_missing = FactoryGirl.create(:challenge, :end_date => "")
+
+    challenge_missing.decorate.human_readable_end_date.should eql "TBC."
+    challenge.decorate.human_readable_end_date.should eql (Date.today + 4).strftime("%d-%m-%Y")
+
+  end
+
+ it "should show the location" do
+    challenge = FactoryGirl.create(:challenge)
+    challenge_missing = FactoryGirl.create(:challenge, :location => "")
+
+    challenge.decorate.location.should eql "Zilverling"
+    challenge_missing.decorate.location.should eql "TBA"
+ end
+
+ it "should decorate the supervisor" do
+    u_super = FactoryGirl.create(:user, :role => 1)
+    challenge = FactoryGirl.create(:challenge, :supervisor_id => u_super.id)
+    challenge_missing = FactoryGirl.create(:challenge)
+    challenge.decorate.supervisor.should_not be_nil
+    challenge_missing.decorate.supervisor.should be_nil
+ end
+
+ it "should show day of week or TBC" do
+    challenge = FactoryGirl.create(:challenge)
+    challenge_missing = FactoryGirl.create(:challenge, :start_date => "")
+
+    challenge.decorate.day_of_week.should eql (Date.today + 2).strftime("%A")
+    challenge_missing.decorate.day_of_week.should eql "TBC"
+ end
+
+ it "should have readable from and till date" do
+    challenge = FactoryGirl.create(:challenge)
+
+    challenge.decorate.from_till.should eql  "From <span id=\"start_date\">" + (Date.today + 2).strftime("%d-%m-%Y") + "</span> till <span id=\"end_date\">" +  (Date.today + 4).strftime("%d-%m-%Y") +"</span>"
+
+ end
+
+ it "should show the correct days until start" do
+    challenge = FactoryGirl.create(:challenge)
+
+    challenge.decorate.days_total.should eql 2
+ end
+
+ it "should show the correct days until end" do
+    challenge = FactoryGirl.create(:challenge, :start_date => Date.today - 2)
+
+    challenge.decorate.days_till_end.should eql 3
+ end
+
+ it "should show the correct days until start" do
+    challenge = FactoryGirl.create(:challenge)
+
+    challenge.decorate.days_till_start.should eql 2
+
+ end
+
+it "should show the correct percentage" do
+    challenge_not_running = FactoryGirl.create(:challenge)
+    challenge_running = FactoryGirl.create(:challenge, :start_date => Date.today - 2)
+    challenge_finished = FactoryGirl.create(:challenge, :start_date => Date.today - 4, :end_date => Date.today - 2)
+
+    challenge_not_running.decorate.percentage_date.should eql "0%"
+    challenge_finished.decorate.percentage_date.should eql "100%"
+    challenge_running.decorate.percentage_date.should eql (((((Date.today - (Date.today - 2))) / ((Date.today + 4) - (Date.today - 2))) * 100 ).to_i).to_s + "%"
+
+end
 
 end

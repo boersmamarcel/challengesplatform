@@ -26,7 +26,11 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def location
-    object.location || "TBA"
+    if object.location.blank?
+      "TBA"
+    else
+      object.location
+    end
   end
 
   def supervisor
