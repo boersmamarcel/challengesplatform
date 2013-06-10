@@ -8,6 +8,6 @@
     &mdash; from 
     = link_to get_name(@message.sender), profile_user_path(@message.sender)
 %p
-  = sanitized_markdown(h(@message.body))
+  = @message.body.html_safe
 %p
-  = button_to "Delete", message_path(@message), :confirm => "are you sure?", :method => :delete
+  = button_to "Delete", message_path(@message), :class => 'btn btn-danger', :confirm => "are you sure?", :method => :delete
