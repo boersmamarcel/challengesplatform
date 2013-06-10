@@ -58,4 +58,14 @@ describe User do
     daan.can_send_message_to_participants?(koek_challenge).should be_false
   end
 
+  it "should be active for authentication" do
+    kees = FactoryGirl.create(:user, :email => "keesstudent@student.utwente.nl", :role => 1)
+    daan = FactoryGirl.create(:user, :email => "daanstudent@student.utwente.nl", :role => 1)
+    daan.active = false;
+
+    kees.active_for_authentication?.should be_true
+    daan.active_for_authentication?.should be_false
+
+  end
+
 end
