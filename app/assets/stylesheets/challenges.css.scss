@@ -103,7 +103,6 @@
   margin-bottom: 20px;
   .challenge {
      -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-     box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
     // @extend .span4;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -114,9 +113,10 @@
     padding: 10px;
     font-size: 13px;
 
-    opacity: 0.5;
+    opacity: 0.6;
     &.state_approved {
       opacity: 1;
+      box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
     }
     .status {
       margin-right: 6px;
