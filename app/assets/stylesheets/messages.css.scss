@@ -1,6 +1,62 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* safari and chrome */
+@-webkit-keyframes wiggle {
+	0% {-webkit-transform:rotate(8deg);}
+	15% {-webkit-transform:rotate(-8deg);}
+	30% {-webkit-transform:rotate(8deg);}
+	45% {-webkit-transform:rotate(0deg);}
+}
+ 
+/* firefox */
+@-moz-keyframes wiggle {
+	0% {-moz-transform:rotate(8deg);}
+	15% {-moz-transform:rotate(-8deg);}
+	30% {-moz-transform:rotate(8deg);}
+	45% {-moz-transform:rotate(0deg);}
+}
+
+/* anyone brave enough to implement the ideal method */
+@keyframes wiggle {
+	0% {transform:rotate(8deg);}
+	15% {transform:rotate(-8deg);}
+	30% {transform:rotate(8deg);}
+	45% {transform:rotate(0deg);}
+}
+
+@-moz-keyframes pulse {
+    0% {-moz-transform: scale(0); }
+	75% { -moz-transform: scale(1.1); }
+    100% { -moz-transform: scale(1); }
+}
+@-webkit-keyframes pulse {
+    0% {-webkit-transform: scale(0); }
+	75% { -webkit-transform: scale(1.1); }
+    100% { -webkit-transform: scale(1); }
+}
+@-o-keyframes pulse {
+    0% {-o-transform: scale(0); }
+	75% { -o-transform: scale(1.1); }
+    100% { -o-transform: scale(1); }
+}
+@keyframes pulse {
+    0% {transform: scale(0); }
+	75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+	-webkit-animation: pulse 0.5s 1s 1 forwards;
+	-moz-animation: pulse 0.5s 1s 1 forwards;
+	animation: pulse 0.5s 1s 1 forwards;
+}
+
+.wiggler {
+	-webkit-animation: wiggle 0.7s 2s 3;
+	-moz-animation: wiggle 0.7s 2s 3;
+	animation: wiggle 0.7s 2s 3;
+}
 
 #mailbox {
 	position: relative;
@@ -14,6 +70,10 @@
 		padding: 0px 4px;
 		font-size: 11px;
 		background-color: #c0392b;
+		-moz-transform: scale(0);
+		-webkit-transform: scale(0);
+		-o-transform: scale(0);
+		transform: scale(0);
 	}
 }
 .message {
