@@ -59,9 +59,10 @@
         %i.icon-map-marker
         %strong= @challenge.location
       //------------------------------------------------------
-      %hr
-      .action
-        = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
+      - unless @challenge.supervisor == current_user
+        %hr
+        .action
+          = render :partial => "shared/enroll_button", :locals => {:challenge => @challenge}
       %hr
       //------------------------------------------------------
       - if @challenge.supervisor.present?
