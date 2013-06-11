@@ -27,7 +27,7 @@
               %i.icon-user
               = link_to get_name(message.sender), profile_user_path(message.sender)
           %td
-            = link_to message_path(message), :confirm => "are you sure?", :method => :delete, :title => "Delete" do
+            = link_to message_path(message), :confirm => "are you sure?", :method => :delete, :title => "Delete", :alt => "Delete" do
               %i.icon-trash
           %td
             = link_to markasread_path(message), :title => "Mark as Read" do
