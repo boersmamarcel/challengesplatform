@@ -13,7 +13,7 @@
           = link_to message_path(message) do
             = message.subject
         %br
-        %p= sanitized_markdown(h(truncate(message.body, :length => 150)))
+        %p= truncate(message.body, :length => 150).html_safe
         %p
           %i.icon-user
           = link_to get_name(message.sender), profile_user_path(message.sender)

@@ -14,7 +14,7 @@
             = link_to message_path(message) do
               = message.subject
             %br
-            = sanitized_markdown(h(truncate(message.body, :length => 80)))
+            = truncate(message.body, :length => 80).html_safe
             - unless message.is_read
               %span.readstatus
                 &#9679; unread
