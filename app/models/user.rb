@@ -64,6 +64,7 @@ class User < ActiveRecord::Base
     to_follower = followers.exists?(user)
 
     my_challenges = participating_challenges
+    supervising_challenges = user.supervising_challenges
     receiver_challenges = user.participating_challenges
     
     # Supervisors can send messages to participants and viceversa
@@ -72,6 +73,7 @@ class User < ActiveRecord::Base
     
     # Users can send messages to co-participants of challenges
     to_participants = !(my_challenges & receiver_challenges).empty?
+    
     ((to_follower || to_participants || supervisors || supervising) && id != user.id) || is_admin?
   end
 
