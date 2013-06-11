@@ -56,6 +56,7 @@ class Admin::ReviewController < Admin::AdminController
 
       if @challenge.save
         flash[:notice] = "Challenge is successfully approved"
+        sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge approved", "user_mailer/challenge_approved", { :challenge => @challenge })
         redirect_to challenge_path(@challenge)
       else
         flash[:notice] = "Something went wrong please try again"
@@ -73,6 +74,7 @@ class Admin::ReviewController < Admin::AdminController
 
     if @comment.save && @challenge.save
       notice = "Challenge successfully declined"
+      sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge declined", "user_mailer/challenge_declined", { :challenge => @challenge })
       redirect_to admin_review_index_path, :alert => notice
     else
       redirect_to admin_review_path(@comment.challenge.id), :notice => 'Challenge can not be declined without comments'
