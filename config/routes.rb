@@ -1,6 +1,6 @@
 Challengesplatform::Application.routes.draw do
   match '/challenges/page/:page' => "challenges#index"
-  match '/challenges/:filter/(page/:page)' => "challenges#index", :constraints => { :filter => /upcoming|running|past|mine|supervising/ }
+  match '/challenges/:filter/(page/:page)' => "challenges#index", :constraints => { :filter => /upcoming|running|past|enrolled|supervising/ }
 
   resources :challenges, :constraints => { :id => /[0-9]+/ } do
     get 'revoke', :on => :member

@@ -7,17 +7,26 @@
       %a.btn.btn-success{href: new_challenge_path}
         %i.icon-plus-sign
         Create a challenge
-  .filters.btn-group{"data-toggle" => "buttons-radio"}
-    %a.button.btn{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
-    - if current_user.is_supervisor?
-      %a.button.btn{:class => @filter == "supervising" ? "active" : "", :href => "/challenges/supervising", :type => "button"}
-        %i.icon-star
-        Supervising
-    %a.button.btn{:class => @filter == "upcoming" ? "active" : "", :href => "/challenges/upcoming", :type => "button"} Upcoming
-    %a.button.btn{:class => @filter == "running" ? "active" : "", :href => "/challenges/running", :type => "button"} Running
-    %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Enrolled
-    %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
-  
+  .filters.btn-group
+    %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      Show
+      = @filter
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
+      - if current_user.is_supervisor?
+        %li
+          %a{:class => @filter == "supervising" ? "active" : "", :href => "/challenges/supervising", :type => "button"}
+            Supervising
+      %li
+        %a{:class => @filter == "upcoming" ? "active" : "", :href => "/challenges/upcoming", :type => "button"} Upcoming
+      %li
+        %a{:class => @filter == "running" ? "active" : "", :href => "/challenges/running", :type => "button"} Running
+      %li
+        %a{:class => @filter == "enrolled" ? "active" : "", :href => "/challenges/enrolled", :type => "button"} Enrolled
+      %li
+        %a{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
   = paginate @challenges
   = render 'shared/challenges_list' , :challenges => @challenges.decorate
   = paginate @challenges

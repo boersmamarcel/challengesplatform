@@ -16,7 +16,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges
   def index
-    @filter = params[:filter]
+    @filter = params[:filter] ||= "all"
     case @filter
       when "upcoming"
         @challenges = Challenge.upcoming.sorted_start_date
@@ -24,7 +24,7 @@ class ChallengesController < ApplicationController
         @challenges = Challenge.running.sorted_start_date
       when "past"
         @challenges = Challenge.past.sorted_start_date
-      when "mine"
+      when "enrolled"
         @challenges = current_user.participating_challenges.newest_first
       when "supervising"
         if current_user.is_supervisor?
