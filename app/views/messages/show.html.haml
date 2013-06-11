@@ -10,4 +10,6 @@
 %p
   = @message.body.html_safe
 %p
-  = button_to "Delete", message_path(@message), :class => 'btn btn-danger', :confirm => "are you sure?", :method => :delete
+  = link_to "Delete", message_path(@message), :class => 'btn btn-danger', :confirm => "are you sure?", :method => :delete
+  %a.btn.btn-primary{ :href => "#", :onClick => "composeMessage('user', #{@message.sender.id}, { subject: '#{get_reply_subject(@message)}'})" }
+    Reply
