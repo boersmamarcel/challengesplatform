@@ -1,8 +1,10 @@
 %input#page_identifier{:type => "hidden", :value => "challenges.#{@challenge.id}"}/
-.alert{class: (@challenge.state == 'declined') ? 'alert-error' : 'alert-block'}
-  %h1
-    %i.icon-warning-sign
-    = @challenge.state
+.alert{class: state_alert_class(@challenge)}
+  %h4
+    %i{class: state_icon_class(@challenge)}
+    = @challenge.state.camelize
+  = state_explanation @challenge
 = render :partial => 'shared/challenge', :object => @challenge,  :options => (options ||= {}), :as => 'challenge'
+%a{name: 'reviewcomments'}
 %div.comments
   = render :partial => 'admin/shared/comments', :locals => {:comments => @challenge.comments, :new_comment => @new_comment}
