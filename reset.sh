@@ -46,6 +46,7 @@ fi
 
 if $d; then
   echo "Resetting database"
+  rake db:migrate
   rake db:reset
   rake db:test:prepare
 fi
