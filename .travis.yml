@@ -36,4 +36,4 @@ script:
 notifications:
   email: false
   hipchat:
-    - secure: "PoC+UsJ0bYZoL4201rBs9xGENp4KkZ9ugYJ+bKc8MllTWfYIWJdCinHLyV39\na9ztNe4ZtKz7N0pouQ7VkpEZq04gI7rXaIyHnKVBRgP67wtB4MT422faz/ui\nl4EYejDkSB6DbfoJCOGa/bXu0GecOrREdcBP0xA4/vMFeOLK5j0="
+    - secure: "MdDty16B6vKD5G7Q036uO/yiWpGcdhoC43FfVrjfdsi5MQrviTPEXrexHP/4\ny1Ut3q14zU3XvwMDxz3sWIlHDG16D1djfILPVGHiQGJWtnVRYpIm0Ug5ZZqO\naDs3UvK8QbPOkeAhMIN98grKDv9x4NpkN8aVHbYkIqyyBGf1IO8="

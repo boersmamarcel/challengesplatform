@@ -36,6 +36,11 @@
           %a{:class => "btn btn-primary", :onClick => "composeMessage('user', #{@challenge.supervisor.id})"}
             Contact Supervisor
         %hr
+      - if current_user.participating_challenges.include?(@challenge)
+        %p.detail
+          %a{:class => "btn btn-primary", :onClick => "composeMessage('user', #{@challenge.supervisor.id})"}
+            Contact Supervisor
+        %hr
       %p.detail
         %i.icon-group
         %strong#participants_count
