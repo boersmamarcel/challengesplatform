@@ -30,10 +30,6 @@
             = link_to 'Edit', "#", :class => 'btn disabled'
           %a{:class => "btn btn-primary", :onClick => "composeMessage('challenge', #{@challenge.id})"}
             Mail Participants
-          %br
-          = form_for @challenge, :url => @url, :html => {:multipart => true, :class => "challenge-form form-horizontal"}  do |f|
-            = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
-
         %hr
       - if current_user.participating_challenges.include?(@challenge)
         %p.detail
