@@ -17,5 +17,7 @@
     %a.button.btn{:class => @filter == "running" ? "active" : "", :href => "/challenges/running", :type => "button"} Running
     %a.button.btn{:class => @filter == "mine" ? "active" : "", :href => "/challenges/mine", :type => "button"} Enrolled
     %a.button.btn{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
+  
+  = paginate @challenges
   = render 'shared/challenges_list' , :challenges => @challenges.decorate
   = paginate @challenges

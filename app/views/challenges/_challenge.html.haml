@@ -20,12 +20,13 @@
           %i.icon-star
           = challenge.state.camelize
     %h4= challenge.title
-  - if challenge.supervisor.present?
-    .supervisor
-      %i.icon-user
+  .supervisor
+    %i.icon-user
+    - if challenge.supervisor.present?
       %strong Supervised by
       = link_to challenge.supervisor.fullname, profile_user_path(challenge.supervisor)
-
+    - else
+      %strong No supervisor
   %p.description= challenge.lead
 
   %p.date
