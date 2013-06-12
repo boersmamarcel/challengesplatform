@@ -54,32 +54,49 @@
             %a.uppercase{:href => "#"} View everything
           / /post-title
 
-
 .container
-  .span12{:style => "margin-top: 600px;"}
-    %h1
-      %i.icon-lightbulb.color-sun-flower
-      Highlighted Challenges
+  .row
+    .span12.center{:style => "margin-top: 600px;"}
+      %h1
+        What do we do
+  .row.vertical-spacing
+    .span4.bigicon
+      %i.icon-rocket.blue-icon
+    .span4.bigicon
+      %i.icon-road.blue-icon
+    .span4.bigicon
+      %i.icon-heart.blue-icon
+  .row.center
+    .span4
+      lorem ipsum small amount of lines wiht limited information but sufficient enough
+    .span4
+      lorem ipsum small amount of lines wiht limited information but sufficient enough
+    .span4
+      lorem ipsum small amount of lines wiht limited information but sufficient enough
+.container{:style => "margin-top: 50px;"}
+  .span12.vertical-spacing
+    %h1.center
+      Staff selected challenges
     = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
 .container
-  .span12
+  .span12.center.vertical-spacing
     %h1
       Testimonials 
-  .span12
+  .span12.vertical-spacing
     .span4
       .stacktwo
         = image_tag 'rom.png'
     .span5{:style => 'margin-top: 140px;'}
       %blockquote
         %p
-          Dit is de opfrisbeurt waar we op zaten te wachten
+          Quote van ROM
         %small
           Rom Langerak opleidings directeur Universiteit Twente
   .span12
     .span5.offset2{:style => 'margin-top: 140px;'}
       %blockquote.pull-right
         %p
-          Bedrijven hebben nu eindelijk de mogelijkheid om hun innovatie te delen
+          Quote van Huib Pasman
         %small
           Huib Pasman - Technology Strategy & Strategic Marketing TNO
     .span4
