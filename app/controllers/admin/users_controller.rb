@@ -37,8 +37,8 @@ class Admin::UsersController < Admin::AdminController
     # You can't edit the sciencechallenges user, dummy!
     redirect_to admin_usermanagement_index_path if @user.eql? 1
 
-    # Update from supervisor to non-supervisor?
-    if(@user.role == 1 and not params[:user][:role].eql? "1")
+    # If this user is now a regular user, transfer his/her challenges
+    if(params[:user][:role].eql? "0" and not @user.role.eql? "0")
       transfer_challenges(@user)
     end
 
