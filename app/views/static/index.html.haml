@@ -1,27 +1,87 @@
 <input type="hidden" id="page_identifier" value="index">
 = tracking_code(:account => ENV['GOOGLEANALYTICS'])
-.hero-unit
-  %h1
-    %i.icon-rocket
-    - ab_test("title_text", "boost", "unlock") do |ab|
-      #{ab} your
-      %strong potential.
-  %p
-    %span.brand
-      = precede("Science") do
-        %strong Challenges
-    organizes challenges for students of the
-    %strong University of Twente.
-    Challenges are short projects that allow you to do some pretty cool things. Are you up to it?
-  %p
-    %a.btn.btn-primary.btn-large{:href => new_user_session_path}
-      Join now!
-    %a.btn.btn-large{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!"}
-      Organize a challenge
-  %p
-    %a{:href => "#"}
-      Read more about Science Challenges and its goal &raquo;
-%h1
-  %i.icon-lightbulb.color-sun-flower
-  Highlighted Challenges
-= render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+%link{ :href =>"http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900,700italic,900italic", :rel=>"stylesheet"}
+#featured{"data-advance-speed" => "6500", "data-animation-speed" => "500", "data-autoplay" => "1", "data-bg-color" => "", "data-caption-animation" => "1", "data-slider-height" => "666"}
+  .slide.orbit-slide.left
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nature.png')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Welcome to Science Challenges
+            %a.uppercase{:href => "#"} Check the newest challenges
+          / /post-title
+  .slide.orbit-slides.right
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nature2.png')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Join the revolution now!
+            %a.uppercase{:href => "#"} Create a challenge
+          / /post-title
+  .slide.orbit-slide.left
+    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/5-52.jpg')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Change your future
+            %a.uppercase{:href => "/users/sign_in"} Explore more challenges
+          / /post-title
+  .slide.orbit-slide.centered
+    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/8-21.jpg')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Basically, we're awesome.
+                What else really needs to be said?
+            %a.uppercase{:href => "#"} Find out more
+          / /post-title
+  .slide.orbit-slide.left
+    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/6-4.jpg')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                We are awesome! Join JOIN JOIN
+            %a.uppercase{:href => "#"} View everything
+          / /post-title
+
+
+.container
+  .span12{:style => "margin-top: 600px;"}
+    %h1
+      %i.icon-lightbulb.color-sun-flower
+      Highlighted Challenges
+    = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+.container
+  .span12
+    %h1
+      Testimonials 
+  .span12
+    .span4
+      .stacktwo
+        = image_tag 'rom.png'
+    .span5{:style => 'margin-top: 140px;'}
+      %blockquote
+        %p
+          Dit is de opfrisbeurt waar we op zaten te wachten
+        %small
+          Rom Langerak opleidings directeur Universiteit Twente
+  .span12
+    .span5.offset2{:style => 'margin-top: 140px;'}
+      %blockquote.pull-right
+        %p
+          Bedrijven hebben nu eindelijk de mogelijkheid om hun innovatie te delen
+        %small
+          Huib Pasman - Technology Strategy & Strategic Marketing TNO
+    .span4
+      .stacktwo
+        = image_tag 'huib.png'

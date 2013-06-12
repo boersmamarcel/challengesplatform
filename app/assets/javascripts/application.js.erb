@@ -35,3 +35,56 @@ $("#profile_tooltip").tooltip();
     }(document, 'script', 'facebook-jssdk'));
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 <% end %>
+
+
+
+
+
+
+jQuery(document).ready(function (a) {
+
+
+    var d = a("body").attr("data-smooth-scrolling");
+    1 == d && a(window).width() > 690 && a("body").outerHeight(!0) > a(window).height() && c();
+    var e = parseInt(a("#featured").attr("data-advance-speed")),
+        f = parseInt(a("#featured").attr("data-animation-speed")),
+        g = parseInt(a("#featured").attr("data-autoplay"));
+    isNaN(e) && (e = 5500), isNaN(f) && (f = 800);
+    var j = [];
+    a('[style*="background"]').each(function () {
+        var b = a(this).attr("style"),
+            c = /background.*?url\('(.*?)'\)/g,
+            d = c.exec(b);
+        d && j.push(d[1])
+    });
+
+
+
+    var k = [];
+    for (i = 0; j.length > i; i++) k[i] = new Image, k[i].src = j[i];
+    a(window).load(function () {
+        a("#featured").orbit({
+            animation: "fade",
+            advanceSpeed: e,
+            animationSpeed: f,
+            timer: g,
+        }), a("#featured article .post-title h2 span").show()
+    });
+     a("#featured .span_12 span.more-info a").click(function () {
+        return "More Info" == a(this).html() ? (a(this).parent().parent().find("h2, > a").css("opacity", 1), a(this).parent().parent().find(".video").stop().animate({
+            top: "-400px"
+        }, 800, "easeOutCubic"), a(this).parent().parent().find("h2").stop().animate({
+            top: "-400px"
+        }, 800, "easeOutCubic"), a(this).parent().parent().find("> a").stop().animate({
+            top: "-380px"
+        }, 800, "easeOutCubic"), a(this).html("Back to Video")) : (a(this).parent().parent().find(".video").stop().animate({
+            top: "0px"
+        }, 800, "easeOutCubic"), a(this).parent().parent().find("h2").stop().animate({
+            top: "0px"
+        }, 800, "easeOutCubic"), a(this).parent().parent().find("> a").stop().animate({
+            top: "0px"
+        }, 800, "easeOutCubic"), a(this).html("More Info")), !1
+    })
+   
+});
+
