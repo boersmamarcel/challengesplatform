@@ -15,7 +15,7 @@ Feature: Supervisor review pipeline
 	    | 2   | Title2  | Description2 | 09-09-2059 | 09-09-2060| pending  | 2     | 2             |
 	    | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| draft    | 1     | 2             |
 	    | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| draft    | 4     | 3             |
-	    | 5   | Title5  | Description5 | next month | 09-09-2060| declined | 2     | 2             |
+	    | 5   | Title5  | Description5 | next month | 09-09-2060| draft    | 2     | 2             |
 	    | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 2             |
 	    | 7   | Title7  | Description7 | 15-05-2013 | 09-09-2060| approved | 2     | 2             |
 	    And I visit the "login" page
