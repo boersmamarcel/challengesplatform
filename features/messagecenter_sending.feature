@@ -73,4 +73,4 @@ Feature: Sending Messages using the message center
         And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
         And I visit the "user.4.profile" page
         And I try to send a message
-       Then I should see a message with "You do not have the permissions required to view this page"
+       Then I should see a message with "Your message has been sent"

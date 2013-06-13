@@ -97,6 +97,12 @@ describe Challenge do
 
     declined.declined?.should be_true
   end
+  
+  it "should see approved equals true when challenge has state approved" do
+    approved = FactoryGirl.create(:challenge, :state => "approved")
+
+    approved.approved?.should be_true
+  end
 
   it "should not be running when end_date or start_date isn't present" do
     challenge = FactoryGirl.create(:challenge, :start_date => "", :end_date => "", :state => "draft")

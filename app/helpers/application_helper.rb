@@ -1,5 +1,5 @@
 module ApplicationHelper
-  @@markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:escape_html => true), :autolink => true)
+  @@markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(), :autolink => true)
   def sanitized_markdown(text)
      sanitizer(@@markdown_renderer.render(text))
   end

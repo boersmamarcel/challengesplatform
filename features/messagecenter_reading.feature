@@ -52,7 +52,7 @@ Feature: Message Center Incoming Messages
 
     Scenario: I delete a message
     When I visit the "messages" page
-    And I click on the "delete" link
+    And I click on the "Delete" link
     Then I should see a message with "Message deleted."
 
     Scenario: Viewing inbox without any messages

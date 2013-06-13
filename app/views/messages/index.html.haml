@@ -7,6 +7,7 @@
       %tr
         %th Subject
         %th 
+        %th 
     %tbody
       - current_user.received_messages.each do |message|
         %tr{:class => message.is_read ? "mail-message read" : "mail-message unread"}
@@ -15,6 +16,7 @@
               = message.subject
             %br
             = truncate(message.body, :length => 80).html_safe
+            %br
             - unless message.is_read
               %span.readstatus
                 &#9679; unread
@@ -25,6 +27,8 @@
               %i.icon-user
               = link_to get_name(message.sender), profile_user_path(message.sender)
           %td
-            = link_to message_path(message), :confirm => "are you sure?", :method => :delete do
+            = link_to message_path(message), :confirm => "are you sure?", :method => :delete, :title => "Delete", :alt => "Delete" do
               %i.icon-trash
-              &nbsp;&nbsp;delete
+          %td
+            = link_to markasread_path(message), :title => "Mark as Read" do
+              %i.icon-eye-open
