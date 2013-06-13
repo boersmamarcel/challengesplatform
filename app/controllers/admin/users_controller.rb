@@ -25,6 +25,7 @@ class Admin::UsersController < Admin::AdminController
     @user = User.new(:password => Devise.friendly_token)
 
     if @user.update_attributes(params[:user], as: :admin) and @user.save
+      @user.send_reset_password_instructions
       redirect_to admin_usermanagement_index_path, notice: 'User was successfully created.'
     else
       render action: "new"
