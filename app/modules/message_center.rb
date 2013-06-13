@@ -5,7 +5,7 @@ module MessageCenter
   def sendMessageToUser(to_user, from_user, subject, body)
     raise MessageException::ParameterShouldBeUser.new('To User should be of type User') unless to_user.is_a? User
     raise MessageException::ParameterShouldBeUser.new('From User should be of type User') unless from_user.is_a? User
-    body = view_context.sanitized_markdown(body)
+    body = view_context.sanitized_markdown(body).html_safe
     @message = Message.create(:subject => subject, :body => body, :sender_id => from_user.id, :receiver_id => to_user.id, :is_read => 0)
     
     if to_user.notify_by_email && !Rails.env.test?

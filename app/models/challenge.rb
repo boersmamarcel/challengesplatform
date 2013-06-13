@@ -73,6 +73,10 @@ class Challenge < ActiveRecord::Base
   def declined?
       state == 'declined'
   end
+  
+  def approved?
+      state == 'approved'
+  end
 
   def pending?
     state == 'pending'
