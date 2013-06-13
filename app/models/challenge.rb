@@ -25,7 +25,6 @@ class Challenge < ActiveRecord::Base
   validate :dates, :if => :pending?
   validates_processing_of :image
 
-
   scope :upcoming, where('start_date > ?', Date.today)
   scope :running, where('end_date >= ? AND start_date <= ?', Date.today, Date.today)
   scope :past, where('end_date < ?', Date.today)
@@ -71,7 +70,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def declined?
-      state == 'declined'
+      draft? and count > 1
   end
   
   def approved?
@@ -107,7 +106,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def editable_by_user?(user)
-    ((state == 'draft' || state == 'declined' ) && user.id == supervisor_id) || user.is_admin?
+    (draft? && user.id == supervisor_id) || user.is_admin?
   end
 
   def visible_for_user?(user)
@@ -123,7 +122,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def decline
-      self.state = "declined"
+      self.state = "draft"
       self.count = count + 1
   end
 
