@@ -3,56 +3,26 @@
 %link{ :href =>"http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900,700italic,900italic", :rel=>"stylesheet"}
 #featured{"data-advance-speed" => "6500", "data-animation-speed" => "500", "data-autoplay" => "1", "data-bg-color" => "", "data-caption-animation" => "1", "data-slider-height" => "666"}
   .slide.orbit-slide.left
-    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nature.png')"}
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/screenshot.png')"}
       .container
         .col.span_12
           .post-title
             %h2{"data-has-caption" => "1"}
               %span
                 Welcome to Science Challenges
-            %a.uppercase{:href => "#"} Check the newest challenges
+            %a.uppercase{:href => "#challenges"} Check the newest challenges
           / /post-title
   .slide.orbit-slides.right
-    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nature2.png')"}
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/university.png')"}
       .container
         .col.span_12
           .post-title
             %h2{"data-has-caption" => "1"}
               %span
-                Join the revolution now!
-            %a.uppercase{:href => "#"} Create a challenge
+                Join an awesome challenge 
+            %a.uppercase{:href => new_user_session_path } Sign in now
           / /post-title
-  .slide.orbit-slide.left
-    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/5-52.jpg')"}
-      .container
-        .col.span_12
-          .post-title
-            %h2{"data-has-caption" => "1"}
-              %span
-                Change your future
-            %a.uppercase{:href => "/users/sign_in"} Explore more challenges
-          / /post-title
-  .slide.orbit-slide.centered
-    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/8-21.jpg')"}
-      .container
-        .col.span_12
-          .post-title
-            %h2{"data-has-caption" => "1"}
-              %span
-                Basically, we're awesome.
-                What else really needs to be said?
-            %a.uppercase{:href => "#"} Find out more
-          / /post-title
-  .slide.orbit-slide.left
-    %article{"data-background-cover" => "1", :style => "background-image: url('http://themenectar.com/demo/salient/wp-content/uploads/2013/05/6-4.jpg')"}
-      .container
-        .col.span_12
-          .post-title
-            %h2{"data-has-caption" => "1"}
-              %span
-                We are awesome! Join JOIN JOIN
-            %a.uppercase{:href => "#"} View everything
-          / /post-title
+  
 
 .container
   .row
@@ -66,16 +36,17 @@
       %i.icon-road.blue-icon
     .span4.bigicon
       %i.icon-heart.blue-icon
-  .row.center
+  .row.center.text-row
     .span4
-      lorem ipsum small amount of lines wiht limited information but sufficient enough
+      It is our mission to inspire students to discover and pursue their passion. Unlocking the full potential of students by create a healthy community to stimulate the sharing of knowledge.
     .span4
-      lorem ipsum small amount of lines wiht limited information but sufficient enough
+      Students can search and enroll for challenges that meet their interests. It is a unique opportunity for students to work with some of the leaders in the field.
     .span4
-      lorem ipsum small amount of lines wiht limited information but sufficient enough
+      Learn, share, make friends and have fun! That is our core value, we try to remove all obstacles to make it as accessible and enjoyable as possible for students to discover their passion.
 .container{:style => "margin-top: 50px;"}
   .span12.vertical-spacing
     %h1.center
+      %a{:id => "challenges"}
       Staff selected challenges
     = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
 .container
