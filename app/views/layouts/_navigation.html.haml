@@ -12,9 +12,9 @@
         %a#mailbox.inactive{ :onClick => "addModal()" ,  'data-toggle' => "tooltip", :title => "Mailbox", "data-placement"=> 'bottom'}
           %i.icon-envelope.icon-large
       - else
-        %a#mailbox.active{ :onClick => "addModal()", 'data-toggle' => "tooltip", :title => "Mailbox", "data-placement"=> 'bottom' }
+        %a#mailbox.active.wiggler{ :onClick => "addModal()", 'data-toggle' => "tooltip", :title => "Mailbox", "data-placement"=> 'bottom' }
           %i.icon-envelope-alt.icon-large.icon-active
-          .badge
+          .badge.pulse
             = "" + current_user.received_messages.unread.count.to_s + ""
     %li.divider-vertical
     %li{class: controller?("dashboard") ? "active" : ""}

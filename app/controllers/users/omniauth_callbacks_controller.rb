@@ -15,7 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   	    end
   	  else
   	      flash[:error] = "Only people associated with the University of Twente can sign up. Please sign up with your utwente.nl email address."
-  	      redirect_to root_path
+  	      redirect_to new_user_session_path
   	  end
   	end
 

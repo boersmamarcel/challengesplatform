@@ -41,6 +41,7 @@ class Challenge < ActiveRecord::Base
 
   scope :visible_for_user, lambda { |user|
     if user.is_admin?
+
     elsif user.is_supervisor?
       where("state = 'approved' OR supervisor_id = ?", user.id)
     else
@@ -71,6 +72,10 @@ class Challenge < ActiveRecord::Base
 
   def declined?
       state == 'declined'
+  end
+  
+  def approved?
+      state == 'approved'
   end
 
   def pending?

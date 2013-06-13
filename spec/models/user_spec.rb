@@ -24,7 +24,8 @@ describe User do
 
     kees.can_send_message_to_user?(daan).should be_true
     lina.can_send_message_to_user?(daan).should be_true
-    daan.can_send_message_to_user?(kees).should be_false
+    # daan.can_send_message_to_user?(kees).should be_false
+    daan.can_send_message_to_user?(kees).should be_true
   end
 
   it "should be able to determine if a user can send a message to a user in same challenge" do
@@ -39,7 +40,8 @@ describe User do
     lina.participating_challenges << [koek_challenge, data_challenge]
     daan.participating_challenges << data_challenge
 
-    kees.can_send_message_to_user?(daan).should be_false
+    # kees.can_send_message_to_user?(daan).should be_false
+    kees.can_send_message_to_user?(daan).should be_true
     kees.can_send_message_to_user?(lina).should be_true
     lina.can_send_message_to_user?(daan).should be_true
     lina.can_send_message_to_user?(kees).should be_true
@@ -56,6 +58,16 @@ describe User do
     kees.can_send_message_to_participants?(koek_challenge).should be_true
     daan.can_send_message_to_participants?(data_challenge).should be_true
     daan.can_send_message_to_participants?(koek_challenge).should be_false
+  end
+
+  it "should be active for authentication" do
+    kees = FactoryGirl.create(:user, :email => "keesstudent@student.utwente.nl", :role => 1)
+    daan = FactoryGirl.create(:user, :email => "daanstudent@student.utwente.nl", :role => 1)
+    daan.active = false;
+
+    kees.active_for_authentication?.should be_true
+    daan.active_for_authentication?.should be_false
+
   end
 
 end
