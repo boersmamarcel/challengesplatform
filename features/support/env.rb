@@ -4,9 +4,8 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'simplecov'
-SimpleCov.start 'rails'
-SimpleCov.coverage_dir 'coverage/cucumber'
+require 'coveralls'
+Coveralls.wear_merged!('rails')
 
 require 'cucumber/rails'
 #require "#{Rails.root}/spec/factories"
