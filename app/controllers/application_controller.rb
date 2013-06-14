@@ -26,12 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_unauthorized_request
-    if user_signed_in?
-      flash[:info] = "You do not have the permissions required to view this page."
-      redirect_to dashboard_path
-    else
-      flash[:info] = "You need to sign in or sign up before continuing."
-      redirect_to new_user_session_path
-    end
+    flash[:info] = "You do not have the permissions required to view this page."
+    redirect_to dashboard_path
   end
 end
