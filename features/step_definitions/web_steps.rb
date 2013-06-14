@@ -79,6 +79,10 @@ Then(/^I should see a message with "(.*?)"$/) do |contents|
   page.should have_content(contents)
 end
 
+Then(/^I should not see a message with "(.*?)"$/) do |contents|
+  page.should_not have_content(contents)
+end
+
 Then(/^I should see the "(.*?)" page$/) do |pageName|
   page.should_not be_nil
   find('input#page_identifier').value.should eql pageName
