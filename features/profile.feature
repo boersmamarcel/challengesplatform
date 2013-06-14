@@ -34,4 +34,8 @@ Feature: User profile
     And I press "Update"
     Then I should see a message with "You updated your account successfully."
     
-    
+    Scenario: Invalid edit (empty last name)
+    When I visit the "user.edit" page for user "s.lang@student.utwente.nl"
+     And I fill in "user[lastname]" with ""
+     And I press "Update"
+    Then I should see a message with "Last name is missing"
