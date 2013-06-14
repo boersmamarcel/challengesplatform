@@ -24,18 +24,9 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You have succesfully logged in"
     dashboard_path
   end
-  
-  def after_update_path_for(resource)
-    profile_user_path(resource)
-  end
 
   def redirect_unauthorized_request
-    if user_signed_in?
-      flash[:info] = "You do not have the permissions required to view this page."
-      redirect_to dashboard_path
-    else
-      flash[:info] = "You need to sign in or sign up before continuing."
-      redirect_to new_user_session_path
-    end
+    flash[:info] = "You do not have the permissions required to view this page."
+    redirect_to dashboard_path
   end
 end

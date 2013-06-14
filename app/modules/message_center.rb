@@ -8,7 +8,7 @@ module MessageCenter
     body = view_context.sanitized_markdown(body).html_safe
     @message = Message.create(:subject => subject, :body => body, :sender_id => from_user.id, :receiver_id => to_user.id, :is_read => 0)
     
-    if to_user.notify_by_email && !Rails.env.test?
+    if to_user.notify_by_email
         UserMailer.personal_message(to_user.email, subject, body).deliver
     end
   end

@@ -24,8 +24,11 @@ Then(/^I should see a section title "(.*?)"$/) do |title|
 end
 
 When(/^I click on the "(.*?)" link$/) do |linktext|
-  # page.all(:xpath, "//a", :text => linktext).first.click
   click_link(linktext, match: :first)
+end
+
+When(/^I press the "(.*?)" button$/) do |linktext|
+  click_button(linktext, match: :first)
 end
 
 When(/^I have no messages$/) do
