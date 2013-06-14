@@ -47,8 +47,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         else
           render "edit"
         end
-    else
-      render "edit"
     end
   end
 
