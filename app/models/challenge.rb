@@ -105,6 +105,10 @@ class Challenge < ActiveRecord::Base
     end
   end
 
+  def supervised_by_user?(user)
+    supervisor_id == user.id
+  end
+
   def editable_by_user?(user)
     (draft? && user.id == supervisor_id) || user.is_admin?
   end

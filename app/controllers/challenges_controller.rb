@@ -117,27 +117,20 @@ class ChallengesController < ApplicationController
     end
   end
 
-  # DELETE /challenges/1
-  def destroy
-    @challenge = Challenge.find(params[:id])
-    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
-
-    @challenge.destroy
-
-    redirect_to challenges_url
-  end
 
   def revoke
     @challenge = Challenge.find(params[:id])
-    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.editable_by_user(current_user)
+    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.supervised_by_user?(current_user)
 
     @challenge.count += 1
     @challenge.state = "draft"
 
     if @challenge.save
-      redirect_to declined_challenges_path , notice: 'Challenge successfully revoked'
+      sendMessageTemplateToUser(current_user, @challenge.supervisor, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
+      sendMessageTemplateToGroup(@challenge.participants, current_user, "Challenge has been revoked", "user_mailer/revoked_participants", {:challenge => @challenge })
+      redirect_to challenge_path(@challenge) , notice: 'Challenge successfully revoked'
     else
-      redirect_to challenges_path, alert: "Couldn't revoke challenge"
+      redirect_to challenge_path(@challenge), alert: "Couldn't revoke challenge"
     end
   end
 
