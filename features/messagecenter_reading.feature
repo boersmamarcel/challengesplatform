@@ -9,7 +9,7 @@ Feature: Message Center Incoming Messages
     | 2  | participant@student.utwente.nl | abcd1234 | abcd1234              | 0    |
 	And the following message records
      | subject             | body                             | sender_id | receiver_id | is_read |
-	 | Room Change         | Tomorrow we will meet outside!   | 1         | 2           | 0       |
+	 | Re: Room Change         | Tomorrow we will meet outside!   | 1         | 2           | 0       |
 	 | Certificate Awarded | You have received a certificate. | 1         | 2           | 1       |
     When I visit the "login" page
    	And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
@@ -17,6 +17,11 @@ Feature: Message Center Incoming Messages
     Scenario: View the inbox icon while having unread messages
     When I visit the "dashboard" page
     Then I should see an "active" mailbox icon
+    
+    Scenario: Mark an email as read
+    When I visit the "messages" page
+     And I click on the "Mark as Read" link
+    Then I should see a message with "Message marked as read"
 
     Scenario: View the inbox icon while having no unread messages
     Given I have read all my messages
@@ -45,14 +50,19 @@ Feature: Message Center Incoming Messages
     And I click on the "mailbox" button
     Then I should see a message with "You have no unread messages"
 
-    Scenario: I view a message
+    Scenario: I view a reply message
     When I visit the "messages" page
-    And I click on the "Room Change" link
+    And I click on the "Re: Room Change" link
+    Then I should see a message with "back to Inbox"
+    
+    Scenario: I view a non-reply message
+    When I visit the "messages" page
+    And I click on the "Certificate Awarded" link
     Then I should see a message with "back to Inbox"
 
     Scenario: I delete a message
     When I visit the "messages" page
-    And I click on the "delete" link
+    And I click on the "Delete" link
     Then I should see a message with "Message deleted."
 
     Scenario: Viewing inbox without any messages

@@ -53,3 +53,9 @@ Feature: Security - supervisors
     | challenges.3.edit | challenges.3    |
     | challenges.5.edit | challenges.5    |
     | challenges.6.edit | challenges.6    |
+
+
+  Scenario: delete account
+    When I visit the "user.edit" page
+     And I press the "Cancel my account" button
+    Then I should be on the "index" page

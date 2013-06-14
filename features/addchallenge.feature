@@ -37,17 +37,17 @@ Feature: Add challenge
     Scenario: Resubmit a declined challenge (submit count should increase)
       Given the following challenge records
         | id | title  | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | draft | 2     | 1             |
+        | 1  | Title1 | Awesome challenge | 03-08-2013 | 09-09-2013 | draft    | 2     | 1             |
       When I edit the challenge with id "1" and a new description "Nice challenge"
-      And I press "Submit for Review"
+      And I press "Resubmit for Review"
       Then I should see "Title1" in the list
 
     Scenario: Resubmit a declined challenge with fields filled incorrectly
       Given the following challenge records
         | id | title   | description       | start_date | end_date   | state    | count | supervisor_id |
-        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | draft | 2     | 1             |
+        | 1  | Title1  | Awesome challenge | 03-08-2013 | 09-09-2013 | draft    | 2     | 1             |
       When I edit the challenge with id "1" and a new description ""
-      And I press "Submit for Review"
+      And I press "Resubmit for Review"
       Then I should see a message with "One or more fields are missing"
 
     Scenario: Edit a pending for review challenge

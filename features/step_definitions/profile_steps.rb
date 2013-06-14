@@ -18,3 +18,8 @@ end
 When(/^I fill in tagline with "(.*?)"$/) do |tagline|
   fill_in :user_tagline, :with => tagline
 end
+
+Then(/^I should see the profile of "(.*?)"$/) do |email|
+  user = User.find_by_email(email)
+  URI.parse(current_url).path.should == getRoute("user." + user.id.to_s + ".profile")
+end

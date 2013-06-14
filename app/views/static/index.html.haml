@@ -1,27 +1,84 @@
 <input type="hidden" id="page_identifier" value="index">
 = tracking_code(:account => ENV['GOOGLEANALYTICS'])
-.hero-unit
-  %h1
-    %i.icon-rocket
-    - ab_test("title_text", "boost", "unlock") do |ab|
-      #{ab} your
-      %strong potential.
-  %p
-    %span.brand
-      = precede("Science") do
-        %strong Challenges
-    organizes challenges for students of the
-    %strong University of Twente.
-    Challenges are short projects that allow you to do some pretty cool things. Are you up to it?
-  %p
-    %a.btn.btn-primary.btn-large{:href => new_user_session_path}
-      Join now!
-    %a.btn.btn-large{:href => "mailto:join@sciencechallenges.nl?subject=We want to join!"}
-      Organize a challenge
-  %p
-    %a{:href => "#"}
-      Read more about Science Challenges and its goal &raquo;
-%h1
-  %i.icon-lightbulb.color-sun-flower
-  Highlighted Challenges
-= render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+%link{ :href =>"http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900,700italic,900italic", :rel=>"stylesheet"}
+#featured{"data-advance-speed" => "6500", "data-animation-speed" => "500", "data-autoplay" => "1", "data-bg-color" => "", "data-caption-animation" => "1", "data-slider-height" => "666"}
+  .slide.orbit-slide.left
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/screenshot.png')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Welcome to Science Challenges
+            %a.uppercase{:href => "#challenges"} Check the newest challenges
+          / /post-title
+  .slide.orbit-slides.right
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/university.png')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Join an awesome challenge 
+            %a.uppercase{:href => new_user_session_path } Sign in now
+          / /post-title
+  .slide.orbit-slides.centered
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nerds.jpg')"}
+      .container
+        .col.span_12
+          .post-title
+            %h2{"data-has-caption" => "1"}
+              %span
+                Our highly motivated team
+            %a.uppercase{:href => team_path } Read more about us!
+          / /post-title
+
+.container
+  .row
+    .span12.center{:style => "margin-top: 600px;"}
+      %h1
+        What do we do
+  .row.vertical-spacing
+    .span4.bigicon
+      %i.icon-rocket.blue-icon
+    .span4.bigicon
+      %i.icon-road.blue-icon
+    .span4.bigicon
+      %i.icon-heart.blue-icon
+  .row.center.text-row
+    .span4
+      It is our mission to inspire students to discover and pursue their passion. Unlocking the full potential of students by create a healthy community to stimulate the sharing of knowledge.
+    .span4
+      Students can search and enroll for challenges that meet their interests. It is a unique opportunity for students to work with some of the leaders in the field.
+    .span4
+      Learn, share, make friends and have fun! That is our core value, we try to remove all obstacles to make it as accessible and enjoyable as possible for students to discover their passion.
+.container{:style => "margin-top: 50px;"}
+  .span12.vertical-spacing
+    %h1.center
+      %a{:id => "challenges"}
+      Staff selected challenges
+    = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+.container
+  .span12.center.vertical-spacing
+    %h1
+      Testimonials 
+  .span12.vertical-spacing
+    .span4
+      .stacktwo
+        = image_tag 'rom.png'
+    .span5{:style => 'margin-top: 140px;'}
+      %blockquote
+        %p
+          Quote van ROM
+        %small
+          Rom Langerak opleidings directeur Universiteit Twente
+  .span12
+    .span5.offset2{:style => 'margin-top: 140px;'}
+      %blockquote.pull-right
+        %p
+          Quote van Huib Pasman
+        %small
+          Huib Pasman - Technology Strategy & Strategic Marketing TNO
+    .span4
+      .stacktwo
+        = image_tag 'huib.png'

@@ -55,4 +55,4 @@
       .control-group
         .controls
           = f.submit 'Save draft', :class => "btn"
-          = f.submit 'Submit for Review', :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+          = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
