@@ -32,7 +32,7 @@ Feature: User profile
     And I fill in "user[password_confirmation]" with "newerpass"
     And I fill in "user[current_password]" with "pass123567"
     And I press "Update"
-    Then I should see a message with "You updated your account successfully."
+    Then I should see the profile of "s.lang@student.utwente.nl"
     
     Scenario: Invalid edit (empty last name)
     When I visit the "user.edit" page for user "s.lang@student.utwente.nl"

@@ -173,3 +173,7 @@ end
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in field, :with => value
 end
+
+Then(/^I should be on the "(.*?)" page$/) do |url|
+  current_path.should == getRoute(url)
+end

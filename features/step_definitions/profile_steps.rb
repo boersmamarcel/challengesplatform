@@ -8,3 +8,8 @@ When(/^I fill in firstname with "(.*?)" and lastname with "(.*?)"$/) do |firstna
   fill_in :user_firstname, :with => firstname
   fill_in :user_lastname, :with => lastname
 end
+
+Then(/^I should see the profile of "(.*?)"$/) do |email|
+  user = User.find_by_email(email)
+  URI.parse(current_url).path.should == getRoute("user." + user.id.to_s + ".profile")
+end
