@@ -86,6 +86,16 @@ describe Challenge do
     starts_tomorrow.state.should eq("draft")
   end
 
+  it "should use the correct implied names" do
+    draft = FactoryGirl.create(:challenge, :state => "draft", :count => 1)
+    declined = FactoryGirl.create(:challenge, :state => "draft", :count => 2)
+    pending = FactoryGirl.create(:challenge, :state => "pending", :count => 2)
+
+    draft.implied_state.should eq("draft")
+    declined.implied_state.should eq("declined")
+    pending.implied_state.should eq("pending")
+  end
+
   it "should see draft? equals true when challenge has state draft" do
     draft = FactoryGirl.create(:challenge, :state => "draft")
 
