@@ -64,4 +64,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     super cancel
   end
+  
+  def after_update_path_for(resource)
+    profile_user_path(resource)
+  end
+  
 end

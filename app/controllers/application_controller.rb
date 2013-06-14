@@ -24,10 +24,6 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You have succesfully logged in"
     dashboard_path
   end
-  
-  def after_update_path_for(resource)
-    profile_user_path(resource)
-  end
 
   def redirect_unauthorized_request
     if user_signed_in?
