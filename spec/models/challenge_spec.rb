@@ -91,9 +91,9 @@ describe Challenge do
     declined = FactoryGirl.create(:challenge, :state => "draft", :count => 2)
     pending = FactoryGirl.create(:challenge, :state => "pending", :count => 2)
 
-    draft.implied_state.should eq("draft")
-    declined.implied_state.should eq("declined")
-    pending.implied_state.should eq("pending")
+    draft.decorate.implied_state.should eq("draft")
+    declined.decorate.implied_state.should eq("declined")
+    pending.decorate.implied_state.should eq("pending")
   end
 
   it "should see draft? equals true when challenge has state draft" do
