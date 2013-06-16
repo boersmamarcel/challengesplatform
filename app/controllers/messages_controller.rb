@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   # Allow regular users some views
-  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :destroy, :compose, :deliver, :autosuggest, :tryout]
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :destroy, :compose, :deliver, :autosuggest, :markasread]
 
   def index
     if request.xhr?
@@ -12,6 +12,13 @@ class MessagesController < ApplicationController
     @message = current_user.received_messages.find(params[:id])
     @message.is_read = true
     @message.save
+  end
+  
+  def markasread
+    @message = current_user.received_messages.find(params[:id])
+    @message.is_read = true
+    @message.save
+    redirect_to messages_path, :notice => "Message marked as read"
   end
   
   def destroy

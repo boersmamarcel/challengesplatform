@@ -4,6 +4,9 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+require 'coveralls'
+Coveralls.wear_merged!('rails')
+
 require 'cucumber/rails'
 #require "#{Rails.root}/spec/factories"
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In

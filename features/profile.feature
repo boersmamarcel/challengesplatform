@@ -25,3 +25,17 @@ Feature: User profile
     And I press "Update"
     And I visit the profile of "s.lang@student.utwente.nl"
     Then I should see the name "Hendrik van Oranje" on the profile page
+    
+    Scenario: Edit my password
+    When I visit the "user.edit" page for user "s.lang@student.utwente.nl"
+    And I fill in "user[password]" with "newerpass"
+    And I fill in "user[password_confirmation]" with "newerpass"
+    And I fill in "user[current_password]" with "pass123567"
+    And I press "Update"
+    Then I should see the profile of "s.lang@student.utwente.nl"
+    
+    Scenario: Invalid edit (empty last name)
+    When I visit the "user.edit" page for user "s.lang@student.utwente.nl"
+     And I fill in "user[lastname]" with ""
+     And I press "Update"
+    Then I should see a message with "Last name is missing"

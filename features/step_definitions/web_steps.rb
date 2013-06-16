@@ -79,6 +79,10 @@ Then(/^I should see a message with "(.*?)"$/) do |contents|
   page.should have_content(contents)
 end
 
+Then(/^I should not see a message with "(.*?)"$/) do |contents|
+  page.should_not have_content(contents)
+end
+
 Then(/^I should see the "(.*?)" page$/) do |pageName|
   page.should_not be_nil
   find('input#page_identifier').value.should eql pageName
@@ -168,4 +172,8 @@ end
 
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in field, :with => value
+end
+
+Then(/^I should be on the "(.*?)" page$/) do |url|
+  current_path.should == getRoute(url)
 end

@@ -79,11 +79,21 @@ describe Challenge do
   end
 
   it "should be able to decline a challenge" do
-    starts_tomorrow = FactoryGirl.create(:challenge, start_date: Date.tomorrow, end_date: Date.today >> 1, :state => "pending")
+    starts_tomorrow = FactoryGirl.create(:challenge, start_date: Date.tomorrow, end_date: Date.today >> 1, :state => "pending", :count => 1)
 
     starts_tomorrow.decline
-    starts_tomorrow.count.should eq(1)
-    starts_tomorrow.state.should eq("declined")
+    starts_tomorrow.count.should eq(2)
+    starts_tomorrow.state.should eq("draft")
+  end
+
+  it "should use the correct implied names" do
+    draft = FactoryGirl.create(:challenge, :state => "draft", :count => 1)
+    declined = FactoryGirl.create(:challenge, :state => "draft", :count => 2)
+    pending = FactoryGirl.create(:challenge, :state => "pending", :count => 2)
+
+    draft.decorate.implied_state.should eq("draft")
+    declined.decorate.implied_state.should eq("declined")
+    pending.decorate.implied_state.should eq("pending")
   end
 
   it "should see draft? equals true when challenge has state draft" do
@@ -93,9 +103,15 @@ describe Challenge do
   end 
 
   it "should see declined equals true when challenge has state delined" do
-    declined = FactoryGirl.create(:challenge, :state => "declined")
+    declined = FactoryGirl.create(:challenge, :state => "draft", :count => 2)
 
     declined.declined?.should be_true
+  end
+  
+  it "should see approved equals true when challenge has state approved" do
+    approved = FactoryGirl.create(:challenge, :state => "approved")
+
+    approved.approved?.should be_true
   end
 
   it "should not be running when end_date or start_date isn't present" do

@@ -36,7 +36,7 @@ Feature: Login
 
   Scenario: Login with a not utwente.nl account in Google OAuth
     When I log in with Google "test@gmail.com"
-    Then I should see the "index" page
+    Then I should see the "session.new" page
     Then I should see a message with "Only people associated with the University of Twente can sign up. Please sign up with your utwente.nl email address."
 
 	Scenario Outline: For all user types, you can't login twice

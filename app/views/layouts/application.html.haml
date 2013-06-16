@@ -19,14 +19,17 @@
         .container
           = render 'layouts/navigation'
     #main{:role => "main"}
-      .container.special-container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
-              -unless controller?("static")
-                = render :partial => 'layouts/smallfooter'
+      - if controller?("static") && action?("index")
+        = yield
+      -else 
+        .container.special-container
+          .content
+            .row
+              .span12
+                = render 'layouts/messages'
+                = yield
+                -unless controller?("static")
+                  = render :partial => 'layouts/smallfooter'
     -if controller?("static")
       = render :partial => 'layouts/footer'
     / Placed at the end of the document so the pages load faster

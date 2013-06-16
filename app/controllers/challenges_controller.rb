@@ -137,14 +137,16 @@ class ChallengesController < ApplicationController
     if @challenge.save
       redirect_to declined_challenges_path , notice: 'Challenge successfully revoked'
     else
-      redirect_to challenges_path,  notice: "Couldn't revoke challenge"
+      redirect_to challenges_path, alert: "Couldn't revoke challenge"
     end
   end
 
   def enroll
     @challenge = Challenge.find(params[:id])
 
-    if @challenge.enroll current_user
+    if @challenge.supervisor == current_user
+      redirect_to supervisor_review_path, alert: 'You cannot be a participant in your own challenge!'
+    elsif @challenge.enroll current_user
       sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been enrolled!", "user_mailer/enrollment", { :challenge => @challenge })
       redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'
     end

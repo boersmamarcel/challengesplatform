@@ -8,4 +8,12 @@ module MessagesHelper
     "#{user.firstname} #{user.lastname}"
   end
   
+  def get_reply_subject(message)
+    if message.subject.start_with? 'Re: '
+      h(message.subject)
+    else
+      h('Re: ' + message.subject)
+    end
+  end
+  
 end
