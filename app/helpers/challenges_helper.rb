@@ -11,7 +11,7 @@ module ChallengesHelper
   end
 
   def state_explanation(challenge)
-    case challenge.state
+    case challenge.decorate.implied_state
     when "declined"
       "Your challenge submission needs some work! See the <a href='#reviewcomments'>review comments</a> for feedback.".html_safe
     when "approved"
@@ -24,7 +24,7 @@ module ChallengesHelper
   end
 
   def state_alert_class(challenge)
-    case challenge.state
+    case challenge.decorate.implied_state
     when "declined"
       "alert-error"
     when "approved"
