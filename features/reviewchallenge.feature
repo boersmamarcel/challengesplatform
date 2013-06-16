@@ -17,7 +17,7 @@ Feature: Review challenges as admin
     | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id | updated_at |
     | 1 | Awesome challenge | This is an awesome challenge | next week | next month | pending | 1 | 2 | today |
     | 2 | Not so awesome challenge | This is not so awesome | next week | next month | pending | 2 |  2 | today |
-    | 3 | Not pending challenge | this is a challenge description | next week | next month | declined | 2 | 2 | today |
+    | 3 | Not pending challenge | this is a challenge description | next week | next month | draft | 2 | 2 | today |
     When I visit the "login" page
     And I fill in email with "m.boersma-1@student.utwente.nl" and password with "pass123456"
   

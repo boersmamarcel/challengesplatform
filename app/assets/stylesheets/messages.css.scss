@@ -8,13 +8,7 @@
 	30% {-webkit-transform:rotate(8deg);}
 	45% {-webkit-transform:rotate(0deg);}
 }
- @-o-keyframes wiggle {
-	0% {-o-transform:rotate(8deg);}
-	15% {-o-transform:rotate(-8deg);}
-	30% {-o-transform:rotate(8deg);}
-	45% {-o-transform:rotate(0deg);}
-}
-
+ 
 /* firefox */
 @-moz-keyframes wiggle {
 	0% {-moz-transform:rotate(8deg);}
@@ -53,15 +47,13 @@
 }
 
 .pulse {
-	-webkit-animation: pulse 0.5s 0.5s 1 forwards;
-	-o-animation: pulse 0.5s 0.5s 1 forwards;
-	-moz-animation: pulse 0.5s 0.5s 1 forwards;
-	animation: pulse 0.5s 0.5s 1 forwards;
+	-webkit-animation: pulse 0.5s 1s 1 forwards;
+	-moz-animation: pulse 0.5s 1s 1 forwards;
+	animation: pulse 0.5s 1s 1 forwards;
 }
 
 .wiggler {
 	-webkit-animation: wiggle 0.7s 2s 3;
-	-o-animation: wiggle 0.7s 2s 3;
 	-moz-animation: wiggle 0.7s 2s 3;
 	animation: wiggle 0.7s 2s 3;
 }
