@@ -77,7 +77,7 @@ class Admin::ReviewController < Admin::AdminController
       sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge declined", "user_mailer/challenge_declined", { :challenge => @challenge })
       redirect_to admin_review_index_path, :alert => notice
     else
-      redirect_to admin_review_path(@comment.challenge.id), :notice => 'Challenge can not be declined without comments'
+      redirect_to admin_review_path(@comment.challenge.id), :alert => 'Challenge can not be declined without comments'
     end
   end
   

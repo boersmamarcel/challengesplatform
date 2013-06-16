@@ -82,6 +82,3 @@ Feature: Review challenges as admin
     And I follow "Approve"
     Then I should see the "challenges.2" page
     And I should see a message with "Challenge is successfully approved"
-  
-    
-  
