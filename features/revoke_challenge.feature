@@ -13,4 +13,4 @@ Feature: As a supervisor
     	And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234"
     	And I open the challenge with id "1"    
     	And I follow "Revoke challenge"
-    	Then the challenge should have state "draft"
+    	Then the challenge should have state "Draft"
