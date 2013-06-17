@@ -1,7 +1,5 @@
-.media.user_tile
+.media
   %a.pull-left{href: profile_user_path(user)}
     = image_tag Gravatar.new(user.email).image_url, :class => 'img-rounded', :width => "64"
   .media-body
-    %a{href: profile_user_path(user)}
-      %h4.media-heading= user.fullname
-    %p= user.tagline
+    %h4.media-heading= user.fullname

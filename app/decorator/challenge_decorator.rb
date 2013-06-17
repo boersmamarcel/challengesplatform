@@ -1,14 +1,6 @@
 class ChallengeDecorator < Draper::Decorator
   delegate_all
 
-  def implied_state
-    if declined?
-      "declined"
-    else
-      state
-    end
-  end
-
   def human_readable_start_date
     if start_date.present?
       start_date.strftime("%d-%m-%Y")

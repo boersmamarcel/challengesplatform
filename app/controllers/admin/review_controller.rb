@@ -17,38 +17,6 @@ class Admin::ReviewController < Admin::AdminController
       redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
     end
   end
-  
-
-  def edit
-    @challenge = Challenge.find(params[:id])
-    @url = admin_review_path(@challenge)
-
-    unless @challenge.editable_by_user?(current_user)
-      redirect_to @challenge, alert: "You do not have the permissions required to view this page."
-    end
-     render 'challenges/edit'
-  end
-
-  def submit_for_review?
-    params[:commit] == "Submit for Review"
-  end
-
-
-  def update
-    @challenge = Challenge.pending.find(params[:id])
-
-    if self.submit_for_review?
-      @challenge.state = 'pending'
-    end
-
-    if @challenge.update_attributes(params[:challenge])
-
-      redirect_to admin_review_path(@challenge), notice: 'Challenge was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
-
 
   def approve
       @challenge = Challenge.pending.find(params[:id])
@@ -80,7 +48,4 @@ class Admin::ReviewController < Admin::AdminController
       redirect_to admin_review_path(@comment.challenge.id), :alert => 'Challenge can not be declined without comments'
     end
   end
-  
-
-  
 end

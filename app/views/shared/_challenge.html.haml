@@ -34,6 +34,11 @@
             %br
             = form_for @challenge, :url => @url, :html => {:multipart => true, :class => "challenge-form form-horizontal"}  do |f|
               = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+          -if @challenge.approved?
+            %br
+            %br
+            %a{:class => "btn btn-danger", :href => revoke_challenge_path(@challenge)}
+              Revoke challenge
 
         %hr
       - if current_user.participating_challenges.include?(@challenge)
