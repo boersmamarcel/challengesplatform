@@ -53,9 +53,18 @@ Feature: Supervisor review pipeline
     	And I press "Add comment"
     	Then the page should have content "This is a test comment" 
 
-
     Scenario: Supervisor resubmits a challenge for the next review
     	When I open the challenge with id "5"
     	And I press "Resubmit for Review"
     	Then the page should have content "pending"
 
+  Scenario Outline: View the message corresponding to a challenge
+    When I visit the "challenges.<id>" page
+    Then I should see a message with "<message>"
+
+    Examples:
+    |id | message                                           |
+    | 3 | Your challenge is still a draft.                  |
+    | 5 | Your challenge submission needs some work!        |
+    | 2 | Your challenge is pending for review.             |
+    | 7 | Your challenge submission is approved, great job! |

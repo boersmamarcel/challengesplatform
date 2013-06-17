@@ -23,6 +23,8 @@
       = link_to('Challenges', challenges_path)
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
+        .badge.pulse
+          = Challenge.pending.count
         = link_to('Review', admin_review_index_path)
       %li{class: controller?("admin/usermanagement") ? "active": ""}
         = link_to('Usermanagement', admin_usermanagement_index_path)

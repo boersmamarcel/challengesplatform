@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604130417) do
+ActiveRecord::Schema.define(:version => 20130611152616) do
 
   create_table "challenges", :force => true do |t|
     t.string   "title"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130604130417) do
     t.string   "lastname"
     t.boolean  "notify_by_email",        :default => true
     t.boolean  "active",                 :default => true
+    t.string   "tagline"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
