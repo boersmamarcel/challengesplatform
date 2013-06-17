@@ -7,9 +7,10 @@
         = image_tag Gravatar.new(@user.email).image_url, :class => 'img-rounded'
       %span.profile_info.span4
         %div.profile_name
-          = "#{@user.firstname} #{@user.lastname}"
+          = @user.fullname
+        %div.profile_tagline
+          = @user.tagline
         %div.profile_info_icons
-         
         %div.profile_buttons
           - if follows?(@user) && @user.id != current_user.id
             = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"

@@ -36,7 +36,7 @@
     background: #ececec;
     padding: 20px;
     text-shadow: 1px 1px 0px white;
-    .detail { 
+    .detail {
       i {
         font-size: 25px;
         float: left;
@@ -91,9 +91,8 @@
 }
 .pagination {
   margin: 0px;
-  margin-top: 10px;
-}
-.filters {
+  float: left;
+  margin-right: 20px;
 }
 // Challenge Tiles
 .challenges-list{
