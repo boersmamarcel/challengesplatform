@@ -7,6 +7,7 @@
       %a.btn.btn-success{href: new_challenge_path}
         %i.icon-plus-sign
         Create a challenge
+  = paginate @challenges
   .filters.btn-group
     %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
       Show
@@ -27,6 +28,5 @@
         %a{:class => @filter == "enrolled" ? "active" : "", :href => "/challenges/enrolled", :type => "button"} Enrolled
       %li
         %a{:class => @filter == "past" ? "active" : "", :href => "/challenges/past", :type => "button"} Past
-  = paginate @challenges
   = render 'shared/challenges_list' , :challenges => @challenges.decorate
   = paginate @challenges
