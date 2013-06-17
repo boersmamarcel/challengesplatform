@@ -5,6 +5,14 @@ class MessagesController < ApplicationController
   def index
     if request.xhr?
       render "index_modal", :layout => false
+      
+      # automatically mark messages shorter than the truncate length as read
+      current_user.received_messages.unread.each do |message|
+        if message.body.length <= 150
+          message.is_read = true
+          message.save
+        end
+      end
     end
   end
   
