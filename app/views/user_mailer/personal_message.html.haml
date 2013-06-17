@@ -1,3 +1,10 @@
-= @message.html_safe
+= render :partial => "messages/mail_header", :layout => false
+
+%hr
+
+%div
+  = @message.html_safe
+  
+%hr
 
 = render :partial => "messages/mail_footer", :layout => false
