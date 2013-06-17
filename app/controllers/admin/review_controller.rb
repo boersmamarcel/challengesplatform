@@ -37,8 +37,16 @@ class Admin::ReviewController < Admin::AdminController
   def update
     @challenge = Challenge.pending.find(params[:id])
 
+     if params[:challenge].present?
+      image = params[:challenge].delete :image
+    end
+
     if self.submit_for_review?
       @challenge.state = 'pending'
+    end
+
+    if image.present?
+      @challenge.image = image
     end
 
     if @challenge.update_attributes(params[:challenge])
