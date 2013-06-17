@@ -32,8 +32,8 @@ gem 'kaminari' # Pagination and sorting gem
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'
-  gem "bootstrap-sass", '~> 2.3.1.0'
-  gem "font-awesome-rails", "~> 3.1.1.2"
+  gem "bootstrap-sass", '~> 2.3.2.0'
+  gem "font-awesome-rails", "~> 3.2.0.0"
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem "rake"
