@@ -22,6 +22,26 @@ def getRoute(name)
     when "challenge.new"
       new_challenge_path
 
+    #static
+    when "aboutus"
+      aboutus_path
+    when "team"
+      team_path
+    when "createchallenge"
+      createchallenge_path
+    when "challengeguidelines"
+      challengeguidelines_path
+    when "universities"
+      universities_path
+    when "companies"
+      companies_path
+    when "termsofservice"
+      termsofservice_path
+    when "privacy"
+      privacy_path
+    when "press"
+      press_path
+
     # Admin namespace
     when "admin/review.index"
       admin_review_index_path
