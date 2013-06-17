@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :mailchimp
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :tagline
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :tagline
   attr_protected :role, :provider, :uid, :active
   attr_readonly :email
 
