@@ -120,14 +120,17 @@ class ChallengesController < ApplicationController
 
   def revoke
     @challenge = Challenge.find(params[:id])
-    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.supervised_by_user?(current_user)
-
+    raise RoleException::SupervisorLevelRequired.new('Supervisor level required') unless @challenge.supervised_by_user?(current_user) || current_user.is_admin?
+    old_state = @challenge.state
     @challenge.count += 1
     @challenge.state = "draft"
 
-    if @challenge.save
-      sendMessageTemplateToUser(current_user, @challenge.supervisor, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
-      sendMessageTemplateToGroup(@challenge.participants, current_user, "Challenge has been revoked", "user_mailer/revoked_participants", {:challenge => @challenge })
+    if (( old_state == "pending" && @challenge.supervisor == current_user) || (current_user.is_admin? && old_state == "approved")) &&  @challenge.save
+      #notify the user if the challenge is approved
+      if @challenge.approved?
+        sendMessageTemplateToUser(current_user, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
+        sendMessageTemplateToGroup(@challenge.participants, current_user, "Challenge has been revoked", "user_mailer/revoked_participants", {:challenge => @challenge })
+      end
       redirect_to challenge_path(@challenge) , notice: 'Challenge successfully revoked'
     else
       redirect_to challenge_path(@challenge), alert: "Couldn't revoke challenge"

@@ -20,7 +20,6 @@ Feature: Participants can enroll to challenges
     | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 2             |
     | 7   | Title7  | Description7 | 15-05-2013 | 09-09-2060| approved | 2     | 2             |
     When I visit the "login" page
-
     And I fill in email with "participant@student.utwente.nl" and password with "abcd1234"
 
 

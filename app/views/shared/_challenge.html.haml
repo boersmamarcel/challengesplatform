@@ -17,7 +17,6 @@
     .description#description.span8
       .video
         = image_tag @challenge.image.url
-        / %img{:alt => "", src: "http://lorempixel.com/620/400/#{['technics','city'].sample}/?#{rand(1..999999)}"}
       %p.lead
         = @challenge.lead
       = sanitized_markdown(@challenge.description)
@@ -30,16 +29,21 @@
             = link_to 'Edit', "#", :class => 'btn disabled'
           %a{:class => "btn btn-primary", :onClick => "composeMessage('challenge', #{@challenge.id})"}
             Mail Participants
-          - unless @challenge.approved?
+          - unless @challenge.approved? || @challenge.pending?
             %br
             = form_for @challenge, :url => @url, :html => {:multipart => true, :class => "challenge-form form-horizontal"}  do |f|
               = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
-          -if @challenge.approved?
+          -if @challenge.pending?
             %br
             %br
             %a{:class => "btn btn-danger", :href => revoke_challenge_path(@challenge)}
               Revoke challenge
-
+        %hr
+      - elsif current_user.is_admin?
+        = link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn'
+        - if @challenge.approved? 
+          %a{:class => "btn btn-danger", :href => revoke_challenge_path(@challenge)}
+            Revoke challenge
         %hr
       - if current_user.participating_challenges.include?(@challenge)
         %p.detail
