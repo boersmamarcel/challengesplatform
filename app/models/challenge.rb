@@ -30,8 +30,8 @@ class Challenge < ActiveRecord::Base
   scope :past, where('end_date < ?', Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
   scope :pending, where(:state => "pending")
-  scope :draft, where(:state => "draft AND count < 2")
-  scope :declined, where("state = ? AND count > 1", "draft")
+  scope :draft, where("state = 'draft' AND count < 2")
+  scope :declined, where("state = 'draft' AND count > 1")
   scope :approved, where(:state => "approved")
   # Edit for quick change of what is and is not editable
   scope :editable, where(:state => "draft")
