@@ -62,6 +62,9 @@ class ChallengesController < ApplicationController
   def edit
     @challenge =  Challenge.find(params[:id])
 
+    # Admins have their own edit options; this is for mortals only
+    redirect_to edit_admin_review_path(@challenge) and return if current_user.is_admin?
+
     unless @challenge.editable_by_user?(current_user)
       redirect_to @challenge, alert: "You do not have the permissions required to view this page."
     end

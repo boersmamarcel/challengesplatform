@@ -23,10 +23,7 @@ class Admin::ReviewController < Admin::AdminController
     @challenge = Challenge.find(params[:id])
     @url = admin_review_path(@challenge)
 
-    unless @challenge.editable_by_user?(current_user)
-      redirect_to @challenge, alert: "You do not have the permissions required to view this page."
-    end
-     render 'challenges/edit'
+    render 'challenges/edit'
   end
 
   def submit_for_review?
@@ -35,14 +32,10 @@ class Admin::ReviewController < Admin::AdminController
 
 
   def update
-    @challenge = Challenge.pending.find(params[:id])
+    @challenge = Challenge.find(params[:id])
 
-     if params[:challenge].present?
+    if params[:challenge].present?
       image = params[:challenge].delete :image
-    end
-
-    if self.submit_for_review?
-      @challenge.state = 'pending'
     end
 
     if image.present?
@@ -50,8 +43,7 @@ class Admin::ReviewController < Admin::AdminController
     end
 
     if @challenge.update_attributes(params[:challenge])
-
-      redirect_to admin_review_path(@challenge), notice: 'Challenge was successfully updated.'
+      redirect_to edit_admin_review_path(@challenge), notice: 'Challenge was successfully updated.'
     else
       render action: "edit"
     end
