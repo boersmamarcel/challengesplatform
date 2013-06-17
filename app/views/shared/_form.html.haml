@@ -54,5 +54,8 @@
           = f.text_field :commitment, :placeholder => "Challenge commitment... ", :class => "enable-popover", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "What is the minimal number of hours per week a student should commit to this challenge?", :title => "Challenge Commitment"
       .control-group
         .controls
-          = f.submit 'Save draft', :class => "btn"
-          = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
+          -if current_user.is_admin?
+            = f.submit "Save challenge", :class => "btn btn-primary", :confirm => "You are using sudo magic, continue?"
+          -else
+            = f.submit 'Save draft', :class => "btn"
+            = f.submit submit_resubmit_name(@challenge), :class => "btn btn-primary", :confirm => "You are submitting your challenge for review, continue?"
