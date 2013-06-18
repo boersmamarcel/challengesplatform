@@ -14,7 +14,6 @@
     %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
     %link{:href => asset_path("favicon.ico"), :rel => "shortcut icon", :type => "image/x-icon"}/
   %body
-    = tracking_code(:account => ENV['GOOGLEANALYTICS'])
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
         .container
@@ -36,4 +35,5 @@
     / Placed at the end of the document so the pages load faster
     %link{:href => "http://fonts.googleapis.com/css?family=Changa+One|Noto+Sans:400,700,400italic|Roboto+Slab:400,300,100,700|Noto+Serif:400,700,400italic", :rel => "stylesheet", :type => "text/css"}
     = javascript_include_tag "application"
+    = tracking_code(:account => ENV['GOOGLEANALYTICS'])
 
