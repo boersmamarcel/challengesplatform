@@ -6,22 +6,22 @@
   %div
     = f.label :email
     %br/
-    = f.email_field :email, :autofocus => true
+    = f.email_field :email, :disabled => true
   %div
     = f.label :firstname
     %i (leave blank if you don't want to change it)
     %br/
-    = f.text_field :firstname
-  %div
-    = f.label :tagline
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.text_field :tagline
+    = f.text_field :firstname, :autofocus => true
   %div
     = f.label :lastname
     %i (leave blank if you don't want to change it)
     %br/
     = f.text_field :lastname
+  %div
+    = f.label :tagline
+    %i (leave blank if you don't want to change it)
+    %br/
+    = f.text_field :tagline
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}

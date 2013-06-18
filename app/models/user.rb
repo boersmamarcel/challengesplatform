@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :tagline
   attr_protected :role, :provider, :uid, :active
+  attr_readonly :email
 
   #Yeah, let's suppose admins are wise enough not to screw things up
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
