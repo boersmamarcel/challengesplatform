@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
       render "index_modal", :layout => false
       
       # automatically mark messages shorter than the truncate length as read
-      current_user.received_messages.unread.each do |message|
+      current_user.received_messages.unread.limit(3).each do |message|
         if message.body.length <= 150
           message.is_read = true
           message.save
