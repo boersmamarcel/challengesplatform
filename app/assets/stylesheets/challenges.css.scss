@@ -96,6 +96,11 @@
 }
 .filters {
   float: left;
+  .dropdown-menu {
+    li a.active {
+      background-color: #efefef;
+    }
+  }
 }
 // Challenge Tiles
 .challenges-list{
