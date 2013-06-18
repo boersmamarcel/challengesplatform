@@ -15,7 +15,7 @@
       %span.caret
     %ul.dropdown-menu
       %li
-        %a{:class => @filter.blank? ? "active" : "", :href => "/challenges/", :type => "button"} All
+        %a{:class => @filter == "all" ? "active" : "", :href => "/challenges/", :type => "button"} All
       - if current_user.is_supervisor?
         %li
           %a{:class => @filter == "supervising" ? "active" : "", :href => "/challenges/supervising", :type => "button"}
