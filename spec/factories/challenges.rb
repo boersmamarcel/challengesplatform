@@ -9,6 +9,7 @@ FactoryGirl.define do
    c.state "draft"
    c.commitment 4
    c.count 0
+   c.meetingtime Time.now
    c.updated_at Time.now
    # c.association :supervisor_id, :factory => :user
   end
