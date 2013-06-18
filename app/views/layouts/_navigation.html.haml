@@ -10,10 +10,10 @@
     %li
       - if current_user.received_messages.unread.empty?
         %a#mailbox.inactive{ :onClick => "addModal()" ,  'data-toggle' => "tooltip", :title => "Mailbox", "data-placement"=> 'bottom'}
-          %i.icon-envelope.icon-large
+          %i.icon-envelope-alt.icon-large
       - else
         %a#mailbox.active.wiggler{ :onClick => "addModal()", 'data-toggle' => "tooltip", :title => "Mailbox", "data-placement"=> 'bottom' }
-          %i.icon-envelope-alt.icon-large.icon-active
+          %i.icon-envelope.icon-large.icon-active
           .badge.pulse
             = "" + current_user.received_messages.unread.count.to_s + ""
     %li.divider-vertical
