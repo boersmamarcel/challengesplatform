@@ -14,6 +14,7 @@
     %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
     %link{:href => asset_path("favicon.ico"), :rel => "shortcut icon", :type => "image/x-icon"}/
   %body
+    = tracking_code(:account => ENV['GOOGLEANALYTICS'])
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
         .container
