@@ -19,6 +19,10 @@ class FollowController < ApplicationController
     respond_to do |format|
       if @follow.save
         sendMessageTemplateToUser(@followee, current_user, "I am now following you!", "user_mailer/follows", { :follower => current_user })
+        activity = Activity.create(:description => :follows)
+        activity.user = current_user
+        activity.event = @followee
+        activity.save
         format.html {redirect_to profile_user_path(@followee), notice: 'You are now following this user'}
       else
         format.html { redirect_to profile_user_path(@followee), notice: 'Whoops something went wrong'}
@@ -27,14 +31,19 @@ class FollowController < ApplicationController
   end
 
   def destroy
-     @followee = User.find(params[:user_id])
-     @followrelation = Follow.where(:user_id => current_user.id, :following_id => @followee.id).first
+    @followee = User.find(params[:user_id])
+    @followrelation = Follow.where(:user_id => current_user.id, :following_id => @followee.id).first
+    
+    activity = Activity.create(:description => :unfollows)
+    activity.user = current_user
+    activity.event = @followee
+    activity.save
       
-      @followrelation.destroy
+    @followrelation.destroy
 
-      respond_to do |format|
-        format.html {redirect_to profile_user_path(@followee), notice: 'You stopped following this user'}
-        format.json { head :no_content}
-      end
+    respond_to do |format|
+      format.html {redirect_to profile_user_path(@followee), notice: 'You stopped following this user'}
+      format.json { head :no_content}
+    end
   end
 end

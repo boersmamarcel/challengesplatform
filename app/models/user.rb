@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy, :conditions => {:unenrolled_at => nil}
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
+  has_many :activities
+  has_many :activities, :as => :event
 
   def is_supervisor?
     self.role > 0

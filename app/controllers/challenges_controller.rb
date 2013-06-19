@@ -147,6 +147,10 @@ class ChallengesController < ApplicationController
       redirect_to supervisor_review_path, alert: 'You cannot be a participant in your own challenge!'
     elsif @challenge.enroll current_user
       sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been enrolled!", "user_mailer/enrollment", { :challenge => @challenge })
+      activity = Activity.create(:description => :enrolled)
+      activity.user = current_user
+      activity.event = @challenge
+      activity.save
       redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'
     end
   end
@@ -156,6 +160,10 @@ class ChallengesController < ApplicationController
 
     if @challenge.unenroll current_user
       sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been unenrolled", "user_mailer/unenrollment", { :challenge => @challenge })
+      activity = Activity.create(:description => :unenrolled)
+      activity.user = current_user
+      activity.event = @challenge
+      activity.save
       redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled'
     end
   end

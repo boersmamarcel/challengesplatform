@@ -1,4 +1,10 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'dashboard.index'}
+
+%h2.bordered
+  %i.icon-group
+  Friends Activities
+= render :partial => 'shared/activities'
+
 - unless @supervising_challenges.blank?
   %h2.bordered
     %i.icon-star.color-belize-hole
