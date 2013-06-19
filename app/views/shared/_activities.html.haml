@@ -1,0 +1,13 @@
+%ul
+  - activities = Activity.where(:user_id => current_user.follows).order('created_at DESC').limit(7)
+  - unless activities.empty?
+    - activities.each do |activity|
+      %li
+        = link_to activity.user.firstname, profile_user_path(activity.user)
+        - if activity.event.blank?
+          = t(activity.description).html_safe
+        - else
+          = t(activity.description, :event => activity.event.decorate.activity_text).html_safe
+        %small= "&mdash; ".html_safe + time_ago_in_words(activity.created_at) + " ago"
+  - else
+    %em No activity

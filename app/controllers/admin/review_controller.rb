@@ -57,6 +57,10 @@ class Admin::ReviewController < Admin::AdminController
       if @challenge.save
         flash[:notice] = "Challenge is successfully approved"
         sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge approved", "user_mailer/challenge_approved", { :challenge => @challenge })
+        activity = Activity.create(:description => :challenge_created)
+        activity.user = @challenge.supervisor
+        activity.event = @challenge
+        activity.save
         redirect_to challenge_path(@challenge)
       else
         flash[:notice] = "Something went wrong please try again"

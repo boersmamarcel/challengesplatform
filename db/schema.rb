@@ -36,7 +36,11 @@ ActiveRecord::Schema.define(:version => 20130619084229) do
     t.text     "location"
     t.integer  "commitment"
     t.string   "image"
+<<<<<<< HEAD
+    t.time     "meetingtime"
+=======
     t.time     "meetingtime",   :default => '2000-01-01 12:00:00'
+>>>>>>> master
   end
 
   create_table "comments", :force => true do |t|

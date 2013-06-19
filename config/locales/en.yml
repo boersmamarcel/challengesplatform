@@ -2,4 +2,8 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  enrolled: "is now participating in %{event}"
+  unenrolled: "is no longer participating in %{event}"
+  follows: "is now following %{event}"
+  unfollows: "is no longer following %{event}"
+  challenge_created: "created a new challenge, %{event}"
