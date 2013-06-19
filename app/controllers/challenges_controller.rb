@@ -30,7 +30,7 @@ class ChallengesController < ApplicationController
         if current_user.is_supervisor?
           @challenges = current_user.supervising_challenges
         else
-          redirect_to "/challenges"
+          redirect_to "/challenges" and return
         end
       else
         @challenges = Challenge.upcoming_and_running.sorted_start_date
