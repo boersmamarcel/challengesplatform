@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619061413) do
+ActiveRecord::Schema.define(:version => 20130619084229) do
 
   create_table "activities", :force => true do |t|
     t.text     "description"
@@ -29,14 +29,18 @@ ActiveRecord::Schema.define(:version => 20130619061413) do
     t.datetime "end_date"
     t.string   "state"
     t.integer  "count",         :default => 1
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "supervisor_id"
     t.text     "lead"
     t.text     "location"
     t.integer  "commitment"
     t.string   "image"
+<<<<<<< HEAD
     t.time     "meetingtime"
+=======
+    t.time     "meetingtime",   :default => '2000-01-01 12:00:00'
+>>>>>>> master
   end
 
   create_table "comments", :force => true do |t|
