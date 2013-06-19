@@ -60,6 +60,8 @@ def getRoute(name)
       edit_challenge_path($1)
     when /^user.([0-9]+).profile$/
       profile_user_path($1)
+    when /^challenges.([a-z]+)$/
+      "/challenges/" + $1
 
     # Message related
     when "messages"
