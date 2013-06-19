@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :activity do
-    description "MyText"
+    description "enrolled"
   end
 end
