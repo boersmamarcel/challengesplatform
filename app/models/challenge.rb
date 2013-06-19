@@ -1,7 +1,7 @@
 class Challenge < ActiveRecord::Base
 
   # Supervisors have write access to these fields:
-  attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment, :image,  :image_cache, :remove_image
+  attr_accessible :title, :description, :end_date, :start_date, :lead, :location, :commitment, :image,  :image_cache, :remove_image, :meetingtime
   # But these are protected:
   attr_protected :count, :state
 
@@ -23,6 +23,7 @@ class Challenge < ActiveRecord::Base
   validates :start_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validates :end_date, :presence => { :message => "One or more fields are missing" }, :if => :pending?
   validate :dates, :if => :pending?
+  validates :meetingtime, :presence => { :message => "You need to supply a first meeting time" }
   validates_processing_of :image
 
   scope :upcoming, where('start_date > ?', Date.today)
