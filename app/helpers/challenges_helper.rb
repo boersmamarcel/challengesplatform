@@ -37,7 +37,7 @@ module ChallengesHelper
   end
 
   def state_icon_class(challenge)
-    case challenge.state
+    case challenge.decorate.implied_state
     when "declined"
       "icon-warning-sign"
     when "approved"

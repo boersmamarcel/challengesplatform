@@ -11,6 +11,7 @@ class Challenge < ActiveRecord::Base
   # Participants does has this default scope (See :conditions)
   has_many :participants, :through => :enrollments, :class_name => "User", :conditions => ("unenrolled_at IS NULL")
   has_many :comments, :order => 'updated_at DESC'
+  has_many :activities, :as => :event
 
   # Carrierwave Image Uploading
   mount_uploader :image, ChallengeImageUploader

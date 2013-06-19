@@ -108,4 +108,8 @@ class ChallengeDecorator < Draper::Decorator
       "100%"
     end
   end
+  
+  def activity_text
+    h.link_to title, object
+  end
 end
