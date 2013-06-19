@@ -45,9 +45,12 @@
           - else
             = f.text_field :end_date
       .control-group
-        = f.label :meetingtime, "First meeting time:", :class => "control-label"
+        = f.label :meetingtime, "Meeting time:", :class => "control-label"
         .controls
           = f.time_select :meetingtime
+          %br
+          %small
+            Meetings are held every week, starting on the first day of the challenge
       .control-group
         = f.label :location , "Location:", :class => "control-label"
         .controls

@@ -71,7 +71,8 @@
         %strong#meeting_time
           = @challenge.meetingtime.strftime("%H:%M")
         %span.type
-          First meeting
+          Meetings every
+          = @challenge.day_of_week
       %p.detail#location
         %i.icon-map-marker
         %strong= @challenge.location
