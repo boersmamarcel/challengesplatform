@@ -30,7 +30,7 @@ class ChallengesController < ApplicationController
         if current_user.is_supervisor?
           @challenges = current_user.supervising_challenges
         else
-          redirect_to "/challenges" and return
+          redirect_to challenges_path and return
         end
       else
         @challenges = Challenge.upcoming_and_running.sorted_start_date
@@ -129,9 +129,9 @@ class ChallengesController < ApplicationController
     @challenge.state = "draft"
 
     if (( old_state == "pending" && @challenge.supervisor == current_user) || (current_user.is_admin? && old_state == "approved")) &&  @challenge.save
-      #notify the user if the challenge is approved
-      if @challenge.approved?
-        sendMessageTemplateToUser(current_user, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
+      #notify users if the challenge was approved
+      if old_state == "approved"
+        sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
         sendMessageTemplateToGroup(@challenge.participants, current_user, "Challenge has been revoked", "user_mailer/revoked_participants", {:challenge => @challenge })
       end
       redirect_to challenge_path(@challenge) , notice: 'Challenge successfully revoked'
