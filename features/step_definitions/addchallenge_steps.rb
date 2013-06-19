@@ -10,6 +10,10 @@ When(/^I fill in title with "(.*?)" and description with "(.*?)" and fill in sta
     end
 end
 
+When(/^I attach the image "(.*?)"$/) do |image|
+    attach_file :challenge_image, File.expand_path("features/test_assets/images/" + image)
+end
+
 Then(/^I should see a title "(.*?)" and description "(.*?)" and start_date "(.*?)" and end_date "(.*?)"$/) do |title, description, start_date, end_date|
     page.find_by_id("title").should have_content(title)
     page.find_by_id("description").should have_content(description)

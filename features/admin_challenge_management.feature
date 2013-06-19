@@ -30,16 +30,14 @@ Feature: An admin must at all times be able to edit/revoke a challenge
 	And I follow "Edit"
 	Then I should see the "challenges.3.edit" page
 
-
 	Scenario: Revoke approved challenge
 	When I open the challenge with id "1"    
 	And I follow "Revoke challenge"
 	Then I should see a message with "Challenge successfully revoked"
 
-
 	Scenario: Revoke pending challenge
 	When I open the challenge with id "2"    
-	Then I should not see a link "Reoke challenge"
+	Then I should not see a link "Revoke challenge"
 	And I should see a link "Edit"
 
 	Scenario: Revoke draft challenge
@@ -47,7 +45,7 @@ Feature: An admin must at all times be able to edit/revoke a challenge
 	Then I should not see a link "Revoke challenge"
 	And I should see a link "Edit"
 
-	Scenario: Revoke decined challenge
+	Scenario: Revoke declined challenge
 	When I open the challenge with id "4"    
 	Then I should not see a link "Revoke challenge"
 	And I should see a link "Edit"
