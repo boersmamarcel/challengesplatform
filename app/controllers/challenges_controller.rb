@@ -128,7 +128,10 @@ class ChallengesController < ApplicationController
     @challenge.count += 1
     @challenge.state = "draft"
 
-    if (( old_state == "pending" && @challenge.supervisor == current_user) || (current_user.is_admin? && old_state == "approved")) &&  @challenge.save
+    supervisor_edit_allowed = (old_state == "pending" && @challenge.supervisor == current_user)
+    admin_edit_allowed = (current_user.is_admin? && old_state == "approved")
+
+    if (supervisor_edit_allowed || admin_edit_allowed) &&  @challenge.save
       #notify users if the challenge was approved
       if old_state == "approved"
         sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
