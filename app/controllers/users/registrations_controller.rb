@@ -11,21 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_to_sign_in_path
   rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_to_sign_in_path
 
-  def ensure_unauthenticated
-   # if current_user.is_authenticated?
-   #   redirect_to dashboard_path, alert: "You are already signed in."
-   # end
-  end
-
   def new
-    ensure_unauthenticated
-
     @user = User.new
   end
 
   def create
-    ensure_unauthenticated
-
     @user = User.new(params[:user])
     # Disable login
     @user.active = false
