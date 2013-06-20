@@ -6,11 +6,28 @@
 # http://stackoverflow.com/questions/8466822/devise-overriding-registrations-controller-uninitialized-constant-usersregis
 require "pp"
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy]
+  skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy, :new, :create]
   
   rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_to_sign_in_path
   rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_to_sign_in_path
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(params[:user])
+    # Disable login
+    @user.active = false
+    # Set a random, unguessable password for this inactive user
+    @user.password = Devise.friendly_token
+
+    if @user.save
+      redirect_to new_user_session_path, notice: "Your request is pending for review. We'll get back to you!"
+    else
+      render action: "new"
+    end
+  end
 
   def redirect_to_sign_in_path
     redirect_to new_user_session_path

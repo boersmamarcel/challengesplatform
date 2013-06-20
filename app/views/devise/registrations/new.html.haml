@@ -1,0 +1,33 @@
+%input#page_identifier{:type => "hidden", :value => "registrations.new"}/
+%h2
+  Request an account
+
+- if resource.errors.any?
+  #error_explanation.alert.alert-error
+    %a.close{"data-dismiss" => "alert"} ×
+    %p
+      = pluralize(@user.errors.count, "error")
+      prohibited this challenge from being saved:
+    %ul
+      - resource.errors.full_messages.each do |msg|
+        %li= msg
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :post }) do |f|
+  %div
+    = f.label :email
+    %br/
+    = f.email_field :email, :autofocus => true
+  %div
+    = f.label :firstname
+    %br/
+    = f.text_field :firstname
+  %div
+    = f.label :lastname
+    %br/
+    = f.text_field :lastname
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+  %div= f.submit "Request account", :class => "btn btn-primary"
+
+= link_to "Back", :back
