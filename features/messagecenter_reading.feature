@@ -1,6 +1,6 @@
 Feature: Message Center Incoming Messages
-	In order to see messages
-	I want to be able to view incoming messages and go to my inbox
+	     In order to see messages
+	     I want to be able to view incoming messages and go to my inbox
     
     Background:
     Given the following user records
