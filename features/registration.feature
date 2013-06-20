@@ -1,16 +1,16 @@
 #language en
 Feature: Registration 
-	Registration should not be possible
+	Users should be able to request an account
 
-	# Redirect to the login page
+	# View the registration form
 	Scenario: Visit the registration url
 	Given I am not logged in
-	When I visit the "registration.form" page
-	Then I should see the "session.new" page
+	When I visit the "registration.new" page
+	Then I should see the "registration.new" page
 
 	# Redirect to the dashboard page
 	Scenario: Visit the login page while logged in
 	Given I am logged in
-	When I visit the "registration.form" page
+	When I visit the "registration.new" page
 	Then I should see the "dashboard.index" page
 	And I should get the message "You are already signed in."

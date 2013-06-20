@@ -11,11 +11,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_to_sign_in_path
   rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_to_sign_in_path
 
+  def ensure_unauthenticated
+   # if current_user.is_authenticated?
+   #   redirect_to dashboard_path, alert: "You are already signed in."
+   # end
+  end
+
   def new
+    ensure_unauthenticated
+
     @user = User.new
   end
 
   def create
+    ensure_unauthenticated
+
     @user = User.new(params[:user])
     # Disable login
     @user.active = false
@@ -64,6 +74,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def cancel
     @user = User.find(params[:id])
+
+    throw RoleException::AdminLevelRequired unless current_user.eql? @user or current_user.is_admin?
+
     # You can't edit the sciencechallenges user, dummy!
     redirect_to edit_user_registration_path if @user.id.eql? 1
     if(@user.is_supervisor?)
