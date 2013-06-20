@@ -1,6 +1,7 @@
 #language en
-Feature: Security - supervisor
-  Admins should never be redirected
+Feature: Security - admin
+         As an admin
+         I want to have full access
 
   # Log in as an admin user for all upcoming scenarios
   Background:

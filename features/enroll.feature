@@ -1,8 +1,8 @@
 @no-txn
-Feature: Participants can enroll to challenges
-  In order to enroll to a challenge
-  as an user
-  I want to be able to view the challenge and press enroll
+Feature: Participants can enroll for challenges
+         In order to enroll for a challenge
+         As an user
+         I want to be able to view the challenge and press enroll
 
   Background:
     Given the following user records

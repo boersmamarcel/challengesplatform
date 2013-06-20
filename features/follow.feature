@@ -1,7 +1,7 @@
 Feature: User should be able to follow other users
-        In order to follow another user
-        As user s.lang@student.utwente.nl
-        I want to be able to visit the profile page of other users and start following that user
+         In order to follow another user
+         As user s.lang@student.utwente.nl
+         I want to be able to visit the profile page of other users and start following that user
         
         Background:
         Given the following user records

@@ -1,7 +1,7 @@
 Feature: User profile
-    In order to have a profile
-    As user s.lang@student.utwente.nl
-    I want to be able to view my profile and edit my first and last name
+         In order to have a profile
+         As user s.lang@student.utwente.nl
+         I want to be able to view my profile and edit my first and last name
 
     Background:
     Given the following user records

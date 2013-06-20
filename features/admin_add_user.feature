@@ -1,6 +1,8 @@
 #language en
 Feature: User adding
-  Admins should be given the opportunity to add users to the system
+         In order to add users
+         As an admin
+         I want to be able to add users with all their information
 
   # Log in as an admin user for all upcoming scenarios
   Background:

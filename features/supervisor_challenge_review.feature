@@ -1,7 +1,7 @@
 Feature: Supervisor review pipeline
-    In order to edit a challenge after a review
-    As a supervisor
-    I want to be able to see the comments on my challenge, add comments to my challenge and resubmit my draft.
+         In order to edit a challenge after a review
+         As a supervisor
+         I want to be able to see the comments on my challenge, add comments to my challenge and resubmit my draft.
 
 
     Background:
