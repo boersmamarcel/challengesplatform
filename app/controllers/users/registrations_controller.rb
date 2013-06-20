@@ -22,6 +22,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Set a random, unguessable password for this inactive user
     @user.password = Devise.friendly_token
 
+    unless params['tos']
+      @user.errors.add(:base, "You have to agree with the terms of service")
+      render action: "new"
+      return
+    end
+
     if @user.save
       redirect_to new_user_session_path, notice: "Your request is pending for review. We'll get back to you!"
     else
