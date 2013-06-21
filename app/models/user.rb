@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
 
   validates :email, :presence => { :message => "is missing" }
-  validates :email, :uniqueness => true
   validates :firstname, :presence => { :message => "is missing"}
   validates :lastname, :presence => { :message => "is missing"}
 
