@@ -1,9 +1,3 @@
-# Disables registration
-#
-# Source; http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-production-environment-only
-# (second answer)
-# and
-# http://stackoverflow.com/questions/8466822/devise-overriding-registrations-controller-uninitialized-constant-usersregis
 require "pp"
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy, :new, :create]
