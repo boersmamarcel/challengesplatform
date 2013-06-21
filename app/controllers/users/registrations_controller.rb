@@ -1,16 +1,32 @@
-# Disables registration
-#
-# Source; http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-production-environment-only
-# (second answer)
-# and
-# http://stackoverflow.com/questions/8466822/devise-overriding-registrations-controller-uninitialized-constant-usersregis
-require "pp"
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy]
+  skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy, :new, :create]
   
   rescue_from 'RoleException::AdminLevelRequired', :with => :redirect_to_sign_in_path
   rescue_from 'RoleException::SupervisorLevelRequired', :with => :redirect_to_sign_in_path
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(params[:user])
+    # Disable login
+    @user.active = false
+    # Set a random, unguessable password for this inactive user
+    @user.password = Devise.friendly_token
+
+    unless params['tos']
+      @user.errors.add(:base, "You have to agree with the terms of service")
+      render action: "new"
+      return
+    end
+
+    if @user.save
+      redirect_to new_user_session_path, notice: "Your request is pending for review. We'll get back to you!"
+    else
+      render action: "new"
+    end
+  end
 
   def redirect_to_sign_in_path
     redirect_to new_user_session_path
@@ -47,6 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def cancel
     @user = User.find(params[:id])
+
+    throw RoleException::AdminLevelRequired unless current_user.eql? @user or current_user.is_admin?
+
     # You can't edit the sciencechallenges user, dummy!
     redirect_to edit_user_registration_path if @user.id.eql? 1
     if(@user.is_supervisor?)

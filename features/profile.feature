@@ -42,4 +42,4 @@ Feature: User profile
     When I visit the "user.edit" page for user "s.lang@student.utwente.nl"
      And I fill in "user[lastname]" with ""
      And I press "Update"
-    Then I should see a message with "Last name is missing"
+    Then I should see a message with "Lastname is missing"
