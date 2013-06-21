@@ -8,7 +8,7 @@
     %a.close{"data-dismiss" => "alert"} ×
     %p
       = pluralize(@user.errors.count, "error")
-      prohibited this challenge from being saved:
+      prohibited your request from being saved:
     %ul
       - resource.errors.full_messages.each do |msg|
         %li= msg
