@@ -15,10 +15,9 @@ class User < ActiveRecord::Base
   #Yeah, let's suppose admins are wise enough not to screw things up
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
 
-  validates :email, :presence => { :message => "Email address is missing" }
-  validates :email, :uniqueness => true
-  validates :firstname, :presence => { :message => "First name is missing"}
-  validates :lastname, :presence => { :message => "Last name is missing"}
+  validates :email, :presence => { :message => "is missing" }
+  validates :firstname, :presence => { :message => "is missing"}
+  validates :lastname, :presence => { :message => "is missing"}
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy

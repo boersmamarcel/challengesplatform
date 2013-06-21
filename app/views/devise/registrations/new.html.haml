@@ -1,0 +1,39 @@
+%input#page_identifier{:type => "hidden", :value => "registration.new"}/
+
+%br
+%br
+
+-if resource.errors.any?
+  #error_explanation.alert.alert-error
+    %a.close{"data-dismiss" => "alert"} ×
+    %p
+      = pluralize(@user.errors.count, "error")
+      prohibited this challenge from being saved:
+    %ul
+      - resource.errors.full_messages.each do |msg|
+        %li= msg
+
+%div.container.row-fluid
+  %div.span4.offset4.text-center.login-box
+    %h2 Request an account
+    %div
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+        %div
+          = f.email_field :email, :autofocus => true, :placeholder => "Email address"
+        %div
+          = f.text_field :firstname, :placeholder => "First name"
+        %div
+          = f.text_field :lastname, :placeholder => "Last name"
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        %div{:style => "vertical-align: middle"}
+          %label.checkbox.inline
+            = check_box_tag 'tos', 'yes', false
+            I agree with the Privacy Policy
+        
+        %p.or-divider
+        %div
+          = f.submit "Submit", :class => "btn btn-primary"
+
+      = render :partial => '/devise/shared/links'
