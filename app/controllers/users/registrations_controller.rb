@@ -1,4 +1,3 @@
-require "pp"
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_filter :require_admin, :require_supervisor, :authenticate_user!, :only => [:cancel, :edit, :update, :destroy, :new, :create]
   
