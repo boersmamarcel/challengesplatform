@@ -25,3 +25,17 @@ Feature: Registration
 	And I press "Submit"
 	Then I should see the "session.new" page
 	And I should see a message with "Your request is pending for review. We'll get back to you!"
+
+	# Request account with taken email address
+	Given the following user records
+		| id | email             | password | password_confirmation | role  |
+    | 1  | taken@example.com | abcd1234 | abcd1234              | 1     |
+		And I am not logged in
+	When I visit the "registration.new" page
+		And I fill in "user_email" with "taken@example.com"
+		And I fill in "user_firstname" with "John"
+		And I fill in "user_lastname" with "Doe"
+		And I check "tos"
+		And I press "Submit"
+	Then I should see the "registration.new" page
+		And I should see a message with "Email has already been taken"
