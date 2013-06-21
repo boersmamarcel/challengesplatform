@@ -11,7 +11,7 @@ env:
     - secure: "biE7FXW01hxze4qEIEs+8lUhNYdVkRViGsEJpyiRs/XIM75/TfPZ7fdiGxXr\nDAL0Sbfj+jI6PY0h7sjPVZVpuJwG69A9Rk+WJuFD2qVcInLhdcL1xMX+vtHM\nr2/X5Oa889LUGMxcj7qxB6I8S8PPIoEWlZ6sZ9mqAlmwYkd5gS4="
     - secure: "jjPuVaXLYUzYRdWkKo9e+vxMe5ioCh9aLOcs2Z9DR7ofqNU0ELEGjYkEWj3Z\nwiXoRMY4dizfT4SnGr5xX4VhWajVLFCSetjLI6JWN9WftOU9WQz9WnEepiju\nE/StLX6rbQ0DfsdHpPKf2+BYYxatn0PCNaQv55UNVfV427GUL2U=" #pass
     - secure: "NY6Qyz7W3nl+IBeQHoibPh2tV+V7HEOAWXpNjIctRWwbujfkAkILlMRrDEPI\n19nHCC6V6+LVqiR3EtiNZ3JTTH74oyHY90vHg+aQVG90UEXwxuJVq0djEFMX\nZZw02mG0M3GmM/7fZXrmHAKXJaZJbKHlu4ljwau6MLtJGFRw6wg=" #ip
-    - secure: "Na0gT20pAjwWBlc45xeqWcMaKcD07bfPTW+xWlvTU1S9rm4BCyomPMymPqQo\nHaskUgDwSxQbJktdqsMmUjKYaiN1dlvNghp3i8h5bcPpM/y+1SZZaTeLOz5a\nDs53LP3YekPI68Wag4vBUSjiigBNXkKYwihYN8m4ftTKW85Wih8="
+    - secure: "LbZST+jfw92UVwz05BL5t3NrxHefHyrKmi4P0nh0MnYXlkgMLq1/jLX3a2nB\nywe4rq0v1qNaSFH1DpeRtEBb/HFfo7VA7gUdbmLgz/hR02r7+cWTwFD7vBCT\nz2vWZX8u/53HrIDiT6Ic0yxDBpDdnmpgd1jBr93tdrXmPEgCu1A="
     - BUNDLE_ARCHIVE="travis_challenges_bundle"
   matrix:
     - DB=postgres
