@@ -5,7 +5,6 @@ gem 'rails', '3.2.13'
 gem 'pg' #Database Postgres
 gem 'jquery-rails' # Jquery for rails
 gem 'jquery-ui-rails' # Jquery ui for rails
-gem 'stellar-js-rails' #stellar parallax scrolling
 gem 'haml' # Haml template rendering
 
 #Add gems for devise authentication and Google oauth
