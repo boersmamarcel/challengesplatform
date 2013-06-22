@@ -1,7 +1,7 @@
 Feature: Add challenge
-    In order to add challenges
-    As an admin or supervisor
-    I want to be able to submit a draft for review and see the current stats of an approved challenge
+         In order to add challenges
+         As a supervisor
+         I want to be able to submit a draft for review and see my approved challenges
 
     Background:
       Given the following user records

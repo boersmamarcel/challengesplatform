@@ -1,6 +1,8 @@
 #language en
 Feature: Usermanagement
-  Admins should be given an overview of all users + options
+         In order to manage all users
+         As an admin
+         I want to be able to edit/delete an user
 
   # Log in as an admin user for all upcoming scenarios
   Background:
