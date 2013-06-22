@@ -1,9 +1,9 @@
 @no-txn
 Feature: A dashboard for participant
-  In order to quickly get up to speed with currently relevant information
-  As a participant
-  I want to be able to see my challenges, upcoming challenges, notifications,
-    and updates of friends on a clear dashboard
+         In order to quickly get up to speed with currently relevant information
+         As a participant
+         I want to be able to see my challenges, upcoming challenges, notifications,
+         and updates of friends on a clear dashboard
 
   Background:
     Given the following user records

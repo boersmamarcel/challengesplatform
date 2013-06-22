@@ -1,6 +1,8 @@
 #language en
 Feature: User modification
-  Admins should be given the opportunity to modify users within the system
+         In order to modify a user
+         As an admin
+         I want to be able to change user details and save them
 
   # Log in as an admin user for all upcoming scenarios
   Background:

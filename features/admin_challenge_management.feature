@@ -1,6 +1,7 @@
-Feature: An admin must at all times be able to edit/revoke a challenge
-		As an admin
-		I want to be able to edit/revoke challenges
+Feature: Admin challenge management
+		 In order to manage the challenges
+		 As an admin
+		 I want to be able to edit/revoke challenges
 
 	Background:
 	Given the following user records

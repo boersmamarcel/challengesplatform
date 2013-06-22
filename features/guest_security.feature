@@ -1,6 +1,6 @@
 Feature: Guest Security
-  In order to keep the site secure
-  guests need to have very limited permissions
+  		 In order to keep the site secure
+  		 guests need to have very limited permissions
   
   Scenario: go to the login page
     When I visit the "login" page

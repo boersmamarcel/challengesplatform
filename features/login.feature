@@ -1,8 +1,8 @@
 #language en
 Feature: Login
-	In order to authenticate myself
-	As a user
-	I want to login
+		In order to authenticate myself
+		As a user
+		I want to login
 
   Scenario: Login with correct user credentials
 		Given the following user records
