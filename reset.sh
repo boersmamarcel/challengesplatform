@@ -6,8 +6,9 @@ b=false # Run bundle
 d=false # Run database reset
 h=false # Help
 c=false # Run cucumber tests
+t=false # update cronTab
 
-while getopts ":ksbdhc" opt; do
+while getopts ":ksbdhct" opt; do
   case $opt in
     k) k=true >&2 ;;
     s) s=true >&2 ;;
@@ -15,6 +16,7 @@ while getopts ":ksbdhc" opt; do
     d) d=true >&2 ;;
     h) h=true >&2 ;;
     c) c=true >&2 ;;
+	t) t=true >&2 ;;
     \?)
       echo "Invalid option: -$OPTARG"
       echo "$0 -h for help"
@@ -31,6 +33,7 @@ if $h; then
   echo "     -c to run cucumber tests"
   echo "     -s to execute rails s when done resetting"
   echo "     -h you're looking at it (and terminate)"
+  echo "     -t to update the crontab"
   exit 0
 fi
 
@@ -64,4 +67,9 @@ if $c; then
     echo "    (psst; server is still running)"
   fi
   cucumber
+fi
+
+if $t; then
+  echo "Updating crontab"
+  bundle exec whenever --update-crontab sciencechallenges
 fi
