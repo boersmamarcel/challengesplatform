@@ -4,7 +4,7 @@
   %div.follows_item
     %span.follow_button
       - if is_following?(u) && u.id != current_user.id
-        = link_to 'Unfollow', user_follow_path(@user), :method => :delete, :class => "btn btn-info"
+        = link_to 'Unfollow', user_follow_path(u.id, :id => 0), :method => :delete, :class => "btn btn-info"
       - elsif ( u.id != current_user.id)
         = link_to 'Follow', user_follow_index_path(u), :method => :post, :class => "btn btn-success"
       - else
@@ -13,5 +13,3 @@
     %span.follow_name
       = link_to "#{u.firstname} #{u.lastname}", profile_user_path(u)
 
-    
-      
