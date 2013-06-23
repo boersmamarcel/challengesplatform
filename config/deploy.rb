@@ -31,6 +31,7 @@ before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 before "deploy", "deploy:deploying"
 before "deploy:assets:precompile", "deploy:symlink_db"
 after "deploy:symlink_db", "deploy:symlink_keys"
+after "deploy:symlink_keys", "deploy:symlink_uploads"
 before "deploy:restart", "deploy:migrate"
 after "deploy", "deploy:done"
 require "rvm/capistrano"
@@ -57,10 +58,16 @@ namespace :deploy do
   task :symlink_db, :roles => :app do
       run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
   end
+
   desc "Symlinks the keys"
   task :symlink_keys, :roles => :app do
       run "ln -nfs #{deploy_to}/shared/config/initializers/devise_local.rb #{release_path}/config/initializers/devise_local.rb"
       run "ln -nfs #{deploy_to}/shared/config/initializers/google_analytics.rb #{release_path}/config/initializers/google_analytics.rb"
       run "rm #{release_path}/config/initializers/secret_token.rb && ln -nfs #{deploy_to}/shared/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+  end
+
+  desc "Symlink the uploaded images"
+  task :symlink_uploads do
+     run "ln -nfs #{deploy_to}/shared/uploads  #{release_path}/public/uploads"
   end
 end
