@@ -1,10 +1,24 @@
-= render :partial => "messages/mail_header", :layout => false
-
-%hr
-
-%div
-  = @message.html_safe
-  
-%hr
-
-= render :partial => "messages/mail_footer", :layout => false
+!!!
+%html
+  %head
+    %style
+      \.logo img{float:left;margin-right:10px}.header .logo{float:right;font-size:28px;margin:0}.header{border-bottom:1px solid #c1c1c1;padding:25px}.container{margin:auto;width:650px;background-color:white;border-left:1px solid #c1c1c1;border-right:1px solid #c1c1c1}.contents{font-family:Georgia;font-size:22px;padding:0}.contents p{margin:0 0 20px 0}.header span{font-size:22px;font-weight:bold}.main{padding:50px}.main .from{font-size:16px;color:#a0a0a0;font-style:italic;margin-bottom:10px}.footer{background-color:#e1e1e1;padding:20px 70px;font-size:12px;border-bottom:1px solid #c1c1c1;border-top:1px solid #c1c1c1;text-align:center}body{background-color:#d0d0d0;padding:0;margin:0;font-family:sans-serif}a{text-decoration:none}.header{background-color:#f2f2f2}
+  %body
+    .container
+      .header
+        .logo
+          %img{ :src => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAArrAAAK6wGCiw1aAAAClGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS4xLjIiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iPgogICAgICAgICA8eG1wOkNyZWF0ZURhdGU+MjAxMy0wNS0yNlQyMDo0NTo1MjwveG1wOkNyZWF0ZURhdGU+CiAgICAgICAgIDx4bXA6Q3JlYXRvclRvb2w+QWRvYmUgRmlyZXdvcmtzIENTNiAoTWFjaW50b3NoKTwveG1wOkNyZWF0b3JUb29sPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxMy0wNS0yNlQyMDo1MTozMDwveG1wOk1vZGlmeURhdGU+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgr9laftAAACo0lEQVRIDZ2VjdUpMRCGc28DVgV0QAd0gApsB3RAB44KbAdWBXRAB44KUMHeecLsnc23duN7zxnJJjPzZn4SzrWgKIpEJBXJRR4iIVhjD52kxd3nbYxFMpFvgc13xGIwFeHkHvv9vpjP50Wv1yvkiBVhjT10DLCdfg7H7IjiWg2Px2MtCaQQbTabAh1wvV79GPysjeufU1EuyRaLRSUSSFSICILVauWJg+gCzmL9kwlPrzR6ZRyq83CcTCbF/X4vBoOBl/P5HBLUfVfTKxo0iK9ZU2SdTseTjUYjTwZxJPD9v5Hkg87y9Qgjst9ETkSsae2wi0Qmdu6PKMN856Pf77vb7ca0FlIrd7lc3Ol08lKr1LzYpXYpJ6TwotsopJAa7nY7TKJARkxTpRDmWDY1CgfhGgC684vaeV18v5FD6JsFh00R0ii/AbXWw8L1V0g6Io21Y386rXY2azHI89z67hChhxh/jJA79xuQeq4SvhXlrInQFF3tokYaTP2qQSshtfu2ftrNSmYjpIZPESeFZahAiMrv5XJZzusmj8fDUS/0uM+Hw6FUM76fEJ7YGY/HDCUk9y5JEoej4XDoL3qapuU+kyzLfDNB0O123Ww2c9vt1j2fPoZS1/g+kdKU/IYXn7tDO/OPQOF5Y0ktQqvb+ojnslZ1c9MDKYQJhAACNYCEV0JJ6VTIGFUnZsTe4PWAy0LGIie3TohOSYkIQrsfM8fnG5novyALROlfnPDviROypvdJLKJJsXsD36/oDOlUd9ve1RhS837itv6Zko21koaRxpCojokMd2tZ/wxLSv5JqWhHCbqmZu1kegzRJL2+pljR1npNQnJI2DOtjwm29WlUknAUg0TEd6+M3wCbaoOEzpu+MRZJRXIRTh6CNfbQaSX6By4k32DUshlgAAAAAElFTkSuQmCC' }
+          = precede("Science") do
+            %strong Challenges
+        %span New Message
+      .main
+        .from
+          = "From: " + @sender.fullname
+        .contents
+          = @message.html_safe
+      .footer
+        %div
+          View this message
+          = link_to "online", message_url(@messageObject, :only_path => false)
+          or
+          = link_to "manage your notification settings", edit_user_registration_url(:only_path => false)

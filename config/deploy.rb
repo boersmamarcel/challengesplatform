@@ -23,6 +23,9 @@ after "deploy:restart", "deploy:cleanup"
 set :rvm_type, :system
 set :rvm_ruby_string, "1.9.3@challenges" #"ruby-2.0.0-p0@challenges"               # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"        # more info: rvm help autolibs
+set :whenever_command, "bundle exec whenever"
+set :whenever_environment, defer { stage }
+set :whenever_identifier, defer { "#{application}_#{stage}" }
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, OR:
@@ -34,6 +37,8 @@ after "deploy:symlink_db", "deploy:symlink_keys"
 after "deploy:symlink_keys", "deploy:symlink_uploads"
 before "deploy:restart", "deploy:migrate"
 after "deploy", "deploy:done"
+
+require "whenever/capistrano"
 require "rvm/capistrano"
 
 namespace :deploy do

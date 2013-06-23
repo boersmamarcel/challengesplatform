@@ -27,6 +27,7 @@ gem 'redcarpet', '~> 2.3.0' # Markdown renderer
 
 gem 'kaminari' # Pagination and sorting gem
 
+gem 'whenever', :require => false # Crons
 
 # Gems used only for assets and not required
 # in production environments by default.
