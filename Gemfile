@@ -29,6 +29,8 @@ gem 'kaminari' # Pagination and sorting gem
 
 gem 'whenever', :require => false # Crons
 
+gem 'roadie' # Changes CSS formatting to inline because of lame mail clients
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
