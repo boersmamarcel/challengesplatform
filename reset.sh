@@ -4,16 +4,18 @@ k=false # Kill previous rails server
 s=false # Run rails server
 b=false # Run bundle
 d=false # Run database reset
+m=false # Run database migrate
 h=false # Help
 c=false # Run cucumber tests
 t=false # update cronTab
 
-while getopts ":ksbdhct" opt; do
+while getopts ":ksbdmhct" opt; do
   case $opt in
     k) k=true >&2 ;;
     s) s=true >&2 ;;
     b) b=true >&2 ;;
     d) d=true >&2 ;;
+    m) m=true >&2 ;;
     h) h=true >&2 ;;
     c) c=true >&2 ;;
 	t) t=true >&2 ;;
@@ -30,6 +32,7 @@ if $h; then
   echo "     -k to kill any servers (port 3000 tcp only)"
   echo "     -b to execute bundle"
   echo "     -d to reset database"
+  echo "     -m to migrate database"
   echo "     -c to run cucumber tests"
   echo "     -s to execute rails s when done resetting"
   echo "     -h you're looking at it (and terminate)"
@@ -52,6 +55,12 @@ if $d; then
   rake db:migrate
   rake db:reset
   rake db:test:prepare
+fi
+
+if $m; then
+  echo "Migrating database"
+  rake db:migrate
+  rake db:migrate RAILS_ENV=test
 fi
 
 if $s; then
