@@ -33,7 +33,7 @@ class ChallengesController < ApplicationController
           redirect_to challenges_path and return
         end
       else
-        @challenges = Challenge.upcoming_and_running.sorted_start_date
+        @challenges = Challenge.newest_first
     end
     @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
   end
