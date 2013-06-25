@@ -67,11 +67,26 @@
       %a{:id => "challenges"}
       Staff selected challenges
     = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+.container{:style => "margin-top: 50px;"}
+  .span12.vertical-spacing
+    %h1.center
+      %a{:id => "challenges"}
+      We want your challenges
+    %p.lead.center
+      Check for more info
+    .container.center
+      %span2
+        %a{:href => companies_path, :class => "btn btn-primary btn-large"}
+          Companies
+      %span2.offset1
+        %a{:href => universities_path, :class => "btn btn-primary btn-large"}
+          Universities
+    
 .container
   .span12.center.vertical-spacing
     %h1
       Testimonials 
-  .span12.vertical-spacing
+  .span12
     .span4
       .stacktwo
         = image_tag 'rom.png'
