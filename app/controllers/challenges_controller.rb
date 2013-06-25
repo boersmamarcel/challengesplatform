@@ -33,9 +33,11 @@ class ChallengesController < ApplicationController
           redirect_to "/challenges"
         end
       else
-        @challenges = Challenge.upcoming_and_running.sorted_start_date
+        # Just show everything
+        @challenges = Challenge
     end
-    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
+    # Only visible, split per page, semi-randomly ordered per page
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).past_last.per(6)
   end
 
   # GET /challenges/1
