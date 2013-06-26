@@ -2,33 +2,40 @@
 - if current_user.received_messages.empty?
   %h2 You have no messages
 - else
-  %table.table.table-hover
-    %thead
-      %tr
-        %th Subject
-        %th 
-        %th 
-    %tbody
-      - current_user.received_messages.each do |message|
-        %tr{:class => message.is_read ? "mail-message read" : "mail-message unread"}
-          %td
-            = link_to message_path(message) do
-              = message.subject
-            %br
-            = truncate(message.body, :length => 80).html_safe
-            %br
-            - unless message.is_read
-              %span.readstatus
-                &#9679; unread
-            %span.time
-              %i.icon-time
-              = get_date(message)
-            %span.from-user
-              %i.icon-user
-              = link_to get_name(message.sender), profile_user_path(message.sender)
-          %td
-            = link_to message_path(message), :confirm => "are you sure?", :method => :delete, :title => "Delete", :alt => "Delete" do
-              %i.icon-trash
-          %td
-            = link_to markasread_path(message), :title => "Mark as Read" do
-              %i.icon-eye-open
+  = form_tag messages_update_path, :method => :put do
+    %table#messagetable.table.table-hover
+      %thead
+        %tr
+          %th 
+            = check_box_tag "massselector"
+          %th Subject
+          %th 
+          %th 
+      %tbody
+        - current_user.received_messages.each do |message|
+          %tr{:class => message.is_read ? "mail-message read" : "mail-message unread"}
+            %td
+              = check_box_tag "message_ids[]", message.id
+            %td
+              = link_to message_path(message) do
+                = message.subject
+              %br
+              = truncate(message.body, :length => 80).html_safe
+              %br
+              - unless message.is_read
+                %span.readstatus
+                  &#9679; unread
+              %span.time
+                %i.icon-time
+                = get_date(message)
+              %span.from-user
+                %i.icon-user
+                = link_to get_name(message.sender), profile_user_path(message.sender)
+            %td
+              = link_to message_path(message), :confirm => "are you sure?", :method => :delete, :title => "Delete", :alt => "Delete" do
+                %i.icon-trash
+            %td
+              = link_to markasread_path(message), :title => "Mark as Read" do
+                %i.icon-eye-open
+    = submit_tag "Mark selected as Read", :class => "btn btn-info"
+    = submit_tag "Delete selected", :class => "btn btn-danger"
