@@ -9,8 +9,6 @@ Challenges platform
   
 # Quick Start Guide
 
-# Quick Start Guide
-
 This guide will serve as a quick start to hosting your own ScienceChallenges site. At the end of this guide you should have a running local copy.
 
 ## Installing your OS
