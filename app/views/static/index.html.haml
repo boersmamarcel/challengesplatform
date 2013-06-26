@@ -74,13 +74,18 @@
       We want your challenges
     %p.lead.center
       Check for more info
-    .container.center
-      %span2
-        %a{:href => companies_path, :class => "btn btn-primary btn-large"}
-          Companies
-      %span2.offset1
-        %a{:href => universities_path, :class => "btn btn-primary btn-large"}
-          Universities
+  .span6.center.offset3
+    .span2.bigicon
+      %i.blue-icon.icon-building
+    .span2.offset1.bigicon
+      %i.blue-icon.icon-book
+  .span6.center.offset3{:style => "margin-top: 20px;"}
+    .span2
+      %a{:href => companies_path, :class => "btn btn-primary btn-large"}
+        Companies
+    .span2.offset1
+      %a{:href => universities_path, :class => "btn btn-primary btn-large"}
+        Universities
     
 .container
   .span12.center.vertical-spacing
