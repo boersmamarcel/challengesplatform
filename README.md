@@ -250,4 +250,4 @@ sudo /etc/init.d/nginx start
 
 ## Well done!
 
-You now have completed the quick start guide to getting the ScienceChallenges platform running! From here you can continue with a more [advanced setup](/boersmamarcel/challengesplatform/wiki).
+You now have completed the quick start guide to getting the ScienceChallenges platform running! From here you can continue with a more [advanced setup](https://github.com/boersmamarcel/challengesplatform/wiki).
