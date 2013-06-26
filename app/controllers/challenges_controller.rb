@@ -35,7 +35,8 @@ class ChallengesController < ApplicationController
       else
         @challenges = Challenge.newest_first
     end
-    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).per(6)
+    # Only visible, split per page, semi-randomly ordered per page
+    @challenges = @challenges.visible_for_user(current_user).page(params[:page]).past_last.per(6)
   end
 
   # GET /challenges/1
