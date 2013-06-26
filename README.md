@@ -1,4 +1,4 @@
-challengesplatform
+ScienceChallenges Online Platform
 ==================
 [![Build Status](https://travis-ci.org/boersmamarcel/challengesplatform.png?branch=master)](https://travis-ci.org/boersmamarcel/challengesplatform)
 [![Dependency Status](https://gemnasium.com/boersmamarcel/challengesplatform.png)](https://gemnasium.com/boersmamarcel/challengesplatform)
