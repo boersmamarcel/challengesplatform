@@ -64,7 +64,15 @@
         %i.icon-calendar
         %strong#day_of_week
           = @challenge.day_of_week
-        %span.type= @challenge.from_till
+        %span.type
+          = @challenge.from_till
+      %p.detail
+        %i.icon-exclamation
+        %strong#meeting_time
+          = @challenge.meetingtime.strftime("%H:%M")
+        %span.type
+          Meetings every
+          = @challenge.day_of_week
       %p.detail#location
         %i.icon-map-marker
         %strong= @challenge.location

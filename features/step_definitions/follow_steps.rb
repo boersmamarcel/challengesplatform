@@ -18,7 +18,6 @@ Given(/^"(.*?)" is following "(.*?)"$/) do |user_email, following_email|
   user = User.find_by_email(user_email)
   following = User.find_by_email(following_email)
   Follow.create(:user_id => user.id, :following_id => following.id)
- 
 end
 
 

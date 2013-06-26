@@ -1,7 +1,7 @@
 Feature: User profile
-    In order to have a profile
-    As user s.lang@student.utwente.nl
-    I want to be able to view my profile and edit my first and last name
+         In order to have a profile
+         As user s.lang@student.utwente.nl
+         I want to be able to view my profile and edit my first and last name
 
     Background:
     Given the following user records
@@ -42,4 +42,4 @@ Feature: User profile
     When I visit the "user.edit" page for user "s.lang@student.utwente.nl"
      And I fill in "user[lastname]" with ""
      And I press "Update"
-    Then I should see a message with "Last name is missing"
+    Then I should see a message with "Lastname is missing"

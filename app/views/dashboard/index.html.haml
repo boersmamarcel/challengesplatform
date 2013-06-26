@@ -1,16 +1,22 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'dashboard.index'}
+
+%h2.bordered
+  %i.icon-group
+  Friends Activities
+= render :partial => 'shared/activities'
+
 - unless @supervising_challenges.blank?
   %h2.bordered
     %i.icon-star.color-belize-hole
-    Your challenges
+    = link_to "Your Challenges", challenges_path + "/supervising"
   = render :partial => 'shared/challenges_list' , :locals => {:challenges => @supervising_challenges, :list_id => "my_challenges"}
 
 - unless @my_challenges.blank?
   %h2.bordered
     %i.icon-ok-sign.color-belize-hole
-    Enrolled Challenges
+    = link_to "Enrolled Challenges", challenges_path + "/enrolled"
   = render :partial => 'shared/challenges_list' , :locals => {:challenges => @my_challenges, :list_id => "my_challenges"}
 %h2.bordered
   %i.icon-road.color-belize-hole
-  Upcoming Challenges
+  = link_to "Upcoming Challenges", challenges_path + "/upcoming"
 = render :partial => 'shared/challenges_list' ,  :locals => {:challenges => @upcoming_challenges, :list_id => "upcoming_challenges"}

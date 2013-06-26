@@ -2,6 +2,10 @@
   <%= link_to "Sign in", new_session_path(resource_name) %><br />
 <% end -%>
 
+<%- if controller_name != 'registrations' %>
+  <%= link_to "Request account", new_user_registration_path %><br />
+<% end -%>
+
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 <% end -%>

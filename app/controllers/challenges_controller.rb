@@ -30,11 +30,10 @@ class ChallengesController < ApplicationController
         if current_user.is_supervisor?
           @challenges = current_user.supervising_challenges
         else
-          redirect_to "/challenges"
+          redirect_to challenges_path and return
         end
       else
-        # Just show everything
-        @challenges = Challenge
+        @challenges = Challenge.newest_first
     end
     # Only visible, split per page, semi-randomly ordered per page
     @challenges = @challenges.visible_for_user(current_user).page(params[:page]).past_last.per(6)
@@ -130,10 +129,13 @@ class ChallengesController < ApplicationController
     @challenge.count += 1
     @challenge.state = "draft"
 
-    if (( old_state == "pending" && @challenge.supervisor == current_user) || (current_user.is_admin? && old_state == "approved")) &&  @challenge.save
-      #notify the user if the challenge is approved
-      if @challenge.approved?
-        sendMessageTemplateToUser(current_user, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
+    supervisor_edit_allowed = (old_state == "pending" && @challenge.supervisor == current_user)
+    admin_edit_allowed = (current_user.is_admin? && old_state == "approved")
+
+    if (supervisor_edit_allowed || admin_edit_allowed) &&  @challenge.save
+      #notify users if the challenge was approved
+      if old_state == "approved"
+        sendMessageTemplateToUser(@challenge.supervisor, current_user, "Challenge successfully revoked", "user_mailer/revoked_supervisor", { :challenge => @challenge })
         sendMessageTemplateToGroup(@challenge.participants, current_user, "Challenge has been revoked", "user_mailer/revoked_participants", {:challenge => @challenge })
       end
       redirect_to challenge_path(@challenge) , notice: 'Challenge successfully revoked'
@@ -149,6 +151,10 @@ class ChallengesController < ApplicationController
       redirect_to supervisor_review_path, alert: 'You cannot be a participant in your own challenge!'
     elsif @challenge.enroll current_user
       sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been enrolled!", "user_mailer/enrollment", { :challenge => @challenge })
+      activity = Activity.create(:description => :enrolled)
+      activity.user = current_user
+      activity.event = @challenge
+      activity.save
       redirect_to challenge_path(@challenge), notice: 'Successfully enrolled'
     end
   end
@@ -158,6 +164,10 @@ class ChallengesController < ApplicationController
 
     if @challenge.unenroll current_user
       sendMessageTemplateToUser(current_user, @challenge.supervisor, "You have been unenrolled", "user_mailer/unenrollment", { :challenge => @challenge })
+      activity = Activity.create(:description => :unenrolled)
+      activity.user = current_user
+      activity.event = @challenge
+      activity.save
       redirect_to challenge_path(@challenge), notice: 'Successfully unenrolled'
     end
   end

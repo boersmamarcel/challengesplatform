@@ -9,7 +9,7 @@ module MessageCenter
     @message = Message.create(:subject => subject, :body => body, :sender_id => from_user.id, :receiver_id => to_user.id, :is_read => 0)
     
     if to_user.notify_by_email
-        UserMailer.personal_message(to_user.email, subject, body).deliver
+      UserMailer.personal_message(to_user.email, subject, body, @message, from_user).deliver
     end
   end
   

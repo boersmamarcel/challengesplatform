@@ -1,6 +1,8 @@
 #language en
 Feature: Usermanagement
-  Admins should be given an overview of all users + options
+         In order to manage all users
+         As an admin
+         I want to be able to edit/delete an user
 
   # Log in as an admin user for all upcoming scenarios
   Background:
@@ -85,9 +87,7 @@ Feature: Usermanagement
     When I visit the "admin/users.3.edit" page
     And I enter "Foo" in user_firstname
     And I enter "Bar" in user_lastname
-    And I enter "foobar@example.com" in user_email
     And I uncheck "user_active"
     And I click on the button with title "Save user"
     Then user Foo should have "Bar" as lastname
-    And user Foo should have "foobar@example.com" as email
     And user Foo should have "disabled" as state

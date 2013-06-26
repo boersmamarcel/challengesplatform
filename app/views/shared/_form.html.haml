@@ -45,6 +45,13 @@
           - else
             = f.text_field :end_date
       .control-group
+        = f.label :meetingtime, "Meeting time:", :class => "control-label"
+        .controls
+          = f.time_select :meetingtime
+          %br
+          %small
+            Meetings are held every week, starting on the first day of the challenge
+      .control-group
         = f.label :location , "Location:", :class => "control-label"
         .controls
           = f.text_field :location, :placeholder => "Challenge location... ", :class => "enable-popover", "data-toggle" => "popover", "data-placement" => "right", "data-trigger" => "focus", "data-content" => "This can be a roomnumber, office or something else. (Leave blank if undecided)", :title => "Challenge location"

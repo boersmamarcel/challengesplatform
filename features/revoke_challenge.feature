@@ -1,6 +1,6 @@
-Feature: As a supervisor
+Feature: Revoke challenge
+         As a supervisor
 		 I want to be able to revoke my challenge
-
 
 		Scenario: Revoke pending challenge
 		Given the following user records

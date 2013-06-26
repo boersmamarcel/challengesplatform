@@ -1,7 +1,7 @@
 Feature: Supervisor review pipeline
-    In order to edit a challenge after a review
-    As a supervisor
-    I want to be able to see the comments on my challenge, add comments to my challenge and resubmit my draft.
+         In order to edit a challenge after a review
+         As a supervisor
+         I want to be able to see the comments on my challenge, add comments to my challenge and resubmit my draft.
 
 
     Background:
@@ -57,6 +57,13 @@ Feature: Supervisor review pipeline
     	When I open the challenge with id "5"
     	And I press "Resubmit for Review"
     	Then the page should have content "pending"
+    	
+    Scenario: Supervisor edits a challenge
+      Given I open the challenge with id "3"
+        And I click on the "Edit" link
+       When I attach the image "image1.jpg"
+        And I press "Save draft"
+       Then I should not see a button "Save draft"
 
   Scenario Outline: View the message corresponding to a challenge
     When I visit the "challenges.<id>" page

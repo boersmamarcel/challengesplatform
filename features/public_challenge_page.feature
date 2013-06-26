@@ -1,7 +1,7 @@
-Feature: public challenges page
-		In order to view challenges
-		As a guest user
-		I want to be able to see the challenge
+Feature: Public challenges page
+		 In order to view challenges
+		 As a guest user
+		 I want to be able to see the challenge
 
 	Background:
     	Given the following user records

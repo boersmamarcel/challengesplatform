@@ -1,9 +1,8 @@
 <input type="hidden" id="page_identifier" value="index">
-= tracking_code(:account => ENV['GOOGLEANALYTICS'])
 %link{ :href =>"http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900,700italic,900italic", :rel=>"stylesheet"}
 #featured{"data-advance-speed" => "6500", "data-animation-speed" => "500", "data-autoplay" => "1", "data-bg-color" => "", "data-caption-animation" => "1", "data-slider-height" => "666"}
   .slide.orbit-slide.left
-    %article{"data-background-cover" => "1", :style => "background-image: url('assets/screenshot.png')"}
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/screenshot.jpg')", "data-stellar-background-ratio" => 0.5}
       .container
         .col.span_12
           .post-title
@@ -13,7 +12,7 @@
             %a.uppercase{:href => "#challenges"} Check the newest challenges
           / /post-title
   .slide.orbit-slides.right
-    %article{"data-background-cover" => "1", :style => "background-image: url('assets/university.png')"}
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/university.jpg')", "data-stellar-background-ratio" => 0.5}
       .container
         .col.span_12
           .post-title
@@ -23,7 +22,7 @@
             %a.uppercase{:href => new_user_session_path } Sign in now
           / /post-title
   .slide.orbit-slides.centered
-    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nerds.jpg')"}
+    %article{"data-background-cover" => "1", :style => "background-image: url('assets/nerds.jpg')", "data-stellar-background-ratio" => 0.5}
       .container
         .col.span_12
           .post-title
@@ -45,7 +44,17 @@
       %i.icon-road.blue-icon
     .span4.bigicon
       %i.icon-heart.blue-icon
-  .row.center.text-row
+  .row.center
+    .span4
+      %h2
+        Inspire
+    .span4
+      %h2
+        Connect
+    .span4
+      %h2
+        Care
+  .row.center
     .span4
       It is our mission to inspire students to discover and pursue their passion. Unlocking the full potential of students by create a healthy community to stimulate the sharing of knowledge.
     .span4
@@ -58,27 +67,38 @@
       %a{:id => "challenges"}
       Staff selected challenges
     = render 'shared/challenges_list' , :challenges => @highlighted_challenges, :options => {:no_status => true}
+.container{:style => "margin-top: 50px;"}
+  .span12.vertical-spacing
+    %h1.center
+      %a{:id => "challenges"}
+      We want your challenges
+    %p.lead.center
+      Check for more info
+  .span6.center.offset3
+    .span2.bigicon
+      %i.blue-icon.icon-building
+    .span2.offset1.bigicon
+      %i.blue-icon.icon-book
+  .span6.center.offset3{:style => "margin-top: 20px;"}
+    .span2
+      %a{:href => companies_path, :class => "btn btn-primary btn-large"}
+        Companies
+    .span2.offset1
+      %a{:href => universities_path, :class => "btn btn-primary btn-large"}
+        Universities
+    
 .container
   .span12.center.vertical-spacing
     %h1
       Testimonials 
-  .span12.vertical-spacing
+  .span12
     .span4
       .stacktwo
         = image_tag 'rom.png'
     .span5{:style => 'margin-top: 140px;'}
       %blockquote
         %p
-          Quote van ROM
+          Niks is zo uitdagend als een challenge
         %small
-          Rom Langerak opleidings directeur Universiteit Twente
-  .span12
-    .span5.offset2{:style => 'margin-top: 140px;'}
-      %blockquote.pull-right
-        %p
-          Quote van Huib Pasman
-        %small
-          Huib Pasman - Technology Strategy & Strategic Marketing TNO
-    .span4
-      .stacktwo
-        = image_tag 'huib.png'
+          Rom Langerak Director of Education University of Twente
+

@@ -1,7 +1,7 @@
 Feature: Delete your own account
-	In order to be able to delete my own account
-	As a user or admin
-	I want to be able to delete my account at the edit user page
+		 In order to be able to delete my own account
+		 As a user or admin
+		 I want to be able to delete my account at the edit user page
 
 	Scenario: As a supervisor I want to be able to delete my account
 		Given the following user records

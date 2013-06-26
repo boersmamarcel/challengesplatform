@@ -1,3 +1,24 @@
-= @message.html_safe
-
-= render :partial => "messages/mail_footer", :layout => false
+!!!
+%html
+  %head
+    %style
+      \.logo img{float:left;margin-right:10px}.header .logo{float:right;font-size:28px;margin:0}.header{border-bottom:1px solid #c1c1c1;padding:25px}.container{margin:auto;width:650px;background-color:white;border-left:1px solid #c1c1c1;border-right:1px solid #c1c1c1}.contents{font-family:Georgia;font-size:22px;padding:0}.contents p{margin:0 0 20px 0}.header span{font-size:22px;font-weight:bold}.main{padding:50px}.main .from{font-size:16px;color:#a0a0a0;font-style:italic;margin-bottom:10px}.footer{background-color:#e1e1e1;padding:20px 70px;font-size:12px;border-bottom:1px solid #c1c1c1;border-top:1px solid #c1c1c1;text-align:center}body{background-color:#d0d0d0;padding:0;margin:0;font-family:sans-serif}a{text-decoration:none}.header{background-color:#f2f2f2}
+  %body
+    .container
+      .header
+        .logo
+          = image_tag attachments['logo.png'].url
+          = precede("Science") do
+            %strong Challenges
+        %span New Message
+      .main
+        .from
+          = "From: " + @sender.fullname
+        .contents
+          = @message.html_safe
+      .footer
+        %div
+          View this message
+          = link_to "online", message_url(@messageObject, :only_path => false)
+          or
+          = link_to "manage your notification settings", edit_user_registration_url(:only_path => false)

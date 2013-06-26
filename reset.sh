@@ -4,17 +4,21 @@ k=false # Kill previous rails server
 s=false # Run rails server
 b=false # Run bundle
 d=false # Run database reset
+m=false # Run database migrate
 h=false # Help
 c=false # Run cucumber tests
+t=false # update cronTab
 
-while getopts ":ksbdhc" opt; do
+while getopts ":ksbdmhct" opt; do
   case $opt in
     k) k=true >&2 ;;
     s) s=true >&2 ;;
     b) b=true >&2 ;;
     d) d=true >&2 ;;
+    m) m=true >&2 ;;
     h) h=true >&2 ;;
     c) c=true >&2 ;;
+	t) t=true >&2 ;;
     \?)
       echo "Invalid option: -$OPTARG"
       echo "$0 -h for help"
@@ -28,9 +32,11 @@ if $h; then
   echo "     -k to kill any servers (port 3000 tcp only)"
   echo "     -b to execute bundle"
   echo "     -d to reset database"
+  echo "     -m to migrate database"
   echo "     -c to run cucumber tests"
   echo "     -s to execute rails s when done resetting"
   echo "     -h you're looking at it (and terminate)"
+  echo "     -t to update the crontab"
   exit 0
 fi
 
@@ -51,6 +57,12 @@ if $d; then
   rake db:test:prepare
 fi
 
+if $m; then
+  echo "Migrating database"
+  rake db:migrate
+  rake db:migrate RAILS_ENV=test
+fi
+
 if $s; then
   echo "Starting rails server as a background process"
   echo "Running on http://localhost:3000"
@@ -64,4 +76,9 @@ if $c; then
     echo "    (psst; server is still running)"
   fi
   cucumber
+fi
+
+if $t; then
+  echo "Updating crontab"
+  bundle exec whenever --update-crontab sciencechallenges
 fi

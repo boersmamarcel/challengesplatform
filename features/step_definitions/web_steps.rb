@@ -15,7 +15,7 @@ def getRoute(name)
       root_path
     when "logout"
       destroy_user_session_path
-    when "registration.form"
+    when "registration.new"
       new_user_registration_path
     when "challenges.index"
       challenges_path
@@ -60,6 +60,8 @@ def getRoute(name)
       edit_challenge_path($1)
     when /^user.([0-9]+).profile$/
       profile_user_path($1)
+    when /^challenges.([a-z]+)$/
+      "/challenges/" + $1
 
     # Message related
     when "messages"

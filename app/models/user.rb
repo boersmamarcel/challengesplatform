@@ -10,14 +10,14 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :tagline
   attr_protected :role, :provider, :uid, :active
+  attr_readonly :email
 
   #Yeah, let's suppose admins are wise enough not to screw things up
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
 
-  validates :email, :presence => { :message => "Email address is missing" }
-  validates :email, :uniqueness => true
-  validates :firstname, :presence => { :message => "First name is missing"}
-  validates :lastname, :presence => { :message => "Last name is missing"}
+  validates :email, :presence => { :message => "is missing" }
+  validates :firstname, :presence => { :message => "is missing"}
+  validates :lastname, :presence => { :message => "is missing"}
 
   has_many :comments
   has_many :followrelations, :class_name => 'Follow', :foreign_key => 'user_id', :dependent => :destroy
@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :enrollments, :foreign_key => 'participant_id', :dependent => :destroy, :conditions => {:unenrolled_at => nil}
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'receiver_id'
+  has_many :activities, :as => :event
 
   def is_supervisor?
     self.role > 0

@@ -96,6 +96,11 @@
 }
 .filters {
   float: left;
+  .dropdown-menu {
+    li a.active {
+      background-color: #efefef;
+    }
+  }
 }
 // Challenge Tiles
 .challenges-list{
@@ -149,17 +154,17 @@
         bottom: 0px;
         margin: 0px;
         padding: 20px 0px 10px 10px;
-        background-image: linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
-        background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
-        background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
-        background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
-        background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.0) 76%);
+        background-image: linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.0) 100%);
+        background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.0) 100%);
+        background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.0) 100%);
+        background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.0) 100%);
+        background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.0) 100%);
 
         background-image: -webkit-gradient(
           linear,
           left bottom,
           left top,
-          color-stop(0, rgba(0,0,0,0.8)),
+          color-stop(0, rgba(0,0,0,0.5)),
           color-stop(1, rgba(0,0,0,0.0))
         );
 

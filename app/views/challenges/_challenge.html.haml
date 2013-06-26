@@ -1,7 +1,15 @@
 .challenge.span4{"class" => "state_#{challenge.state}"}
   %a.thumb{:href => challenge_path(challenge)}
     = image_tag challenge.image.thumb.url
-    - if !options[:no_status] && challenge.current_user_enrolled?
+    - if challenge.over?
+      .status
+        %span.badge.badge-success
+          %i.icon-ok-sign
+          - if challenge.current_user_enrolled?
+            You finished this Challenge!
+          - else
+            Challenge has finished
+    - elsif !options[:no_status] && challenge.current_user_enrolled?
       .status
         %span.badge.badge-success
           %i.icon-ok-sign
@@ -43,7 +51,7 @@
           = challenge.days_till_end
         %span.muted
           = pluralize(challenge.days_till_end, "Day").split.last
-          to go
+          left
     - elsif challenge.upcoming?
       %li
         %strong
@@ -57,7 +65,7 @@
         %strong
           %i.icon-calendar
           0
-        %span.muted Challenge is over
+        %span.muted Finished
     %li
       %strong
         %i.icon-group

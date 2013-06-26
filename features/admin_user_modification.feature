@@ -1,6 +1,8 @@
 #language en
 Feature: User modification
-  Admins should be given the opportunity to modify users within the system
+         In order to modify a user
+         As an admin
+         I want to be able to change user details and save them
 
   # Log in as an admin user for all upcoming scenarios
   Background:
@@ -16,4 +18,4 @@ Feature: User modification
      And I click on the link with title "edit John"
      And I fill in "user[lastname]" with ""
      And I press "Save user"
-    Then I should see a message with "Last name is missing"
+    Then I should see a message with "Lastname is missing"
