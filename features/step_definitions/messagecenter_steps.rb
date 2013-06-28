@@ -37,6 +37,18 @@ When(/^I have no messages$/) do
   end
 end
 
+When(/^I select all checkboxes$/) do
+  all(:css, "#message_ids_").each {|elem| elem.set(true)}
+end
+
+Then(/^I should have no unread messages$/) do
+  Message.unread.count.should == 0
+end
+
+Then(/^I should have no messages$/) do
+  Message.all.count.should == 0
+end
+
 When(/^I send a new message with subject "(.*?)" and contents "(.*?)" for challenge "(.*?)"$/) do |subject, body, challenge|
   page.evaluate_script "composeMessage('challenge', #{challenge})"
   fill_in :subject, :with => subject
