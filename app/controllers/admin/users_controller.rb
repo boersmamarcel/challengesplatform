@@ -38,6 +38,10 @@ class Admin::UsersController < Admin::AdminController
     # You can't edit the sciencechallenges user, dummy!
     redirect_to admin_usermanagement_index_path if @user.eql? 1
 
+    if(params[:user][:active] and not @user.active)
+      sendMessageTemplateToUser(@user, current_user, "ScienceChallenges account", "user_mailer/activated_requested_account", {:user => @user, :admin => current_user})
+    end
+
     # If this user is now a regular user, transfer his/her challenges
     if(params[:user][:role].eql? "0" and not @user.role.eql? "0")
       transfer_challenges(@user)
