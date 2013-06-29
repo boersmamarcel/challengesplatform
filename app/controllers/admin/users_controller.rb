@@ -39,6 +39,7 @@ class Admin::UsersController < Admin::AdminController
     redirect_to admin_usermanagement_index_path if @user.eql? 1
 
     if(params[:user][:active] and not @user.active)
+      @user.ensure_reset_password_token!
       sendMessageTemplateToUser(@user, current_user, "ScienceChallenges account", "user_mailer/activated_requested_account", {:user => @user, :admin => current_user})
     end
 
