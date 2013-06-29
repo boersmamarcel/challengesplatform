@@ -42,11 +42,7 @@ When(/^I select all checkboxes$/) do
 end
 
 Then(/^I should have no unread messages$/) do
-  Message.unread.count.should == 0
-end
-
-Then(/^I should have no messages$/) do
-  Message.all.count.should == 0
+  first(:css, ".unread").should == nil
 end
 
 When(/^I send a new message with subject "(.*?)" and contents "(.*?)" for challenge "(.*?)"$/) do |subject, body, challenge|

@@ -33,7 +33,7 @@ Feature: Message Center Incoming Messages
     When I visit the "messages" page
      And I select all checkboxes
      And I press the "Delete selected" button
-    Then I should have no messages
+    Then I should see a message with "You have no messages"
 
     Scenario: View the inbox icon while having no unread messages
     Given I have read all my messages
