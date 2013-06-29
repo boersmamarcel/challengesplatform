@@ -15,6 +15,12 @@
     %link{:href => asset_path("fav64.png"), :rel => "icon", :sizes => "64x64", :type => "image/png"}/
     %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
     %link{:href => asset_path("favicon.ico"), :rel => "shortcut icon", :type => "image/x-icon"}/
+
+    <!--[if lt IE 9]>
+    <script>
+    alert("You are using an unsupported version of Internet Explorer. Old versions of Internet Explorer lack support and speed required by modern sites.\n\nFor full functionality, please upgrade or use a different browser.");
+    </script>
+    <![endif]-->
   %body
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
