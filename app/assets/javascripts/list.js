@@ -147,76 +147,11 @@ var List = function(id, options, values) {
         }
     };
 
-
-    /*
-    * Add object to list
-    */
-    this.add = function(values, callback) {
-        if (callback) {
-            addAsync(values, callback);
-        }
-        var added = [],
-            notCreate = false;
-        if (values[0] === undefined){
-            values = [values];
-        }
-        for (var i = 0, il = values.length; i < il; i++) {
-            var item = null;
-            if (values[i] instanceof Item) {
-                item = values[i];
-                item.reload();
-            } else {
-                notCreate = (self.items.length > self.page) ? true : false;
-                item = new Item(values[i], undefined, notCreate);
-            }
-            self.items.push(item);
-            added.push(item);
-        }
-        self.update();
-        return added;
-    };
-
-    /*
-    * Adds items asynchronous to the list, good for adding huge amount of
-    * data. Defaults to add 100 items a time
-    */
-    var addAsync = function(values, callback, items) {
-        var valuesToAdd = values.splice(0, 100);
-        items = items || [];
-        items = items.concat(self.add(valuesToAdd));
-        if (values.length > 0) {
-            setTimeout(function() {
-                addAsync(values, callback, items);
-            }, 10);
-        } else {
-            self.update();
-            callback(items);
-        }
-    };
-
   this.show = function(i, page) {
     this.i = i;
     this.page = page;
     self.update();
   };
-
-    /* Removes object from list.
-    * Loops through the list and removes objects where
-    * property "valuename" === value
-    */
-    this.remove = function(valueName, value, options) {
-        var found = 0;
-        for (var i = 0, il = self.items.length; i < il; i++) {
-            if (self.items[i].values()[valueName] == value) {
-                templater.remove(self.items[i], options);
-                self.items.splice(i,1);
-                il--;
-                found++;
-            }
-        }
-        self.update();
-        return found;
-    };
 
     /* Gets the objects in the list which
     * property "valueName" === value
@@ -338,31 +273,6 @@ var List = function(id, options, values) {
             }
             self.update();
         }
-        return self.visibleItems;
-    };
-
-    /*
-    * Filters the list. If filterFunction() returns False hides the Item.
-    * if filterFunction == false are the filter removed
-    */
-    this.filter = function(filterFunction) {
-        self.i = 1; // Reset paging
-        reset.filter();
-        if (filterFunction === undefined) {
-            self.filtered = false;
-        } else {
-            self.filtered = true;
-            var is = self.items;
-            for (var i = 0, il = is.length; i < il; i++) {
-                var item = is[i];
-                if (filterFunction(item)) {
-                    item.filtered = true;
-                } else {
-                    item.filtered = false;
-                }
-            }
-        }
-        self.update();
         return self.visibleItems;
     };
 
