@@ -2,12 +2,17 @@
 %h2
   User management
 
-%p
+%p.pull-right
   %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
     %i.icon-plus-sign
     Add user
 
 %div#user-list
+  %div.input-prepend
+    %span.add-on
+      %i.icon-search
+    %input.search{:type => "text", :placeholder => "Search"}
+
   %table.table
     %thead
       %tr
@@ -23,7 +28,7 @@
       - @users.each do |user|
         = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
 
-%p
+%p.pull-right
   %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
     %i.icon-plus-sign
     Add user
