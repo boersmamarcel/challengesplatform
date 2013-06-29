@@ -15,6 +15,7 @@
     %th Email
     %th Role
     %th State
+    %th Last login
     %th Actions
     - @users.each do |user|
       = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
