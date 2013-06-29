@@ -15,6 +15,13 @@
     %link{:href => asset_path("fav64.png"), :rel => "icon", :sizes => "64x64", :type => "image/png"}/
     %link{:href => asset_path("fav128.png"), :rel => "icon", :sizes => "128x128", :type => "image/png"}/
     %link{:href => asset_path("favicon.ico"), :rel => "shortcut icon", :type => "image/x-icon"}/
+
+    <!--[if lt IE 10]><script>
+    if(document.cookie.indexOf("old_IE_version") < 0) {
+    alert("You are using an unsupported version of Internet Explorer. Old versions of Internet Explorer lack support and speed required by modern sites.\n\nFor full functionality, please upgrade to IE10 (or above) or use a different browser.");
+    var date = new Date( (new Date()).getTime()+(24*60*60*1000)); document.cookie = 'old_IE_version=warned; expires=' + date.toUTCString() + '; path=/'
+    }
+    </script><![endif]-->
   %body
     %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
