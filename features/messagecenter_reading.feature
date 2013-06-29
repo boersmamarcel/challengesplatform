@@ -22,6 +22,18 @@ Feature: Message Center Incoming Messages
     When I visit the "messages" page
      And I click on the "Mark as Read" link
     Then I should see a message with "Message marked as read"
+    
+    Scenario: Mark an email as read using checkbox
+    When I visit the "messages" page
+     And I select all checkboxes
+     And I press the "Mark selected as Read" button
+    Then I should have no unread messages
+    
+    Scenario: Delete emails using checkbox
+    When I visit the "messages" page
+     And I select all checkboxes
+     And I press the "Delete selected" button
+    Then I should see a message with "You have no messages"
 
     Scenario: View the inbox icon while having no unread messages
     Given I have read all my messages

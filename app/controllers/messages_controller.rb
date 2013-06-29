@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   # Allow regular users some views
-  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :destroy, :compose, :deliver, :autosuggest, :markasread]
+  skip_filter :require_admin, :require_supervisor, :only => [:index, :show, :destroy, :compose, :deliver, :autosuggest, :markasread, :update]
 
   def index
     if request.xhr?
@@ -75,6 +75,17 @@ class MessagesController < ApplicationController
       # Redirect the user to previous page and show a flash message!
       redirect_to :back, :notice => "Your message has been sent."
     end
+  end
+  
+  def update
+    selected_messages = current_user.received_messages.where(:id => params[:message_ids])
+    if params[:commit] == "Mark selected as Read"
+      selected_messages.update_all(:is_read => true)
+    elsif params[:commit] == "Delete selected"
+      selected_messages.delete_all
+    end
+    
+    redirect_to messages_path
   end
   
   def check_challenge

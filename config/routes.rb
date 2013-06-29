@@ -29,7 +29,8 @@ Challengesplatform::Application.routes.draw do
     request.env['warden'].user.is_admin?
   }
   get "messages/compose", :to => "messages#compose"
-  post "messages/deliver", :to => "messages#deliver"
+  post "messages/deliver", :to => "messages#deliver", :as => :message_deliver
+  put "messages/update", :to => "messages#update", :as => :messages_update
   get "messages/autosuggest", :to => "messages#autosuggest"
   get "messages/markasread/:id", :to => "messages#markasread", :as => "markasread"
   
