@@ -57,5 +57,5 @@ Feature: Security - supervisors
 
   Scenario: delete account
     When I visit the "user.edit" page
-     And I press the "Cancel my account" button
+     And I press the "Destroy my account" button
     Then I should be on the "index" page
