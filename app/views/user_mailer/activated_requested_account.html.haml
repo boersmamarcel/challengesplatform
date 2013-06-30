@@ -3,7 +3,9 @@
   = values[:user].firstname
   ,
 %p
-  Welcome to the ScienceChallenges network! Your account has been activated.
+  Welcome to the ScienceChallenges network! Your account has been 
+  = values[:type]
+  \.
 %p
   Please click 
   = link_to "here", edit_password_url(values[:user], :reset_password_token => values[:user].reset_password_token)
