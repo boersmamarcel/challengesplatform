@@ -2,23 +2,33 @@
 %h2
   User management
 
-%p
+%p.pull-right
   %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
     %i.icon-plus-sign
     Add user
 
-%p
+%div#user-list
+  %div.input-prepend
+    %span.add-on
+      %i.icon-search
+    %input.search{:type => "text", :placeholder => "Search"}
+
   %table.table
-    %th ID
-    %th Firstname
-    %th Lastname
-    %th Email
-    %th Role
-    %th State
-    %th Actions
-    - @users.each do |user|
-      = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
-%p
+    %thead
+      %tr
+        %th.sort{:data_sort => "id"} ID
+        %th.sort{:data_sort => "firstname"} Firstname
+        %th.sort{:data_sort => "lastname"} Lastname
+        %th.sort{:data_sort => "email"} Email
+        %th.sort{:data_sort => "role"} Role
+        %th.sort{:data_sort => "state"} State
+        %th.sort{:data_sort => "last_login"} Last login
+        %th Actions
+    %tbody.list
+      - @users.each do |user|
+        = render :partial => 'admin/usermanagement/usermanagementtablerow', :object => user, :as => 'user'
+
+%p.pull-right
   %a{:class => "btn btn-primary", :title => "Create user", :href => new_admin_user_path}
     %i.icon-plus-sign
     Add user
