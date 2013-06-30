@@ -1,4 +1,7 @@
 /*
+This code uses ListJS (it's been modified).
+ListJS is licensed under the following license;
+
 ListJS Beta 0.2.0
 By Jonny StrÃ¶mberg (www.jonnystromberg.com, www.listjs.com)
 License (MIT)
@@ -669,7 +672,7 @@ function enableList() {
 */
 if(document.getElementById('user-list')) {
     enableList();
-    
+
     var options = {
         valueNames: [ 'id', 'firstname', 'lastname', 'email', 'role', 'state', 'last_login' ]
     };
