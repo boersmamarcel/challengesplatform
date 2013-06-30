@@ -14,7 +14,7 @@ Feature: Delete your own account
 		When I visit the "login" page
 		And I fill in email with "supervisor@student.utwente.nl" and password with "abcd1234" 
 		When I visit the "user.edit" page
-		And I press "Cancel my account"
+		And I press "Destroy my account"
 		Then I should see the "index" page
 		And the challenges of supervisor with id "1" should be transferred to the default supervisor
 
@@ -26,5 +26,5 @@ Feature: Delete your own account
 		When I visit the "login" page
 		And I fill in email with "user@student.utwente.nl" and password with "abcd1234" 
 		When I visit the "user.edit" page
-		And I press "Cancel my account"
+		And I press "Destroy my account"
 		Then I should see the "index" page
