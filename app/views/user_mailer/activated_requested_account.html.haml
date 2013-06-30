@@ -1,0 +1,23 @@
+%p
+  Hello
+  = values[:user].firstname
+  ,
+%p
+  Welcome to the ScienceChallenges network! Your account has been 
+  = values[:type]
+  \.
+%p
+  Please click 
+  = link_to "here", edit_password_url(values[:user], :reset_password_token => values[:user].reset_password_token)
+  to set your password. If the link does not work, you can also copy this to your browser; 
+  = edit_password_url(values[:user], :reset_password_token => values[:user].reset_password_token)
+  \.
+%p
+  We are looking forward to your participation, and we hope to see one of your challenges available.
+%p
+  If you have any questions, please, do not hesistate to contact us. We will always review your challenge submissions, so any mistakes should be spotted before your challenge is publically available.
+%p
+  Regards,
+%p
+  = values[:admin].firstname
+  = values[:admin].lastname
