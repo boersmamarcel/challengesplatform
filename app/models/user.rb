@@ -83,4 +83,21 @@ class User < ActiveRecord::Base
     challenge.supervisor == self || is_admin?
   end
 
+  # The code below takes over some newer Devise functionality
+  # Originates from Devise recoverable.rb
+  def ensure_reset_password_token!
+    generate_reset_password_token! if should_generate_reset_token?
+  end
+
+  protected
+    def should_generate_reset_token?
+      reset_password_token.nil? || !reset_password_period_valid?
+    end
+
+    def generate_reset_password_token!
+      self.reset_password_token = self.class.reset_password_token
+      self.reset_password_sent_at = Time.now.utc
+      self.reset_password_token
+      save(:validate => false)
+    end
 end
