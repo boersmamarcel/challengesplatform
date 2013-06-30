@@ -1,0 +1,34 @@
+%input{:type => :hidden, :id =>'page_identifier', :value => 'search.index'}
+
+%h2
+  Search
+
+%div#search-list
+  %div.input-prepend
+    %span.add-on
+      %i.icon-search
+    %input.search{:type => "text", :placeholder => "Search"}
+
+  %ul.filter
+    %li.btn#filter-none Show all
+    %li.btn#filter-users Only users
+
+  %table.table
+    %thead
+      %tr
+        %th.hidden ID
+        %th.sort{:data_sort => "category"} type
+        %th.sort{:data_sort => "name"} Name
+        %th Link
+        %th One-liner
+    %tbody.list
+      %tr
+        %th.id.hidden 1
+        %th.type page
+        %th.name Challenge Guidelines
+        %th
+          = link_to("link", challengeguidelines_path())
+        %th Learn how to create a challenge
+
+%script{:language => "JavaScript"}
+  = "var data_resource = '#{search_data_path()}.json';"

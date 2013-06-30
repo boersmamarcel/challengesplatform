@@ -1,11 +1,32 @@
 /*
-This code uses ListJS (it's been modified).
-ListJS is licensed under the following license;
-
 ListJS Beta 0.2.0
 By Jonny StrÃ¶mberg (www.jonnystromberg.com, www.listjs.com)
+
+OBS. The API is not frozen. It MAY change!
+
 License (MIT)
+
 Copyright (c) 2011 Jonny StrÃ¶mberg http://jonnystromberg.com
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 */
 function enableList() {
     (function( window, undefined ) {
@@ -127,11 +148,76 @@ function enableList() {
             }
         };
 
+
+        /*
+        * Add object to list
+        */
+        this.add = function(values, callback) {
+            if (callback) {
+                addAsync(values, callback);
+            }
+            var added = [],
+                notCreate = false;
+            if (values[0] === undefined){
+                values = [values];
+            }
+            for (var i = 0, il = values.length; i < il; i++) {
+                var item = null;
+                if (values[i] instanceof Item) {
+                    item = values[i];
+                    item.reload();
+                } else {
+                    notCreate = (self.items.length > self.page) ? true : false;
+                    item = new Item(values[i], undefined, notCreate);
+                }
+                self.items.push(item);
+                added.push(item);
+            }
+            self.update();
+            return added;
+        };
+
+        /*
+        * Adds items asynchronous to the list, good for adding huge amount of
+        * data. Defaults to add 100 items a time
+        */
+        var addAsync = function(values, callback, items) {
+            var valuesToAdd = values.splice(0, 100);
+            items = items || [];
+            items = items.concat(self.add(valuesToAdd));
+            if (values.length > 0) {
+                setTimeout(function() {
+                    addAsync(values, callback, items);
+                }, 10);
+            } else {
+                self.update();
+                callback(items);
+            }
+        };
+
       this.show = function(i, page) {
         this.i = i;
         this.page = page;
         self.update();
       };
+
+        /* Removes object from list.
+        * Loops through the list and removes objects where
+        * property "valuename" === value
+        */
+        this.remove = function(valueName, value, options) {
+            var found = 0;
+            for (var i = 0, il = self.items.length; i < il; i++) {
+                if (self.items[i].values()[valueName] == value) {
+                    templater.remove(self.items[i], options);
+                    self.items.splice(i,1);
+                    il--;
+                    found++;
+                }
+            }
+            self.update();
+            return found;
+        };
 
         /* Gets the objects in the list which
         * property "valueName" === value
@@ -253,6 +339,31 @@ function enableList() {
                 }
                 self.update();
             }
+            return self.visibleItems;
+        };
+
+        /*
+        * Filters the list. If filterFunction() returns False hides the Item.
+        * if filterFunction == false are the filter removed
+        */
+        this.filter = function(filterFunction) {
+            self.i = 1; // Reset paging
+            reset.filter();
+            if (filterFunction === undefined) {
+                self.filtered = false;
+            } else {
+                self.filtered = true;
+                var is = self.items;
+                for (var i = 0, il = is.length; i < il; i++) {
+                    var item = is[i];
+                    if (filterFunction(item)) {
+                        item.filtered = true;
+                    } else {
+                        item.filtered = false;
+                    }
+                }
+            }
+            self.update();
             return self.visibleItems;
         };
 
