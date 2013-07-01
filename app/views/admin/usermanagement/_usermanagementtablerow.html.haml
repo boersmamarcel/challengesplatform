@@ -5,6 +5,9 @@
   %td.email= user.email
   %td.role= (['student', 'supervisor', 'admin'])[user.role]
   %td.state= user.active ? "active" : "disabled"
+  %td.last_login
+    =user.last_sign_in_at.strftime("%d-%m-%Y") unless user.last_sign_in_at.nil?
+    ="N/A" if user.last_sign_in_at.nil?
   %td.actions
     -if user.id.eql? current_user.id or user.id.eql? 1
       %a{:class => "btn disabled", :title => "message is disabled"}
