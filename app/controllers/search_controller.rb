@@ -5,6 +5,11 @@ class SearchController < ApplicationController
   def index
   end
 
-  def data
+  def query
+    @results = Challenge.approved.search(params[:q]).decorate
+
+    respond_to do |format|
+      format.json { render :json => @results }
+    end
   end
 end

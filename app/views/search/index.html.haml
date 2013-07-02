@@ -3,12 +3,15 @@
 %h2
   Search
 
-%div#search-list
-  %div.input-prepend
-    %span.add-on
-      %i.icon-search
-    %input.search{:type => "text", :placeholder => "Search"}
+%div.input-prepend
+  %span.add-on
+    %i.icon-search
+  %input#search-bar{:type => "text", :placeholder => "Search"}
 
+%p#results_id
+  Hello world
+
+%div#search-list
   %ul.filter
     %li.btn#filter-none Show all
     %li.btn#filter-users Only users
@@ -31,4 +34,4 @@
         %th Learn how to create a challenge
 
 %script{:language => "JavaScript"}
-  = "var data_resource = '#{search_data_path()}.json';"
+  = "var query_path = '#{search_path()}.json';"

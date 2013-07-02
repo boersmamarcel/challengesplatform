@@ -7,6 +7,9 @@ gem 'jquery-rails' # Jquery for rails
 gem 'jquery-ui-rails' # Jquery ui for rails
 gem 'haml' # Haml template rendering
 
+# Enhance SQL queries
+gem 'squeel' # DSL for SQL queries
+
 #Add gems for devise authentication and Google oauth
 gem 'devise' # Authentication Gem
 gem 'omniauth-google-oauth2' # O-Auth plugin for google

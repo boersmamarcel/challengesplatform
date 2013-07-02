@@ -1,6 +1,10 @@
 class ChallengeDecorator < Draper::Decorator
   delegate_all
 
+  def as_json(options={})
+    super(options.merge(:only => [:id, :title]))
+  end
+
   def implied_state
     if declined?
       "declined"
