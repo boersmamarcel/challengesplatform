@@ -20,7 +20,7 @@
     %thead
       %tr
         %th.hidden ID
-        %th.sort{:data_sort => "category"} type
+        %th.sort{:data_sort => "type"} type
         %th.sort{:data_sort => "name"} Name
         %th Link
         %th One-liner
@@ -29,9 +29,9 @@
         %th.id.hidden 1
         %th.type page
         %th.name Challenge Guidelines
-        %th
+        %th.link 
           = link_to("link", challengeguidelines_path())
-        %th Learn how to create a challenge
+        %th.onel Learn how to create a challenge
 
 %script{:language => "JavaScript"}
   = "var query_path = '#{search_path()}.json';"
