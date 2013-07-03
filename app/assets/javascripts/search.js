@@ -1,7 +1,6 @@
 var query_path = "/query.json";
 
 if($('#instant-search').length > 0) {
-  $('#instant-search').removeAttr("style");
   $('#instant-search').typeahead({
     name: 'instant',
     valueKey: 'title',
@@ -16,8 +15,8 @@ if($('#instant-search').length > 0) {
     rateLimitWait: 100,
     template: '<p><strong><a href="{{url}}">{{value}}</a></strong> – {{id}}</p>',
     engine: Hogan,
-    limit: 5
-    //footer: "<p>The end</p>",
+    limit: 5,
+    footer: "<p><a href='/search'>Full search</a></p>",
   });
 }
 

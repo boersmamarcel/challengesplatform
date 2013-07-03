@@ -25,7 +25,7 @@
     %li
       %div#instant-search-div
         %input#instant-search{:type => "text", :placeholder => "Instant Search"}
-        
+
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
         .badge.pulse
