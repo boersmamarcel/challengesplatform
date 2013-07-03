@@ -58,7 +58,7 @@ Challengesplatform::Application.routes.draw do
   end
 
   get "search", :to => "search#index"
-  post "search", :to => "search#query"
+  get "query", :to => "search#query"
 
   get "static/index"
   get "aboutus", :to => "static#aboutus"

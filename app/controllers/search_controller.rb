@@ -6,10 +6,18 @@ class SearchController < ApplicationController
   end
 
   def query
-    @results = Challenge.approved.search(params[:q]).decorate
+    print(params)
+    print(">>>>>>>>>>>>>>>>" + params[:q])
 
-    respond_to do |format|
-      format.json { render :json => @results }
+    @results = Challenge.approved.search(params[:q]);
+
+    if(params[:t] == "i")
+      # set to 2 for testing purposes...
+      @results = @results.limit(4)
     end
+
+    @results = @results.decorate;
+
+    render :json => @results
   end
 end

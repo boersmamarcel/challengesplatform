@@ -1,8 +1,22 @@
 class ChallengeDecorator < Draper::Decorator
   delegate_all
 
+  def value
+    title
+  end
+
+  def url
+    "http://google.com"
+  end
+
   def as_json(options={})
-    super(options.merge(:only => [:id, :title]))
+    super(
+      options.merge(
+        :root => false, 
+        :only => [:id], 
+        :methods => [:value, :url]
+      )
+    )
   end
 
   def implied_state

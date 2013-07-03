@@ -21,6 +21,11 @@
       = link_to('Dashboard', dashboard_path)
     %li{class: controller?("challenges") ? "active" : ""}
       = link_to('Challenges', challenges_path)
+
+    %li
+      %div#instant-search-div
+        %input#instant-search{:type => "text", :placeholder => "Instant Search"}
+        
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
         .badge.pulse
