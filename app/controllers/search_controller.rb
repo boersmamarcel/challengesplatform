@@ -6,10 +6,7 @@ class SearchController < ApplicationController
   end
 
   def query
-    print(params)
-    print(">>>>>>>>>>>>>>>>" + params[:q])
-
-    @results = Challenge.approved.search(params[:q]);
+    @results = Challenge.visible_for_user(current_user).search(params[:q]);
 
     if(params[:t] == "i")
       # set to 2 for testing purposes...

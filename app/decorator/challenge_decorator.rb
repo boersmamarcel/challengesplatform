@@ -1,20 +1,16 @@
 class ChallengeDecorator < Draper::Decorator
   delegate_all
 
-  def value
-    title
-  end
-
   def url
-    "http://google.com"
+    "/challenge/#{id}"
   end
 
   def as_json(options={})
     super(
       options.merge(
-        :root => false, 
-        :only => [:id], 
-        :methods => [:value, :url]
+        :root => true, 
+        :only => [:id, :title], 
+        :methods => [:url]
       )
     )
   end

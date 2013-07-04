@@ -1,9 +1,11 @@
 var query_path = "/query.json";
 
-if($('#instant-search').length > 0) {
-  $('#instant-search').typeahead({
+var searchbar = $('#instant-search');
+
+if(searchbar.length > 0) {
+  searchbar.typeahead({
     name: 'instant',
-    valueKey: 'title',
+    valueKey: 'challenge',
     remote: {
       url: query_path + '?q=%QUERY&t=i',
       dataType: "json",
@@ -13,10 +15,14 @@ if($('#instant-search').length > 0) {
       }
     },
     rateLimitWait: 100,
-    template: '<p><strong><a href="{{url}}">{{value}}</a></strong> – {{id}}</p>',
+    template: '<p><strong><a href="{{challenge.url}}">{{challenge.title}}</a></strong> – {{challenge.id}}</p>',
     engine: Hogan,
     limit: 5,
     footer: "<p><a href='/search'>Full search</a></p>",
+  });
+
+  searchbar.on('typeahead:selected', function(event, selected) {
+    console.log("redirect to: " + selected.challenge.url);
   });
 }
 
