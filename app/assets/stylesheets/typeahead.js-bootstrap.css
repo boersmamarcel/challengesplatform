@@ -1,5 +1,12 @@
+#instant-search-div {
+  margin-top: 5px;
+  width: 100px;
+  padding-right: 30px;
+}
+
 .twitter-typeahead .tt-query,
 .twitter-typeahead .tt-hint {
+  width: 100%;
   margin-bottom: 0;
 }
 

@@ -23,21 +23,25 @@
       = link_to('Challenges', challenges_path)
 
     %li
-      %div#instant-search-div
+      #instant-search-div
         %input#instant-search{:type => "text", :placeholder => "Instant Search"}
 
     -if current_user.is_admin?
-      %li{class: controller?("admin/review") ? "active": ""}
+      %li{class: controller?("admin/review") ? "active hide-on-search": "hide-on-search"}
         .badge.pulse
           = Challenge.pending.count
         = link_to('Review', admin_review_index_path)
-      %li{class: controller?("admin/usermanagement") ? "active": ""}
-        = link_to('Usermanagement', admin_usermanagement_index_path)
+      %li{class: controller?("admin/usermanagement") ? "active hide-on-search": "hide-on-search"}
+        = link_to('Users', admin_usermanagement_index_path)
   %ul.nav.pull-right
     %li.dropdown
       %a{"class" => "dropdown-toggle " + ((controller?("profile") || controller?("users/registrations")) ? "active" : ""), "data-toggle" => "dropdown", :href => "#"}
-        = current_user.decorate.fullname
-        %b.caret
+        .hide-on-search
+          = current_user.decorate.fullname
+          %b.caret
+        .hide-on-search.hidden
+          %i.icon-user
+          %b.caret
       %ul.dropdown-menu{"role" => "menu"}
         %li
           %a.active{:href => profile_user_path(current_user)}

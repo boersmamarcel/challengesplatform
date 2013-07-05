@@ -2,15 +2,19 @@ class ChallengeDecorator < Draper::Decorator
   delegate_all
 
   def url
-    "/challenge/#{id}"
+    Rails.application.routes.url_helpers.challenge_path(id)
+  end
+
+  def value
+    title
   end
 
   def as_json(options={})
     super(
       options.merge(
-        :root => true, 
+        :root => false, 
         :only => [:id, :title], 
-        :methods => [:url]
+        :methods => [:url, :value]
       )
     )
   end

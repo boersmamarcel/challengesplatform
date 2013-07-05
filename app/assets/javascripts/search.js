@@ -3,26 +3,33 @@ var query_path = "/query.json";
 var searchbar = $('#instant-search');
 
 if(searchbar.length > 0) {
+  searchbar.focus(function() {
+    $('.hide-on-search').toggle(400);
+    $('#instant-search-div').animate({width: 300}, 400);
+  });
+
+  searchbar.blur(function() {
+    $('#instant-search-div').animate({width: 100}, 400);
+    $('.hide-on-search').toggle(400);
+  });
+
   searchbar.typeahead({
     name: 'instant',
-    valueKey: 'challenge',
+    //remote: query_path + '?t=i&q=%QUERY'
     remote: {
       url: query_path + '?q=%QUERY&t=i',
-      dataType: "json",
-      filter: function(parsedResponse) {
-        console.log(parsedResponse);
-        return parsedResponse;
-      }
+      dataType: "json"
     },
     rateLimitWait: 100,
-    template: '<p><strong><a href="{{challenge.url}}">{{challenge.title}}</a></strong> – {{challenge.id}}</p>',
+    template: '<p><strong><a href="{{url}}">{{title}}</a></strong> – {{supervisor}}</p>',
     engine: Hogan,
     limit: 5,
     footer: "<p><a href='/search'>Full search</a></p>",
   });
 
   searchbar.on('typeahead:selected', function(event, selected) {
-    console.log("redirect to: " + selected.challenge.url);
+    if(selected.url.length > 0)
+      window.location = selected.url;
   });
 }
 
