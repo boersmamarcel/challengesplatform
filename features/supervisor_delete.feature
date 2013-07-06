@@ -1,7 +1,7 @@
 Feature: A supervisor should be able to delete itself
 		In order to delete myself
 		As a supervisor
-		I want to be able to cancel my account
+		I want to be able to Destroy my account
 
 		Scenario: Delete supervisor
 			Given the following user records
@@ -11,5 +11,5 @@ Feature: A supervisor should be able to delete itself
      		When I visit the "login" page
     		And I fill in email with "super@ut.nl" and password with "abcd1234"
     		And I visit the "user.edit" page
-    		And I press "Cancel my account"
+    		And I press "Destroy my account"
     		Then I should see the "index" page

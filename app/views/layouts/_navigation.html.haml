@@ -24,12 +24,12 @@
 
     %li
       #instant-search-div
-        %input#instant-search{:type => "text", :placeholder => "Instant Search"}
-
+      
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active hide-on-search": "hide-on-search"}
-        .badge.pulse
-          = Challenge.pending.count
+        -if Challenge.pending.count > 0
+          .badge.pulse
+            = Challenge.pending.count
         = link_to('Review', admin_review_index_path)
       %li{class: controller?("admin/usermanagement") ? "active hide-on-search": "hide-on-search"}
         = link_to('Users', admin_usermanagement_index_path)

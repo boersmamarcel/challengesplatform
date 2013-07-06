@@ -1,21 +1,24 @@
 var query_path = "/query.json";
 
+$('#instant-search-div').html('<input id="instant-search" type="text" placeholder="Instant search">')
+
 var searchbar = $('#instant-search');
 
 if(searchbar.length > 0) {
   searchbar.focus(function() {
-    $('.hide-on-search').toggle(400);
-    $('#instant-search-div').animate({width: 300}, 400);
+    $('.hide-on-search').toggle(200, function() {
+      $('#instant-search-div').animate({width: 300}, 300);
+    });
   });
 
   searchbar.blur(function() {
-    $('#instant-search-div').animate({width: 100}, 400);
-    $('.hide-on-search').toggle(400);
+    $('#instant-search-div').animate({width: 100}, 300, function() {
+      $('.hide-on-search').toggle(200);      
+    });
   });
 
   searchbar.typeahead({
     name: 'instant',
-    //remote: query_path + '?t=i&q=%QUERY'
     remote: {
       url: query_path + '?q=%QUERY&t=i',
       dataType: "json"

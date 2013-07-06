@@ -1,52 +1,56 @@
 %input#page_identifier{:type => "hidden", :value => "registrations.edit"}/
 %h2
-  Edit #{resource_name.to_s.humanize}
+  Edit Account
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
+
+  %div.container
+    %div.row-fluid
+      %div.span2 Email:
+      %div.span3
+        = f.email_field :email, :disabled => true
+    %div.row-fluid
+      %div.span2 Firstname:
+      %div.span3
+        = f.text_field :firstname
+    %div.row-fluid
+      %div.span2 Lastname:
+      %div.span3
+        = f.text_field :lastname
+    %div.row-fluid
+      %div.span2 Tagline:
+      %div.span3
+        = f.text_field :tagline, :placeholder => "Tagline"
+    %div.row-fluid
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    - if resource.provider.blank?
+      %div.row-fluid
+        %div.span2 New password:
+        %div.span3
+          = f.password_field :password, :autocomplete => "off", :placeholder => "New password"
+        %div.span5
+          %i (leave blank if you don't want to change it)
+      %div.row-fluid
+        %div.span3.offset2
+          = f.password_field :password_confirmation, :autocomplete => "off", :placeholder => "Password confirmation"
+      %div.row-fluid
+        %div.span2 Current password:
+        %div.span3
+          = f.password_field :current_password
+        %div.span5
+          %i (we need your current password to confirm your changes)
+
+    %div.row-fluid
+      %div.span2
+        Mail me on notifications
+      %div.span3
+        = f.check_box :notify_by_email
     %br/
-    = f.email_field :email, :disabled => true
-  %div
-    = f.label :firstname
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.text_field :firstname, :autofocus => true
-  %div
-    = f.label :lastname
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.text_field :lastname
-  %div
-    = f.label :tagline
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.text_field :tagline
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  - if resource.provider.blank?
-    %div
-      = f.label :password
-      %i (leave blank if you don't want to change it)
-      %br/
-      = f.password_field :password, :autocomplete => "off"
-    %div
-      = f.label :password_confirmation
-      %br/
-      = f.password_field :password_confirmation
-    %div
-      = f.label :current_password
-      %i (we need your current password to confirm your changes)
-      %br/
-      = f.password_field :current_password
-  %h4 Notification Settings
-  %div
-    = f.label :notify_by_email
-    = f.check_box :notify_by_email
-  %br/
-  %div= f.submit "Update", :class => "btn btn-primary"
-%h3 Cancel my account
+    %div= f.submit "Update", :class => "btn btn-primary"
+%h3 Destroy my account
 %p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"}
+  This destroys your account, and removes you from our mailing. This can not be undone!
+  #{button_to "Destroy my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"}
 = link_to "Back", :back
