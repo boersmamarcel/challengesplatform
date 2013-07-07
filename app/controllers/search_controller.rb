@@ -11,6 +11,8 @@ class SearchController < ApplicationController
     if(params[:t] == "i")
       # set to 2 for testing purposes...
       @results = @results.limit(4)
+    else
+      @results = @results.limit(50)
     end
 
     @results = @results.decorate;

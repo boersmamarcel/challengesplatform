@@ -1,19 +1,92 @@
 require 'spec_helper'
 
 describe SearchController do
+  before (:each) do
+    @self   = FactoryGirl.create(:user, :role => 0, :active => true)
 
-  describe "GET 'query' not authenticated" do
-    it "returns http redirect" do
+    @student1   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "a@a.com", :firstname => "student user foo")
+    @student2   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "b@a.com", :firstname => "student user bar")
+    @supervisor = FactoryGirl.create(:user, :role => 1, :active => true, :email => "a@b.com", :firstname => "supervisor user foo")
+    @admin      = FactoryGirl.create(:user, :role => 2, :active => true, :email => "a@c.com", :firstname => "admin user foo")
+    @challenge1 = FactoryGirl.create(:challenge, :title => "Foo visible", :supervisor => @supervisor, :state => "approved")
+    @challenge2 = FactoryGirl.create(:challenge, :title => "Foo hidden", :supervisor => @supervisor, :state => "pending")
+    @message1   = FactoryGirl.create(:message, :subject => "msg foo 1", :sender_id => @self, :receiver_id => @student2)
+    @message2   = FactoryGirl.create(:message, :subject => "msg foo 2", :sender_id => @student1, :receiver_id => @student2)
+    @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self, :receiver_id => @student2)
+    @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student2, :receiver_id => @self)
+    
+    sign_in @self
+  end
+
+  describe "does not allow outsiders to view pages" do
+    it "returns http redirect for query" do
+      sign_out @self
       get 'query'
       response.status.should eq(302)
     end
-  end
 
-  describe "GET 'index' not authenticated" do
-    it "returns http redirect" do
+    it "returns http redirect for index" do
+      sign_out @self
       get 'index'
       response.status.should eq(302)
     end
   end
 
+  describe "Search functionality" do
+    it "returns visible challenges matching the query" do
+      get 'query', {:q => "Foo"}
+
+      response.body.should include(@challenge1.decorate.title)
+      response.body.should_not include(@challenge2.decorate.title)
+    end
+
+    it "returns users matching the query" do
+      get 'query', {:q => "Foo"}
+
+      response.body.should include(@student1.decorate.firstname)
+      response.body.should_not include(@student2.decorate.firstname)
+      response.body.should include(@supervisor.decorate.firstname)
+      response.body.should include(@admin.decorate.firstname)
+    end
+
+    it "returns visible messages matching the query" do
+      get 'query', {:q => "Foo"}
+
+      response.body.should include(@message1.decorate.subject)
+      response.body.should_not include(@message2.decorate.subject)
+      response.body.should_not include(@message3.decorate.subject)
+      response.body.should include(@message4.decorate.subject)
+    end
+  end
+
+  describe "Selective search" do
+    it "allows selective searching for challenges" do
+      get 'query', {:q => "Foo", :c => "c"}
+      response.body.should include(@challenge1.decorate.title)
+      response.body.should_not include(@student1.decorate.firstname)
+      response.body.should_not include(@message1.decorate.subject)
+    end
+
+    it "allows selective searching for users" do
+      get 'query', {:q => "Foo", :c => "u"}
+      response.body.should include(@student1.decorate.firstname)
+      response.body.should_not include(@challenge1.decorate.title)
+      response.body.should_not include(@message1.decorate.subject)
+    end
+
+    it "allows selective searching for messages" do
+      get 'query', {:q => "Foo", :c => "m"}
+
+      response.body.should include(@message1.decorate.subject)
+      response.body.should_not include(@student1.decorate.firstname)
+      response.body.should_not include(@challenge1.decorate.title)
+    end
+
+    it "allows full search" do
+      get 'query', {:q => "Foo"}
+      response.body.should include(@challenge1.decorate.title)
+      response.body.should include(@student1.decorate.firstname)
+      response.body.should include(@message1.decorate.subject)
+    end
+  end
 end
