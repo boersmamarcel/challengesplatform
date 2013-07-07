@@ -1,6 +1,24 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
+  def value
+    fullname
+  end
+
+  def url
+    Rails.application.routes.url_helpers.profile_user_path(id)
+  end
+
+  def as_json(options={})
+    super(
+      options.merge(
+        :root => false, 
+        :only => [:id], 
+        :methods => [:url, :value]
+      )
+    )
+  end
+
   def fullname
     "#{object.firstname} #{object.lastname}"
   end

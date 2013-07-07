@@ -6,6 +6,7 @@ describe SearchController do
 
     @student1   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "a@a.com", :firstname => "student user foo")
     @student2   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "b@a.com", :firstname => "student user bar")
+    @student3   = FactoryGirl.create(:user, :role => 0, :active => false, :email => "c@a.com", :firstname => "inactive user foo")
     @supervisor = FactoryGirl.create(:user, :role => 1, :active => true, :email => "a@b.com", :firstname => "supervisor user foo")
     @admin      = FactoryGirl.create(:user, :role => 2, :active => true, :email => "a@c.com", :firstname => "admin user foo")
     @challenge1 = FactoryGirl.create(:challenge, :title => "Foo visible", :supervisor => @supervisor, :state => "approved")
@@ -45,6 +46,7 @@ describe SearchController do
 
       response.body.should include(@student1.decorate.firstname)
       response.body.should_not include(@student2.decorate.firstname)
+      response.body.should_not include(@student3.decorate.firstname)
       response.body.should include(@supervisor.decorate.firstname)
       response.body.should include(@admin.decorate.firstname)
     end

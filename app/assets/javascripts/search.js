@@ -7,7 +7,7 @@ var searchbar = $('#instant-search');
 if(searchbar.length > 0) {
   searchbar.focus(function() {
     $('.hide-on-search').toggle(200, function() {
-      $('#instant-search-div').animate({width: 300}, 300);
+      $('#instant-search-div').animate({width: 320}, 300);
     });
   });
 
@@ -24,7 +24,7 @@ if(searchbar.length > 0) {
       dataType: "json"
     },
     rateLimitWait: 100,
-    template: '<p><strong><a href="{{url}}">{{title}}</a></strong> – {{supervisor}}</p>',
+    template: '<p><strong><a href="{{url}}">{{value}}</a></strong> – {{subvalue}}</p>',
     engine: Hogan,
     limit: 5,
     footer: "<p><a href='/search'>Full search</a></p>",
