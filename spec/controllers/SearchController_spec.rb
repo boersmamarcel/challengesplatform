@@ -11,10 +11,10 @@ describe SearchController do
     @admin      = FactoryGirl.create(:user, :role => 2, :active => true, :email => "a@c.com", :firstname => "admin user foo")
     @challenge1 = FactoryGirl.create(:challenge, :title => "Foo visible", :supervisor => @supervisor, :state => "approved")
     @challenge2 = FactoryGirl.create(:challenge, :title => "Foo hidden", :supervisor => @supervisor, :state => "pending")
-    @message1   = FactoryGirl.create(:message, :subject => "msg foo 1", :sender_id => @self, :receiver_id => @student2)
-    @message2   = FactoryGirl.create(:message, :subject => "msg foo 2", :sender_id => @student1, :receiver_id => @student2)
-    @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self, :receiver_id => @student2)
-    @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student2, :receiver_id => @self)
+    @message1   = FactoryGirl.create(:message, :subject => "msg foo 1", :sender_id => @self.id, :receiver_id => @student2.id)
+    @message2   = FactoryGirl.create(:message, :subject => "msg foo 2", :sender_id => @student1.id, :receiver_id => @student2.id)
+    @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self.id, :receiver_id => @student2.id)
+    @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student2.id, :receiver_id => @self.id)
     
     sign_in @self
   end
@@ -54,7 +54,8 @@ describe SearchController do
     it "returns visible messages matching the query" do
       get 'query', {:q => "Foo"}
 
-      response.body.should include(@message1.decorate.subject)
+      # You can't see this one, because sent messages can not be seen (yet)
+      response.body.should_not include(@message1.decorate.subject)
       response.body.should_not include(@message2.decorate.subject)
       response.body.should_not include(@message3.decorate.subject)
       response.body.should include(@message4.decorate.subject)
@@ -79,7 +80,7 @@ describe SearchController do
     it "allows selective searching for messages" do
       get 'query', {:q => "Foo", :c => "m"}
 
-      response.body.should include(@message1.decorate.subject)
+      response.body.should include(@message4.decorate.subject)
       response.body.should_not include(@student1.decorate.firstname)
       response.body.should_not include(@challenge1.decorate.title)
     end
@@ -88,7 +89,7 @@ describe SearchController do
       get 'query', {:q => "Foo"}
       response.body.should include(@challenge1.decorate.title)
       response.body.should include(@student1.decorate.firstname)
-      response.body.should include(@message1.decorate.subject)
+      response.body.should include(@message4.decorate.subject)
     end
   end
 end
