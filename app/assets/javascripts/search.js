@@ -36,7 +36,8 @@ if(searchbar.length > 0) {
   });
 }
 
-if(document.getElementById('page_identifier').value == 'search.index') {
+var page_id = document.getElementById('page_identifier');
+if(page_id != null && page_id.value == 'search.index') {
   // Create result list
   enableList();
   var options = { valueNames: [ 'id', 'name' ] };
