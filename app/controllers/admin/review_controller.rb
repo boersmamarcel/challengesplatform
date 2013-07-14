@@ -1,23 +1,22 @@
 class Admin::ReviewController < Admin::AdminController
-  
+
   def index
     # Get all pending for review challenges
     @challenges = Challenge.pending.decorate
     @draft_challenges = Challenge.draft.decorate
     @declined_challenges = Challenge.declined.decorate
   end
-  
+
   def show
     begin
-      @challenge = Challenge.pending.find_by_id!(params[:id]).decorate
+      @challenge = Challenge.find_by_id!(params[:id]).decorate
       @new_comment = @challenge.comments.new
       @challenge.reload
       render :show
     rescue ActiveRecord::RecordNotFound
-      redirect_to admin_review_index_path, :alert => "This challenge can't be reviewed"
+      redirect_to admin_review_index_path, :alert => "This challenge does not exist."
     end
   end
-  
 
   def edit
     @challenge = Challenge.find(params[:id])
@@ -48,7 +47,6 @@ class Admin::ReviewController < Admin::AdminController
       render action: "edit"
     end
   end
-
 
   def approve
       @challenge = Challenge.pending.find(params[:id])
@@ -84,7 +82,4 @@ class Admin::ReviewController < Admin::AdminController
       redirect_to admin_review_path(@comment.challenge.id), :alert => 'Challenge can not be declined without comments'
     end
   end
-  
-
-  
 end
