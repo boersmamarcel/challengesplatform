@@ -1,4 +1,4 @@
-/*
+/*!
 ListJS Beta 0.2.0
 By Jonny StrÃ¶mberg (www.jonnystromberg.com, www.listjs.com)
 
