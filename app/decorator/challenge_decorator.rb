@@ -1,20 +1,29 @@
 class ChallengeDecorator < Draper::Decorator
+  include Sprockets::Helpers::RailsHelper
   delegate_all
+
+  def value
+    title
+  end
 
   def url
     Rails.application.routes.url_helpers.challenge_path(id)
   end
 
-  def value
-    title
+  def sub
+    "By; #{supervisor.decorate.fullname}"
+  end
+
+  def img
+    ActionController::Base.helpers.image_path("fav32.png")
   end
 
   def as_json(options={})
     super(
       options.merge(
         :root => false, 
-        :only => [:id, :title], 
-        :methods => [:url, :value]
+        :only => [], 
+        :methods => [:url, :value, :sub, :img]
       )
     )
   end

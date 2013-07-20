@@ -1,3 +1,20 @@
 // Place all the styles related to the Search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.instant-val .instant-sub {
+  text-decoration: none;
+}
+
+.instant-val {
+  weight: bold;
+}
+
+.instant-sub {
+  font-style: italic;
+}
+
+.instant-img {
+  width: 32px;
+  heigth: 32px;
+}

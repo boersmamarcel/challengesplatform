@@ -9,12 +9,21 @@ class MessageDecorator < Draper::Decorator
     Rails.application.routes.url_helpers.message_path(id)
   end
 
+  def sub
+    #"To; #{receiver.decorate.fullname}"  if sender.id == current_user.id # once implemented
+    "From; #{sender.decorate.fullname}" # unless sender.id == current_user.id
+  end
+
+  def img
+    ActionController::Base.helpers.image_path("message-icon.png")
+  end
+
   def as_json(options={})
     super(
       options.merge(
         :root => false, 
-        :only => [:id, :title], 
-        :methods => [:url, :value]
+        :only => [], 
+        :methods => [:url, :value, :sub, :img]
       )
     )
   end

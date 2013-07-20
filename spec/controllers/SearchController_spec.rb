@@ -7,14 +7,15 @@ describe SearchController do
     @student1   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "a@a.com", :firstname => "student user foo")
     @student2   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "b@a.com", :firstname => "student user bar")
     @student3   = FactoryGirl.create(:user, :role => 0, :active => false, :email => "c@a.com", :firstname => "inactive user foo")
+    @student4   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "d@a.com", :firstname => "dummy")
     @supervisor = FactoryGirl.create(:user, :role => 1, :active => true, :email => "a@b.com", :firstname => "supervisor user foo")
     @admin      = FactoryGirl.create(:user, :role => 2, :active => true, :email => "a@c.com", :firstname => "admin user foo")
     @challenge1 = FactoryGirl.create(:challenge, :title => "Foo visible", :supervisor => @supervisor, :state => "approved")
     @challenge2 = FactoryGirl.create(:challenge, :title => "Foo hidden", :supervisor => @supervisor, :state => "pending")
-    @message1   = FactoryGirl.create(:message, :subject => "msg foo 1", :sender_id => @self.id, :receiver_id => @student2.id)
-    @message2   = FactoryGirl.create(:message, :subject => "msg foo 2", :sender_id => @student1.id, :receiver_id => @student2.id)
-    @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self.id, :receiver_id => @student2.id)
-    @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student2.id, :receiver_id => @self.id)
+    @message1   = FactoryGirl.create(:message, :subject => "msg foo 1", :sender_id => @self.id, :receiver_id => @student4.id)
+    @message2   = FactoryGirl.create(:message, :subject => "msg foo 2", :sender_id => @student1.id, :receiver_id => @student4.id)
+    @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self.id, :receiver_id => @student4.id)
+    @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student4.id, :receiver_id => @self.id)
     
     sign_in @self
   end

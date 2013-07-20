@@ -9,12 +9,21 @@ class UserDecorator < Draper::Decorator
     Rails.application.routes.url_helpers.profile_user_path(id)
   end
 
+  def sub
+    tagline if defined? tagline
+    "-" unless defined? tagline
+  end
+
+  def img
+    Gravatar.new(email).image_url
+  end
+
   def as_json(options={})
     super(
       options.merge(
-        :root => false, 
-        :only => [:id], 
-        :methods => [:url, :value]
+        :root => false,
+        :only => [],
+        :methods => [:url, :value, :sub, :img]
       )
     )
   end
