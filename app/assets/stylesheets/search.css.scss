@@ -2,28 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.tt-suggestion {
-  border-bottom: 1px solid #ccc;
-}
 
-.instant-val .instant-sub {
-  text-decoration: none;
-}
+/* Instant search */
+  .tt-suggestion {
+    border-bottom: 1px solid #ccc;
+  }
 
-.instant-val {
-  font-weight: bold;
-}
+  .instant-val .instant-sub {
+    text-decoration: none;
+  }
 
-.instant-sub {
-  font-style: italic;
-}
+  .instant-val {
+    font-weight: bold;
+  }
 
-.instant-img {
-  width: 36px;
-  heigth: 36px;
-  display: block;
-  margin: 4px 4px 4px 0px;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
-}
+  .instant-sub {
+    font-style: italic;
+  }
+
+  .instant-img {
+    width: 36px;
+    heigth: 36px;
+    display: block;
+    margin: 4px 4px 4px 0px;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+  }
+
+  #instant-footer {
+    text-align: center;
+    font-weight: bold;
+  }

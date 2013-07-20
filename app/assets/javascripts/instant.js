@@ -24,6 +24,7 @@ if(search_div.length > 0) {
   }
 
   var query_path = "/query.json";
+  var full_search_path = "/search";
   search_div.html('<input id="instant-search" type="text" placeholder="Instant search">')
 
   var searchbar = $('#instant-search');
@@ -38,12 +39,36 @@ if(search_div.length > 0) {
     template: '',
     engine: templater,
     limit: 5,
-    footer: "<p><a href='/search'>Full search</a></p>",
+    footer: '<p id="instant-footer">Full search</p>',
+  });
+
+  $('#instant-footer').click(function(e) {
+    console.log(full_search_path + "#" + searchbar.val());
+    //window.location = full_search_path + "#" + searchbar.val();
   });
 
   searchbar.on('typeahead:selected', function(event, selected) {
     if(selected.url.length > 0)
       window.location = selected.url;
+  });
+
+  var autocompleted_url = false;
+  searchbar.on('typeahead:autocompleted', function(event, completed) {
+    autocompleted_url = completed.url;
+  });
+
+  searchbar.keydown(function(event){
+    if(event.which == 13) { // The enter key
+      if(autocompleted_url) {
+        window.location = autocompleted_url;
+      }
+      else {
+        window.location = full_search_path + "#" + searchbar.val();
+      }
+    }
+    else if(event.which == 8 || event.which == 46) {
+      autocompleted_url = false;
+    }
   });
 
   // focussing and blurring (fancy; clicking a suggestion is no blur)
