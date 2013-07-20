@@ -2,12 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.tt-suggestion {
+  border-bottom: 1px solid #ccc;
+}
+
 .instant-val .instant-sub {
   text-decoration: none;
 }
 
 .instant-val {
-  weight: bold;
+  font-weight: bold;
 }
 
 .instant-sub {
@@ -15,6 +19,11 @@
 }
 
 .instant-img {
-  width: 32px;
-  heigth: 32px;
+  width: 36px;
+  heigth: 36px;
+  display: block;
+  margin: 4px 4px 4px 0px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
 }

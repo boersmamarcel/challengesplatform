@@ -15,7 +15,7 @@ class ChallengeDecorator < Draper::Decorator
   end
 
   def img
-    ActionController::Base.helpers.image_path("fav32.png")
+    ActionController::Base.helpers.image_path("fav64.png")
   end
 
   def as_json(options={})

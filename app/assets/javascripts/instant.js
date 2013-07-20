@@ -5,10 +5,11 @@ if(search_div.length > 0) {
     compile: function(template) {
       var template = '';
       template += '<div class="instant-result">';
-      template += '<p class="instant-img pull-left"><img src={{img}} alt="" /></p>';
+      template += '<img class="instant-img pull-left" src={{img}} alt="" />';
       template += '<p class="instant-val">{{value}}</p>';
       template += '<p class="instant-sub">{{sub}}</p>';
       template += '</div>';
+      template += '<hr';
 
       return {
         render: function(context) {
@@ -45,24 +46,22 @@ if(search_div.length > 0) {
       window.location = selected.url;
   });
 
-  // bluf (fancy; clicking a suggestion is no blur)
+  // focussing and blurring (fancy; clicking a suggestion is no blur)
   var focusin = false;
   $(document).mouseup(function (e) {
     // Do we have focus?
     if (search_div.is(e.target) || search_div.has(e.target).length != 0) {
       // yes; we have focus
-      // Are we gaining focus?
-      if(!focusin) {
+      if(!focusin) { // Are we gaining focus?
         $('.hide-on-search').toggle(150, function() {
           search_div.animate({width: 320}, 200);
         });
         focusin = true;
       }
     }
-    else {
+    else { 
       // no; we have no focus
-      //Are we losing focus?
-      if(focusin) {
+      if(focusin) { //Are we losing focus?
         search_div.animate({width: 100}, 200, function() {
           $('.hide-on-search').toggle(150);      
         });
