@@ -38,13 +38,7 @@ if(search_div.length > 0) {
     rateLimitWait: 100,
     template: '',
     engine: templater,
-    limit: 5,
-    footer: '<p id="instant-footer">Full search</p>',
-  });
-
-  $('#instant-footer').click(function(e) {
-    console.log(full_search_path + "#" + searchbar.val());
-    //window.location = full_search_path + "#" + searchbar.val();
+    limit: 5
   });
 
   searchbar.on('typeahead:selected', function(event, selected) {
@@ -62,10 +56,8 @@ if(search_div.length > 0) {
       if(autocompleted_url) {
         window.location = autocompleted_url;
       }
-      else {
-        window.location = full_search_path + "#" + searchbar.val();
-      }
     }
+    // On delete or backspace; disregard the old autocomplete
     else if(event.which == 8 || event.which == 46) {
       autocompleted_url = false;
     }
@@ -87,9 +79,8 @@ if(search_div.length > 0) {
     else { 
       // no; we have no focus
       if(focusin) { //Are we losing focus?
-        $('.tt-dropdown-menu').hide();
         search_div.animate({width: 100}, 200, function() {
-          $('.hide-on-search').toggle(150);      
+          $('.hide-on-search').toggle(150);
         });
         focusin = false;
       }

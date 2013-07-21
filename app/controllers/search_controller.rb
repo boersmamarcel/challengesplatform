@@ -2,9 +2,6 @@ class SearchController < ApplicationController
 
   skip_filter :require_admin, :require_supervisor
 
-  def index
-  end
-
   def query
     @query = params[:q];
     # Set the limit (lower for instant search)

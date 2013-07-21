@@ -10,8 +10,11 @@ class UserDecorator < Draper::Decorator
   end
 
   def sub
-    tagline if defined? tagline
-    "-" unless defined? tagline
+    if(tagline.eql?(nil) || tagline.length == 0)
+      "-"
+    else
+      tagline
+    end
   end
 
   def img
