@@ -87,6 +87,7 @@ if(search_div.length > 0) {
     else { 
       // no; we have no focus
       if(focusin) { //Are we losing focus?
+        $('.tt-dropdown-menu').hide();
         search_div.animate({width: 100}, 200, function() {
           $('.hide-on-search').toggle(150);      
         });
