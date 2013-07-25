@@ -24,6 +24,7 @@
 
     %li
       #instant-search-div
+        %input{:type => "text", :id=>"instant-search", :class=>"instant-search-beforeLoad", :placeholder=> "Instant search"}
       
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active hide-on-search": "hide-on-search"}

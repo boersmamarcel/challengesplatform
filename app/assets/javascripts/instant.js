@@ -25,9 +25,8 @@ if(search_div.length > 0) {
 
   var query_path = "/query.json";
   var full_search_path = "/search";
-  search_div.html('<input id="instant-search" type="text" placeholder="Instant search">')
-
   var searchbar = $('#instant-search');
+  searchbar.removeClass('instant-search-beforeLoad');
 
   searchbar.typeahead({
     name: 'instant',

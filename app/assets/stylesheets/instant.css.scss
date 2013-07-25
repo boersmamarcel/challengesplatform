@@ -3,9 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-/* Instant search */
   .tt-suggestion {
     border-bottom: 1px solid #ccc;
+  }
+
+  /* Prevents some trouble with size of instant search input text field */
+  .instant-search-beforeLoad {
+    width: 100px;
   }
 
   .instant-val .instant-sub {
