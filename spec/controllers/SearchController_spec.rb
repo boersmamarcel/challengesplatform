@@ -26,12 +26,6 @@ describe SearchController do
       get 'query'
       response.status.should eq(302)
     end
-
-    it "returns http redirect for index" do
-      sign_out @self
-      get 'index'
-      response.status.should eq(302)
-    end
   end
 
   describe "Search functionality" do
