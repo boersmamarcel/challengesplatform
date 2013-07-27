@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+  #instant-search {
+    background-color: #666;
+    border-color: #999;
+    color: white; /* Set regular color; if user starts typing but blurs, text should still be white */
+  }
+
+  /* Set the color of the placeholder*/
+  #instant-search::-webkit-input-placeholder { color: #ddd; }
+  #instant-search:-ms-input-placeholder      { color: #ddd; }/* IE10+ */
+  #instant-search:-moz-placeholder           { color: #ddd; }
 
   .tt-suggestion {
     border-bottom: 1px solid #ccc;
