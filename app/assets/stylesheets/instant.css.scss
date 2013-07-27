@@ -17,6 +17,11 @@
     border-bottom: 1px solid #ccc;
   }
 
+  i.hide-on-search {
+    color: #999;
+    vertical-align: middle;
+  }
+
   /* Prevents some trouble with size of instant search input text field */
   .instant-search-beforeLoad {
     width: 100px;
