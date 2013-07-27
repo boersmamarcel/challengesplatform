@@ -55,6 +55,9 @@ if(search_div.length > 0) {
       if(autocompleted_url) {
         window.location = autocompleted_url;
       }
+      else {
+        window.location = full_search_path;
+      }
     }
     // On delete or backspace; disregard the old autocomplete
     else if(event.which == 8 || event.which == 46) {
