@@ -58,7 +58,6 @@ $(document).ready(function(a){
 
     $(window).scroll(function () {
         max = 350;
-        console.log($("body").scrollTop());
         $(".post-title").css({'opacity' : 1-($("body").scrollTop()/max)});
     });
 
