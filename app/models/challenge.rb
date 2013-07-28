@@ -5,6 +5,12 @@ class Challenge < ActiveRecord::Base
   # But these are protected:
   attr_protected :count, :state
 
+  searchable do
+    text :title, :boost => 5
+    text :lead, :boost => 2
+    text :description
+  end
+
   belongs_to :supervisor, :class_name => "User"
 
   has_many :enrollments, :dependent => :destroy # Enrollments does not have a default scope for unenrolled users
@@ -53,12 +59,6 @@ class Challenge < ActiveRecord::Base
 
   scope :supervised_by_user, lambda { |user|
     where("supervisor_id = ?", user.id)
-  }
-
-  scope :search, lambda { |query|
-    where do
-      (title =~ "%#{query}%")
-    end
   }
 
   def enroll(user)
@@ -145,4 +145,31 @@ class Challenge < ActiveRecord::Base
     errors.add(:dates, "End date can not be before start date") if start_date.nil? || end_date.nil? || start_date > end_date
     errors.add(:dates, "Start date can not be in the past") if start_date.nil? || start_date < DateTime.now
   end
+
+  # Originally these come from the decorator.
+    def value
+      title
+    end
+
+    def url
+      Rails.application.routes.url_helpers.challenge_path(id)
+    end
+
+    def sub
+      "By; #{supervisor.decorate.fullname}"
+    end
+
+    def img
+      ActionController::Base.helpers.image_path("fav64.png")
+    end
+
+    def as_json(options={})
+      super(
+        options.merge(
+          :root => false, 
+          :only => [], 
+          :methods => [:url, :value, :sub, :img]
+        )
+      )
+    end
 end

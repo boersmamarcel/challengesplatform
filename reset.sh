@@ -64,6 +64,7 @@ if $m; then
 fi
 
 if $s; then
+  bundle exec rake sunspot:solr:start
   echo "Starting rails server as a background process"
   echo "Running on http://localhost:3000"
   echo "Call $0 -k to terminate server"

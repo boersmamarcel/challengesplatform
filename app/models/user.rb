@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   #Yeah, let's suppose admins are wise enough not to screw things up
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
 
+  searchable do
+    text :firstname, :boost => 5
+    text :lastname, :boost => 2
+    text :tagline
+  end
+
   validates :email, :presence => { :message => "is missing" }
   validates :firstname, :presence => { :message => "is missing"}
   validates :lastname, :presence => { :message => "is missing"}
@@ -97,6 +103,41 @@ class User < ActiveRecord::Base
   def ensure_reset_password_token!
     generate_reset_password_token! if should_generate_reset_token?
   end
+
+  #Originally, these come from the decorator
+    def fullname
+        "#{firstname} #{lastname}"
+      end
+
+    def value
+      fullname
+    end
+
+    def url
+      Rails.application.routes.url_helpers.profile_user_path(id)
+    end
+
+    def sub
+      if(tagline.eql?(nil) || tagline.length == 0)
+        "-"
+      else
+        tagline
+      end
+    end
+
+    def img
+      Gravatar.new(email).image_url
+    end
+
+    def as_json(options={})
+      super(
+        options.merge(
+          :root => false, 
+          :only => [], 
+          :methods => [:url, :value, :sub, :img]
+        )
+      )
+    end
 
   protected
     def should_generate_reset_token?
