@@ -13,6 +13,7 @@
 # Ignore Solr index data
 # Build index every time; bundle exec rake sunspot:solr:reindex
 /solr/data
+/solr/pids
 
 # Ignore all logfiles and tempfiles.
 /tmp
