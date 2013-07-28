@@ -12,8 +12,8 @@ class SearchController < ApplicationController
       query.fulltext @query
     end
     
-    @results = @sunspot_search.results.map(&:decorate)
+    @sunspot_search.results.map!(&:decorate)
 
-    render :json => @results
+    render :json => @sunspot_search.results
   end
 end
