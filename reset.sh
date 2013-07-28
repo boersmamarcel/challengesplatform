@@ -33,10 +33,14 @@ if $h; then
   echo "     -b to execute bundle"
   echo "     -d to reset database"
   echo "     -m to migrate database"
+  echo "     -i to reindex Solr (required when changing schemes/db info outside regular flow)"
   echo "     -c to run cucumber tests"
   echo "     -s to execute rails s when done resetting"
   echo "     -h you're looking at it (and terminate)"
   echo "     -t to update the crontab"
+  echo ""
+  echo "On new pull/fetch/deploy, run;"
+  echo "     $0 -kbmis"
   exit 0
 fi
 
@@ -61,6 +65,10 @@ if $m; then
   echo "Migrating database"
   rake db:migrate
   rake db:migrate RAILS_ENV=test
+fi
+
+if $i; then
+  bundle exec rake sunspot:solr:reindex
 fi
 
 if $s; then
