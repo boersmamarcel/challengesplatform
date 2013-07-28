@@ -14,6 +14,7 @@
 # Build index every time; bundle exec rake sunspot:solr:reindex
 /solr/data
 /solr/pids
+/log
 
 # Ignore all logfiles and tempfiles.
 /tmp
