@@ -146,30 +146,4 @@ class Challenge < ActiveRecord::Base
     errors.add(:dates, "Start date can not be in the past") if start_date.nil? || start_date < DateTime.now
   end
 
-  # Originally these come from the decorator.
-    def value
-      title
-    end
-
-    def url
-      Rails.application.routes.url_helpers.challenge_path(id)
-    end
-
-    def sub
-      "By; #{supervisor.decorate.fullname}"
-    end
-
-    def img
-      ActionController::Base.helpers.image_path("fav64.png")
-    end
-
-    def as_json(options={})
-      super(
-        options.merge(
-          :root => false, 
-          :only => [], 
-          :methods => [:url, :value, :sub, :img]
-        )
-      )
-    end
 end
