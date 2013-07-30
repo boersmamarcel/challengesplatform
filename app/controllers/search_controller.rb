@@ -21,13 +21,22 @@ class SearchController < ApplicationController
         if(params[:c] != 'u' && params[:c] != 'm')
           all_of do
             with(:type, "Challenge")
-            with(:state, "approved")
+
+            any_of do
+              with(:state, "approved")
+              with(:supervisor_id, current_user.id)
+            end
           end
         end
 
         if(params[:c] != 'u' && params[:c] != 'c')
           all_of do
             with(:type, "Message")
+            
+            any_of do
+              #with(:sender_id, current_user.id)
+              with(:receiver_id, current_user.id)
+            end
           end
         end
       end

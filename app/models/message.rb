@@ -11,6 +11,8 @@ class Message < ActiveRecord::Base
     string :type do
       "Message"
     end
+    integer :sender_id
+    integer :receiver_id
   end
   
   belongs_to :sender, :class_name => 'User'
