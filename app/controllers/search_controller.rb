@@ -6,24 +6,29 @@ class SearchController < ApplicationController
   end
 
   def query
-    @query = params[:q].downcase;
-
     @sunspot_search = Sunspot.search(User, Challenge, Message) do
-      fulltext @query
+      fulltext params[:q].downcase
 
       any_of do
-        all_of do
-          with :type, "User"
-          with :active, true
+
+        if(params[:c] != 'c' && params[:c] != 'm')
+          all_of do
+            with(:type, "User")
+            with(:active, true)
+          end
         end
 
-        all_of do
-          with :type, "Challenge"
-          with :state, "approved"
+        if(params[:c] != 'u' && params[:c] != 'm')
+          all_of do
+            with(:type, "Challenge")
+            with(:state, "approved")
+          end
         end
 
-        all_of do
-          with :type, "Message"
+        if(params[:c] != 'u' && params[:c] != 'c')
+          all_of do
+            with(:type, "Message")
+          end
         end
       end
     end
