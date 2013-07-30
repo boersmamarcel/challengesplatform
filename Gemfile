@@ -12,6 +12,7 @@ gem 'squeel' # DSL for SQL queries
 
 # Search engine (will replace squeel)
 gem 'sunspot_rails'
+gem 'sunspot_test'
 gem 'progress_bar'
 
 #Add gems for devise authentication and Google oauth

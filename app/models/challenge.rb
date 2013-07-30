@@ -9,6 +9,11 @@ class Challenge < ActiveRecord::Base
     text :title, :boost => 5
     text :lead, :boost => 2
     text :description
+
+    string :type do
+      "Challenge"
+    end
+    string :state
   end
 
   belongs_to :supervisor, :class_name => "User"

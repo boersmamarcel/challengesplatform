@@ -4,7 +4,12 @@ class Message < ActiveRecord::Base
   searchable do
     text :subject, :boost => 3
     text :sender do
-      User.find(sender_id).firstname << " " << User.find(sender_id).lastname
+       @user = User.find(sender_id)
+       @user.firstname << " " << @user.lastname
+    end
+
+    string :type do
+      "Message"
     end
   end
   

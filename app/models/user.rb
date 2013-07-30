@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
     text :firstname, :boost => 5
     text :lastname, :boost => 2
     text :tagline
+
+    string :type do
+      "User"
+    end
+    boolean :active
   end
 
   validates :email, :presence => { :message => "is missing" }

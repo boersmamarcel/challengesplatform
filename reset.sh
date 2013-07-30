@@ -5,20 +5,24 @@ s=false # Run rails server
 b=false # Run bundle
 d=false # Run database reset
 m=false # Run database migrate
+i=false # Reindex Solr
 h=false # Help
 c=false # Run cucumber tests
 t=false # update cronTab
+r=false #
 
-while getopts ":ksbdmhct" opt; do
+while getopts ":ksbdmhctir" opt; do
   case $opt in
     k) k=true >&2 ;;
     s) s=true >&2 ;;
     b) b=true >&2 ;;
     d) d=true >&2 ;;
     m) m=true >&2 ;;
+    i) i=true >&2 ;;
     h) h=true >&2 ;;
     c) c=true >&2 ;;
-	t) t=true >&2 ;;
+    r) r=true >&2 ;;
+  t) t=true >&2 ;;
     \?)
       echo "Invalid option: -$OPTARG"
       echo "$0 -h for help"
@@ -27,7 +31,7 @@ while getopts ":ksbdmhct" opt; do
   esac
 done
 
-if $h; then
+if $h || !($k || $s || $b || $d || $m || $c || $r || $i); then
   echo "Call $0 to reset the environment."
   echo "     -k to kill any servers (port 3000 tcp only)"
   echo "     -b to execute bundle"
@@ -38,10 +42,20 @@ if $h; then
   echo "     -s to execute rails s when done resetting"
   echo "     -h you're looking at it (and terminate)"
   echo "     -t to update the crontab"
+  echo "     -r to run rspec"
   echo ""
   echo "On new pull/fetch/deploy, run;"
   echo "     $0 -kbmis"
   exit 0
+fi
+
+# Solr has to be started for reindexing or running the rails server
+if $i || $s || $c; then
+  bundle exec rake sunspot:solr:start
+fi
+
+if $r || $c; then
+  rake db:test:prepare
 fi
 
 if $k; then
@@ -68,11 +82,10 @@ if $m; then
 fi
 
 if $i; then
-  bundle exec rake sunspot:solr:reindex
+  yes | bundle exec rake sunspot:solr:reindex
 fi
 
 if $s; then
-  bundle exec rake sunspot:solr:start
   echo "Starting rails server as a background process"
   echo "Running on http://localhost:3000"
   echo "Call $0 -k to terminate server"
@@ -85,6 +98,10 @@ if $c; then
     echo "    (psst; server is still running)"
   fi
   cucumber
+fi
+
+if $r; then
+  rspec
 fi
 
 if $t; then
