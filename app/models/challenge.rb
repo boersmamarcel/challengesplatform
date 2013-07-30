@@ -14,6 +14,7 @@ class Challenge < ActiveRecord::Base
       "Challenge"
     end
     string :state
+    integer :supervisor_id
   end
 
   belongs_to :supervisor, :class_name => "User"
