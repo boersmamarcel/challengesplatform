@@ -7,29 +7,34 @@ class SearchController < ApplicationController
 
   def query
     @sunspot_search = Sunspot.search(User, Challenge, Message) do
+      # Not model specific query
       fulltext params[:q].downcase
 
       any_of do
-
-        if(params[:c] != 'c' && params[:c] != 'm')
+        # User-model specific query
+        if(params[:c].nil? || params[:c].eql?('u'))
           all_of do
             with(:type, "User")
             with(:active, true)
           end
         end
 
-        if(params[:c] != 'u' && params[:c] != 'm')
+        # Challenge-model specific query
+        if(params[:c].nil? || params[:c].eql?('c'))
           all_of do
             with(:type, "Challenge")
 
-            any_of do
-              with(:state, "approved")
-              with(:supervisor_id, current_user.id)
+            if(not current_user.is_admin?)
+              any_of do
+                with(:state, "approved")
+                with(:supervisor_id, current_user.id)
+              end
             end
           end
         end
 
-        if(params[:c] != 'u' && params[:c] != 'c')
+        # Message-model specific query
+        if(params[:c].nil? || params[:c].eql?('m'))
           all_of do
             with(:type, "Message")
             

@@ -39,7 +39,7 @@ if $h || !($k || $s || $b || $d || $m || $c || $r || $i); then
   echo "     -m to migrate database"
   echo "     -i to reindex Solr (required when changing schemes/db info outside regular flow)"
   echo "     -c to run cucumber tests"
-  echo "     -s to execute rails s when done resetting"
+  echo "     -s to execute rails s when done resetting (auto-starts Solr)"
   echo "     -h you're looking at it (and terminate)"
   echo "     -t to update the crontab"
   echo "     -r to run rspec"
@@ -50,11 +50,13 @@ if $h || !($k || $s || $b || $d || $m || $c || $r || $i); then
 fi
 
 # Solr has to be started for reindexing or running the rails server
-if $i || $s || $c; then
+if $i || $s; then
+  echo "Starting Solr (bundle exec rake sunspot:solr:start)"
   bundle exec rake sunspot:solr:start
 fi
 
 if $r || $c; then
+  echo "Preparing test database (rake db:test:prepare)"
   rake db:test:prepare
 fi
 
@@ -64,21 +66,23 @@ if $k; then
 fi
 
 if $b; then
-  echo "Running bundle"
+  echo "Running bundle install"
   bundle install
 fi
 
 if $d; then
-  echo "Resetting database"
+  echo "Resetting database (migrate, reset, prepare)"
   rake db:migrate
   rake db:reset
   rake db:test:prepare
+  echo "Don't forget to reindex ($0 -i) if you updated schemes"
 fi
 
 if $m; then
   echo "Migrating database"
   rake db:migrate
   rake db:migrate RAILS_ENV=test
+  echo "Don't forget to reindex ($0 -i) if you updated schemes"
 fi
 
 if $i; then
