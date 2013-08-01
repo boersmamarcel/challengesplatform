@@ -57,6 +57,8 @@ Challengesplatform::Application.routes.draw do
     resources :review 
   end
 
+  get "query", :to => "search#query"
+  get "search", :to => "search#index"
 
   get "static/index"
   get "aboutus", :to => "static#aboutus"

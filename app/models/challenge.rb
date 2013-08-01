@@ -31,9 +31,7 @@ class Challenge < ActiveRecord::Base
   scope :running, where('end_date >= ? AND start_date <= ?', Date.today, Date.today)
   scope :past, where('end_date < ?', Date.today)
   scope :upcoming_and_running, where('end_date > ?', Date.today)
-  
   scope :past_last, order("case when (end_date < \'#{Date.today}\' ) then random() else (2 + random()) end desc")
-
   scope :pending, where(:state => "pending")
   scope :draft, where("state = 'draft' AND count < 2")
   scope :declined, where("state = 'draft' AND count > 1")
@@ -55,6 +53,12 @@ class Challenge < ActiveRecord::Base
 
   scope :supervised_by_user, lambda { |user|
     where("supervisor_id = ?", user.id)
+  }
+
+  scope :search, lambda { |query|
+    where do
+      (title =~ "%#{query}%")
+    end
   }
 
   def enroll(user)

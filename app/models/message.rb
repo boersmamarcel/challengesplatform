@@ -6,5 +6,15 @@ class Message < ActiveRecord::Base
   
   scope :unread, where(:is_read => false)
   default_scope order('created_at DESC')
+
+  scope :visible_for_user, lambda { |user|
+    where(:receiver_id => user.id)
+  }
+
+  scope :search, lambda { |query|
+    where do
+      (subject =~ "%#{query}%")
+    end  
+  }
   
 end

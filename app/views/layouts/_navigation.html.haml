@@ -17,27 +17,54 @@
           .badge.pulse
             = "" + current_user.received_messages.unread.count.to_s + ""
     %li.divider-vertical
+    
+    %li
+      #instant-search-div
+        %input{:type => "text", :id=>"instant-search", :class=>"instant-search-beforeLoad", :placeholder=> "Omnibox"}
+
     %li{class: controller?("dashboard") ? "active" : ""}
-      = link_to('Dashboard', dashboard_path)
+      %a{:href => dashboard_path, :title => "Dashboard"}
+        .hide-on-search
+          Dashboard
+        .hide-on-search.hidden
+          %i.icon-dashboard.icon-large
     %li{class: controller?("challenges") ? "active" : ""}
-      = link_to('Challenges', challenges_path)
+      %a{:href => challenges_path, :title => "Challenges"}
+        .hide-on-search
+          Challenges
+        .hide-on-search.hidden
+          %i.icon-lightbulb.icon-large
+
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
         -if Challenge.pending.count > 0
           .badge.pulse
             = Challenge.pending.count
-        = link_to('Review', admin_review_index_path)
+        %a{:href => admin_review_index_path, :title => "Review"}
+          .hide-on-search
+            Review
+          .hide-on-search.hidden
+            %i.icon-comments-alt
       %li{class: controller?("admin/usermanagement") ? "active": ""}
-        = link_to('Usermanagement', admin_usermanagement_index_path)
+        %a{:href => admin_usermanagement_index_path, :title => "Usermanagement"}
+          .hide-on-search
+            Users
+          .hide-on-search.hidden
+            %i.icon-group
+
   %ul.nav.pull-right
     %li.dropdown
       %a{"class" => "dropdown-toggle " + ((controller?("profile") || controller?("users/registrations")) ? "active" : ""), "data-toggle" => "dropdown", :href => "#"}
-        = current_user.decorate.fullname
-        %b.caret
+        .hide-on-search
+          = current_user.decorate.fullname
+          %b.caret
+        .hide-on-search.hidden
+          %i.icon-user.icon-large
+          %b.caret
       %ul.dropdown-menu{"role" => "menu"}
         %li
           %a.active{:href => profile_user_path(current_user)}
-            %i.icon-user.icon-large
+            %i.icon-user
             Profile
         %li
           %a{:href => edit_user_registration_path}
