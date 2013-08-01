@@ -45,9 +45,13 @@ if(search_div.length > 0) {
       window.location = selected.url;
   });
 
+  // Keep track of the highlighted suggestion, in case the user presses enter!
   var autocompleted_url = false;
-  searchbar.on('typeahead:autocompleted', function(event, completed) {
-    autocompleted_url = completed.url;
+  searchbar.on('typeahead:custom:suggestionHighlighted', function(event, selected) {
+    autocompleted_url = selected.url;
+  });
+  searchbar.on('typeahead:custom:suggestionHighlightLost', function(event, completed) {
+    autocompleted_url = false;
   });
 
   searchbar.keydown(function(event){
@@ -56,12 +60,8 @@ if(search_div.length > 0) {
         window.location = autocompleted_url;
       }
       else {
-        window.location = full_search_path;
+        window.location = full_search_path + "?q=" + searchbar.val();
       }
-    }
-    // On delete or backspace; disregard the old autocomplete
-    else if(event.which == 8 || event.which == 46) {
-      autocompleted_url = false;
     }
   });
 
