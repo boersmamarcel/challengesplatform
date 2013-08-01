@@ -10,6 +10,12 @@ gem 'haml' # Haml template rendering
 # Enhance SQL queries
 gem 'squeel' # DSL for SQL queries
 
+# Search engine (will replace squeel)
+gem 'sunspot_rails'
+gem 'sunspot_test'
+gem 'sunspot_solr' # Ideally, we'll switch to a standalone Solr server...
+gem 'progress_bar'
+
 #Add gems for devise authentication and Google oauth
 gem 'devise' # Authentication Gem
 gem 'omniauth-google-oauth2' # O-Auth plugin for google

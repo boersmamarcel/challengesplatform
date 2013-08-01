@@ -5,6 +5,7 @@
 # files.
 
 require 'coveralls'
+require 'sunspot_test/cucumber'
 Coveralls.wear_merged!('rails')
 
 require 'cucumber/rails'
