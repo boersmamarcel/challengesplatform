@@ -13,6 +13,7 @@ gem 'squeel' # DSL for SQL queries
 # Search engine (will replace squeel)
 gem 'sunspot_rails'
 gem 'sunspot_test'
+gem 'sunspot_solr' # Ideally, we'll switch to a standalone Solr server...
 gem 'progress_bar'
 
 #Add gems for devise authentication and Google oauth
@@ -66,5 +67,4 @@ group :test, :development  do
   gem 'database_cleaner' # Database cleaner used for tests where transactions are not possible
   gem 'rspec-rails', '~> 2.0' #Rspec for rails
   gem 'poltergeist' # PhantomJS (headless browser)
-  gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end

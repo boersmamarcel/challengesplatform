@@ -35,7 +35,8 @@ before "deploy", "deploy:deploying"
 before "deploy:assets:precompile", "deploy:symlink_db"
 after "deploy:symlink_db", "deploy:symlink_keys"
 after "deploy:symlink_keys", "deploy:symlink_uploads"
-before "deploy:restart", "deploy:migrate"
+before "deploy:restart", "deploy:prepare_solr"
+before "deploy:prepare_solr", "deploy:migrate"
 after "deploy", "deploy:done"
 
 require "whenever/capistrano"
@@ -47,6 +48,12 @@ namespace :deploy do
 
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  desc "Starts and reindexes the Solr database"
+  task :prepare_solr do
+    run "bundle exec rake sunspot:solr:start"
+    run "yes | bundle exec rake sunspot:solr:reindex"
   end
 
   desc "Runs an audiofile in order to notice the user that deployment has started"
