@@ -1,4 +1,5 @@
 require 'coveralls'
+require 'sunspot_test/rspec'
 Coveralls.wear_merged!('rails')
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'

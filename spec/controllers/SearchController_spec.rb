@@ -1,7 +1,15 @@
 require 'spec_helper'
 
-describe SearchController do
+describe SearchController, :search => true do
   before (:each) do
+
+    Sunspot.remove_all!(User, Challenge, Message)
+    Sunspot.commit
+    Sunspot.index(User.all)
+    Sunspot.index(Challenge.all)
+    Sunspot.index(Message.all)
+    Sunspot.commit
+
     @self   = FactoryGirl.create(:user, :role => 0, :active => true)
 
     @student1   = FactoryGirl.create(:user, :role => 0, :active => true, :email => "a@a.com", :firstname => "student user foo")
@@ -17,6 +25,8 @@ describe SearchController do
     @message3   = FactoryGirl.create(:message, :subject => "msg bar 1", :sender_id => @self.id, :receiver_id => @student4.id)
     @message4   = FactoryGirl.create(:message, :subject => "msg foo 3", :sender_id => @student4.id, :receiver_id => @self.id)
     
+    Sunspot.commit
+
     sign_in @self
   end
 

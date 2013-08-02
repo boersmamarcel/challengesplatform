@@ -10,13 +10,20 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
+# Ignore Solr index data
+# Build index every time; bundle exec rake sunspot:solr:reindex
+/solr/data
+/solr/pids
+/log
+sunspot-solr.pid
+
 # Ignore all logfiles and tempfiles.
 /tmp
 *.log
 *.lock
 *.swp
 
-# ingore key files
+# Ingore key files
 devise_local.rb
 
 # Ignore database.yml (an example is provided in database.example.yml)
