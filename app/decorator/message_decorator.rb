@@ -1,6 +1,6 @@
 class MessageDecorator < Draper::Decorator
   delegate_all
-
+  
   def value
     subject
   end

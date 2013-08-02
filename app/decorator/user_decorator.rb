@@ -1,6 +1,10 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
+  def fullname
+      "#{firstname} #{lastname}"
+    end
+
   def value
     fullname
   end
@@ -24,17 +28,13 @@ class UserDecorator < Draper::Decorator
   def as_json(options={})
     super(
       options.merge(
-        :root => false,
-        :only => [],
+        :root => false, 
+        :only => [], 
         :methods => [:url, :value, :sub, :img]
       )
     )
   end
 
-  def fullname
-    "#{object.firstname} #{object.lastname}"
-  end
-  
   def activity_text
     h.link_to fullname, h.profile_user_path(object)
   end

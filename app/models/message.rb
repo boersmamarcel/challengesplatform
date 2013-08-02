@@ -1,5 +1,19 @@
 class Message < ActiveRecord::Base
   attr_accessible :body, :receiver_id, :is_read, :subject, :sender_id
+
+  searchable do
+    text :subject, :boost => 3
+    text :sender do
+       @user = User.find(sender_id)
+       @user.firstname << " " << @user.lastname
+    end
+
+    string :type do
+      "Message"
+    end
+    integer :sender_id
+    integer :receiver_id
+  end
   
   belongs_to :sender, :class_name => 'User'
   belongs_to :receiver, :class_name => 'User'
@@ -16,5 +30,5 @@ class Message < ActiveRecord::Base
       (subject =~ "%#{query}%")
     end  
   }
-  
+
 end
