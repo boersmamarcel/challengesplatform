@@ -52,8 +52,24 @@ namespace :deploy do
 
   desc "Starts and reindexes the Solr database"
   task :prepare_solr do
-    run "bundle exec rake sunspot:solr:start"
-    run "yes | bundle exec rake sunspot:solr:reindex"
+    begin
+      run("cd #{deploy_to}/current && /usr/bin/env rake sunspot:solr:stop RAILS_ENV=#{rails_env}")
+    rescue Exception => error
+      puts "***Unable to stop Solr with error: #{error}"
+      puts "***Solr may have not been started. Continuing anyway.***"
+    end
+    begin
+      run("cd #{release_path} && /usr/bin/env rake sunspot:solr:start RAILS_ENV=#{rails_env}")
+    rescue Exception => error
+      puts "***Unable to start Solr with error: #{error}."
+      puts "***Continuing anyway.***"
+    end
+    begin
+      run("cd #{release_path} && /usr/bin/env rake sunspot:reindex RAILS_ENV=#{rails_env}")
+    rescue Exception => error
+      puts "***Unable to reindex Solr with error: #{error}"
+      puts "***Continuing anyway.***"
+    end
   end
 
   desc "Runs an audiofile in order to notice the user that deployment has started"
