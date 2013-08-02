@@ -65,7 +65,7 @@ namespace :deploy do
       puts "***Continuing anyway.***"
     end
     begin
-      run("cd #{release_path} && /usr/bin/env rake sunspot:reindex RAILS_ENV=#{rails_env}")
+      run("cd #{release_path} && yes | /usr/bin/env rake sunspot:reindex RAILS_ENV=#{rails_env}")
     rescue Exception => error
       puts "***Unable to reindex Solr with error: #{error}"
       puts "***Continuing anyway.***"
