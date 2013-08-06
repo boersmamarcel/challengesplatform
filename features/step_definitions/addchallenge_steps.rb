@@ -1,8 +1,11 @@
-When(/^I fill in title with "(.*?)" and description with "(.*?)" and fill in start_date with "(.*?)" and end_date with "(.*?)" and lead with "(.*?)" and commitment with "(.*?)" and image with "(.*?)"$/) do | title, description, start_date, end_date, lead, commitment, image |
+require 'date'
+
+When(/^I fill in title with "(.*?)" and description with "(.*?)" and start_date with "(.*?)" and end_date with "(.*?)" and lead with "(.*?)" and commitment with "(.*?)" and image with "(.*?)"$/) do | title, description, start_date, end_date, lead, commitment, image |
     fill_in :challenge_title, :with => title
     fill_in :challenge_description, :with => description
-    fill_in :challenge_start_date, :with => start_date
-    fill_in :challenge_end_date, :with => end_date
+    # Uses stringToDate in web_steps.rb
+    fill_in :challenge_start_date, :with => stringToDate(start_date) unless start_date == ''
+    fill_in :challenge_end_date, :with => stringToDate(end_date) unless end_date == ''
     fill_in :challenge_lead, :with => lead
     fill_in :challenge_commitment, :with => commitment
     if image.present?
@@ -50,7 +53,6 @@ end
 When(/^I open the challenge with id "(.*?)"$/) do |id|
     visit challenge_path(id)
 end
-
 
 Then(/^I should see a (button|link) "(.*?)"$/) do |type, button|
    page.should have_selector(:link_or_button, button)

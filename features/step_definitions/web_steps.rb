@@ -130,30 +130,35 @@ def css_case(str)
   str.squish.underscore.downcase.tr(" ","_")
 end
 
+def stringToDate(string)
+  case string
+    when 'today' then
+      Date.today
+    when 'tomorrow' then
+      Date.tomorrow
+    when 'next month' then
+      Date.today >> 1
+    when 'last month' then
+      Date.today << 1
+    when 'last week' then
+      Date.today - 7
+    when 'next week' then
+      Date.today + 7
+    when 'last year' then
+      Date.today + 365
+    when 'next year' then
+      Date.today - 365
+    else
+      string
+  end
+end
+
+
 def interpret_dates(hash)
   # Interpret dates
   hash.each do |key, value|
     if key.include?("date")
-      hash[key] = case value
-      when 'today' then
-        Date.today
-      when 'tomorrow' then
-        Date.tomorrow
-      when 'next month' then
-        Date.today >> 1
-      when 'last month' then
-        Date.today << 1
-      when 'last week' then
-        Date.today - 7
-      when 'next week' then
-        Date.today + 7
-      when 'last year' then
-        Date.today + 365
-      when 'next year' then
-        Date.today - 365
-      else
-        value
-      end
+      hash[key] = stringToDate(value)
     end
     if key.include?("updated_at")
          hash[key] = case value
