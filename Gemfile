@@ -17,11 +17,12 @@ gem 'sunspot_solr' # Ideally, we'll switch to a standalone Solr server...
 gem 'progress_bar'
 
 #Add gems for devise authentication and Google oauth
-gem 'devise' # Authentication Gem
+gem 'devise', '>= 3.0.1' # Authentication Gem
 gem 'omniauth-google-oauth2' # O-Auth plugin for google
 gem 'omniauth' # O-Auth plugin
 gem 'gravatar-ultimate' # Gravatar api
-gem "devise_mailchimp"  # Mailchimp
+# Change me to the default devise_mailchimp once Bram's pull request has been approved
+gem 'devise_mailchimp', :git => 'git@github.com:bcleenders/devise_mailchimp.git'  # Mailchimp
 
 gem 'draper', '~> 1.0' # For modeldecorators
 
