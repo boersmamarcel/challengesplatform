@@ -22,7 +22,7 @@ gem 'omniauth-google-oauth2' # O-Auth plugin for google
 gem 'omniauth' # O-Auth plugin
 gem 'gravatar-ultimate' # Gravatar api
 # Change me to the default devise_mailchimp once Bram's pull request has been approved
-gem 'devise_mailchimp', :git => 'git@github.com:bcleenders/devise_mailchimp.git'  # Mailchimp
+gem 'devise_mailchimp', :git => 'https://github.com/bcleenders/devise_mailchimp.git'  # Mailchimp
 
 gem 'draper', '~> 1.0' # For modeldecorators
 
