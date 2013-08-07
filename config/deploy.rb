@@ -74,12 +74,26 @@ namespace :deploy do
 
   desc "Runs an audiofile in order to notice the user that deployment has started"
   task :deploying, :on_error => :continue do
-    system "/usr/bin/afplay ~/Dropbox/Notes/deploying.mp3"
+    begin
+      system "/usr/bin/afplay ~/Dropbox/Notes/deploying.mp3"
+    rescue
+    end
+    begin
+      system "ffplay ~/Music/deploying.mp3 -nodisp -autoexit"
+    rescue
+    end
   end
 
   desc "Runs an audiofile in order to notice the user that deployment was succesful"
   task :done, :on_error => :continue do
-    system "/usr/bin/afplay ~/Dropbox/Notes/welldone.mp3"
+    begin
+      system "/usr/bin/afplay ~/Dropbox/Notes/welldone.mp3"
+    rescue
+    end
+    begin
+      system "ffplay ~/Music/welldone.mp3 -nodisp -autoexit"
+    rescue
+    end
   end
 
   desc "Symlinks the database.yml"
