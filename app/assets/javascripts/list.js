@@ -781,7 +781,7 @@ function enableList() {
 * Hacky way to fix that it only runs on the correct page
 * This helps us avoid errors due to non-loaded libraries (cause it's at the bottom)
 */
-if(document.getElementById('user-list')) {
+if($('#user-list').length > 0) {
     enableList();
 
     var options = {

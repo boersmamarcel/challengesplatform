@@ -1,31 +1,10 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'search.index'}
 
 %h1
-  No records found
+  Search
 
-%p
-  %strong
-    Unfortunately, we could not find what you're looking for.
+.center
+  %form.form-search
+    %input.search-query.span6#search-full-query{:type => "text", :placeholder => "Type to search", :autocomplete => "off"}
 
-%p
-  You could try typing a little slower (don't press enter), to give our server some time to think about your query. It might just help...
-
-%br
-%br
-%hr
-%br
-
-%p
-  We're working on a more advanced search engine (full text and ranked), using 
-  %a{:href => "https://github.com/sunspot/sunspot", :target => "_blank"}
-    Sunspot
-  \/
-  %a{:href=>"http://lucene.apache.org/core/", :target => "_blank"}
-    Lucene
-  (or similar techniques). This should enhance the search functionality.
-
-%p
-  If this sounds interesting to you and you'd like to have a look at it, please do feel free to contact us. You can contact me on
-  %a{:href => "mailto:bcleenders@gmail.com"}
-    bcleenders@gmail.com
-  if you want more information (or ask me in person).
+#search-full-results

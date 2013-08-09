@@ -1,32 +1,18 @@
 var search_div = $('#instant-search-div');
 if(search_div.length > 0) {
-  // Templating engine; makes stuff look nice :)
-  var templater = {
-    compile: function(template) {
-      var template = '';
+
+  var query_path = "/query.json";
+  var full_search_path = "/search";
+  var searchbar = $('#instant-search');
+  searchbar.removeClass('instant-search-beforeLoad');
+
+  var template = '';
       template += '<div class="instant-result">';
       template += '<img class="instant-img pull-left" src={{img}} alt="" />';
       template += '<p class="instant-val">{{value}}</p>';
       template += '<p class="instant-sub">{{sub}}</p>';
       template += '</div>';
       template += '<hr';
-
-      return {
-        render: function(context) {
-          return template
-            .replace('{{url}}', context.url)
-            .replace('{{value}}', context.value)
-            .replace('{{img}}', context.img)
-            .replace('{{sub}}', context.sub);
-        }
-      }
-    }
-  }
-
-  var query_path = "/query.json";
-  var full_search_path = "/search";
-  var searchbar = $('#instant-search');
-  searchbar.removeClass('instant-search-beforeLoad');
 
   searchbar.typeahead({
     name: 'instant',
@@ -35,8 +21,8 @@ if(search_div.length > 0) {
       dataType: "json"
     },
     rateLimitWait: 100,
-    template: '',
-    engine: templater,
+    template: template,
+    engine: templateEngine,
     limit: 5
   });
 
