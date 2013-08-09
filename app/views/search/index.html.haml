@@ -4,7 +4,24 @@
   Search
 
 .center
-  %form.form-search
+  .form-search
     %input.search-query.span6#search-full-query{:type => "text", :placeholder => "Type to search", :autocomplete => "off"}
 
-#search-full-results
+#search-full-results.search-full-hideable
+  %ul.center.filter
+    %li.filter-btn.filter-selected#search-full-filter-users Show all
+    %li.filter-btn#search-full-filter-users Show users
+    %li.filter-btn#search-full-filter-challenges Show challenges
+    %li.filter-btn#search-full-filter-messages Show messages
+    %li.filter-btn#search-full-filter-pages Show pages
+
+  %ul.list#search-full-resultlist
+
+#search-full-loading.search-full-hideable
+  %br
+  %h1.center
+    %i.icon-spinner.icon-spin.icon-large
+
+#search-full-noresults.search-full-hideable
+  %h2.center
+    No results found

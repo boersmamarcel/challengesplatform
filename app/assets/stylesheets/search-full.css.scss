@@ -6,3 +6,39 @@
 #search-full-query::-webkit-input-placeholder { padding-top: 7px; }
 #search-full-query:-ms-input-placeholder      { padding-top: 7px; }
 #search-full-query::-moz-placeholder          { padding-top: 7px; }
+
+ul#search-full-resultlist {
+  list-style: none;
+}
+
+.search-full-hideable {
+  display: none;
+}
+
+.filter {
+  margin: 10px 0px;
+  width: 100%;
+  float: left;
+  clear: both;
+}
+
+.filter-btn {
+  color: #333;
+  margin: 5px auto;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: solid 1px #999;
+  display: inline-block;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.filter-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ccc;
+}
+
+.filter-selected {
+  font-weight: bold;
+}

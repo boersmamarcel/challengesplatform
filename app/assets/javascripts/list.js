@@ -28,7 +28,6 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
-function enableList() {
     (function( window, undefined ) {
     "use strict";
     var document = window.document,
@@ -774,21 +773,3 @@ function enableList() {
     window.List = List;
     window.ListJsHelpers = h;
     })(window);
-}
-
-
-/*
-* Hacky way to fix that it only runs on the correct page
-* This helps us avoid errors due to non-loaded libraries (cause it's at the bottom)
-*/
-if($('#user-list').length > 0) {
-    enableList();
-
-    var options = {
-        valueNames: [ 'id', 'firstname', 'lastname', 'email', 'role', 'state', 'last_login' ]
-    };
-
-    var userList = new List('user-list', options);
-
-    userList.sort('id', {'asc': true});
-}
