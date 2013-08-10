@@ -1,8 +1,7 @@
 // Are we on the right page?
 if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.index') {
   var input = $('#search-full-query'),
-      resultsList = $('#search-full-resultlist'),
-      list;
+      resultsList = $('#search-full-resultlist');
 
   var template = [
     '<li class="search-full-result search-full-type-{{type}}">',
@@ -13,6 +12,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
 
   var renderer = templateEngine.compile(template);
 
+  // Switches between noresults/loading/results/nothing (below search bar)
   var show = function(toShow) {
     $('.search-full-hideable').hide();
 
@@ -23,9 +23,12 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     }
   };
 
+  // Filters results
+  var currentFilter = 'all';
   var filter = function(visible) {
     $('.search-full-result').hide();
 
+    currentFilter = visible;
     switch(visible) {
       case 'users': $('.search-full-type-U').show(); break;
       case 'challenges': $('.search-full-type-C').show(); break;
@@ -33,7 +36,19 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       case 'pages': $('.search-full-type-P').show(); break;
       case 'all': $('.search-full-result').show(); break;
     }
-  }
+    checkFiltered();
+  };
+
+  var checkFiltered = function() {
+    var hasVisibleItems = false;
+    $('.search-full-result').each(function() {
+      if($(this).is(':visible')) {
+        hasVisibleItems = true;
+        return false;
+      }
+    });
+    $('#search-full-filter-noresults').toggle(! hasVisibleItems);
+  };
 
   var updateResults = function(data) {
     if(data.length == 0) {
@@ -46,8 +61,9 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       html += renderer.render(data[i]);
 
     resultsList.html(html);
-
+    filter(currentFilter);
     show('results');
+    checkFiltered();
   };
 
   var getResults = function() {
