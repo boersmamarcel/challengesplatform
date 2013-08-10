@@ -4,10 +4,13 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       resultsList = $('#search-full-resultlist');
 
   var template = [
-    '<li class="search-full-result search-full-type-{{type}}">',
-    '  <a class="value" href="{{url}}">{{value}}</a>',
-    '  <p class="sub">{{sub}}</p>',
-    '</li>'
+    '<a class="value" href="{{url}}">',
+    '  <li class="search-full-result search-full-type-{{type}}">',
+    '    <img class="pull-left" src="{{img}}" />',
+    '    <p class="value">{{value}}</p>',
+    '    <p class="sub">{{sub}}</p>',
+    '  </li>',
+    '</a>'
   ].join('');
 
   var renderer = templateEngine.compile(template);
@@ -36,15 +39,22 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       case 'pages': $('.search-full-type-P').show(); break;
       case 'all': $('.search-full-result').show(); break;
     }
+
     checkFiltered();
   };
 
   var checkFiltered = function() {
-    var hasVisibleItems = false;
+    // Update odd/even stuff
+    $('.search-full-result').removeClass('search-full-type-odd');
+    $('.search-full-result').removeClass('search-full-type-even');
+
+    var hasVisibleItems = false,
+        i = 0;
     $('.search-full-result').each(function() {
       if($(this).is(':visible')) {
         hasVisibleItems = true;
-        return false;
+        $(this).addClass( (i%2 == 0) ? 'search-full-result-even' : 'search-full-result-odd');
+        i++;
       }
     });
     $('#search-full-filter-noresults').toggle(! hasVisibleItems);
@@ -57,8 +67,9 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     }
 
     var html = '';
-    for(var i = 0; i < data.length; i++)
+    for(var i = 0; i < data.length; i++) {
       html += renderer.render(data[i]);
+    }
 
     resultsList.html(html);
     filter(currentFilter);
@@ -96,7 +107,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
 
   (function() {
     var url = window.location.toString(),
-        q = (url.indexOf('q=') > -1) ? url.substring(url.indexOf('q=') + 2) : '';
+        q = (url.indexOf('q=') > -1) ? url.substring(url.indexOf('q=') + 2).replace(/\%20/g, ' ') : '';
     input.val(q);
     getResults();
 

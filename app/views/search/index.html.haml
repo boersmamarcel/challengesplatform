@@ -13,12 +13,12 @@
     %li.filter-btn{:filterType => "users"} Show users
     %li.filter-btn{:filterType => "challenges"} Show challenges
     %li.filter-btn{:filterType => "messages"} Show messages
-    <!--%li.filter-btn{:filterType => "pages"} Show pages-->
 
-  %ul.list#search-full-resultlist
+  .row
+    %ul.offset2.span8#search-full-resultlist
 
   #search-full-filter-noresults.center
-    No results with the current filter. Consider showing all results
+    No results with the current filter. Consider showing all results...
 
 #search-full-loading.search-full-hideable
   %br
@@ -26,5 +26,12 @@
     %i.icon-spinner.icon-spin.icon-large
 
 #search-full-noresults.search-full-hideable
-  %h2.center
-    No results found
+  .offset2
+    %strong
+      Your search did not match any results
+    Suggestions:
+    %ul
+      %li Search for full words (not "exa" but "example")
+      %li Make sure all words are spelled correctly.
+      %li Try different keywords.
+      %li Try more general keywords.
