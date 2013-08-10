@@ -9,11 +9,11 @@
 
 #search-full-results.search-full-hideable
   %ul.center.filter
-    %li.filter-btn.filter-selected#search-full-filter-users Show all
-    %li.filter-btn#search-full-filter-users Show users
-    %li.filter-btn#search-full-filter-challenges Show challenges
-    %li.filter-btn#search-full-filter-messages Show messages
-    %li.filter-btn#search-full-filter-pages Show pages
+    %li.filter-btn.filter-selected{:filterType => "all"} Show all
+    %li.filter-btn{:filterType => "users"} Show users
+    %li.filter-btn{:filterType => "challenges"} Show challenges
+    %li.filter-btn{:filterType => "messages"} Show messages
+    %li.filter-btn{:filterType => "pages"} Show pages
 
   %ul.list#search-full-resultlist
 

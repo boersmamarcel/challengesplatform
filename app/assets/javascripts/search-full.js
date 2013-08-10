@@ -5,7 +5,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       list;
 
   var template = [
-    '<li>',
+    '<li class="search-full-result search-full-type-{{type}}">',
     '  <a class="value" href="{{url}}">{{value}}</a>',
     '  <p class="sub">{{sub}}</p>',
     '</li>'
@@ -23,6 +23,18 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     }
   };
 
+  var filter = function(visible) {
+    $('.search-full-result').hide();
+
+    switch(visible) {
+      case 'users': $('.search-full-type-U').show(); break;
+      case 'challenges': $('.search-full-type-C').show(); break;
+      case 'messages': $('.search-full-type-M').show(); break;
+      case 'pages': $('.search-full-type-P').show(); break;
+      case 'all': $('.search-full-result').show(); break;
+    }
+  }
+
   var updateResults = function(data) {
     if(data.length == 0) {
       show('noresults');
@@ -32,11 +44,9 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     var html = '';
     for(var i = 0; i < data.length; i++)
       html += renderer.render(data[i]);
-    
-    // Create list and make a list of it
+
     resultsList.html(html);
-    list = new List('search-full-results', {valueNames: ['value', 'sub']});
-    
+
     show('results');
   };
 
@@ -64,13 +74,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     $(this).click(function() {
       $('.filter-btn').removeClass('filter-selected');
       $(this).addClass('filter-selected');
-
-      // Add filtering
-      list.filter(function(item) {
-        // TODO!
-        //console.log(item);
-        return true;
-      });
+      filter($(this).attr('filterType'));
     });
   });
 

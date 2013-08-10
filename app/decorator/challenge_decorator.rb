@@ -14,6 +14,10 @@ class ChallengeDecorator < Draper::Decorator
     "By; #{supervisor.decorate.fullname}"
   end
 
+  def type
+    'C'
+  end
+
   def img
     ActionController::Base.helpers.image_path("fav64.png")
   end
@@ -23,7 +27,7 @@ class ChallengeDecorator < Draper::Decorator
       options.merge(
         :root => false, 
         :only => [], 
-        :methods => [:url, :value, :sub, :img]
+        :methods => [:url, :value, :sub, :img, :type]
       )
     )
   end

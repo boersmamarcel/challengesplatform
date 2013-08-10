@@ -14,6 +14,10 @@ class MessageDecorator < Draper::Decorator
     "From; #{sender.decorate.fullname}" # unless sender.id == current_user.id
   end
 
+  def type
+    'M'
+  end
+
   def img
     ActionController::Base.helpers.image_path("message-icon.png")
   end
@@ -23,7 +27,7 @@ class MessageDecorator < Draper::Decorator
       options.merge(
         :root => false, 
         :only => [], 
-        :methods => [:url, :value, :sub, :img]
+        :methods => [:url, :value, :sub, :img, :type]
       )
     )
   end

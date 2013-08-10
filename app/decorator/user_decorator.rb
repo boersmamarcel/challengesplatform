@@ -21,6 +21,10 @@ class UserDecorator < Draper::Decorator
     end
   end
 
+  def type
+    'U'
+  end
+
   def img
     Gravatar.new(email).image_url
   end
@@ -30,7 +34,7 @@ class UserDecorator < Draper::Decorator
       options.merge(
         :root => false, 
         :only => [], 
-        :methods => [:url, :value, :sub, :img]
+        :methods => [:url, :value, :sub, :img, :type]
       )
     )
   end
