@@ -49,6 +49,13 @@ if $h || !($k || $s || $b || $d || $m || $c || $r || $i); then
   exit 0
 fi
 
+if $k; then
+  echo "Killing Solr server"
+  bundle exec rake sunspot:solr:stop
+  echo "Killing server on TCP port 3000"
+  fuser -k 3000/tcp
+fi
+
 # Solr has to be started for reindexing or running the rails server
 if $i || $s; then
   echo "Starting Solr (bundle exec rake sunspot:solr:start)"
@@ -58,11 +65,6 @@ fi
 if $r || $c; then
   echo "Preparing test database (rake db:test:prepare)"
   rake db:test:prepare
-fi
-
-if $k; then
-  echo "Killing server on TCP port 3000"
-  fuser -k 3000/tcp
 fi
 
 if $b; then

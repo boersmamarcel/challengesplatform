@@ -6,7 +6,7 @@ class Challenge < ActiveRecord::Base
   attr_protected :count, :state
 
   searchable do
-    text :title, :boost => 5
+    text :title, :boost => 5, :as => :title_ngram
     text :lead, :boost => 2
     text :description
 
