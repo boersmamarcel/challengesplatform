@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   attr_accessible :body, :receiver_id, :is_read, :subject, :sender_id
 
   searchable do
-    text :subject, :boost => 3
+    text :subject, :boost => 3, :as => :subject_ngram
     text :sender do
        @user = User.find(sender_id)
        @user.firstname << " " << @user.lastname
