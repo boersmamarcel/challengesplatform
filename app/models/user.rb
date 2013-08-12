@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :tagline, :remember_me, :notify_by_email, :join_mailing_list, :firstname, :lastname, :role, :active, as: :admin
 
   searchable do
-    text :firstname, :boost => 5
-    text :lastname, :boost => 2
+    text :firstname, :boost => 5, :as => :firstname_ngram
+    text :lastname, :boost => 2, :as => :lastname_ngram
     text :tagline
 
     string :type do
