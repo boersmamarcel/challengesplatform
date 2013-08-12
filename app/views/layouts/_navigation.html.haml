@@ -22,18 +22,21 @@
       #instant-search-div
         %input{:type => "text", :id=>"instant-search", :class=>"instant-search-beforeLoad", :placeholder=> "Omnibox"}
 
-    %li{class: controller?("dashboard") ? "active" : ""}
+    %li.hide-on-search{class: controller?("dashboard") ? "active" : ""}
       %a{:href => dashboard_path, :title => "Dashboard"}
-        .hide-on-search
-          Dashboard
-        .hide-on-search.hidden
-          %i.icon-dashboard.icon-large
-    %li{class: controller?("challenges") ? "active" : ""}
+        Dashboard
+    <!-- Replaces previous <li> on hiding -->
+    %li.hide-on-search.hidden{class: controller?("dashboard") ? "active" : ""}
+      %a#nav_dashboard{:href => dashboard_path, :title => "Dashboard", "data-toggle" => "tooltip", "data-placement"=> "bottom"}
+        %i.icon-dashboard.icon-large
+
+    %li.hide-on-search{class: controller?("challenges") ? "active" : ""}
       %a{:href => challenges_path, :title => "Challenges"}
-        .hide-on-search
-          Challenges
-        .hide-on-search.hidden
-          %i.icon-lightbulb.icon-large
+        Challenges
+    <!-- Replaces previous <li> on hiding -->
+    %li.hide-on-search.hidden{class: controller?("challenges") ? "active" : ""}
+      %a#nav_challenges{:href => challenges_path, :title => "Challenges", "data-toggle" => "tooltip", "data-placement"=> "bottom"}
+        %i.icon-lightbulb.icon-large
 
     -if current_user.is_admin?
       %li{class: controller?("admin/review") ? "active": ""}
@@ -78,4 +81,4 @@
 - else
   %ul.nav.pull-right
     %li
-      = link_to('Login', new_user_session_path)
+      = link_to("Login", new_user_session_path)
