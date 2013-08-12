@@ -1,0 +1,44 @@
+/*
+* Keep this code split from search-full to keep score of what's where
+*/
+var sdb = (function() {
+  var query_url = '<%= Rails.application.routes.url_helpers.query_path() %>',
+      pages_path = '<%= ActionController::Base.helpers.asset_path("search-pages.json") %>',
+      pages = [],
+      doneCallback = function() {},
+      failCallback = function() {};
+
+  var callbackHandler = {
+    done: function(callback) {
+      doneCallback = callback;
+      return callbackHandler;
+    },
+    fail: function(callback) {
+      failCallback = callback;
+      return callbackHandler;
+    }
+  };
+
+  var searchPages = function(query) {
+    var result = [];
+    for(var i = 0; i < pages.length; i++) {
+      if(pages[i].value.toLowerCase().indexOf(query.toLowerCase()) > -1)
+        result.push(pages[i]);
+    }
+    return result;
+  }
+
+  // load the pages JSON file in our variable
+  $.get(pages_path, 'json').done(function(data) { pages = data; });
+
+  return function(query, type) {
+    $.get(query_url, {q: query, t: type}, 'json')      
+      .done(function(data){
+        var pages = searchPages(query);
+        doneCallback(pages.concat(data));
+      })
+      .fail(failCallback);
+
+    return callbackHandler;
+  }
+})();

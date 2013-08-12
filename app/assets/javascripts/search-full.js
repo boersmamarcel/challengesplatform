@@ -88,7 +88,8 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
 
     show('loading');
 
-    $.get('/query.json', {q: query, t: 'f'}, 'json')
+    sdb(query, 'f')
+    //$.get('/query.json', {q: query, t: 'f'}, 'json')
       .done(function(data) {
         updateResults(data);
       })
