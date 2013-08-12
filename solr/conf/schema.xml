@@ -67,6 +67,18 @@
         <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
+    <!-- NGram searching -->
+    <fieldType class="solr.TextField" name="text_ngram" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+          <filter class="solr.LowerCaseFilterFactory"/>
+          <filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="50" side="front"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="boolean" class="solr.BoolField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
@@ -127,6 +139,8 @@
     <field name="lat" stored="true" type="tdouble" multiValued="false" indexed="true"/>
     <!-- *** This field is used by Sunspot! *** -->
     <field name="lng" stored="true" type="tdouble" multiValued="false" indexed="true"/>
+    <!-- NGram searching -->
+    <dynamicField name="*_ngram" stored="false" type="text_ngram" multiValued="true" indexed="true"/>
     <!-- *** This dynamicField is used by Sunspot! *** -->
     <dynamicField name="random_*" stored="false" type="rand" multiValued="false" indexed="true"/>
     <!-- *** This dynamicField is used by Sunspot! *** -->
