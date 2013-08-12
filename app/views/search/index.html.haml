@@ -3,35 +3,34 @@
 %h1
   Search
 
-.center
-  .form-search
-    %input.search-query.span6#search-full-query{:type => "text", :placeholder => "Type to search", :autocomplete => "off"}
-
-#search-full-results.search-full-hideable
-  %ul.center.filter
-    %li.filter-btn.filter-selected{:filterType => "all"} Show all
-    %li.filter-btn{:filterType => "users"} Show users
-    %li.filter-btn{:filterType => "challenges"} Show challenges
-    %li.filter-btn{:filterType => "messages"} Show messages
-
+.container
   .row
-    %ul.offset2.span8#search-full-resultlist
+    .offset2.span8
+      %input#search-full-query.span8{:type => "text", :placeholder => "Type to search", :autocomplete => "off"}
 
-  #search-full-filter-noresults.center
-    No results with the current filter. Consider showing all results...
+      #search-full-results.search-full-hideable
+        %ul.center.filter
+          %li.filter-btn.filter-selected{:filterType => "all"} Show all
+          %li.filter-btn{:filterType => "users"} Show users
+          %li.filter-btn{:filterType => "challenges"} Show challenges
+          %li.filter-btn{:filterType => "messages"} Show messages
 
-#search-full-loading.search-full-hideable
-  %br
-  %h1.center
-    %i.icon-spinner.icon-spin.icon-large
+        %ul#search-full-resultlist
 
-#search-full-noresults.search-full-hideable
-  .offset2
-    %strong
-      Your search did not match any results
-    Suggestions:
-    %ul
-      %li Search for full words (not "exa" but "example")
-      %li Make sure all words are spelled correctly.
-      %li Try different keywords.
-      %li Try more general keywords.
+        #search-full-filter-noresults
+          No results with the current filter. Consider showing all results...
+
+  #search-full-loading.search-full-hideable
+    %br
+    %h1.center
+      %i.icon-spinner.icon-spin.icon-large
+
+  #search-full-noresults.search-full-hideable
+    .offset2.span8
+      %strong
+        Your search did not match any results
+      Suggestions:
+      %ul
+        %li Make sure all words are spelled correctly.
+        %li Try different keywords.
+        %li Try more general keywords.

@@ -1,11 +1,18 @@
 #search-full-query {
   font-size: 26px;
   height: 32px;
+  -webkit-border-radius: 16px;
+     -moz-border-radius: 16px;
+          border-radius: 16px;
 }
 
-#search-full-query::-webkit-input-placeholder { padding-top: 5px; }
-#search-full-query:-ms-input-placeholder      { padding-top: 5px; }
-#search-full-query::-moz-placeholder          { padding-top: 5px; }
+#search-full-query::-webkit-input-placeholder { padding-top: 7px; }
+#search-full-query:-ms-input-placeholder      { padding-top: 7px; }
+#search-full-query::-moz-placeholder          { padding-top: 7px; }
+
+#search-full-results ul {
+  margin-left: 0px;
+}
 
 ul#search-full-resultlist {
   list-style: none;
@@ -53,7 +60,8 @@ ul#search-full-resultlist {
   width: 50px;
   height: 50px;
   display: block;
-  margin: 4px 10px 4px 0px;
+  padding: 0px;
+  margin: 0px 0px 4px 0px;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
           border-radius: 5px;
@@ -73,7 +81,7 @@ ul#search-full-resultlist {
 }
 
 .search-full-result-even {
-  background-color: #e0e0e0;
+  background-color: #fff;
 }
 
 .search-full-result-odd {

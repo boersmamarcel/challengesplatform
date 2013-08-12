@@ -46,7 +46,7 @@ if(search_div.length > 0) {
         window.location = autocompleted_url;
       }
       else {
-        window.location = full_search_path + "?q=" + searchbar.val();
+        window.location = full_search_path + "#q=" + searchbar.val();
       }
     }
   });

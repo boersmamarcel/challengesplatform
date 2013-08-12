@@ -79,6 +79,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
 
   var getResults = function() {
     var query = input.val();
+    window.location = '#q=' + query;
 
     if(query.length < 2) {
       show(); // Don't show anything (not even "no results")
