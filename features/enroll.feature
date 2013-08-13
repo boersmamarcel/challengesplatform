@@ -11,11 +11,10 @@ Feature: Participants can enroll for challenges
     | 3  | participant@student.utwente.nl  | abcd1234 | abcd1234               | 0     |
     And the following challenge records
     | id  | title   | description  | start_date | end_date  | state    | count | supervisor_id |
-
     | 1   | Title1  | Description1 | next week  | 09-09-2060| approved | 1     | 2             |
     | 2   | Title2  | Description2 | 09-09-2059 | 09-09-2060| pending  | 2     | 2             |
-    | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| draft | 1     | 2             |
-    | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| draft | 4     | 2             |
+    | 3   | Title3  | Description3 | 09-09-2059 | 09-09-2060| draft    | 1     | 2             |
+    | 4   | Title4  | Description4 | 09-09-2059 | 09-09-2060| draft    | 4     | 2             |
     | 5   | Title5  | Description5 | next month | 09-09-2060| approved | 2     | 2             |
     | 6   | Title6  | Description6 | 09-09-2059 | 09-09-2060| approved | 2     | 2             |
     | 7   | Title7  | Description7 | 15-05-2013 | 09-09-2060| approved | 2     | 2             |
