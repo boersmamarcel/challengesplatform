@@ -21,6 +21,8 @@ def getRoute(name)
       challenges_path
     when "challenge.new"
       new_challenge_path
+    when "search.index"
+      search_path
 
     #static
     when "aboutus"

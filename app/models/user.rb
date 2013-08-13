@@ -43,13 +43,6 @@ class User < ActiveRecord::Base
   has_many :activities, :as => :event
 
   scope :active, where(:active => true)
-  scope :search, lambda { |query|
-    # TODO; more intelligent system
-    query = query.split[0]
-    where do
-      (firstname =~ "%#{query}%") | (lastname =~ "%#{query}%")
-    end  
-  }
 
   def is_supervisor?
     self.role > 0

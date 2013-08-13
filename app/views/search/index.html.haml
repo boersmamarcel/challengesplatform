@@ -1,31 +1,37 @@
 %input{:type => :hidden, :id =>'page_identifier', :value => 'search.index'}
 
 %h1
-  No records found
+  Search
 
-%p
-  %strong
-    Unfortunately, we could not find what you're looking for.
+.container
+  .row
+    .offset2.span8
+      %input#search-full-query.span8{:type => "text", :placeholder => "Type to search", :autocomplete => "off"}
 
-%p
-  You could try typing a little slower (don't press enter), to give our server some time to think about your query. It might just help...
+      #search-full-results.search-full-hideable
+        %ul.center.filter
+          %li.filter-btn#filter-all.filter-selected{:filterType => "all"} Show all
+          %li.filter-btn#filter-users{:filterType => "users"} Show users
+          %li.filter-btn#filter-challenges{:filterType => "challenges"} Show challenges
+          %li.filter-btn#filter-messages{:filterType => "messages"} Show messages
 
-%br
-%br
-%hr
-%br
+        %ul#search-full-resultlist
 
-%p
-  We're working on a more advanced search engine (full text and ranked), using 
-  %a{:href => "https://github.com/sunspot/sunspot", :target => "_blank"}
-    Sunspot
-  \/
-  %a{:href=>"http://lucene.apache.org/core/", :target => "_blank"}
-    Lucene
-  (or similar techniques). This should enhance the search functionality.
+        #search-full-filter-noresults
+          No results with the current filter. Consider showing all results...
 
-%p
-  If this sounds interesting to you and you'd like to have a look at it, please do feel free to contact us. You can contact me on
-  %a{:href => "mailto:bcleenders@gmail.com"}
-    bcleenders@gmail.com
-  if you want more information (or ask me in person).
+  #search-full-loading.search-full-hideable
+    %br
+    %h1.center
+      %i.icon-spinner.icon-spin.icon-large
+
+  #search-full-noresults.search-full-hideable
+    .offset2.span8
+      %strong
+        Your search did not match any results.
+      %br
+      Suggestions:
+      %ul
+        %li Make sure all words are spelled correctly.
+        %li Try different keywords.
+        %li Try more general keywords.
