@@ -16,9 +16,10 @@ if(search_div.length > 0) {
 
   searchbar.typeahead({
     name: 'instant',
+    prefetch: '<%= ActionController::Base.helpers.asset_path("search-pages.json") %>',
     remote: {
       url: query_path + '?q=%QUERY&t=i',
-      dataType: "json"
+      dataType: 'json'
     },
     rateLimitWait: 100,
     template: template,
