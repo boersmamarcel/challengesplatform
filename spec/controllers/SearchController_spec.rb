@@ -97,4 +97,28 @@ describe SearchController, :search => true do
       response.body.should include(@message4.decorate.subject)
     end
   end
+
+  describe "Partial search" do
+    it "allows matching start" do
+      get 'query', {:q => "Fo"}
+      response.body.should include('Foo')
+    end
+
+    it 'does not allow matching half-way a word' do
+      get 'query', {:q => "oo"}
+      response.body.should_not include('Foo')
+    end
+  end
+
+  describe "Invalid queries" do
+    it "does not allow an empty" do
+      get 'query', {:q => ""}
+      response.body.should == '[]'
+    end
+
+    it "does not allow single-character queries" do
+      get 'query', {:q => "F"}
+      response.body.should == '[]'
+    end
+  end
 end

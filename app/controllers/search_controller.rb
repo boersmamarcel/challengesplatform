@@ -6,6 +6,12 @@ class SearchController < ApplicationController
   end
 
   def query
+    # Don't respond to extremely short messages
+    if(params[:q].length < 2)
+      render :json => []
+      return
+    end
+
     @sunspot_search = Sunspot.search(User, Challenge, Message) do
       # Not model specific query
       fulltext params[:q].downcase
