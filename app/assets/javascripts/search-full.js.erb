@@ -17,7 +17,7 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       var result = [];
 
       for(var i = 0; i < pages.length; i++) {
-        if(pages[i].value.indexOf(query.toLowerCase()) > -1) {
+        if(pages[i].value.toLowerCase().indexOf(query) > -1) {
           // Matching the value
           result.push(pages[i]);
         }

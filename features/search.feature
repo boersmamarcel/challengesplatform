@@ -49,3 +49,19 @@ Feature: Search
      And I click within "#filter-challenges"
     Then the page should have content "foobarChallenge"
      And the page should not have content "foobarUser"
+
+  @search
+  @javascript
+  Scenario: search pages (inbox)
+    When I visit the "search.index" page
+     And I enter "inb" in search-full-query
+    Then the page should have content "Inbox"
+     And the page should have content "Message inbox; view all your messages"
+
+  @search
+  @javascript
+  Scenario: search pages (challenges)
+    When I visit the "search.index" page
+     And I enter "chal" in search-full-query
+    Then the page should have content "Challenges"
+     And the page should have content "An overview of all challenges"
