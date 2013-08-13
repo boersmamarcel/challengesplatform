@@ -1,5 +1,53 @@
 // Are we on the right page?
 if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.index') {
+  var databus = (function() {
+    var query_url = '<%= Rails.application.routes.url_helpers.query_path() %>',
+        pages_path = '<%= ActionController::Base.helpers.asset_path("search-pages.json") %>',
+        pages = [],
+        doneCallback = function() {},
+        failCallback = function() {};
+
+    var callbackHandler = {
+      done: function(callback) { doneCallback = callback; return callbackHandler; },
+      fail: function(callback) { failCallback = callback; return callbackHandler; }
+    };
+
+    var searchPages = function(query) {
+      query = query.toLowerCase();
+      var result = [];
+
+      for(var i = 0; i < pages.length; i++) {
+        if(pages[i].value.toLowerCase().indexOf(query) > -1) {
+          // Matching the value
+          result.push(pages[i]);
+        }
+        else {
+          // Query is contains a token, or matches the start of a token
+          for(var j = 0; pages[i].tokens != null && j < pages[i].tokens.length; j++)
+            if(query.indexOf(pages[i].tokens[j].toLowerCase()) < -1 
+                || pages[i].tokens[j].toLowerCase().indexOf(query) == 0)
+              result.push(pages[i]);
+        }
+      }
+      
+      return result;
+    }
+
+    // load the pages JSON file in our variable
+    $.get(pages_path, 'json').done(function(data) { pages = data; });
+
+    return function(query, type) {
+      $.get(query_url, {q: query, t: type}, 'json')      
+        .done(function(data){
+          var pages = searchPages(query);
+          doneCallback(pages.concat(data));
+        })
+        .fail(failCallback);
+
+      return callbackHandler;
+    }
+  })();
+
   var input = $('#search-full-query'),
       resultsList = $('#search-full-resultlist');
 
@@ -88,7 +136,8 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
 
     show('loading');
 
-    $.get('/query.json', {q: query, t: 'f'}, 'json')
+    databus(query, 'f')
+    //$.get('/query.json', {q: query, t: 'f'}, 'json')
       .done(function(data) {
         updateResults(data);
       })

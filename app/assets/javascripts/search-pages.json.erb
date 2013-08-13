@@ -1,0 +1,26 @@
+[{"url":"<%= Rails.application.routes.url_helpers.dashboard_path() %>",
+  "value":"Dashboard",
+  "sub":"Your main page",
+  "img":"<%= ActionController::Base.helpers.asset_path('link-icon.png') %>",
+  "type":"P"
+},
+{ "url":"<%= Rails.application.routes.url_helpers.challenges_path() %>",
+  "value":"Challenges",
+  "sub":"An overview of all challenges",
+  "img":"<%= ActionController::Base.helpers.asset_path('link-icon.png') %>",
+  "type":"P"
+},
+{ "url":"<%= Rails.application.routes.url_helpers.messages_path() %>",
+  "value":"Inbox",
+  "sub":"Message inbox; view all your messages",
+  "img":"<%= ActionController::Base.helpers.asset_path('link-icon.png') %>",
+  "type":"P",
+  "tokens": ["messages", "mail", "inbox"]
+},
+{ "url":"<%= Rails.application.routes.url_helpers.team_path() %>",
+  "value":"Team",
+  "sub":"The Scienchallenges crew",
+  "img":"<%= ActionController::Base.helpers.asset_path('link-icon.png') %>",
+  "type":"P",
+  "tokens": ["team", "crew"]
+}]
