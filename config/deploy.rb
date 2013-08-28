@@ -53,6 +53,7 @@ namespace :deploy do
   desc "Starts and reindexes the Solr database"
   task :prepare_solr do
     begin
+      # Check whether variable rails_env is set
       run("cd #{deploy_to}/current && /usr/bin/env rake sunspot:solr:stop RAILS_ENV=#{rails_env}")
     rescue Exception => error
       puts "***Unable to stop Solr with error: #{error}"
