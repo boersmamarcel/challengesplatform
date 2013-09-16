@@ -4,9 +4,9 @@ set :stages, %w(production staging)
 set :default_stage, "staging"
 set :application, "Challengesplatform"
 
-role :web, "198.199.77.172"                          # Your HTTP server, Apache/etc
-role :app, "198.199.77.172"                          # This may be the same as your `Web` server
-role :db, "198.199.77.172", :primary => true         # This may be the same as your `Web` server
+role :web, "www2.sciencechallenges.nl"                          # Your HTTP server, Apache/etc
+role :app, "www2.sciencechallenges.nl"                          # This may be the same as your `Web` server
+role :db, "www2.sciencechallenges.nl", :primary => true         # This may be the same as your `Web` server
 # role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
 # role :db,  "your slave db-server here"
 set :keep_releases, 3
