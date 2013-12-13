@@ -97,9 +97,14 @@ class User < ActiveRecord::Base
   end
 
   # The code below takes over some newer Devise functionality
-  # Originates from Devise recoverable.rb
+  # Code originates from: https://github.com/plataformatec/devise/blob/master/lib/devise/models/recoverable.rb#L45
+  # It sets a new password for the user (without checking/mailing)
   def ensure_reset_password_token!
-    generate_reset_password_token! if should_generate_reset_token?
+    raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
+
+    self.reset_password_token   = enc
+    self.reset_password_sent_at = Time.now.utc
+    self.save(:validate => false)
   end
     
   protected
