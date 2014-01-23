@@ -64,7 +64,7 @@ fi
 
 if $r || $c; then
   echo "Preparing test database (rake db:test:prepare)"
-  rake db:test:prepare
+  bundle exec rake db:test:prepare
 fi
 
 if $b; then
@@ -74,16 +74,16 @@ fi
 
 if $d; then
   echo "Resetting database (migrate, reset, prepare)"
-  rake db:migrate
-  rake db:reset
-  rake db:test:prepare
+  bundle exec rake db:migrate
+  bundle exec rake db:reset
+  bundle exec rake db:test:prepare
   echo "Don't forget to reindex ($0 -i) if you updated schemes"
 fi
 
 if $m; then
   echo "Migrating database"
-  rake db:migrate
-  rake db:migrate RAILS_ENV=test
+  bundle exec rake db:migrate
+  bundle exec rake db:migrate RAILS_ENV=test
   echo "Don't forget to reindex ($0 -i) if you updated schemes"
 fi
 
