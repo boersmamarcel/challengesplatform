@@ -43,15 +43,14 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id]).decorate
 
-    if current_user.present?
-      redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
+    # If it's not visible, we can just redirect.
+    redirect_unauthorized_request unless @challenge.visible_for_user?(current_user)
 
-      #if a supervisor visits his own challenge it should see extra options so render the review view
-      redirect_to supervisor_review_path if current_user.id == @challenge.supervisor.id 
-    else
-      #render the public version
-      render :guest_challenge unless current_user.present?
-    end
+    # If you're supervisor, you get bonusses.
+    redirect_to supervisor_review_path if @challenge.supervised_by_user?(current_user)
+
+    # If you're guest, you have a special view
+    render :guest_challenge unless current_user.present?
   end
 
   # GET /challenges/new

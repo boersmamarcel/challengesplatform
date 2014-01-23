@@ -121,7 +121,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def supervised_by_user?(user)
-    supervisor_id == user.id
+    user.present? and supervisor_id == user.id
   end
 
   def editable_by_user?(user)
