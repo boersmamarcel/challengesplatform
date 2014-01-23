@@ -1,4 +1,3 @@
-/* breaking asset compiling */
 // Are we on the right page?
 if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.index') {
   var databus = (function() {
@@ -18,14 +17,14 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
       var result = [];
 
       for(var i = 0; i < pages.length; i++) {
-        if(typeof pages[i].value != 'undefined' && pages[i].value.toLowerCase().indexOf(query) > -1) {
+        if(pages[i].value.toLowerCase().indexOf(query) > -1) {
           // Matching the value
           result.push(pages[i]);
         }
         else {
           // Query is contains a token, or matches the start of a token
           for(var j = 0; pages[i].tokens != undefined && j < pages[i].tokens.length; j++)
-            if(query.indexOf(pages[i].tokens[j].toLowerCase()) > -1 
+            if(query.indexOf(pages[i].tokens[j].toLowerCase()) < -1 
                 || pages[i].tokens[j].toLowerCase().indexOf(query) == 0)
               result.push(pages[i]);
         }
@@ -35,10 +34,10 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     }
 
     // load the pages JSON file in our variable
-    $.getJSON(pages_path).done(function(data) { pages = data; });
+    $.get(pages_path, 'json').done(function(data) { pages = data; });
 
     return function(query, type) {
-      $.getJSON(query_url, {q: query, t: type})      
+      $.get(query_url, {q: query, t: type}, 'json')      
         .done(function(data){
           var pages = searchPages(query);
           doneCallback(pages.concat(data));
@@ -165,4 +164,3 @@ if($('#page_identifier').length > 0 && $('#page_identifier').val() === 'search.i
     input.keyup(getResults);
   })();
 }
-/* breaking asset compiling (2) */
