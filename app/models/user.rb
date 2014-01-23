@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
     end
 
     def generate_reset_password_token!
-      self.reset_password_token = self.class.reset_password_token
+      self.reset_password_token = Devise.friendly_token
       self.reset_password_sent_at = Time.now.utc
       self.reset_password_token
       save(:validate => false)

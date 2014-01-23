@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619084229) do
+ActiveRecord::Schema.define(:version => 20130628172513) do
 
   create_table "activities", :force => true do |t|
     t.text     "description"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130619084229) do
     t.boolean  "notify_by_email",        :default => true
     t.boolean  "active",                 :default => true
     t.string   "tagline"
+    t.boolean  "activated",              :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

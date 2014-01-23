@@ -242,6 +242,8 @@ Devise.setup do |config|
   require "omniauth-google-oauth2"
   config.omniauth :google_oauth2, ENV["OAUTH2CLIENTID"], ENV["OAUTH2CLIENTSECRET"], { :access_type => "offline", :approval_prompt => "" } 
 
+  config.secret_key = ENV['DEVISE_KEY']
+
   Devise.mailchimp_api_key = ENV["MAILCHIMPKEY"]
   Devise.mailing_list_name = 'Challenges'
 end

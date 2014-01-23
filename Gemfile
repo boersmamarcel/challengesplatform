@@ -49,7 +49,10 @@ group :assets do
   gem "font-awesome-rails", "~> 3.2.0.0"
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem "rake"
+end
+
+group :assets, :test, :development do
+  gem 'rake'
 end
 
 group :development do
@@ -63,7 +66,6 @@ group :test, :development  do
   gem 'coveralls', require: false # Testing coverage report
   gem 'factory_girl_rails' # Factories for tests
   gem 'rspec' # Testing framework for rails
-  gem 'rake'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner' # Database cleaner used for tests where transactions are not possible
   gem 'rspec-rails', '~> 2.0' #Rspec for rails
