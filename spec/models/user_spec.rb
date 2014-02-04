@@ -69,19 +69,12 @@ describe User do
     daan.active_for_authentication?.should be_false
   end
 
-  it "should know when to generate reset password codes" do
+  it "should know how to generate reset password codes" do
     not_activated = FactoryGirl.create(:user, :email => "not_act@student.utwente.nl", :active => false)
 
     not_activated.reset_password_token.should be_nil
     not_activated.ensure_reset_password_token!
     not_activated.reset_password_token.should_not be_nil
     not_activated.reset_password_sent_at.today?.should be_true
-
-    activated = FactoryGirl.create(:user, :email => "act@student.utwente.nl")
-    activated.ensure_reset_password_token!
-    code = activated.reset_password_token;
-    activated.ensure_reset_password_token!
-    activated.reset_password_token.should == code
   end
-
 end
