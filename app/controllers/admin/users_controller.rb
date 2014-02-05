@@ -26,7 +26,7 @@ class Admin::UsersController < Admin::AdminController
 
     if @user.update_attributes(params[:user], as: :admin) and @user.save
       if(@user.active)
-        @user.ensure_reset_password_token!
+        @raw = @user.ensure_reset_password_token!
         sendMessageTemplateToUser(@user, current_user, "ScienceChallenges account", "user_mailer/activated_requested_account", {:user => @user, :admin => current_user, :type => "created"}, true)
       end
       redirect_to admin_usermanagement_index_path, notice: 'User was successfully created.'
@@ -42,7 +42,7 @@ class Admin::UsersController < Admin::AdminController
     redirect_to admin_usermanagement_index_path if @user.eql? 1
 
     if(params[:user][:active] and not @user.active)
-      @user.ensure_reset_password_token!
+      @raw = @user.ensure_reset_password_token!
       sendMessageTemplateToUser(@user, current_user, "ScienceChallenges account", "user_mailer/activated_requested_account", {:user => @user, :admin => current_user, :type => "activated"}, true)
     end
 

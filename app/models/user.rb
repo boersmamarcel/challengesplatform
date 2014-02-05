@@ -99,18 +99,20 @@ class User < ActiveRecord::Base
   # The code below takes over some newer Devise functionality
   # Originates from Devise recoverable.rb
   def ensure_reset_password_token!
-    generate_reset_password_token! if should_generate_reset_token?
+    generate_reset_password_token!
   end
     
   protected
-    def should_generate_reset_token?
-      reset_password_token.nil? || !reset_password_period_valid?
-    end
-
+    # Generate a token and the hash of the token
+    # Returns the non hashed version of the token (don't lose it!)
     def generate_reset_password_token!
-      self.reset_password_token = Devise.friendly_token
+      # Source: https://github.com/plataformatec/devise/blob/master/lib/devise/models/recoverable.rb#L47
+      raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
+      self.reset_password_token   = enc
       self.reset_password_sent_at = Time.now.utc
-      self.reset_password_token
-      save(:validate => false)
+      self.save(:validate => false)
+
+      send_devise_notification(:reset_password_instructions, raw, {})
+      raw
     end
 end
