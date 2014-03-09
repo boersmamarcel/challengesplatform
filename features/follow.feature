@@ -50,6 +50,6 @@ Feature: User should be able to follow other users
     Given "s.lang@student.utwente.nl" is following "h.kort@student.utwente.nl"
     When I visit the profile of "s.lang@student.utwente.nl"
     And I follow "See all"
-    And I click on the button with title "Unfollow"
+    And I press the "Unfollow" button
     Then I should see a message with "You stopped following this user"
     And I should see the "user.2.profile" page

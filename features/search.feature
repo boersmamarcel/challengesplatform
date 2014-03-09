@@ -32,7 +32,7 @@ Feature: Search
       | 2  | foobarUser@a.com | foobaruser | 0    | true   |
     When I visit the "search.index" page
      And I enter "foo" in search-full-query
-     And I click within "#filter-challenges"
+     And I press the "#filter-challenges" button
     Then the page should have content "No results with the current filter. Consider showing all results..."
 
   @search
@@ -46,7 +46,7 @@ Feature: Search
       | 1   | foobarChallenge | some lead | some challenge | next week  | next month | approved | 2             |
     When I visit the "search.index" page
      And I enter "foo" in search-full-query
-     And I click within "#filter-challenges"
+     And I press the "#filter-challenges" button
     Then the page should have content "foobarChallenge"
      And the page should not have content "foobarUser"
 

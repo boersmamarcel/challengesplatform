@@ -1,5 +1,5 @@
-When(/^I click on the button with title "(.*?)"$/) do |title|
-  click_on(title)
+When(/^I press the "(.*?)" button$/) do |text|
+  click_button(text, match: :first)
 end
 
 When(/^I click on the "(.*?)" link$/) do |linktekst|
