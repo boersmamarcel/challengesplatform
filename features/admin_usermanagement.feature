@@ -38,20 +38,20 @@ Feature: Usermanagement
 
   Scenario: Delete a user
     When I visit the "admin/usermanagement.index" page
-    And I click on the link with title "delete Abraxis"
-    And I click on the link with title "delete Rinzler"
+    And I click on the "delete Abraxis" link
+    And I click on the "delete Rinzler" link
     Then I should not see a link with title "delete Abraxis"
     And I should not see a link with title "delete Rinzler"
     And I should see a link with title "delete Tron"
 
   Scenario: Edit a user
     When I visit the "admin/usermanagement.index" page
-    And I click on the link with title "edit Abraxis"
+    And I click on the "edit Abraxis" link
     Then I should see the "admin/users.3.edit" page
 
   Scenario: Edit yourself
     When I visit the "admin/usermanagement.index" page
-    And I click on the link with title "edit Kevin"
+    And I click on the "edit Kevin" link
     Then I should see the "registrations.edit" page
 
   Scenario: Promote a supervisor to admin
@@ -71,7 +71,7 @@ Feature: Usermanagement
   # Add checks about behaviour of challenges when their supervisor is disabled/removed
   Scenario: Remove a supervisor and transfer challenges
     When I visit the "admin/usermanagement.index" page
-    And I click on the link with title "delete Abraxis"
+    And I click on the "delete Abraxis" link
     And I visit the "challenges.1" page
     Then the supervisor should be "sciencechallenges"
 
