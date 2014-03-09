@@ -23,6 +23,10 @@ Then(/^I should see a section title "(.*?)"$/) do |title|
   page.should have_xpath("//h1 | //h2 | //h3 | //h4", :text => title)
 end
 
+When(/^I press the "(.*?)" button$/) do |linktext|
+  click_button(linktext, match: :first)
+end
+
 When(/^I have no messages$/) do
   Message.all.each do |m|
     m.destroy

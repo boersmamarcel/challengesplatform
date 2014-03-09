@@ -57,14 +57,14 @@ Feature: Usermanagement
   Scenario: Promote a supervisor to admin
     When I visit the "admin/users.3.edit" page
     And I select "admin" from the "user_role" dropdown
-    And I press the "Save user" button
+    And I click on the button with title "Save user"
     Then I should see the "admin/usermanagement.index" page
     And user Abraxis should have "admin" as role
 
   Scenario: Demote a supervisor to student
     When I visit the "admin/users.3.edit" page
     And I select "student" from the "user_role" dropdown
-    And I press the "Save user" button
+    And I click on the button with title "Save user"
     Then I should see the "admin/usermanagement.index" page
     And user Abraxis should have "student" as role
 
@@ -79,7 +79,7 @@ Feature: Usermanagement
   Scenario: de-activate a user
     When I visit the "admin/users.3.edit" page
     And I uncheck "user_active"
-    And I press the "Save user" button
+    And I click on the button with title "Save user"
     And I visit the "challenges.1" page
     Then the supervisor should be "Abraxis"
 
@@ -88,6 +88,6 @@ Feature: Usermanagement
     And I enter "Foo" in user_firstname
     And I enter "Bar" in user_lastname
     And I uncheck "user_active"
-    And I press the "Save user" button
+    And I click on the button with title "Save user"
     Then user Foo should have "Bar" as lastname
     And user Foo should have "disabled" as state
