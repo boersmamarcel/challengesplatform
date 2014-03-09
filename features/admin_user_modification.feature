@@ -15,7 +15,7 @@ Feature: User modification
 
     Scenario: change user lastname to empty string
     When I visit the "admin/usermanagement.index" page
-     And I click on the link with title "edit John"
+     And I click on the "edit John" link
      And I fill in "user[lastname]" with ""
      And I press "Save user"
     Then I should see a message with "Lastname is missing"
