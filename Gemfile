@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails essentials
-gem 'rails', '3.2.13'
+gem 'rails', '~> 3.2.17'
 gem 'pg' #Database Postgres
 gem 'jquery-rails' # Jquery for rails
 gem 'jquery-ui-rails' # Jquery ui for rails
