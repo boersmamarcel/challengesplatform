@@ -15,7 +15,7 @@ Feature: User adding
 
   Scenario: Access the add user page
     When I visit the "admin/usermanagement.index" page
-    And I click on the link with title "Add user"
+    And I click on the "Add user" link
     Then I should see the "admin/users.new" page
 
   Scenario: Add a user

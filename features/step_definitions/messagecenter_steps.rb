@@ -23,10 +23,6 @@ Then(/^I should see a section title "(.*?)"$/) do |title|
   page.should have_xpath("//h1 | //h2 | //h3 | //h4", :text => title)
 end
 
-When(/^I click on the "(.*?)" link$/) do |linktext|
-  click_link(linktext, match: :first)
-end
-
 When(/^I press the "(.*?)" button$/) do |linktext|
   click_button(linktext, match: :first)
 end

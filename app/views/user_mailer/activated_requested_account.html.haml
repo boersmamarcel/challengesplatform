@@ -8,9 +8,9 @@
   \.
 %p
   Please click 
-  = link_to "here", edit_password_url(values[:user], :reset_password_token => values[:user].reset_password_token)
+  = link_to "here", edit_password_url(@user, :reset_password_token => @raw)
   to set your password. If the link does not work, you can also copy this to your browser; 
-  = edit_password_url(values[:user], :reset_password_token => values[:user].reset_password_token)
+  = edit_password_url(@user, :reset_password_token => @raw)
   \.
 %p
   We are looking forward to your participation, and we hope to see one of your challenges available.
