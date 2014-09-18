@@ -260,7 +260,7 @@ You now have completed the quick start guide to getting the ScienceChallenges pl
 # License
 The MIT License (MIT)
 
-Copyright (c) 2014 Marcel Boersma, Bram Leender, Koen van Urk, Bas Veeling
+Copyright (c) 2014 Marcel Boersma, Bram Leenders, Koen van Urk, Bas Veeling
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
