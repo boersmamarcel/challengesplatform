@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails essentials
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.17'
 gem 'pg' #Database Postgres
 gem 'jquery-rails' # Jquery for rails
 gem 'jquery-ui-rails' # Jquery ui for rails
@@ -17,7 +17,7 @@ gem 'sunspot_solr' # Ideally, we'll switch to a standalone Solr server...
 gem 'progress_bar'
 
 #Add gems for devise authentication and Google oauth
-gem 'devise', '~> 3.1.1' # Authentication Gem
+gem 'devise', '~> 3.2.1' # Authentication Gem
 gem 'omniauth-google-oauth2' # O-Auth plugin for google
 gem 'omniauth' # O-Auth plugin
 gem 'gravatar-ultimate' # Gravatar api
@@ -26,7 +26,7 @@ gem 'devise_mailchimp', :git => 'https://github.com/bcleenders/devise_mailchimp.
 
 gem 'draper', '~> 1.0' # For modeldecorators
 
-gem 'carrierwave', '~> 0.8' # For file uploading
+gem 'carrierwave', '~> 0.10' # For file uploading
 gem "mini_magick" # For image resizing. OSX: `brew install imagemagick`. UNIX: http://www.imagemagick.org/script/binary-releases.php#unix
 
 gem 'redis'
